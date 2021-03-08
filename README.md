@@ -37,14 +37,14 @@ Vamos a usar **GIT** para gestionar el código y **Trello** para gestionar el pr
 
 ## Horarios y Fechas
 
-El proyecto dura cuatro semanas. El lunes siguiente al terminar el sprint se realiza una demo donde se muestra al TL el progreso de esa semana. La última semana tiene el `demo final` donde se muestra el proyecto a todo el cohorte.
+El proyecto dura cinco semanas. El lunes siguiente al terminar el sprint se realiza una demo donde se muestra al TL el progreso de esa semana. La última semana tiene el `demo final` donde se muestra el proyecto a todo el cohorte.
 
 El horario de trabajo sigue siendo de 9AM a 18PM.
 Todos los días a un horario a definir con su TL habrá un STAND UP para revisar las tareas del día, el progreso y si están bloqueados y/o necesitan ayuda.
 
 ## Comenzando
 
-Vamos iniciar clonando el repo de Github que se les indicará llamado: `ec-{Cohorte}-{Grupo}`. Donde vamos a invitar a todos colaboradores del proyecto.
+Vamos iniciar clonando el repo de Github que se les indicará llamado: `ecommerce-ft{cohorte}-g{grupo}`. Donde vamos a invitar a todos colaboradores del proyecto.
 
 Nosotros te vamos a dar un `boilerplate` con los modelos de Usuario y el flow de autenticación funcionando. Sobre este código vas a branchear para empezar a agregar tus propias features.
 
@@ -77,9 +77,9 @@ Tenés que reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias
 
 El contenido de `client` fue creado usando: Create React App.
 
-### Requerimientos
+### Requerimientos Mínimos para aprobar
 
-La aplicación del e-commerce va a contar con los siguientes requerimientos:
+La aplicación del e-commerce va a contar con los siguientes requerimientos Mínimos:
 
 ### Usuarios no Autenticados
 
@@ -170,7 +170,7 @@ Algunas constrains qué deberás implementar:
 
 ### Milestones
 
-Este proyecto tiene muchas tareas para realizar, asi que es fácil sentirse abrumado. Estas son las features que esperamos que muestres en cada demo:
+Este proyecto tiene muchas tareas para realizar, asi que es fácil sentirse abrumado. Pueden seguir este lineamiento para presentar lo mínimo:
 
 - Demo **1**: Catálogo de productos
     + Los usuarios pueden ver los productos y filtrar por categoría.
