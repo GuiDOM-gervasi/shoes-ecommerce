@@ -20,6 +20,11 @@ export interface ProductAttributes {
   price: number;
 }
 
+export interface CategoryAttributes {
+  id?: string;
+  name: string;
+}
+
 @Table({
   defaultScope:{
     attributes: {exclude: ['deleteAt']}
@@ -82,6 +87,31 @@ export class User extends Model<UserAttributes>{
   firstName!: string;
 
 }
+//--------------------------------------------------------------------------------------------
 
+@Table({
+  defaultScope:{
+    attributes: {exclude: ['deleteAt']}
+  },
+  paranoid: true,
+  tableName: 'categories'
+})
 
-export default [User, Product];
+export class Category extends Model<CategoryAttributes>{  
+  @Column({
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER.UNSIGNED
+  })
+  id?: string;
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING
+  })
+  name!: string;
+
+}
+
+export default [User, Product, Category];

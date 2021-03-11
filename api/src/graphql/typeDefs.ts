@@ -13,9 +13,15 @@ const typeDefs = gql `
     price: Float
   }
 
+   type Category {
+    id: ID!
+    name: String!
+  }
+
   type Mutation {
     createUser(firstName:String!): User!
     createProduct(name:String!, description:String,price:Float): Product!
+    createCategory(name:String!): Category!
   }
 
   # type Mutation {
@@ -23,8 +29,9 @@ const typeDefs = gql `
   # }
 
   type Query {
-     sers: [User!]!
-    products:[Product!]! 
+    users: [User!]!
+    products:[Product!]!
+    categories:[Category!]!
   }
 `
 export default typeDefs;
