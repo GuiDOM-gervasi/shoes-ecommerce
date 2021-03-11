@@ -1,4 +1,5 @@
 import {
+  BelongsToMany,
   BelongsTo,
   Column,
   DataType,
@@ -18,12 +19,49 @@ export interface ProductAttributes {
   name: string;
   description: string;
   price: number;
+  brandId:string;
+  
 }
 
 export interface CategoryAttributes {
   id?: string;
   name: string;
 }
+
+export interface BrandAttributes {
+  id?: string;
+  name: string;
+}
+
+@Table({
+  defaultScope:{
+    attributes: {exclude: ['deleteAt']}
+  },
+  paranoid: true,
+  tableName: 'brands'
+})
+
+export class Brand extends Model<BrandAttributes>{  
+  @Column({
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER.UNSIGNED
+  })
+  id?: string;
+
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING
+  })
+  name!: string;
+
+  @HasMany (() => Product)
+  products!:Product[] 
+
+}
+//-----------------------------------------------------------------------------
 
 @Table({
   defaultScope:{
@@ -59,6 +97,16 @@ export class Product extends Model<ProductAttributes>{
     type: DataType.FLOAT
   })
   price!: number;
+
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER.UNSIGNED
+  })
+   @ForeignKey(() => Brand)
+  brandId!: string;
+
+  @BelongsTo(() => Brand )
+  brand!:Brand;
 
 }
 
@@ -114,4 +162,34 @@ export class Category extends Model<CategoryAttributes>{
 
 }
 
-export default [User, Product, Category];
+//--------------------------------------------------------------------------------------------
+
+// @Table({
+//   defaultScope:{
+//     attributes: {exclude: ['deleteAt']}
+//   },
+//   paranoid: true,
+//   tableName: 'brands'
+// })
+
+// export class Brand extends Model<BrandAttributes>{  
+//   @Column({
+//     allowNull: false,
+//     autoIncrement: true,
+//     primaryKey: true,
+//     type: DataType.INTEGER.UNSIGNED
+//   })
+//   id?: string;
+
+//   @Column({
+//     allowNull: false,
+//     type: DataType.STRING
+//   })
+//   name!: string;
+
+//   @HasMany (() => Product)
+//   products!:Product[] 
+
+// }
+
+export default [User, Product, Category , Brand];
