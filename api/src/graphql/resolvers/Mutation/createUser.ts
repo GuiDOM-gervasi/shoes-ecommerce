@@ -1,7 +1,10 @@
-import {User} from "../../../db/models";
+import {User, UserAttributes} from "../../../db/models";
 
-const createUserResolver = (context: any, {name}: {name:string}) =>{
-  return User.create({name});
+const createUserResolver = async (context: any, {firstName}: UserAttributes) =>{
+  // console.log(firstName)
+  let aux = await User.create({firstName});
+  // console.log(aux)
+  return aux
 }
 
 export default createUserResolver

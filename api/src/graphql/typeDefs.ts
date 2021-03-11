@@ -3,11 +3,11 @@ import {gql} from 'apollo-server';
 const typeDefs = gql `
   type User {
     id: ID!
-    name: String!
+    firstName: String!
   }
 
   type Mutation {
-    createUser(name:String!): User!
+    createUser(firstName:String!): User!
   }
 
   type Query {
