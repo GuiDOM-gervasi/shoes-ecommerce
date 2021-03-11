@@ -9,7 +9,7 @@
     "paths": {
       "#root/*": ["./src/*"]
     },
-    "strict": true,
+    "strict": false,
     "target": "es6",
     "types": ["node"]
   }
