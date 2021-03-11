@@ -8,6 +8,11 @@ import {
   Table
 } from "sequelize-typescript";
 
+export interface UserAttributes {
+  id?: string;
+  firstName: string;
+}
+
 @Table({
   defaultScope:{
     attributes: {exclude: ['deleteAt']}
@@ -16,7 +21,7 @@ import {
   tableName: 'users'
 })
 
-export class User extends Model<User>{  
+export class User extends Model<UserAttributes>{  
   @Column({
     allowNull: false,
     autoIncrement: true,
@@ -29,8 +34,9 @@ export class User extends Model<User>{
     allowNull: false,
     type: DataType.STRING
   })
-  name!: string;
+  firstName!: string;
 
 }
+
 
 export default [User];
