@@ -37,7 +37,7 @@ module.exports.up = (queryInterface, DataTypes) => {
         allowNull: false,
         references: {
           key: "id",
-          model: "brand",
+          model: "brands",
         },
         type: DataTypes.INTEGER.UNSIGNED,
       },
