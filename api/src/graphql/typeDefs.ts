@@ -10,11 +10,12 @@ const typeDefs = gql `
     id: ID!
     name: String!
     description: String
+    price: Float
   }
 
   type Mutation {
     createUser(firstName:String!): User!
-    createProduct(name:String!, description:String): Product!
+    createProduct(name:String!, description:String,price:Float): Product!
   }
 
   # type Mutation {
@@ -22,7 +23,8 @@ const typeDefs = gql `
   # }
 
   type Query {
-    users: [User!]!
+     sers: [User!]!
+    products:[Product!]! 
   }
 `
 export default typeDefs;
