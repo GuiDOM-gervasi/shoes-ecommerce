@@ -21,6 +21,7 @@ export interface ProductAttributes {
   description: string;
   price: number;
   brandId:string;
+  CategoriesId: [string];
   
 }
 
@@ -33,29 +34,47 @@ export interface BrandAttributes {
   id?: string;
   name: string;
 }
+// Definitions of tables and sequelize models 
+// Table productcategory
+@Table({
+defaultScope:{
+  attributes: {exclude: ['deleteAt']}
+},
+paranoid: true,
+tableName: 'productcategory'
+})
 
-@Table
 export class ProductCategory extends Model{
-  @ForeignKey(
-  	() => Product
-  )
-  @Column
-  productId: string
 
-   @ForeignKey(
-  	() => Category
-  )
-  @Column
-  categoryId: string
-
-  @Unique
-  @Column
-  id:string
-
+  @Column({
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER.UNSIGNED
+  })
+  id?: string;
   
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER.UNSIGNED
+  })
+  @ForeignKey( () => Product )
+  productId: string;
+  
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER.UNSIGNED
+  })
+  @ForeignKey( () => Category )
+  categoryId: string;
+
+  // @Column({
+  //   allowNull: false,
+  //   type: DataType.INTEGER.UNSIGNED
+  // })
+  // @ForeignKey(() => Brand)
+  // brandId!: string;
 }
-
-
 
 @Table({
   defaultScope:{
@@ -96,7 +115,7 @@ export class Brand extends Model<BrandAttributes>{
   tableName: 'products'
 })
 
-export class Product extends Model<ProductAttributes>{
+export class Product extends Model{ //<ProductAttributes>
   @Column({
     allowNull: false,
     autoIncrement: true,
@@ -127,7 +146,7 @@ export class Product extends Model<ProductAttributes>{
     allowNull: false,
     type: DataType.INTEGER.UNSIGNED
   })
-   @ForeignKey(() => Brand)
+  @ForeignKey(() => Brand)
   brandId!: string;
 
   @BelongsTo(() => Brand )
@@ -225,4 +244,4 @@ export class Category extends Model<CategoryAttributes>{
 
 // }
 
-export default [User, Product, Category , Brand];
+export default [User, Product, Category , Brand, ProductCategory];
