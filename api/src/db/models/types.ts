@@ -21,3 +21,9 @@ export interface BrandAttributes {
   id?: string;
   name: string;
 }
+
+export interface ModelAttributes {
+  id?: string;
+  size: string;
+  color: string;
+}
