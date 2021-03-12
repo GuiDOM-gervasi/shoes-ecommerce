@@ -1,4 +1,5 @@
-import { Product, ProductAttributes } from "../../../db/models";
+import Product from "../../../db/models/products";
+import {ProductAttributes} from '../../../db/models/types'
 
 // export interface ProductImput {
 //   id?: string;

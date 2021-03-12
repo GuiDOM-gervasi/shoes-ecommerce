@@ -1,4 +1,4 @@
-import { Brand } from '../../../db/models';
+import Brand from '../../../db/models/brands';
 
 const BrandResolver = () => {
   return Brand.findAll();
