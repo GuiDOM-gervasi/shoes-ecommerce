@@ -50,20 +50,20 @@ export class ProductCategory extends Model{
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   id?: string;
   
   @Column({
     allowNull: false,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   @ForeignKey( () => Product )
   productId: string;
   
   @Column({
     allowNull: false,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   @ForeignKey( () => Category )
   categoryId: string;
@@ -89,7 +89,7 @@ export class Brand extends Model<BrandAttributes>{
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   id?: string;
 
@@ -120,7 +120,7 @@ export class Product extends Model{ //<ProductAttributes>
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   id?: string;
 
@@ -144,7 +144,7 @@ export class Product extends Model{ //<ProductAttributes>
 
   @Column({
     allowNull: false,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   @ForeignKey(() => Brand)
   brandId!: string;
@@ -171,7 +171,7 @@ export class User extends Model<UserAttributes>{
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   id?: string;
 
@@ -197,7 +197,7 @@ export class Category extends Model<CategoryAttributes>{
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   id?: string;
 

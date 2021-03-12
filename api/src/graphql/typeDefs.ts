@@ -1,7 +1,7 @@
-import { Brand } from './../db/models';
-import {gql} from 'apollo-server';
+import { Brand } from "./../db/models";
+import { gql } from "apollo-server";
 
-const typeDefs = gql `
+const typeDefs = gql`
   type User {
     id: ID!
     firstName: String!
@@ -12,6 +12,8 @@ const typeDefs = gql `
     name: String!
     description: String
     price: Float
+    brand: Brand!
+    categories: [Category!]
   }
 
   type Category {
@@ -24,17 +26,24 @@ const typeDefs = gql `
   }
 
   type Mutation {
-    createUser(firstName:String!): User!
-    createProduct(name:String!, description:String,price:Float,brandId:ID!, CategoriesId:[String]): Product!
-    createCategory(name:String!): Category!
-    createBrand(name:String!): Brand!
+    createUser(firstName: String!): User!
+    createProduct(
+      name: String!
+      description: String
+      price: Float
+      brandId: ID!
+      CategoriesId: [String]
+    ): Product!
+
+    createCategory(name: String!): Category!
+    createBrand(name: String!): Brand!
   }
 
   type Query {
     users: [User!]!
-    products:[Product!]!
-    categories:[Category!]!
-    brand:[Brand!]!
+    products: [Product!]!
+    categories: [Category!]!
+    brand: [Brand!]!
   }
-`
+`;
 export default typeDefs;

@@ -7,7 +7,7 @@ module.exports.up = (queryInterface, DataTypes) => {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
       },
       name: {
         allowNull: false,
@@ -39,9 +39,8 @@ module.exports.up = (queryInterface, DataTypes) => {
           key: "id",
           model: "brands",
         },
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
       },
-      
     },
     {
       charset: "utf8",
