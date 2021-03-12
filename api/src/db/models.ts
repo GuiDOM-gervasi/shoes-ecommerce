@@ -6,7 +6,8 @@ import {
   ForeignKey,
   HasMany,
   Model,
-  Table
+  Table,
+  Unique
 } from "sequelize-typescript";
 
 export interface UserAttributes {
@@ -32,6 +33,29 @@ export interface BrandAttributes {
   id?: string;
   name: string;
 }
+
+@Table
+export class ProductCategory extends Model{
+  @ForeignKey(
+  	() => Product
+  )
+  @Column
+  productId: string
+
+   @ForeignKey(
+  	() => Category
+  )
+  @Column
+  categoryId: string
+
+  @Unique
+  @Column
+  id:string
+
+  
+}
+
+
 
 @Table({
   defaultScope:{
@@ -59,6 +83,7 @@ export class Brand extends Model<BrandAttributes>{
 
   @HasMany (() => Product)
   products!:Product[] 
+  
 
 }
 //-----------------------------------------------------------------------------
@@ -107,8 +132,11 @@ export class Product extends Model<ProductAttributes>{
 
   @BelongsTo(() => Brand )
   brand!:Brand;
-
-}
+  
+  @BelongsToMany(() => Category,{through: ()=> ProductCategory})
+  categories: Array<Category & {ProductCategory: ProductCategory}> 
+ 
+ }
 
 //--------------------------------------------------------------------------------------------
 @Table({
@@ -160,7 +188,12 @@ export class Category extends Model<CategoryAttributes>{
   })
   name!: string;
 
+  @BelongsToMany(() => Product, {through: () => ProductCategory})
+  products: Array<Product & {ProductCategory: ProductCategory}>;
+
 }
+
+
 
 //--------------------------------------------------------------------------------------------
 
