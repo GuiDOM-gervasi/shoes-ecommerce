@@ -1,4 +1,5 @@
-import {User, UserAttributes} from "../../../db/models";
+import User from "../../../db/models/users";
+import { UserAttributes } from '../../../db/models/types'
 
 const createUserResolver = async (context: any, {firstName}: UserAttributes) =>{
   // console.log(firstName)

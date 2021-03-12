@@ -1,4 +1,4 @@
-import { User } from '../../../db/models';
+import User from '../../../db/models/users';
 
 const userResolver = () => {
   return User.findAll();

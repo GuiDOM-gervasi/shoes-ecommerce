@@ -1,4 +1,5 @@
-import {Brand, BrandAttributes} from "../../../db/models";
+import Brand from "../../../db/models/brands";
+import {BrandAttributes} from '../../../db/models/types'
 
 const createCategoryResolver = async (context: any, {name}: BrandAttributes) =>{
   
