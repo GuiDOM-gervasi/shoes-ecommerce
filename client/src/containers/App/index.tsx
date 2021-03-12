@@ -3,27 +3,46 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GlobalStyles } from "./GlobalStyles";
 import Nav from "../../components/Nav";
 import { QueryUsers } from "../../types";
-import { GET_USERS } from "../../graphql/queries";
-import { ADD_USER } from "../../graphql/mutations";
+import { GET_PRODUCTS } from "../../graphql/queries";
+import { ADD_PRODUCT } from "../../graphql/mutations";
+
+interface ProductAttributes {
+  name: String;
+  description: String;
+  price: Number;
+  brandId: String;
+  CategoriesId: String[];
+}
 
 function App() {
-  const { data, loading, refetch } = useQuery<QueryUsers>(GET_USERS);
+  const { data: dataQuery, loading, refetch } = useQuery<QueryUsers>(
+    GET_PRODUCTS
+  );
+  const [mutate, { error: errorMutation, data }] = useMutation(ADD_PRODUCT);
 
-  function handleSubmit() {
-    const [addUser, { data }] = useMutation(ADD_USER, {});
-    addUser();
-    console.log(data);
+  const handleClick = async () => {
+    try {
+      await mutate({
+        variables: {
+          name: "ALTAS ZAPAS WACHO",
+          description: "muy copadas",
+          price: 99,
+          brandId: "1",
+          CategoriesId: ["1", "2"],
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  if (errorMutation) {
+    console.log(errorMutation);
   }
-
   return (
     <div className="App">
-      <GlobalStyles />
-      <Nav />
-      <h1 onClick={refetch}>Hello Typescript</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="name" />
-      </form>
-      <span>{loading ? "loading" : data}</span>
+      <button onClick={refetch}>refetch</button>
+      <span>{loading ? "loading" : "ya cargo perro"}</span>
+      <button onClick={handleClick}>Mutation</button>
     </div>
   );
 }

@@ -1,10 +1,16 @@
 import gql from "graphql-tag";
 
-export const GET_USERS = gql`
-  {
-    User {
+export const GET_PRODUCTS = gql`
+  query Product {
+    products {
       id
       name
+      brand {
+        name
+      }
+      categories {
+        name
+      }
     }
   }
 `;
