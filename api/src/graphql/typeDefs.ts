@@ -44,6 +44,7 @@ const typeDefs = gql`
     products: [Product!]!
     categories: [Category!]!
     brand: [Brand!]!
+    productDetail(id:String!): Product!
   }
 `;
 export default typeDefs;

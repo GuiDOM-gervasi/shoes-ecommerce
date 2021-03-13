@@ -14,3 +14,20 @@ export const GET_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_PRODUCT = gql`
+  query ProductDetail($id:String!) {
+    productDetail(id:$id) {
+      id
+      description
+      price
+      name
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;
