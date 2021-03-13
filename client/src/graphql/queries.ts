@@ -33,7 +33,7 @@ export const GET_PRODUCT = gql`
 `;
 
 export const SEARCH_PRODUCTS = gql`
-query searchProducts($name :String!){
+query searchProducts($name:String!){
   searchProducts(name:$name){
     id
     name
