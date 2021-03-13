@@ -30,6 +30,10 @@ const typeDefs = gql`
     size: String!
     color: String!
   }
+  
+  type ProductForCategory{
+  	products: [Product!]!
+  }
 
   type Mutation {
     createUser(firstName: String!): User!
@@ -53,6 +57,7 @@ const typeDefs = gql`
     categories: [Category!]!
     brand: [Brand!]!
     models: [Model!]!
+    productForCategory(name:String!): [ProductForCategory!]!
   }
 `;
 export default typeDefs;
