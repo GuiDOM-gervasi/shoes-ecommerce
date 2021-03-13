@@ -30,7 +30,8 @@ export class Brand extends Model<BrandAttributes>{
   @Unique
   @Column({
     allowNull: false,
-    type: DataType.STRING
+    type: DataType.STRING,
+    
   })
   name!: string;
 
