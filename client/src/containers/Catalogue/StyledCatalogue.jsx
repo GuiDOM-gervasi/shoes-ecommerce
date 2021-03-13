@@ -40,7 +40,7 @@ export const StyledCatalogue = styled.div`
     }
   }
 
-  a:active {
+  a, a:active, a:focus {
     outline: none;
   }
 `;
