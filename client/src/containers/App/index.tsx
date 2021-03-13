@@ -43,6 +43,7 @@ function App() {
       <button onClick={refetch}>refetch</button>
       <span>{loading ? "loading" : "ya cargo perro"}</span>
       <button onClick={handleClick}>Mutation</button>
+      <Nav/>
     </div>
   );
 }
