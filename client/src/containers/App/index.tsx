@@ -5,6 +5,7 @@ import Nav from "../../components/Nav";
 import { QueryUsers } from "../../types";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import { ADD_PRODUCT } from "../../graphql/mutations";
+import Catalogue from "../Catalogue";
 
 interface ProductAttributes {
   name: String;
@@ -24,8 +25,8 @@ function App() {
     try {
       await mutate({
         variables: {
-          name: "ALTAS ZAPAS WACHO",
-          description: "muy copadas",
+          name: "Nombre de Zapatillas",
+          description: "Zapas de prueba",
           price: 99,
           brandId: "1",
           CategoriesId: ["1", "2"],
@@ -40,9 +41,9 @@ function App() {
   }
   return (
     <div className="App">
-      <button onClick={refetch}>refetch</button>
-      <span>{loading ? "loading" : "ya cargo perro"}</span>
-      <button onClick={handleClick}>Mutation</button>
+      <GlobalStyles />
+      <Nav />
+      <Catalogue />
     </div>
   );
 }

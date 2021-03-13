@@ -4,7 +4,7 @@ import { StyledNav } from "./StyledNav";
 export default function Nav() {
   return (
     <StyledNav>
-      <h1>Hello world</h1>
+      <h3>Hello Typescript</h3>
     </StyledNav>
   );
 }
