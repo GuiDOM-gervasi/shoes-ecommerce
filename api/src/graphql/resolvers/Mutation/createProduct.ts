@@ -1,5 +1,5 @@
 import Product from "../../../db/models/products";
-import {ProductAttributes} from '../../../db/models/types'
+import {ProductAttributes} from '../../../db/models/types';
 
 // export interface ProductImput {
 //   id?: string;
@@ -13,10 +13,14 @@ import {ProductAttributes} from '../../../db/models/types'
 
 const createProductResolver = async (
   context: any,
-  { name, description, price, brandId, CategoriesId }: ProductAttributes
+  { name, description, price, brandId, CategoriesId, ModelsId }: ProductAttributes
 ) => {
   const product = await Product.create({ name, description, price, brandId });
+
   await product.$add("category", CategoriesId);
+
+  await product.$add("model", ModelsId);
+  console.log(product)
 
   return product;
 };

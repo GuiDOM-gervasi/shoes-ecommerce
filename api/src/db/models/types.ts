@@ -10,6 +10,7 @@ export interface ProductAttributes {
   price: number;
   brandId: string;
   CategoriesId: [string];
+  ModelsId: [string];
 }
 
 export interface CategoryAttributes {
@@ -20,4 +21,10 @@ export interface CategoryAttributes {
 export interface BrandAttributes {
   id?: string;
   name: string;
+}
+
+export interface ModelAttributes {
+  id?: string;
+  size: string;
+  color: string;
 }

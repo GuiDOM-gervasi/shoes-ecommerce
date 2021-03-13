@@ -3,7 +3,8 @@ import {
   DataType,
   HasMany,
   Model,
-  Table
+  Table,
+  Unique
 } from "sequelize-typescript";
 
 import Product from './products'
@@ -22,10 +23,11 @@ export class Brand extends Model<BrandAttributes>{
     allowNull: false,
     autoIncrement: true,
     primaryKey: true,
-    type: DataType.INTEGER.UNSIGNED
+    type: DataType.INTEGER
   })
   id?: string;
 
+  @Unique
   @Column({
     allowNull: false,
     type: DataType.STRING
