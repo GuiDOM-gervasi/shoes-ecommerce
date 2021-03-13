@@ -5,7 +5,6 @@ const productDetailResolver = async (parent, args, context, info) => {
   const productDetail = await Product.findByPk(args.id,{
     include: [Brand as any, Category as any],
   });
-  console.log(productDetail)
   return productDetail
 }
 
