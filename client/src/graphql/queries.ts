@@ -16,9 +16,8 @@ export const GET_PRODUCTS = gql`
 `;
 
 export const SEARCH_PRODUCTS = gql`
-  query Product($name: String!) {
-    products (name: $name) {
-      id
+  query Product{
+    products {
       name
     }
   }
