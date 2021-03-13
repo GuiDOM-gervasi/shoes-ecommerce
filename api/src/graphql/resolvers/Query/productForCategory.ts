@@ -1,18 +1,18 @@
 import Product from "../../../db/models/products";
-import Category from "../../../db/models/category";
-import {ProductAttributes} from "../../../db/models/types"
+import Category from "../../../db/models/category";;
+import Brand from "../../../db/models/brands";;
+import Models from "../../../db/models/models";;
+import {ProductAttributes} from "../../../db/models/types";
  
 
 
 const productoForCategory = async(parent, args, context, info)=>{
-  console.log(args.name)
-  const productsCategory = Category.findAll({
+  const productsCategory = await Category.findAll({
   	where:{
 	  name:args.name
 	},
-	include: [Product as any]
+	include:{model: Product,include:[Brand as any,Models as any]}
   })
-  console.log(productsCategory)
   
   return productsCategory
 }

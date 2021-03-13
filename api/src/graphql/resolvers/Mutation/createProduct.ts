@@ -20,6 +20,7 @@ const createProductResolver = async (
   await product.$add("category", CategoriesId);
 
   await product.$add("model", ModelsId);
+  console.log(product)
 
   return product;
 };
