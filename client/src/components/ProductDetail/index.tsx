@@ -21,11 +21,13 @@ interface ProdDetail {
 interface Categories {
   name: string;
 }
-export default function ProductDetail() {
+export default function ProductDetail({match}) {
+
+  const productId = match.params.id;
 
   const { loading, error, data } = useQuery(GET_PRODUCT, {
     variables: {
-      id: "1"
+      id: productId
     },
   }
   );
