@@ -3,7 +3,8 @@ import {
   Column,
   DataType,
   Model,
-  Table
+  Table,
+  Unique
 } from "sequelize-typescript";
 import ProductCategory from './productcategory'
 import Product from './products'
@@ -26,6 +27,7 @@ export class Category extends Model<CategoryAttributes> {
   })
   id?: string;
 
+  @Unique
   @Column({
     allowNull: false,
     type: DataType.STRING,

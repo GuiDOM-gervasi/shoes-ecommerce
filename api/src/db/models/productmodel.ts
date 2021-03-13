@@ -40,6 +40,12 @@ import {
     })
     @ForeignKey(() => Models)
     modelId: string;
+    
+    @Column({
+      allowNull: true,
+      type: DataType.TEXT
+    })
+    img: string;
 
   }
   

@@ -3,7 +3,8 @@ import {
   DataType,
   HasMany,
   Model,
-  Table
+  Table,
+  Unique
 } from "sequelize-typescript";
 
 import Product from './products'
@@ -26,6 +27,7 @@ export class Brand extends Model<BrandAttributes>{
   })
   id?: string;
 
+  @Unique
   @Column({
     allowNull: false,
     type: DataType.STRING

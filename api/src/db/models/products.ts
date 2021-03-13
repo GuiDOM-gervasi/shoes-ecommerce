@@ -5,7 +5,8 @@ import {
   DataType,
   ForeignKey,
   Model,
-  Table
+  Table,
+  Unique
 } from "sequelize-typescript";
 
 import ProductCategory from './productcategory'
@@ -31,8 +32,10 @@ export class Product extends Model {
     primaryKey: true,
     type: DataType.INTEGER,
   })
+
   id?: string;
 
+  @Unique
   @Column({
     allowNull: false,
     type: DataType.STRING,
@@ -41,7 +44,7 @@ export class Product extends Model {
 
   @Column({
     allowNull: false,
-    type: DataType.STRING,
+    type: DataType.TEXT,
   })
   description: string;
 
