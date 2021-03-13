@@ -1,10 +1,11 @@
 import React from "react";
+import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
 
 export default function Nav() {
   return (
     <StyledNav>
-      <h3>Hello Typescript</h3>
+      <SearchBar/>
     </StyledNav>
   );
 }

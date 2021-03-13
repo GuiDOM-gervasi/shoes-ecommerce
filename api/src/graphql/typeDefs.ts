@@ -59,6 +59,7 @@ const typeDefs = gql`
     productDetail(id:String!): Product!
     models: [Model!]!
     productForCategory(name:String!): [ProductForCategory!]!
+    searchProducts(name:String!):[Product!]!
   }
 `;
 export default typeDefs;
