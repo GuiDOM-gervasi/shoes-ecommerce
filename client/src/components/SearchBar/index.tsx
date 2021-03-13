@@ -6,19 +6,25 @@ import { QueryProducts } from "./../../types";
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
+  const [dataProduct, setDataProdutc] = useState([]);
 
-  const { data: dataQuery, loading, refetch } = useQuery<QueryProducts>(
-    SEARCH_PRODUCTS
-  );
+  const { data, loading, refetch } = useQuery(SEARCH_PRODUCTS, {
+    variables: { name: searchValue },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(dataQuery);
+  };
+  const handleQuery = () => {
+    if (searchValue) {
+      setDataProdutc(data["searchProducts"]);
+    }
   };
 
   const handleChange = (e) => {
     e.preventDefault();
     setSearchValue(e.target.value);
+    handleQuery();
   };
 
   return (
@@ -29,8 +35,25 @@ export default function SearchBar() {
           onChange={handleChange}
           value={searchValue}
         ></input>
-        <input type="submit" value=""></input>
+        <input type="submit" value="submit"></input>
       </form>
+      <div>
+        {dataProduct
+          ? dataProduct
+              .sort((a, b) => {
+                var nameA = a.name.toUpperCase();
+                var nameB = b.name.toUpperCase();
+                if (nameA < nameB) {
+                  return -1;
+                }
+                if (nameA > nameB) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map((item, i) => <h5 key={i}>{item.name}</h5>)
+          : null}
+      </div>
     </StyledSearchBar>
   );
 }
