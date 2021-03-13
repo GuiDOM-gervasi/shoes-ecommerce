@@ -10,6 +10,7 @@ export interface ProductAttributes {
   price: number;
   brandId: string;
   CategoriesId: [string];
+  ModelsId: [string];
 }
 
 export interface CategoryAttributes {
