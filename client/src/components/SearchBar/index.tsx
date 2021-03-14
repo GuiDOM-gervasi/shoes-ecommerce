@@ -2,30 +2,37 @@ import React, { useState } from "react";
 import { StyledSearchBar } from "./StyledSearchBar";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { Link, useHistory } from 'react-router-dom'
-
+import { Link, useHistory } from "react-router-dom";
 
 export default function SearchBar() {
-  
   const [searchValue, setSearchValue] = useState("");
-  const [activeAutoComplete, setActiveAutoComplete] = useState(false);
-  const [searchProduct, { called, loading, data }] = useLazyQuery(SEARCH_PRODUCTS);
   const history = useHistory();
+  const [activeAutoComplete, setActiveAutoComplete] = useState(false);
+  const [searchProduct, { called, loading, data }] = useLazyQuery(
+    SEARCH_PRODUCTS
+  );
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
   };
 
   const handleClick = (e) => {
+    const idProduct = e.target.id;
     const query = e.target.innerText;
-    setSearchValue(query);
-    history.push(`/search?query=${query}`);
-  }
+    setActiveAutoComplete(false);
+
+    if (idProduct) {
+      history.push(`/product/${idProduct}`);
+    } else {
+      setSearchValue(query);
+      history.push(`/search?query=${query}`);
+    }
+  };
 
   const handleChange = (e) => {
     const query = e.target.value;
     setSearchValue(query);
-    query && setActiveAutoComplete(!activeAutoComplete);
+    query && setActiveAutoComplete(true);
     searchProduct({
       variables: {
         name: query,
@@ -35,18 +42,17 @@ export default function SearchBar() {
 
   return (
     <StyledSearchBar>
-        <form autoComplete="off" onSubmit={handleSubmit} className="formSearch">
-          <input
-            type="text"
-            onChange={handleChange}
-            value={searchValue}
-            placeholder="Zapatilla Nike Airmax..."
-          ></input>
-          <input type="submit" value="search" className="boton"></input>
-        </form>
-        {
-          (called && loading) ? null : 
-          <div className={activeAutoComplete ? "contentResult" : "contentResult"}>
+      <form autoComplete="off" onSubmit={handleSubmit} className="formSearch">
+        <input
+          type="text"
+          onChange={handleChange}
+          value={searchValue}
+          placeholder="Zapatilla Nike Airmax..."
+        ></input>
+        <input type="submit" value="search" className="boton"></input>
+      </form>
+      {called && loading ? null : activeAutoComplete ? (
+        <div className="contentResult">
           {searchValue && data && data["searchProducts"]
             ? data["searchProducts"]
                 .sort((a: { name: string }, b: { name: string }) => {
@@ -61,16 +67,28 @@ export default function SearchBar() {
                   return 0;
                 })
                 .map((item, i) => {
-                  if(i<3){
-                    return (<div key={i} className="contentResultItem">
-                    <div>
-                      <div className="name" onClick={handleClick}>{item.name}</div>
-                      <Link to={`/product/${item.id}`}><div className="goPage">go!</div></Link>
-                    </div>
-                  </div>)
-                  }}) : null}
-    </div>
-        }
+                  if (i < 3) {
+                    return (
+                      <div key={i} className="contentResultItem">
+                        <div>
+                          <div className="name" onClick={handleClick}>
+                            {item.name}
+                          </div>
+                          <div
+                            className="goPage"
+                            id={item.id}
+                            onClick={handleClick}
+                          >
+                            go!
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                })
+            : null}
+        </div>
+      ) : null}
     </StyledSearchBar>
   );
 }

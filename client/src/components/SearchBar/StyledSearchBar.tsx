@@ -17,17 +17,17 @@ export const StyledSearchBar = styled.div`
 
     input{
     border: 1px solid transparent;
-    background-color: #f1f1f1;
+    background-color: #f0f0f0;
     padding: 0.5rem 0;
     }
 
     input[type=text] {
-      background-color: #f1f1f1;
+      background-color: #f0f0f0;
       width: 80%;
     }
 
     input[type=submit] {
-      background-color: #f1f1f1;
+      background-color: #f0f0f0;
       width:20%;
       color: #6930C3;
     }
@@ -51,13 +51,17 @@ export const StyledSearchBar = styled.div`
     top: 100%;
     left: 0;
     right: 0;
-
     div {
+
     padding: 0.3rem 0.5rem;
     cursor: pointer;
-    background-color: #fff;
+    background-color: #f0f0f0;
     display: flex;
-    
+
+      a, a:active, a:focus, a:link {
+        text-decoration: none;
+      }
+
       &:hover{
         color: #6930C3;
       }
@@ -68,17 +72,19 @@ export const StyledSearchBar = styled.div`
 
       .goPage{
         background-color: #6930C3;
-        border: 0.1rem solid #6930C3;
-        color:#fff;
+        border: none;
+        box-sizing: border-box;
+        border-radius: 5px;
+        color: #F0F0F0;
         width: 100%;
+        padding: 5px;
+
         &:hover{
-          background-color: #fff;
-          border: 0.1rem solid #6930C3;
-          color: #6930C3;
+          background-color: #6930C350;
+          transition: all 0.3s;
         }
       }
 
     }
-
   }
 `;
