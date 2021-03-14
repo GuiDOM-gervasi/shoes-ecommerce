@@ -1,55 +1,94 @@
 import React, { useState } from "react";
 import { StyledSearchBar } from "./StyledSearchBar";
-import { SEARCH_PRODUCTS, GET_PRODUCTS } from "../../graphql/queries";
+import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { QueryProducts } from "./../../types";
+import { Link, useHistory } from "react-router-dom";
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
+  const history = useHistory();
+  const [activeAutoComplete, setActiveAutoComplete] = useState(false);
+  const [searchProduct, { called, loading, data }] = useLazyQuery(
+    SEARCH_PRODUCTS
+  );
 
-  const [searchProduct, { data, loading }] = useLazyQuery(SEARCH_PRODUCTS);
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
   };
 
+  const handleClick = (e) => {
+    const idProduct = e.target.id;
+    const query = e.target.innerText;
+    setActiveAutoComplete(false);
+
+    if (idProduct) {
+      history.push(`/product/${idProduct}`);
+    } else {
+      setSearchValue(query);
+      history.push(`/search?query=${query}`);
+    }
+  };
+
   const handleChange = (e) => {
-    e.preventDefault();
-    setSearchValue(e.target.value);
+    const query = e.target.value;
+    setSearchValue(query);
+    query && setActiveAutoComplete(true);
     searchProduct({
       variables: {
-        name: e.target.value,
+        name: query,
       },
     });
   };
 
   return (
     <StyledSearchBar>
-      <form onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit} className="formSearch">
         <input
-          type="search"
+          type="text"
           onChange={handleChange}
           value={searchValue}
+          placeholder="Zapatilla Nike Airmax..."
         ></input>
-        <input type="submit" value="submit"></input>
+        <input type="submit" value="search" className="boton"></input>
       </form>
-      <div>
-        {searchValue && data && data["searchProducts"]
-          ? data["searchProducts"]
-              .sort((a, b) => {
-                var nameA = a.name.toUpperCase();
-                var nameB = b.name.toUpperCase();
-                if (nameA < nameB) {
-                  return -1;
-                }
-                if (nameA > nameB) {
-                  return 1;
-                }
-                return 0;
-              })
-              .map((item, i) => <h5 key={i}>{item.name}</h5>)
-          : null}
-      </div>
+      {called && loading ? null : activeAutoComplete ? (
+        <div className="contentResult">
+          {searchValue && data && data["searchProducts"]
+            ? data["searchProducts"]
+                .sort((a: { name: string }, b: { name: string }) => {
+                  var nameA = a.name.toUpperCase();
+                  var nameB = b.name.toUpperCase();
+                  if (nameA < nameB) {
+                    return -1;
+                  }
+                  if (nameA > nameB) {
+                    return 1;
+                  }
+                  return 0;
+                })
+                .map((item, i) => {
+                  if (i < 3) {
+                    return (
+                      <div key={i} className="contentResultItem">
+                        <div>
+                          <div className="name" onClick={handleClick}>
+                            {item.name}
+                          </div>
+                          <div
+                            className="goPage"
+                            id={item.id}
+                            onClick={handleClick}
+                          >
+                            go!
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  }
+                })
+            : null}
+        </div>
+      ) : null}
     </StyledSearchBar>
   );
 }
