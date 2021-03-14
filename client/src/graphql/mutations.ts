@@ -20,3 +20,19 @@ export const ADD_PRODUCT = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: String!) {
+    deleteProduct( id: $id) {
+      id
+    }
+  }
+`;
+
+export const UNDELETE_PRODUCT = gql`
+  mutation undeleteProduct($id: String!) {
+    deleteProduct( id: $id) {
+      id
+    }
+  }
+`;
