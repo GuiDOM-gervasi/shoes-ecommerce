@@ -2,14 +2,12 @@ import {
   Column,
   DataType,
   ForeignKey,
-  HasMany,
   Model,
   Table
 } from "sequelize-typescript";
 
 import Product from './products'
 import Category from './category'
-import { BrandAttributes } from './types'
 
 // Definitions of tables and sequelize models
 // Table productcategory
@@ -51,30 +49,6 @@ export class ProductCategory extends Model {
   // brandId!: string;
 }
 
-@Table({
-  defaultScope: {
-    attributes: { exclude: ["deleteAt"] },
-  },
-  paranoid: true,
-  tableName: "brands",
-})
-export class Brand extends Model<BrandAttributes> {
-  @Column({
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: DataType.INTEGER,
-  })
-  id?: string;
-
-  @Column({
-    allowNull: false,
-    type: DataType.STRING,
-  })
-  name!: string;
-
-  @HasMany(() => Product)
-  products!: Product[];
-}
+  //delete inutil brand table
 
 export default ProductCategory

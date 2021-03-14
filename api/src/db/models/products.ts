@@ -5,12 +5,16 @@ import {
   DataType,
   ForeignKey,
   Model,
-  Table
+  Table,
+  Unique
 } from "sequelize-typescript";
 
 import ProductCategory from './productcategory'
 import Brand from './brands'
 import Category from './category'
+
+import Models from './models'
+import ProductModel from './productmodel'
 
 
 @Table({
@@ -28,8 +32,10 @@ export class Product extends Model {
     primaryKey: true,
     type: DataType.INTEGER,
   })
+
   id?: string;
 
+  @Unique
   @Column({
     allowNull: false,
     type: DataType.STRING,
@@ -38,7 +44,7 @@ export class Product extends Model {
 
   @Column({
     allowNull: false,
-    type: DataType.STRING,
+    type: DataType.TEXT,
   })
   description: string;
 
@@ -60,6 +66,9 @@ export class Product extends Model {
 
   @BelongsToMany(() => Category, { through: () => ProductCategory })
   categories: Array<Category & { ProductCategory: ProductCategory }>;
+
+  @BelongsToMany(() => Models, { through: () => ProductModel })
+  models: Array<Models & { ProductModels: ProductModel }>;
 }
 
 export default Product

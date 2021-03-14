@@ -1,9 +1,9 @@
 import { Sequelize } from "sequelize-typescript";
+
 // import accessEnv from '../helpers/accessEnv';
+
 import models from "./models";
 
-// const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env //accessEnv("DB_USER", "DB_PASSWORD", "DB_HOST", "DB_NAME")
-// const sequelize = new Sequelize(`postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`,{
 const sequelize = new Sequelize(
   `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`,
   {
@@ -16,6 +16,6 @@ const sequelize = new Sequelize(
   }
 );
 
-sequelize.sync({ force: true });
+sequelize.sync({ force: false });
 
 export default sequelize;

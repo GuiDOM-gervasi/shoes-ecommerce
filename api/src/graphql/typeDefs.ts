@@ -1,4 +1,3 @@
-import Brand from "./../db/models/brands";
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
@@ -14,6 +13,7 @@ const typeDefs = gql`
     price: Float
     brand: Brand!
     categories: [Category!]
+    models: [Model!]
   }
 
   type Category {
@@ -25,6 +25,16 @@ const typeDefs = gql`
     name: String!
   }
 
+  type Model {
+    id: ID!
+    size: String!
+    color: String!
+  }
+  
+  type ProductForCategory{
+  	products: [Product!]!
+  }
+
   type Mutation {
     createUser(firstName: String!): User!
     createProduct(
@@ -33,10 +43,12 @@ const typeDefs = gql`
       price: Float
       brandId: ID!
       CategoriesId: [String]
+      ModelsId: [String]
     ): Product!
-
+    
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
+    createModel(size: String! color: String!): Model!
   }
 
   type Query {
@@ -44,6 +56,10 @@ const typeDefs = gql`
     products: [Product!]!
     categories: [Category!]!
     brand: [Brand!]!
+    productDetail(id:String!): Product!
+    models: [Model!]!
+    productForCategory(name:String!): [ProductForCategory!]!
+    searchProducts(name:String!):[Product!]!
   }
 `;
 export default typeDefs;
