@@ -76,7 +76,6 @@ export const StyledSearchBar = styled.div`
         box-sizing: border-box;
         border-radius: 5px;
         color: #F0F0F0;
-        width: 100%;
         padding: 5px;
 
         &:hover{
