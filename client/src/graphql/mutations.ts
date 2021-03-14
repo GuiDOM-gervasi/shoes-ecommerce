@@ -31,7 +31,7 @@ export const DELETE_PRODUCT = gql`
 
 export const UNDELETE_PRODUCT = gql`
   mutation undeleteProduct($id: String!) {
-    deleteProduct( id: $id) {
+    undeleteProduct( id: $id) {
       id
     }
   }
