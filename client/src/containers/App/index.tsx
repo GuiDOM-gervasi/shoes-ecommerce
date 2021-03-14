@@ -6,8 +6,9 @@ import { QueryUsers } from "../../types";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import { ADD_PRODUCT } from "../../graphql/mutations";
 import Catalogue from "../Catalogue";
-import {Route} from "react-router-dom"
-import ProductDetail from "../../components/ProductDetail"
+import { Route } from "react-router-dom";
+import ProductDetail from "../../components/ProductDetail";
+import CRUDProducts from "../CRUDProducts";
 
 interface ProductAttributes {
   name: String;
@@ -44,9 +45,10 @@ function App() {
   return (
     <div className="App">
       <Nav />
-      <GlobalStyles/>
-      <Route exact path="/" component={Catalogue}/>
-      <Route  path="/product/:id" component={ProductDetail}/>
+      <GlobalStyles />
+      <Route exact path="/" component={Catalogue} />
+      <Route path="/product/:id" component={ProductDetail} />
+      <Route path="/crud" component={CRUDProducts} />
     </div>
   );
 }
