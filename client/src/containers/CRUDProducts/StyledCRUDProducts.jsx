@@ -28,4 +28,8 @@ export const StyledCRUDProducts = styled.div`
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
     align-self: center;
   }
+
+  .modal {
+    position: absolute;
+  }
 `;

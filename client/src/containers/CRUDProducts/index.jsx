@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import { StyledCRUDProducts } from "./StyledCRUDProducts.jsx";
+import AddProduct from '../../components/AddProduct';
 
 export default function CRUDProducts() {
   const { data, loading, error } = useQuery(GET_PRODUCTS);
@@ -12,9 +13,15 @@ export default function CRUDProducts() {
 	  console.log('submitee');
   }
 
+  const handleClick = () => {
+    document.querySelector('.modal').style.display = 'flex';
+    document.body.onclick = () => document.querySelector('modal').style.display = 'none';
+  }
+
   return (
     <StyledCRUDProducts>
-      <button className="addButton" disabled> Add new product </button>
+      <AddProduct className='modal' />
+      <button className="addButton" onClick={handleClick}> Add new product </button>
       <ul>
         {allProducts?.map((item) => (
           <li key={item.id}>

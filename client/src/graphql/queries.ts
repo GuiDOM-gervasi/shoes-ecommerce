@@ -41,3 +41,31 @@ export const SEARCH_PRODUCTS = gql`
     }
   }
 `;
+
+export const GET_CATEGORIES = gql`
+  query Categories {
+    categories {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_BRANDS = gql`
+  query Brands {
+    brand {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_MODELS = gql`
+  query Models {
+    models {
+      id
+      size
+      color
+    }
+  }
+`;

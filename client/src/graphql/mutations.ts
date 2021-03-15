@@ -36,3 +36,17 @@ export const UNDELETE_PRODUCT = gql`
     }
   }
 `;
+
+export const ADD_MODEL = gql`
+  mutation addModel(
+    $size: String!
+    $color: String!
+  ) {
+    createModel(
+      size: $size
+      color: $color
+    ) {
+      id
+    }
+  } 
+`;
