@@ -20,3 +20,19 @@ export const ADD_PRODUCT = gql`
     }
   }
 `;
+
+export const DELETE_CATEGORY = gql`
+  mutation deleteCategory($id: String!) {
+    deleteCategory( id: $id) {
+      id
+    }
+  }
+`;
+
+export const UNDELETE_CATEGORY = gql`
+  mutation undeleteCategory($id: String!) {
+    undeleteCategory( id: $id) {
+      id
+    }
+  }
+`;
