@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyledSearchBar } from "./StyledSearchBar";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/react-hooks";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -14,20 +14,28 @@ export default function SearchBar() {
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    setActiveAutoComplete(false);
+    if(searchValue){
+      history.push(`/search?query=${searchValue}`)
+    }
   };
 
   const handleClick = (e) => {
     const idProduct = e.target.id;
-    const query = e.target.innerText;
     setActiveAutoComplete(false);
 
     if (idProduct) {
       history.push(`/product/${idProduct}`);
-    } else {
-      setSearchValue(query);
-      history.push(`/search?query=${query}`);
+      setSearchValue("")
     }
   };
+
+  const handleKeyPress = (e) => {
+    setActiveAutoComplete(false);
+    if(e.which === 13){ // Enter code = 13;
+      history.push(`/search?query=${searchValue}`)
+    }
+  }
 
   const handleChange = (e) => {
     const query = e.target.value;
@@ -46,6 +54,7 @@ export default function SearchBar() {
         <input
           type="text"
           onChange={handleChange}
+          onKeyPress={handleKeyPress}
           value={searchValue}
           placeholder="Zapatilla Nike Airmax..."
         ></input>
@@ -71,15 +80,8 @@ export default function SearchBar() {
                     return (
                       <div key={i} className="contentResultItem">
                         <div>
-                          <div className="name" onClick={handleClick}>
+                          <div className="name" id={item.id} onClick={handleClick}>
                             {item.name}
-                          </div>
-                          <div
-                            className="goPage"
-                            id={item.id}
-                            onClick={handleClick}
-                          >
-                            go!
                           </div>
                         </div>
                       </div>

@@ -70,7 +70,7 @@ export const StyledSearchBar = styled.div`
         color: #000;
       }
 
-      .goPage{
+      /* .goPage{
         background-color: #6930C3;
         border: none;
         box-sizing: border-box;
@@ -82,7 +82,7 @@ export const StyledSearchBar = styled.div`
           background-color: #6930C350;
           transition: all 0.3s;
         }
-      }
+      } */
 
     }
   }
