@@ -43,13 +43,12 @@ export default function ProductDetail({match}) {
       {loading ?
         "Loading" :
         <div className="container">
-          {console.log("Data", data)}
           <div>
-            <img className="photo" src={photo} />
+            <img className="photo" src={photo}  alt={name}/>
             <ul>
-              <li><img className="photoDetail" src={photoDetail1} /></li>
-              <li><img className="photoDetail" src={photoDetail2} /></li>
-              <li><img className="photoDetail" src={photoDetail3} /></li>
+              <li><img className="photoDetail" src={photoDetail1} alt={`photoDetail 1 - ${name}`}/></li>
+              <li><img className="photoDetail" src={photoDetail2} alt={`photoDetail 2 - ${name}`}/></li>
+              <li><img className="photoDetail" src={photoDetail3} alt={`photoDetail 3 - ${name}`}/></li>
             </ul>
           </div>
           <div className="info">

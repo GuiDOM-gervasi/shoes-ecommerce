@@ -75,8 +75,7 @@ export default function SearchBar() {
                   }
                   return 0;
                 })
-                .map((item, i) => {
-                  if (i < 3) {
+                .slice(0,3).map((item, i) => {
                     return (
                       <div key={i} className="contentResultItem">
                         <div>
@@ -86,7 +85,6 @@ export default function SearchBar() {
                         </div>
                       </div>
                     );
-                  }
                 })
             : null}
         </div>
