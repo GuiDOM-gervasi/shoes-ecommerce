@@ -21,13 +21,12 @@ export default function Catalogue() {
         <section className="trend">Tendencias</section>
         <section className="sale">Ofertas</section>
       </div>
-      {products.map((item, i) => (
-        <Link to={`/product/${item.id || 1}`}>
+      {products.map((item) => (
+        <Link key={item.id} to={`/product/${item.id || 1}`}>
           <img
             src={item.photo || fotosZapa.photo}
             alt="name"
             className="productImg"
-            key={item.id}
           />
         </Link>
       ))}
