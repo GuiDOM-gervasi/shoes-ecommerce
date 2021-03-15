@@ -22,14 +22,11 @@ export default function SearchBar() {
 
   const handleClick = (e) => {
     const idProduct = e.target.id;
-    const query = e.target.innerText;
     setActiveAutoComplete(false);
 
     if (idProduct) {
       history.push(`/product/${idProduct}`);
-    } else {
-      setSearchValue(query);
-      history.push(`/search?query=${query}`);
+      setSearchValue("")
     }
   };
 
@@ -83,15 +80,8 @@ export default function SearchBar() {
                     return (
                       <div key={i} className="contentResultItem">
                         <div>
-                          <div className="name" onClick={handleClick}>
+                          <div className="name" id={item.id} onClick={handleClick}>
                             {item.name}
-                          </div>
-                          <div
-                            className="goPage"
-                            id={item.id}
-                            onClick={handleClick}
-                          >
-                            go!
                           </div>
                         </div>
                       </div>
