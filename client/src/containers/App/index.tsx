@@ -8,6 +8,7 @@ import { ADD_PRODUCT } from "../../graphql/mutations";
 import Catalogue from "../Catalogue";
 import { Route } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail";
+import SearchResult from "../SearchResult";
 
 interface ProductAttributes {
   name: String;
@@ -47,7 +48,7 @@ function App() {
       <GlobalStyles />
       <Route exact path="/" component={Catalogue} />
       <Route path="/product/:id" component={ProductDetail} />
-      <Route path="/search" component={ProductDetail} />
+      <Route exact path="/search" component={SearchResult} />
     </div>
   );
 }
