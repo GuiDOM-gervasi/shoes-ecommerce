@@ -50,6 +50,10 @@ const typeDefs = gql`
     atr:String!
     input:[String]
     ): Product! 
+    updateCategory(
+    id:String!
+    input:String!
+    ):Category!
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String! color: String!): Model!

@@ -20,3 +20,16 @@ export const ADD_PRODUCT = gql`
     }
   }
 `;
+
+export const ADD_CATEGORY = gql`
+mutation addCategory(
+  $name: String!
+){
+  createCategory(
+    name: $name
+  ){
+    id
+    name
+  }
+}
+`
