@@ -1,16 +1,56 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation} from "@apollo/react-hooks";
 import { StyledAddCategory } from "./StyledAddCategory";
-import { ADD_PRODUCT, ADD_MODEL } from "../../graphql/mutations";
-import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
-import { validateChange, check, form } from "../../helpers/validation";
+import { ADD_CATEGORY } from "../../graphql/mutations";
+import { validateChange, check, formCategory} from "../../helpers/validation";
 
+interface AddCategoryAttributes{
+	className: String
+}
 
-export default function AddCategory(){
+export default function AddCategory({className} : AddCategoryAttributes){
+	const [createCateogry, {error: errorMutationModel}] = useMutation(ADD_CATEGORY)
+	const [form,setForm] = useState<formCategory>({
+		name:"",
+	})
+	const handleSubmit= async(e) => {
+	e.preventDefault();
+	let {name} = form
+	try {
+	await createCateogry({
+		variables: {
+		name
+		},
+	})
+	}catch(err){
+		console.log(err)
+	}finally{
+		setForm({name: ""})
+	}
+	
+}
+	const handleChange= async(e: any) => {
+	setForm(validateChange(e,form as any))
+	check(e);
+}
+	if(errorMutationModel){
+		console.log(errorMutationModel)
+	}
 	return (
 	<StyledAddCategory>
-	<div>
+	<form onSubmit={handleSubmit}>
+	<div className="div_name">
+		<input 
+		type = "text"
+		name = "name"
+		onChange = {handleChange}
+		placeholder= "Category Name"
+		value={form.name}
+		/>
+		<span className="span_name"></span>
 	</div>
+	<input type = "submit" value="Add Category"/> 
+	</form>
 	</StyledAddCategory>
 )
 }

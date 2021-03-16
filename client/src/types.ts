@@ -28,3 +28,12 @@ export interface ProductAttributes {
 export interface QueryProducts {
   products: ProductAttributes[];
 }
+
+export interface CategoryAttributes {
+  id?: string;
+  name: String;
+}
+
+export interface QuertCategories{
+  categories: CategoryAttributes[]
+}

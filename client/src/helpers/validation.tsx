@@ -6,6 +6,9 @@ export interface form {
   CategoriesId: string[];
   ModelsId: string[];
 }
+export interface formCategory {
+  name: string;
+}
 
 export function validateChange(e: any, form: form) {
   switch (e.target.name) {
