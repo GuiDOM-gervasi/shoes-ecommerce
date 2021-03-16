@@ -1,7 +1,12 @@
+import  Models  from './../../../db/models/models';
+import  ProductModel  from './../../../db/models/productmodel';
 import Product from "../../../db/models/products";
 import { Op } from "sequelize";
 import Category from "#root/db/models/category";
 import Brand from "../../../db/models/brands";
+
+
+
 
 
 const searchProduct = async (parent, args, context, info) => {
@@ -18,7 +23,7 @@ const searchProduct = async (parent, args, context, info) => {
         { name: { [Op.like]: convertName[2] } },
       ],
     },
-    include: [Brand as any, Category as any],
+    include: [Brand as any, Category as any,Models as any ,ProductModel as any  ],
   });
   return searchProduct;
 };

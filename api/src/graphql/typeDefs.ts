@@ -1,3 +1,5 @@
+import { Product } from './../db/models/products';
+import { ProductModel } from './../db/models/productmodel';
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
@@ -14,6 +16,7 @@ const typeDefs = gql`
     brand: Brand!
     categories: [Category!]
     models: [Model!]
+    
   }
 
   type Category {
@@ -32,6 +35,9 @@ const typeDefs = gql`
   }
   
   type ProductForCategory{
+  	products: [Product!]!
+  }
+  type ProductModel{
   	products: [Product!]!
   }
 
@@ -60,6 +66,7 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name:String!): [ProductForCategory!]!
     searchProducts(name:String!):[Product!]!
+    productModel:[Product!]!
   }
 `;
 export default typeDefs;
