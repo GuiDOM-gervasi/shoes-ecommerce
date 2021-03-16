@@ -56,4 +56,24 @@ export const StyledAddProduct = styled.div`
     position: absolute;
     bottom: 0;
   }
+
+  .selectsMultiple {
+    display: flex;
+    flex-direction: row;
+
+    .divModels {
+      width: 50%;
+      select {
+        width: 30%;
+      }
+    }
+  }
+
+  optgroup {
+    color: rgba(0, 0, 0, 0.3);
+
+    option {
+      color: black;
+    }
+  }
 `;

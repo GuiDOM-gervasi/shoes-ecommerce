@@ -10,9 +10,10 @@ interface AddProductAttributes {
 }
 
 export default function AddProduct({ className }: AddProductAttributes) {
-  const [createProduct, { error: errorMutationProduct }] = useMutation(
-    ADD_PRODUCT
-  );
+  const [
+    createProduct,
+    { error: errorMutationProduct, data: dataMutationProduct },
+  ] = useMutation(ADD_PRODUCT);
   const [createModel, { error: errorMutationModel }] = useMutation(ADD_MODEL);
 
   const { data: dataCat, loading: loadingCat, error: errorCat } = useQuery(
@@ -34,6 +35,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
     brandId: "1",
     CategoriesId: [],
     ModelsId: [],
+    error: true,
   });
 
   if (errorMutationProduct || errorMutationModel) {
@@ -69,6 +71,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
       });
     } catch (err) {
       console.log(err);
+      return;
     }
     setForm({
       name: "",
@@ -77,13 +80,15 @@ export default function AddProduct({ className }: AddProductAttributes) {
       brandId: "1",
       CategoriesId: [],
       ModelsId: [],
+      error: true,
     });
+    alert("Producto creado");
   };
 
   const handleChange = async (e: any) => {
     if (e.target.name === "price" && Number(e.target.value) <= 0) return;
-    setForm(validateChange(e, form));
-    check(e);
+    const error = check(e, form);
+    setForm(validateChange(e, form, error));
   };
 
   return (
@@ -127,26 +132,42 @@ export default function AddProduct({ className }: AddProductAttributes) {
             ))}
           </select>
         </div>
-        <div className="div_categories">
-          <select name="CategoriesId" id="categories" onChange={handleChange}>
-            {categories?.map((category) => (
-              <option value={category.id} key={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+        <div className="selectsMultiple">
+          <div className="div_categories">
+            <select
+              name="CategoriesId"
+              id="categories"
+              onChange={handleChange}
+              multiple
+            >
+              <optgroup label="Categories">
+                {categories?.map((category) => (
+                  <option value={category.id} key={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+          </div>
+          <div className="div_models">
+            <select
+              name="ModelsId"
+              id="models"
+              onChange={handleChange}
+              multiple
+            >
+              <optgroup label="Models">
+                {models?.map((model) => (
+                  <option value={model.id} key={model.id}>
+                    {model.size} - {model.color}
+                  </option>
+                ))}
+              </optgroup>
+            </select>
+            <button disabled>New model</button>
+          </div>
         </div>
-        <div className="div_models">
-          <select name="ModelsId" id="models" onChange={handleChange}>
-            {models?.map((model) => (
-              <option value={model.id} key={model.id}>
-                {model.size} - {model.color}
-              </option>
-            ))}
-          </select>
-          <button disabled>New model</button>
-        </div>
-        <input type="submit" value="Add product" />
+        <input type="submit" value="Add product" disabled={form.error} />
       </form>
     </StyledAddProduct>
   );

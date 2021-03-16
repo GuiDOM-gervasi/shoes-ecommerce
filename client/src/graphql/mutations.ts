@@ -6,7 +6,8 @@ export const ADD_PRODUCT = gql`
     $description: String!
     $price: Float!
     $brandId: ID!
-    $CategoriesId: [String]
+    $CategoriesId: [String]!
+    $ModelsId: [String]!
   ) {
     createProduct(
       name: $name
@@ -14,6 +15,7 @@ export const ADD_PRODUCT = gql`
       price: $price
       brandId: $brandId
       CategoriesId: $CategoriesId
+      ModelsId: $ModelsId
     ) {
       name
       id
