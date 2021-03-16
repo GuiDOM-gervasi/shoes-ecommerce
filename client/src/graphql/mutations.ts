@@ -25,7 +25,7 @@ export const ADD_PRODUCT = gql`
 
 export const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: String!) {
-    deleteProduct( id: $id) {
+    deleteProduct(id: $id) {
       id
     }
   }
@@ -33,22 +33,16 @@ export const DELETE_PRODUCT = gql`
 
 export const UNDELETE_PRODUCT = gql`
   mutation undeleteProduct($id: String!) {
-    undeleteProduct( id: $id) {
+    undeleteProduct(id: $id) {
       id
     }
   }
 `;
 
 export const ADD_MODEL = gql`
-  mutation addModel(
-    $size: String!
-    $color: String!
-  ) {
-    createModel(
-      size: $size
-      color: $color
-    ) {
+  mutation addModel($size: String!, $color: String!) {
+    createModel(size: $size, color: $color) {
       id
     }
-  } 
+  }
 `;

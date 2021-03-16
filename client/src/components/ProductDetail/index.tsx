@@ -30,7 +30,6 @@ export default function ProductDetail({ match }) {
         "Loading"
       ) : (
         <div className="container">
-          {console.log("Data", data)}
           <div>
             <img className="photo" src={photo} alt="main" />
             <ul>

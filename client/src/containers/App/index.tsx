@@ -6,6 +6,7 @@ import { Route } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail";
 import CRUDProducts from "../CRUDProducts";
 import AddProduct from "../../components/AddProduct";
+import EditProduct from "../../components/EditProduct";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/admin/products" component={CRUDProducts} />
       <Route path="/admin/addProduct" component={AddProduct} />
+      <Route path="/admin/editProduct/:productId" component={EditProduct} />
     </div>
   );
 }
