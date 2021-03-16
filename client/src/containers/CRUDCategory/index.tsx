@@ -1,15 +1,15 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { Link } from "react-router-dom";
-import { StyledCategory } from "./StyleCategory";
+import { StyledCRUDCategory } from "./StyledCRUDCategory";
 
 
 export default function Category(){
 	return(
-	<StyledCategory>
+	<StyledCRUDCategory>
 	<div>
 	</div>
-	</StyledCategory>
+	</StyledCRUDCategory>
 )
 }
 

@@ -21,6 +21,7 @@ export const ADD_PRODUCT = gql`
   }
 `;
 
+
 export const ADD_CATEGORY = gql`
 mutation addCategory(
   $name: String!
@@ -33,3 +34,33 @@ mutation addCategory(
   }
 }
 `
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: String!) {
+    deleteProduct( id: $id) {
+      id
+    }
+  }
+`;
+
+export const UNDELETE_PRODUCT = gql`
+  mutation undeleteProduct($id: String!) {
+    undeleteProduct( id: $id) {
+      id
+    }
+  }
+`;
+
+export const ADD_MODEL = gql`
+  mutation addModel(
+    $size: String!
+    $color: String!
+  ) {
+    createModel(
+      size: $size
+      color: $color
+    ) {
+      id
+    }
+  } 
+`;

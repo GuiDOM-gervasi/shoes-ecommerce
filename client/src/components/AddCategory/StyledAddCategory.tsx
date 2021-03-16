@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const StyledCategory= styled.div`
+export const StyledAddCategory= styled.div`
 	display: flex;
 	flex-wrap: wrap;
 
 
 `;
-  
+ 

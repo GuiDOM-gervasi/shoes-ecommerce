@@ -6,7 +6,7 @@ export default function Slider() {
   return (
     <StyledSlider>
       {slidesArray.map((photo, i) => (
-        <img src={photo} key={i} alt={"Product image slider" + i} className={"slide" + i} />
+        <img src={photo} alt="Product slider" className={"slide" + i} key={i} />
       ))}
     </StyledSlider>
   );
