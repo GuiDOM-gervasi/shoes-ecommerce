@@ -11,7 +11,13 @@ export default function CRUDProducts() {
   const history = useHistory();
   const { data, loading, error } = useQuery(GET_PRODUCTS);
   const allProducts = data ? data.products : null;
-  const [deleteProduct, {loading: loadingDelete}] = useMutation(DELETE_PRODUCT);
+  const [deleteProduct, { loading: loadingDelete }] = useMutation(
+    DELETE_PRODUCT,
+    {
+      refetchQueries: [{ query: GET_PRODUCTS }],
+    }
+  );
+
   if (loading) return <span> loading </span>;
   if (error) return <span> error {error.message} </span>;
 
@@ -20,10 +26,10 @@ export default function CRUDProducts() {
   };
 
   const handleDelete = (id) => {
-    deleteProduct({variables:{id}})
-  }
+    deleteProduct({ variables: { id } });
+  };
 
-  if(loadingDelete) return <span>loading...</span>
+  if (loadingDelete) return <span>loading...</span>;
 
   return (
     <StyledCRUDProducts>
