@@ -34,3 +34,15 @@ export interface ModelAttributes {
   size: string;
   color: string;
 }
+
+export interface UpdateProductAttributes {
+  id: string;
+  atr: string;
+  input: [string];
+}
+
+export interface UpdateUserAttributes {
+  id?: string;
+  atr: string;
+  input: string;
+}

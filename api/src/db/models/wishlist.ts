@@ -32,14 +32,14 @@ import {
       type: DataType.INTEGER,
     })
     @ForeignKey(() => Product)
-    productId: string;
+    productId!: string;
   
     @Column({
       allowNull: false,
       type: DataType.INTEGER,
     })
     @ForeignKey(() => User)
-    userId: string;
+    userId!: string;
 
   }
 

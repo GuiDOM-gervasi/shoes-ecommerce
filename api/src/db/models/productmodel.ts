@@ -32,20 +32,20 @@ import {
       type: DataType.INTEGER,
     })
     @ForeignKey(() => Product)
-    productId: string;
+    productId!: string;
   
     @Column({
       allowNull: false,
       type: DataType.INTEGER,
     })
     @ForeignKey(() => Models)
-    modelId: string;
+    modelId!: string;
     
     @Column({
       allowNull: true,
       type: DataType.TEXT
     })
-    img: string;
+    img?: string;
 
   }
   

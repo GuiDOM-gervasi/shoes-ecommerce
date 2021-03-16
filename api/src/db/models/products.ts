@@ -48,7 +48,7 @@ export class Product extends Model {
     allowNull: false,
     type: DataType.TEXT,
   })
-  description: string;
+  description?: string;
 
   @Column({
     allowNull: false,
@@ -67,13 +67,13 @@ export class Product extends Model {
   brand!: Brand;
 
   @BelongsToMany(() => Category, { through: () => ProductCategory })
-  categories: Array<Category & { ProductCategory: ProductCategory }>;
+  categories?: Array<Category & { ProductCategory: ProductCategory }>;
 
   @BelongsToMany(() => Models, { through: () => ProductModel })
-  models: Array<Models & { ProductModels: ProductModel }>;
+  models?: Array<Models & { ProductModels: ProductModel }>;
 
   @BelongsToMany(() => User, { through: () => WishList })
-  users: Array<User & { WishList: WishList }>;
+  users?: Array<User & { WishList: WishList }>;
 }
 
 export default Product

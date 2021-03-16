@@ -69,10 +69,10 @@ export class User extends Model<UserAttributes> {
     allowNull: true,
     type: DataType.BOOLEAN,
   })
-  nlsuscribe: Boolean;
+  nlsuscribe?: Boolean;
 
   @BelongsToMany(() => Product, { through: () => WishList })
-  products: Array<Product & { WishList: WishList }>;
+  products?: Array<Product & { WishList: WishList }>;
 
 }
 
