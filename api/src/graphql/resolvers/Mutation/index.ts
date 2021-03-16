@@ -5,3 +5,4 @@ export {default as createBrand} from "./createBrand";
 export {default as createModel} from './createModel';
 export {default as updateProduct} from "./updateProduct";
 export {default as updateUser} from "./updateUser";
+export {default as addImage} from "./addImage";
