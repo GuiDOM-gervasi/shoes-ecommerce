@@ -16,7 +16,7 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
-export const GET_PRODUCT = gql`
+export const GET_PRODUCT_DETAIL = gql`
   query ProductDetail($id: String!) {
     productDetail(id: $id) {
       id

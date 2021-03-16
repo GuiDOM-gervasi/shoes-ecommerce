@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { StyledAddProduct } from "./StyledAddProduct";
 import { ADD_PRODUCT, ADD_MODEL } from "../../graphql/mutations";
 import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
-import { validateChange, check, form } from "../../helpers/validacion";
+import { validateChange, check, form } from "../../helpers/validation";
 
 interface AddProductAttributes {
   className: String;
