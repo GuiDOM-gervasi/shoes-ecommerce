@@ -4,6 +4,13 @@ const typeDefs = gql`
   type User {
     id: ID!
     firstName: String!
+    lastName: String!
+    userName: String!
+    isAdmin: Boolean!
+    email: String!
+    password: String!
+    nlsuscribe: Boolean
+    products: [Product!]
   }
 
   type Product {
@@ -36,7 +43,15 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(firstName: String!): User!
+    createUser(
+      firstName: String!
+      lastName: String!
+      userName: String!
+      isAdmin: Boolean!
+      email: String!
+      password: String!
+      nlsuscribe: Boolean
+    ): User!
     createProduct(
       name: String!
       description: String

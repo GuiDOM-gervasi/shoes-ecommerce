@@ -1,6 +1,12 @@
 export interface UserAttributes {
   id?: string;
   firstName: string;
+  lastName: string;
+  userName: string;
+  isAdmin: Boolean;
+  email: string;
+  password: string;
+  nlsuscribe: Boolean;
 }
 
 export interface ProductAttributes {

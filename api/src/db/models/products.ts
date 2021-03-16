@@ -15,6 +15,8 @@ import Category from './category'
 
 import Models from './models'
 import ProductModel from './productmodel'
+import User from "./users";
+import {WishList} from "./wishlist";
 
 
 @Table({
@@ -69,6 +71,9 @@ export class Product extends Model {
 
   @BelongsToMany(() => Models, { through: () => ProductModel })
   models: Array<Models & { ProductModels: ProductModel }>;
+
+  @BelongsToMany(() => User, { through: () => WishList })
+  users: Array<User & { WishList: WishList }>;
 }
 
 export default Product
