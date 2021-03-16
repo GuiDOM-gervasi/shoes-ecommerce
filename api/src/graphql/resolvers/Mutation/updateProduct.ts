@@ -1,5 +1,5 @@
 import ProductCategory from "#root/db/models/productcategory";
-import { handlerUpdate } from "#root/helpers/handlerUpdate";
+import { handlerUpdate } from "#root/helpers/updateProduct";
 import Product from "../../../db/models/products";
 import ProductModel from "#root/db/models/productmodel"
 const updateProduct = async (parent, args, context, info)  => {
