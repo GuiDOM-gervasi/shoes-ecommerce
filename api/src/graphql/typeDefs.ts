@@ -16,7 +16,7 @@ const typeDefs = gql`
     brand: Brand!
     categories: [Category!]
     models: [Model!]
-    
+    img: String
   }
 
   type Category {
