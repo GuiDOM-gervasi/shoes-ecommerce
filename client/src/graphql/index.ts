@@ -7,7 +7,19 @@ import { ApolloClient,
 import {typeDefs} from './typeDef'
 import {ProductBasic} from '../types'
 
-export const cache = new InMemoryCache({});
+export const cache = new InMemoryCache({
+  // typePolicies: {
+  //   Query: {
+  //     fields: {
+  //       productForCategory: {
+  //         read() {
+  //           return loadedProducts();
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+});
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,

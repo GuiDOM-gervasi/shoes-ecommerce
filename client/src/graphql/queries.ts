@@ -51,8 +51,8 @@ export const GET_CATEGORIES= gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-  query ProductForCategory($name:String!) {
-    products {
+  query productForCategory($name:String) {
+    productForCategory(name: $name) {
       id
       name
       brand {
