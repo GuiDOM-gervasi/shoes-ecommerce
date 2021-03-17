@@ -8,12 +8,13 @@ import Slider from "../../components/Slider";
 import Filter from "../../components/Filter";
 
 export default function Catalogue() {
+  
   let  { data, loading, error } = useQuery(GET_PRODUCTS);
   const [loadedProducts, setLoadedProduct] = React.useState([]) 
   if (loading || !data) <span> Loading... </span>;
   if (error) return <span>Error {error.message}</span>;
   
-  if (loadedProducts.length <1){
+  if (loadedProducts.length < 1){
     setLoadedProduct(data.products)
   }
 
