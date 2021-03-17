@@ -6,4 +6,6 @@ export {default as createModel} from './createModel';
 export {default as updateProduct} from "./updateProduct";
 export {default as updateCategory} from "./updateCategory";
 export {default as deleteProduct} from './deleteProduct';
+export {default as deleteCategory} from './deleteCategory';
 export {default as undeleteProduct} from './undeleteProduct';
+export {default as undeleteCategory} from './undeleteCategory';

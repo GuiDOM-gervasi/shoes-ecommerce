@@ -57,9 +57,10 @@ const typeDefs = gql`
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String! color: String!): Model!
-
     deleteProduct(id:String!): Product
+    deleteCategory(id:String!): Category
     undeleteProduct(id:String!): Product
+    undeleteCategory(id:String!): Category
   }
 
   type Query {

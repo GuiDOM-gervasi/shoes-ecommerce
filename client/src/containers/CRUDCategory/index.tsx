@@ -4,8 +4,6 @@ import { StyledCRUDCategory } from "./StyledCRUDCategory";
 import { CategoryAttributes } from "../../types"
 import { GET_CATEGORIES } from "../../graphql/queries"
 import { useHistory } from "react-router-dom";
-import AddCategory from "../../components/AddCategory"
-
 
 export default function Category(){
 	const history = useHistory();
