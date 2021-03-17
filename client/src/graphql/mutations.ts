@@ -46,3 +46,19 @@ export const ADD_MODEL = gql`
     }
   }
 `;
+
+export const EDIT_PRODUCT = gql`
+  mutation editProduct(
+    $id: String!,
+    $atr: String!,
+    $input: [String],
+  ) {
+    updateProduct(
+      id: $id,
+      atr: $atr,
+      input: $input,
+    ) {
+        id
+    }
+  }
+`;

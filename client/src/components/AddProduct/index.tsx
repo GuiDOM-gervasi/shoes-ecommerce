@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { StyledAddProduct } from "./StyledAddProduct";
-import { ADD_PRODUCT, ADD_MODEL } from "../../graphql/mutations";
+import { ADD_PRODUCT } from "../../graphql/mutations";
 import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
 import { validateChange, check, form } from "../../helpers/validation";
 
@@ -12,9 +12,9 @@ interface AddProductAttributes {
 export default function AddProduct({ className }: AddProductAttributes) {
   const [
     createProduct,
-    { error: errorMutationProduct, data: dataMutationProduct },
+    { error: errorMutationProduct },
   ] = useMutation(ADD_PRODUCT);
-  const [createModel, { error: errorMutationModel }] = useMutation(ADD_MODEL);
+  // const [createModel, { error: errorMutationModel }] = useMutation(ADD_MODEL);
 
   const { data: dataCat, loading: loadingCat, error: errorCat } = useQuery(
     GET_CATEGORIES
@@ -38,8 +38,8 @@ export default function AddProduct({ className }: AddProductAttributes) {
     error: true,
   });
 
-  if (errorMutationProduct || errorMutationModel) {
-    console.log(errorMutationProduct || errorMutationModel);
+  if (errorMutationProduct) {
+    console.log(errorMutationProduct);
   }
 
   if (loadingCat || loadingBrands || loadingMod) return <span>loading...</span>;

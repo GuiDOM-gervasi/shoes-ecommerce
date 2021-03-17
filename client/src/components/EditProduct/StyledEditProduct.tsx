@@ -58,4 +58,22 @@ export const StyledEditProduct = styled.div`
       opacity: 0.8;
     }
   }
+
+  .modal {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 30%;
+    height: 30%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    input {
+      margin: 1rem 0;
+    }
+  }
 `;

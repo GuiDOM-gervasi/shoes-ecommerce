@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import { DELETE_PRODUCT } from "../../graphql/mutations";
 import { StyledCRUDProducts } from "./StyledCRUDProducts";
 import { ProductAttributes } from "../../types";
 import { useHistory } from "react-router-dom";
-import AddProduct from "../../components/AddProduct";
 
 export default function CRUDProducts() {
   const history = useHistory();
@@ -29,6 +28,10 @@ export default function CRUDProducts() {
     deleteProduct({ variables: { id } });
   };
 
+  const handleEdit = (id) => {
+    history.push(`/admin/editProduct/${id}`);
+  };
+
   if (loadingDelete) return <span>loading...</span>;
 
   return (
@@ -44,7 +47,7 @@ export default function CRUDProducts() {
             <span className="price"> {item.price} </span>
 
             <div className="buttons">
-              <button disabled> edit </button>
+              <button onClick={() => handleEdit(item.id)}> edit </button>
               <button onClick={() => handleDelete(item.id)}> delete </button>
             </div>
           </li>
