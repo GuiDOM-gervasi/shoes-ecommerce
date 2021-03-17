@@ -16,29 +16,6 @@ export const StyledCatalogue = styled.div`
     }
   }
 
-  .filterBar {
-    height: 2rem;
-    background-color: #808080;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    section {
-      width: 33%;
-      height: 100%;
-      border-right: 1px solid #747474;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 500ms ease;
-
-      &:hover {
-        background-color: #3a3a3a;
-        color: #f0f0f0;
-      }
-    }
-  }
 
   a, a:active, a:focus {
     outline: none;
