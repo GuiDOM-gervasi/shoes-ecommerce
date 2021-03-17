@@ -1,6 +1,12 @@
 export interface UserAttributes {
   id?: string;
   firstName: string;
+  lastName: string;
+  userName: string;
+  isAdmin: Boolean;
+  email: string;
+  password: string;
+  nlsuscribe: Boolean;
 }
 
 export interface ProductAttributes {
@@ -27,4 +33,16 @@ export interface ModelAttributes {
   id?: string;
   size: string;
   color: string;
+}
+
+export interface UpdateProductAttributes {
+  id: string;
+  atr: string;
+  input: [string];
+}
+
+export interface UpdateUserAttributes {
+  id?: string;
+  atr: string;
+  input: string;
 }

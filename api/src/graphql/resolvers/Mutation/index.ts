@@ -8,3 +8,5 @@ export {default as undeleteProduct} from './undeleteProduct';
 export {default as updateProduct} from "./updateProduct"
 export {default as deleteCategory} from './deleteCategory';
 export {default as undeleteCategory} from './undeleteCategory';
+export {default as updateUser} from "./updateUser";
+export {default as addImage} from "./addImage";
