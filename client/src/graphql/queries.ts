@@ -5,6 +5,7 @@ export const GET_PRODUCTS = gql`
     products {
       id
       name
+      price
       brand {
         name
       }
@@ -15,9 +16,9 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
-export const GET_PRODUCT = gql`
-  query ProductDetail($id:String!) {
-    productDetail(id:$id) {
+export const GET_PRODUCT_DETAIL = gql`
+  query ProductDetail($id: String!) {
+    productDetail(id: $id) {
       id
       description
       price
@@ -33,10 +34,38 @@ export const GET_PRODUCT = gql`
 `;
 
 export const SEARCH_PRODUCTS = gql`
-query searchProducts($name:String!){
-  searchProducts(name:$name){
-    id
-    name
+  query searchProducts($name: String!) {
+    searchProducts(name: $name) {
+      id
+      name
+    }
   }
-}
+`;
+
+export const GET_CATEGORIES = gql`
+  query Categories {
+    categories {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_BRANDS = gql`
+  query Brands {
+    brand {
+      id
+      name
+    }
+  }
+`;
+
+export const GET_MODELS = gql`
+  query Models {
+    models {
+      id
+      size
+      color
+    }
+  }
 `;
