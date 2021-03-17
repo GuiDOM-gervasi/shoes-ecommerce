@@ -17,7 +17,7 @@ const createProductResolver = async (
 ) => {
   const product = await Product.create({ name, description, price, brandId });
 
-  await product.$add("category", CategoriesId);
+  await product.$add("category", CategoriesId);// 3er arg , throw:{}
 
   await product.$add("model", ModelsId);
   console.log(product)

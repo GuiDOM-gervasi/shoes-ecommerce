@@ -6,16 +6,15 @@ import {
   ForeignKey,
   Model,
   Table,
-  Unique
+  Unique,
 } from "sequelize-typescript";
 
-import ProductCategory from './productcategory'
-import Brand from './brands'
-import Category from './category'
+import ProductCategory from "./productcategory";
+import Brand from "./brands";
+import Category from "./category";
 
-import Models from './models'
-import ProductModel from './productmodel'
-
+import Models from "./models";
+import ProductModel from "./productmodel";
 
 @Table({
   defaultScope: {
@@ -32,7 +31,6 @@ export class Product extends Model {
     primaryKey: true,
     type: DataType.INTEGER,
   })
-
   id?: string;
 
   @Unique
@@ -69,6 +67,9 @@ export class Product extends Model {
 
   @BelongsToMany(() => Models, { through: () => ProductModel })
   models: Array<Models & { ProductModels: ProductModel }>;
+
+  // @BelongsTo(() => ProductModel)
+  // productModel: ProductModel;
 }
 
-export default Product
+export default Product;
