@@ -31,23 +31,27 @@ export default function ProductDetail({ match }) {
       ) : (
         <div className="container">
           <div>
-            <img className="photo" src={photo} alt="main" />
+            <img className="photo" src={photo} alt={name} />
             <ul>
               <li>
-                <img className="photoDetail" src={photoDetail1} alt="detail" />
+                <img
+                  className="photoDetail"
+                  src={photoDetail1}
+                  alt={`photoDetail 1 - ${name}`}
+                />
               </li>
               <li>
                 <img
                   className="photoDetail"
                   src={photoDetail2}
-                  alt="detail 2"
+                  alt={`photoDetail 2 - ${name}`}
                 />
               </li>
               <li>
                 <img
                   className="photoDetail"
                   src={photoDetail3}
-                  alt="detail 3"
+                  alt={`photoDetail 3 - ${name}`}
                 />
               </li>
             </ul>

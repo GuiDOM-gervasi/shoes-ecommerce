@@ -30,10 +30,24 @@ export const DELETE_PRODUCT = gql`
     }
   }
 `;
+export const DELETE_CATEGORY = gql`
+  mutation deleteCategory($id: String!) {
+    deleteCategory(id: $id) {
+      id
+    }
+  }
+`;
 
 export const UNDELETE_PRODUCT = gql`
   mutation undeleteProduct($id: String!) {
     undeleteProduct(id: $id) {
+      id
+    }
+  }
+`;
+export const UNDELETE_CATEGORY = gql`
+  mutation undeleteCategory($id: String!) {
+    undeleteCategory(id: $id) {
       id
     }
   }
@@ -48,17 +62,9 @@ export const ADD_MODEL = gql`
 `;
 
 export const EDIT_PRODUCT = gql`
-  mutation editProduct(
-    $id: String!,
-    $atr: String!,
-    $input: [String],
-  ) {
-    updateProduct(
-      id: $id,
-      atr: $atr,
-      input: $input,
-    ) {
-        id
+  mutation editProduct($id: String!, $atr: String!, $input: [String]) {
+    updateProduct(id: $id, atr: $atr, input: $input) {
+      id
     }
   }
 `;
