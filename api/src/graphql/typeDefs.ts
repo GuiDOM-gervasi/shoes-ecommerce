@@ -30,9 +30,9 @@ const typeDefs = gql`
     size: String!
     color: String!
   }
-  
-  type ProductForCategory{
-  	products: [Product!]!
+
+  type ProductForCategory {
+    products: [Product!]!
   }
 
   type Mutation {
@@ -45,15 +45,8 @@ const typeDefs = gql`
       CategoriesId: [String]
       ModelsId: [String]
     ): Product!
-    updateProduct(
-    id:String!
-    atr:String!
-    input:[String]
-    ): Product! 
-    updateCategory(
-    id:String!
-    input:String!
-    ):Category!
+    
+    updateCategory(id:String!,input:String!):Category!
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String! color: String!): Model!
@@ -61,6 +54,7 @@ const typeDefs = gql`
     deleteCategory(id:String!): Category
     undeleteProduct(id:String!): Product
     undeleteCategory(id:String!): Category
+    updateProduct(id: String!, atr: String!, input: [String]): Product!
   }
 
   type Query {
@@ -68,10 +62,10 @@ const typeDefs = gql`
     products: [Product!]!
     categories: [Category!]!
     brand: [Brand!]!
-    productDetail(id:String!): Product!
+    productDetail(id: String!): Product!
     models: [Model!]!
-    productForCategory(name:String!): [ProductForCategory!]!
-    searchProducts(name:String!):[Product!]!
+    productForCategory(name: String!): [ProductForCategory!]!
+    searchProducts(name: String!): [Product!]!
   }
 `;
 export default typeDefs;

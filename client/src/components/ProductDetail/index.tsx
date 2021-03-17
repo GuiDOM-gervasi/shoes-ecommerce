@@ -30,25 +30,28 @@ export default function ProductDetail({ match }) {
         "Loading"
       ) : (
         <div className="container">
-          {console.log("Data", data)}
           <div>
-            <img className="photo" src={photo} alt="main" />
+            <img className="photo" src={photo} alt={name} />
             <ul>
               <li>
-                <img className="photoDetail" src={photoDetail1} alt="detail" />
+                <img
+                  className="photoDetail"
+                  src={photoDetail1}
+                  alt={`photoDetail 1 - ${name}`}
+                />
               </li>
               <li>
                 <img
                   className="photoDetail"
                   src={photoDetail2}
-                  alt="detail 2"
+                  alt={`photoDetail 2 - ${name}`}
                 />
               </li>
               <li>
                 <img
                   className="photoDetail"
                   src={photoDetail3}
-                  alt="detail 3"
+                  alt={`photoDetail 3 - ${name}`}
                 />
               </li>
             </ul>
@@ -60,7 +63,9 @@ export default function ProductDetail({ match }) {
             <h4 className="priceBefore">{priceBefore}</h4>
             <h3 className="price">{price}</h3>
             <h4>{categories[0].name}</h4>
-            <h4>{categories[1].name}</h4>
+            <button className="botonInvertido">Seleccionar talle</button>
+            <button className="boton" disabled>Añadir a favoritos</button>
+            <button className="botonGlass">Ver Detalle</button>
             <button className="boton">Agregar al carrito</button>
           </div>
         </div>
