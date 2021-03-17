@@ -1,12 +1,14 @@
 import styled from "styled-components";
 
 export const StyledSlider = styled.div`
-  height: 40vh;
+  height: 50vh;
   width: 100%;
   overflow: hidden;
 
   img {
-    object-fit: cover;
-    width: 100%;
+        min-width: 100%;
+        height: 70vh;
+        object-position: 20% 130%;
+        object-fit: cover;
   }
 `;

@@ -63,7 +63,9 @@ export default function ProductDetail({ match }) {
             <h4 className="priceBefore">{priceBefore}</h4>
             <h3 className="price">{price}</h3>
             <h4>{categories[0].name}</h4>
-            <h4>{categories[1].name}</h4>
+            <button className="botonInvertido">Seleccionar talle</button>
+            <button className="boton" disabled>Añadir a favoritos</button>
+            <button className="botonGlass">Ver Detalle</button>
             <button className="boton">Agregar al carrito</button>
           </div>
         </div>
