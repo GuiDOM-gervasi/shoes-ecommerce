@@ -40,3 +40,27 @@ query searchProducts($name:String!){
   }
 }
 `;
+
+export const GET_CATEGORIES= gql`
+  query Category {
+    categories {
+      id
+      name
+      }
+    }
+`;
+
+export const GET_PRODUCTS_BY_CATEGORIES = gql`
+  query ProductForCategory($name:String!) {
+    products {
+      id
+      name
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;

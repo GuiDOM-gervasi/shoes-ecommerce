@@ -1,14 +1,24 @@
-import { ApolloClient } from "apollo-client";
-import { HttpLink } from "apollo-link-http";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient,
+  NormalizedCacheObject, 
+  InMemoryCache, 
+  makeVar,
+} from "@apollo/client";
 
-export const cache = new InMemoryCache();
+import {typeDefs} from './typeDef'
+import {ProductBasic} from '../types'
 
-const client = new ApolloClient({
+export const cache = new InMemoryCache({});
+
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
-  link: new HttpLink({
-    uri: "http://localhost:3001/graphql",
-  }),
+  uri: "http://localhost:3001/graphql",
+  // headers: {
+  //   authorization: localStorage.getItem('token') || '',
+  // },
+  typeDefs,
 });
+
+// Reactive variables. Initialize as an empty array
+export const loadedProducts = makeVar<ProductBasic[]>([]);
 
 export default client;
