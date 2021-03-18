@@ -3,14 +3,26 @@ import React from "react";
 import { GlobalStyles } from "./GlobalStyles";
 import Nav from "../../components/Nav";
 import Catalogue from "../Catalogue";
-import {Route} from "react-router-dom"
-import ProductDetail from "../../components/ProductDetail"
+
+import { Route } from "react-router-dom";
+import ProductDetail from "../../components/ProductDetail";
+import SearchResult from "../SearchResult";
+
+
 import CRUDProducts from "../CRUDProducts";
 import AddProduct from "../../components/AddProduct";
 import CRUDCategory from "../CRUDCategory";
 import AddCategory from "../../components/AddCategory"
 import EditProduct from "../../components/EditProduct";
 import EditCategory from "../../components/EditCategory";
+
+interface ProductAttributes {
+  name: String;
+  description: String;
+  price: Number;
+  brandId: String;
+  CategoriesId: String[];
+}
 
 function App() {
   return (
@@ -24,7 +36,10 @@ function App() {
       <Route  path="/admin/category" component={CRUDCategory} />
       <Route path="/admin/addCategory" component={AddCategory} />
       <Route path="/admin/editProduct/:productId" component={EditProduct} />
+
+      <Route exact path="/search" component={SearchResult} />
       <Route path="/admin/editCategory/:categoryId" component={EditCategory} />
+
     </div>
   );
 }

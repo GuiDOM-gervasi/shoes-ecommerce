@@ -1,3 +1,5 @@
+import { Product } from './../db/models/products';
+import { ProductModel } from './../db/models/productmodel';
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
@@ -21,6 +23,7 @@ const typeDefs = gql`
     brand: Brand!
     categories: [Category!]
     models: [Model!]
+    img: String
   }
 
   type Category {
@@ -40,6 +43,9 @@ const typeDefs = gql`
 
   type ProductForCategory {
     products: [Product!]!
+  }
+  type ProductModel{
+  	products: [Product!]!
   }
 
   type Mutation {
@@ -82,8 +88,9 @@ const typeDefs = gql`
     brand: [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
-    productForCategory(name: String!): [ProductForCategory!]!
-    searchProducts(name: String!): [Product!]!
+    productForCategory(name:String!): [ProductForCategory!]!
+    searchProducts(name:String!):[Product!]!
+    productModel:[Product!]!
   }
 `;
 export default typeDefs;

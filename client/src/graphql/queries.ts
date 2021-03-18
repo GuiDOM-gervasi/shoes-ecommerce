@@ -38,6 +38,18 @@ export const SEARCH_PRODUCTS = gql`
     searchProducts(name: $name) {
       id
       name
+      description
+      price
+      img
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+      models {
+        id
+      }
     }
   }
 `;
