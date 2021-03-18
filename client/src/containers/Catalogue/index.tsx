@@ -1,33 +1,40 @@
-import { useQuery } from "@apollo/react-hooks";
-import React from "react";
+import { useQuery} from "@apollo/client";
 import { Link } from "react-router-dom";
+import React from 'react';
 import { StyledCatalogue } from "./StyledCatalogue";
 import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Slider from "../../components/Slider";
+import Filter from "../../components/Filter";
 
 export default function Catalogue() {
-  const { data, loading, error } = useQuery(GET_PRODUCTS);
-  if (loading) return <span>Loading</span>;
+  
+  let  { data, loading, error } = useQuery(GET_PRODUCTS);
+  const [loadedProducts, setLoadedProduct] = React.useState([]) 
+  if (loading || !data) return <span> Loading... </span>;
   if (error) return <span>Error {error.message}</span>;
-
-  const products = data.products;
+  
+  if (loadedProducts.length < 1){
+    console.log(data)
+    setLoadedProduct(data.products)
+  }
 
   return (
-    <StyledCatalogue>
+    <StyledCatalogue className="fondoDegradado">
       <Slider />
-      <div className="filterBar">
+      <div className="sectionBar">
         <section className="create">Crear</section>
         <section className="trend">Tendencias</section>
         <section className="sale">Ofertas</section>
+        <Filter setLoadedProduct={setLoadedProduct} />
       </div>
-      {products.map((item, i) => (
-        <Link to={`/product/${item.id || 1}`}>
+
+      {loadedProducts.map((item, i) => (
+        <Link to={`/product/${item.id || 1}`} key={item.id}>
           <img
             src={item.photo || fotosZapa.photo}
             alt="name"
             className="productImg"
-            key={item.id}
           />
         </Link>
       ))}

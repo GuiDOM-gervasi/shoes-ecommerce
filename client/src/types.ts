@@ -16,7 +16,8 @@ export interface QueryUsers {
   users: User[];
 }
 
-interface ProductAttributes {
+export interface ProductAttributes {
+  id: string;
   name: String;
   description: String;
   price: Number;
@@ -24,7 +25,22 @@ interface ProductAttributes {
   CategoriesId: String[];
 }
 
-
 export interface QueryProducts {
   products: ProductAttributes[];
+}
+
+export interface Brand{
+  id: String;
+  name: String;
+  __typename: String;
+}
+
+// interface para array de productos del catalogo // generar una para el detalle
+export interface ProductBasic {
+  name: String;
+  description: String;
+  price: Number;
+  brandId: Brand;
+  categories: String[];
+  __typename: String;
 }
