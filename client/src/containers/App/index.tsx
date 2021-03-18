@@ -1,8 +1,5 @@
 import React from "react";
-<<<<<<< HEAD
-import { useQuery, useMutation } from "@apollo/client";
-=======
->>>>>>> master
+// import { useQuery, useMutation } from "@apollo/client";
 import { GlobalStyles } from "./GlobalStyles";
 import Nav from "../../components/Nav";
 import Catalogue from "../Catalogue";

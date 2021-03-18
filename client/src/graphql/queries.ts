@@ -58,16 +58,6 @@ export const GET_BRANDS = gql`
       name
     }
   }
-}
-`;
-
-export const GET_CATEGORIES= gql`
-  query Category {
-    categories {
-      id
-      name
-      }
-    }
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
