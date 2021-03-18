@@ -2,8 +2,11 @@ import {
   Column,
   DataType,
   Model,
+  BelongsToMany,
   Table
 } from "sequelize-typescript";
+import Product from "./products";
+import {WishList} from './wishlist';
 
 import { UserAttributes } from './types'
 
@@ -28,6 +31,49 @@ export class User extends Model<UserAttributes> {
     type: DataType.STRING,
   })
   firstName!: string;
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING,
+  })
+  lastName!: string;
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING,
+  })
+  userName!: string;
+
+  @Column({
+    allowNull: false,
+    type: DataType.BOOLEAN,
+  })
+  isAdmin!: Boolean;
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING,
+    validate:{
+      isEmail: true
+    }
+  })
+  email!: string;
+
+  @Column({
+    allowNull: false,
+    type: DataType.STRING,
+  })
+  password!: string;
+
+  @Column({
+    allowNull: true,
+    type: DataType.BOOLEAN,
+  })
+  nlsuscribe?: Boolean;
+
+  @BelongsToMany(() => Product, { through: () => WishList })
+  products?: Array<Product & { WishList: WishList }>;
+
 }
 
 export default User

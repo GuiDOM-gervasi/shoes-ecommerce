@@ -35,7 +35,7 @@ export class Category extends Model<CategoryAttributes> {
   name!: string;
 
   @BelongsToMany(() => Product, { through: () => ProductCategory })
-  products: Array<Product & { ProductCategory: ProductCategory }>;
+  products?: Array<Product & { ProductCategory: ProductCategory }>;
 }
 
 export default Category

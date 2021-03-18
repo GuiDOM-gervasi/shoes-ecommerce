@@ -34,6 +34,21 @@ export interface CategoryAttributes {
   name: String;
 }
 
-export interface QuertCategories{
-  categories: CategoryAttributes[]
+export interface QuertCategories {
+  categories: CategoryAttributes[];
+}
+export interface Brand {
+  id: String;
+  name: String;
+  __typename: String;
+}
+
+// interface para array de productos del catalogo // generar una para el detalle
+export interface ProductBasic {
+  name: String;
+  description: String;
+  price: Number;
+  brandId: Brand;
+  categories: String[];
+  __typename: String;
 }
