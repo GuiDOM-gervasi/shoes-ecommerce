@@ -60,28 +60,19 @@ const typeDefs = gql`
       CategoriesId: [String]
       ModelsId: [String]
     ): Product!
-    updateProduct(
-    id:String!
-    atr:String!
-    input:[String]
-    ): Product! 
-    updateUser(
-      id: String!
-      atr:String!
-      input: String
-    ): String
-    addImage(
-      idProduct: String!
-      idModel: String!
-      input: String
-    ): String
+
+    updateCategory(id: String!, input: String!): Category!
+    updateProduct(id: String!, atr: String!, input: [String]): Product!
+    updateUser(id: String!, atr: String!, input: String): String
+    addImage(idProduct: String!, idModel: String!, input: String): String
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String!, color: String!): Model!
     deleteProduct(id: String!): Product
-    undeleteProduct(id: String!): Product
     deleteCategory(id: String!): Category
+    undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
+    updateProduct(id: String!, atr: String!, input: [String]): Product!
   }
 
   type Query {

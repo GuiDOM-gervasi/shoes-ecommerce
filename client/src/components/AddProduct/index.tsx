@@ -96,7 +96,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
       <form onSubmit={handleSubmit}>
         <div className="div_name">
           <input
-            type="text"
+            type="text" 
             name="name"
             onChange={handleChange}
             placeholder="Air max"

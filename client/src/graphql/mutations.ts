@@ -23,6 +23,20 @@ export const ADD_PRODUCT = gql`
   }
 `;
 
+
+export const ADD_CATEGORY = gql`
+mutation addCategory(
+  $name: String!
+){
+  createCategory(
+    name: $name
+  ){
+    id
+    name
+  }
+}
+`
+
 export const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: String!) {
     deleteProduct(id: $id) {
@@ -67,4 +81,12 @@ export const EDIT_PRODUCT = gql`
       id
     }
   }
+`;
+
+export const EDIT_CATEGORY = gql`
+mutation editCategory($id:String!, $input: String!){
+	updateCategory(id:$id,input: $input){
+		id
+	}
+}
 `;
