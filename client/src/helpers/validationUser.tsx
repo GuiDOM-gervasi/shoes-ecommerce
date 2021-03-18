@@ -11,20 +11,20 @@ export interface form {
 
 export function validateChange(e: any, form: form, error: boolean) {
   switch (e.target.name) {
-    case "price":
-      return { ...form, price: Number(e.target.value), error };
+    // case "price":
+    //   return { ...form, price: Number(e.target.value), error };
 
-    case "CategoriesId":
-    case "ModelsId":
-      const values = Array.from(e.target.selectedOptions).map(
-        (item: any) => item.value
-      );
-      const newForm = new Set([...form[e.target.name], ...values]);
-      return {
-        ...form,
-        [e.target.name]: Array.from(newForm),
-        error,
-      };
+    // case "CategoriesId":
+    // case "ModelsId":
+    //   const values = Array.from(e.target.selectedOptions).map(
+    //     (item: any) => item.value
+    //   );
+    //   const newForm = new Set([...form[e.target.name], ...values]);
+    //   return {
+    //     ...form,
+    //     [e.target.name]: Array.from(newForm),
+    //     error,
+    //   };
 
     default:
       return { ...form, [e.target.name]: e.target.value, error };
