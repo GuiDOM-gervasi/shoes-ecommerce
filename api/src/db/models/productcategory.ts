@@ -32,14 +32,14 @@ export class ProductCategory extends Model {
     type: DataType.INTEGER,
   })
   @ForeignKey(() => Product)
-  productId: string;
+  productId!: string;
 
   @Column({
     allowNull: false,
     type: DataType.INTEGER,
   })
   @ForeignKey(() => Category)
-  categoryId: string;
+  categoryId!: string;
 
   // @Column({
   //   allowNull: false,

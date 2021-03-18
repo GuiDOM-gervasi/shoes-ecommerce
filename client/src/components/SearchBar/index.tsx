@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyledSearchBar } from "./StyledSearchBar";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 
 export default function SearchBar() {

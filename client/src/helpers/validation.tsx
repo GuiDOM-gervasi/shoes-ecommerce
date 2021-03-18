@@ -7,6 +7,9 @@ export interface form {
   ModelsId: string[];
   error: boolean;
 }
+export interface formCategory {
+  name: string;
+}
 
 export function validateChange(e: any, form: form, error: boolean) {
   switch (e.target.name) {

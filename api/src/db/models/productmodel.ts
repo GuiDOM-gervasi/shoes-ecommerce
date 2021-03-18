@@ -19,38 +19,38 @@ import Models from "./models";
   paranoid: true,
   tableName: "productmodels",
 })
-export class ProductModel extends Model {
-  @Column({
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-    type: DataType.INTEGER,
-  })
-  id?: string;
 
-  @Column({
-    allowNull: false,
-    type: DataType.INTEGER,
-  })
-  @ForeignKey(() => Product)
-  productId: string;
 
-  //  @HasMany(() => Product)
-  // products: Product[];
+  export class ProductModel extends Model {
+    @Column({
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataType.INTEGER,
+    })
+    id?: string;
+  
+    @Column({
+      allowNull: false,
+      type: DataType.INTEGER,
+    })
+    @ForeignKey(() => Product)
+    productId!: string;
+  
+    @Column({
+      allowNull: false,
+      type: DataType.INTEGER,
+    })
+    @ForeignKey(() => Models)
+    modelId!: string;
+    
+    @Column({
+      allowNull: true,
+      type: DataType.TEXT
+    })
+    img?: string;
 
-  @Column({
-    allowNull: false,
-    type: DataType.INTEGER,
-  })
-  @ForeignKey(() => Models)
-  modelId: string;
+  }
+  
+  export default ProductModel
 
-  @Column({
-    allowNull: true,
-    type: DataType.TEXT,
-  })
-  img: string;
-
-}
-
-export default ProductModel;

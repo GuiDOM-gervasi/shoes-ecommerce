@@ -72,6 +72,22 @@ export const GET_BRANDS = gql`
   }
 `;
 
+export const GET_PRODUCTS_BY_CATEGORIES = gql`
+  query productForCategory($name:String) {
+    productForCategory(name: $name) {
+      id
+      name
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;
+
+
 export const GET_MODELS = gql`
   query Models {
     models {

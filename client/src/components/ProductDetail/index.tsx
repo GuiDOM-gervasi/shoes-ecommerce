@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 
