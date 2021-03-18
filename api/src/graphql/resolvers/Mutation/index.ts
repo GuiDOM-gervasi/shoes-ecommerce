@@ -10,3 +10,5 @@ export {default as deleteCategory} from './deleteCategory';
 export {default as undeleteCategory} from './undeleteCategory';
 export {default as updateUser} from "./updateUser";
 export {default as addImage} from "./addImage";
+export {default as createCart} from './createCart';
+export {default as addToCart} from './addToCart';

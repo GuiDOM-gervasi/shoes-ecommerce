@@ -6,7 +6,8 @@ import {
   ForeignKey,
   Model,
   Table,
-  Unique
+  Unique,
+  HasOne
 } from "sequelize-typescript";
 
 import ProductCategory from './productcategory'
@@ -17,6 +18,8 @@ import Models from './models'
 import ProductModel from './productmodel'
 import User from "./users";
 import {WishList} from "./wishlist";
+import Cart from "./carts";
+import CartProduct from "./cartproduct";
 
 
 @Table({
@@ -74,6 +77,9 @@ export class Product extends Model {
 
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;
+
+  @BelongsToMany(() => Cart, { through: () => CartProduct })
+  carts?: Array<Cart & { CartProduct: CartProduct }>;
 }
 
 export default Product

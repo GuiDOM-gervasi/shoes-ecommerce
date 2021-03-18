@@ -35,6 +35,20 @@ export interface ModelAttributes {
   color: string;
 }
 
+export interface CartAttributes {
+  id?: string;
+  userId: string;
+  state: string;
+}
+
+export interface CartProductAttributes{
+  id?: string;
+  productId: string;
+  cartId: string;
+  quantity: number;
+  price: number;
+}
+
 export interface UpdateProductAttributes {
   id: string;
   atr: string;

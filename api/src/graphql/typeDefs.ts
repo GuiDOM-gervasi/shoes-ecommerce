@@ -42,6 +42,28 @@ const typeDefs = gql`
     products: [Product!]!
   }
 
+  type Cart{
+    id: ID!
+    state: String!
+    userId: String!
+  }
+
+  type CartProduct {
+    id: ID!
+    productId: Product
+    cartId: Cart
+    quantity: Int
+    price: Float
+  }
+
+  type MutationCartProduct{
+    id: ID!
+    productId: String!
+    cartId: String!
+    quantity: Int
+    price: Float
+  }
+
   type Mutation {
     createUser(
       firstName: String!
@@ -75,6 +97,16 @@ const typeDefs = gql`
       idModel: String!
       input: String
     ): String
+    createCart(
+      userId: String!
+      state: String!
+    ): Cart!
+    addToCart(
+      productId: String!
+      cartId: String!
+      quantity: Int
+      price: Float
+    ): MutationCartProduct!
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String!, color: String!): Model!
@@ -93,6 +125,8 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
+    carts: [Cart]!
+    cartsproducts (cartId: String! ): [MutationCartProduct]!
   }
 `;
 export default typeDefs;
