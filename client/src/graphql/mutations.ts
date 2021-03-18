@@ -82,3 +82,11 @@ export const EDIT_PRODUCT = gql`
     }
   }
 `;
+
+export const EDIT_CATEGORY = gql`
+mutation editCategory($id:String!, $input: String!){
+	updateCategory(id:$id,input: $input){
+		id
+	}
+}
+`;

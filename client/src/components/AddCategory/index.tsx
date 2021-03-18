@@ -30,8 +30,8 @@ export default function AddCategory({className} : AddCategoryAttributes){
 	
 }
 	const handleChange= async(e: any) => {
-	setForm(validateChange(e,form as any))
-	check(e);
+	const error = check(e,form as any);
+	setForm(validateChange(e,form as any,error as any))
 }
 	if(errorMutationModel){
 		console.log(errorMutationModel)
