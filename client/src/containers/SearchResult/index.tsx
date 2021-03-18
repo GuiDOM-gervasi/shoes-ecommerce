@@ -3,8 +3,8 @@ import { useLocation } from "react-router";
 import { useLazyQuery, useQuery } from "@apollo/react-hooks";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { Link } from "react-router-dom";
-import { StyledSearchBar } from "../../components/SearchBar/StyledSearchBar";
 import { fotosZapa } from "../../components/ProductDetail/mockup";
+import { StyledSearchResult } from "./StyledSearchResult";
 
 function useQueryParams() {
   return new URLSearchParams(useLocation().search);
@@ -19,7 +19,7 @@ export default function SearchResult() {
   const products = data["searchProducts"];
 
   return (
-    <StyledSearchBar>
+    <StyledSearchResult className="fondoDegradado">
       <div className="filterBar">
         {products &&
           products.map((item, i) => (
@@ -33,6 +33,6 @@ export default function SearchResult() {
             </Link>
           ))}
       </div>
-    </StyledSearchBar>
+    </StyledSearchResult>
   );
 }
