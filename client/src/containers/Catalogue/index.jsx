@@ -11,10 +11,11 @@ export default function Catalogue() {
   
   let  { data, loading, error } = useQuery(GET_PRODUCTS);
   const [loadedProducts, setLoadedProduct] = React.useState([]) 
-  if (loading || !data) <span> Loading... </span>;
+  if (loading || !data) return <span> Loading... </span>;
   if (error) return <span>Error {error.message}</span>;
   
   if (loadedProducts.length < 1){
+    console.log(data)
     setLoadedProduct(data.products)
   }
 
@@ -25,8 +26,9 @@ export default function Catalogue() {
         <section className="create">Crear</section>
         <section className="trend">Tendencias</section>
         <section className="sale">Ofertas</section>
+        <Filter setLoadedProduct={setLoadedProduct} />
       </div>
-      <Filter setLoadedProduct={setLoadedProduct} />
+
       {loadedProducts.map((item, i) => (
         <Link to={`/product/${item.id || 1}`} key={item.id}>
           <img
