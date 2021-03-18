@@ -68,3 +68,27 @@ export const EDIT_PRODUCT = gql`
     }
   }
 `;
+
+export const ADD_USER = gql`
+  mutation addUser(
+    $firstName: String!
+    $lastName: String!
+    $userName: String!
+    $isAdmin: Boolean!
+    $email: String!
+    $password: String!
+    $nlsuscribe: Boolean!
+  ) {
+    createUser(
+      firstName: $firstName
+      lastName: $lastName
+      userName: $userName
+      isAdmin: $isAdmin
+      email: $email
+      password: $password
+      nlsuscribe: $nlsuscribe
+    ) {
+      userName
+    }
+  }
+`;

@@ -8,6 +8,7 @@ import ProductDetail from "../../components/ProductDetail";
 import CRUDProducts from "../CRUDProducts";
 import AddProduct from "../../components/AddProduct";
 import EditProduct from "../../components/EditProduct";
+import AddUser from "../../components/AddUser";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
       <Route path="/admin/products" component={CRUDProducts} />
       <Route path="/admin/addProduct" component={AddProduct} />
       <Route path="/admin/editProduct/:productId" component={EditProduct} />
+      <Route path="/register" component={AddUser} />
     </div>
   );
 }
