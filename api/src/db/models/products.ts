@@ -7,7 +7,8 @@ import {
   Model,
   Table,
   Unique,
-  HasOne
+  HasOne,
+  HasMany
 } from "sequelize-typescript";
 
 import ProductCategory from './productcategory'
@@ -69,6 +70,8 @@ export class Product extends Model {
   @BelongsTo(() => Brand)
   brand!: Brand;
 
+  @HasMany(() => ProductModel,'productId')  
+
   @BelongsToMany(() => Category, { through: () => ProductCategory })
   categories?: Array<Category & { ProductCategory: ProductCategory }>;
 
@@ -78,8 +81,8 @@ export class Product extends Model {
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;
 
-  @BelongsToMany(() => Cart, { through: () => CartProduct })
-  carts?: Array<Cart & { CartProduct: CartProduct }>;
+  // @BelongsToMany(() => Cart, { through: () => CartProduct })
+  // carts?: Array<Cart & { CartProduct: CartProduct }>;
 }
 
 export default Product

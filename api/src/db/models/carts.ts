@@ -46,8 +46,8 @@ export class Cart extends Model<CartAttributes> {
     @BelongsTo(() => User)
     user: User;
 
-    @BelongsToMany(() => Product, { through: () => CartProduct })
-    products?: Array<Product & { CartProduct: CartProduct }>;
+    // @BelongsToMany(() => Product, { through: () => CartProduct })
+    // products?: Array<Product & { CartProduct: CartProduct }>;
 }
   
 export default Cart;

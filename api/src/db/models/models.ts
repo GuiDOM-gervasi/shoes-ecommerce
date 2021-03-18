@@ -2,6 +2,7 @@ import {
     BelongsToMany,
     Table,
     Column,
+    HasMany,
     DataType,
     Model
 } from 'sequelize-typescript';
@@ -40,6 +41,8 @@ export class Models extends Model<ModelAttributes> {
         type: DataType.STRING,
       })
       color!: string;
+
+    @HasMany(() => ProductModel,'modelId')
   
     @BelongsToMany(() => Product, { through: () => ProductModel })
     products?: Array<Product & { ProductModel: ProductModel }>;
