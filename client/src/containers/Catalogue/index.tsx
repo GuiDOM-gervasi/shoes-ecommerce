@@ -20,9 +20,9 @@ export default function Catalogue() {
   }
 
   return (
-    <StyledCatalogue>
+    <StyledCatalogue className="fondoDegradado">
       <Slider />
-      <div className="filterBar">
+      <div className="sectionBar">
         <section className="create">Crear</section>
         <section className="trend">Tendencias</section>
         <section className="sale">Ofertas</section>

@@ -16,14 +16,14 @@ export interface QueryUsers {
   users: User[];
 }
 
-interface ProductAttributes {
+export interface ProductAttributes {
+  id: string;
   name: String;
   description: String;
   price: Number;
   brandId: String;
   CategoriesId: String[];
 }
-
 
 export interface QueryProducts {
   products: ProductAttributes[];
