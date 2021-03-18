@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 
-export default function ProductDetail({ match }) {
+export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
 
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {

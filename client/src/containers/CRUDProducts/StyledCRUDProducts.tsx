@@ -19,7 +19,7 @@ export const StyledCRUDProducts = styled.div`
       justify-content: center;
     }
   }
-
+  button,
   .addButton {
     margin: 1rem 0;
     padding: .5rem;
@@ -28,8 +28,5 @@ export const StyledCRUDProducts = styled.div`
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
     align-self: center;
   }
-
-  .modal {
-    position: absolute;
-  }
+  
 `;
