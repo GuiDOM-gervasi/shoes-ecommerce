@@ -1,30 +1,13 @@
 import React from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery } from "@apollo/react-hooks";
-import { GET_PRODUCT } from "../../graphql/queries";
+import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 
-interface ProdDetail {
-  product: {
-    name: string;
-    brand: string;
-    description: string;
-    price: number;
-    priceBefore: number;
-    categories: Array<Categories>;
-    photo: string;
-    photoDetail1: string;
-    photoDetail2: string;
-    photoDetail3: string;
-  };
-}
-interface Categories {
-  name: string;
-}
 export default function ProductDetail({ match }) {
   const productId = match.params.id;
 
-  const { loading, error, data } = useQuery(GET_PRODUCT, {
+  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
     },
@@ -47,18 +30,29 @@ export default function ProductDetail({ match }) {
         "Loading"
       ) : (
         <div className="container">
-          {console.log("Data", data)}
           <div>
-            <img className="photo" src={photo} />
+            <img className="photo" src={photo} alt={name} />
             <ul>
               <li>
-                <img className="photoDetail" src={photoDetail1} />
+                <img
+                  className="photoDetail"
+                  src={photoDetail1}
+                  alt={`photoDetail 1 - ${name}`}
+                />
               </li>
               <li>
-                <img className="photoDetail" src={photoDetail2} />
+                <img
+                  className="photoDetail"
+                  src={photoDetail2}
+                  alt={`photoDetail 2 - ${name}`}
+                />
               </li>
               <li>
-                <img className="photoDetail" src={photoDetail3} />
+                <img
+                  className="photoDetail"
+                  src={photoDetail3}
+                  alt={`photoDetail 3 - ${name}`}
+                />
               </li>
             </ul>
           </div>
@@ -69,7 +63,11 @@ export default function ProductDetail({ match }) {
             <h4 className="priceBefore">{priceBefore}</h4>
             <h3 className="price">{price}</h3>
             <h4>{categories[0].name}</h4>
-            <h4>{categories[1].name}</h4>
+            <button className="botonInvertido">Seleccionar talle</button>
+            <button className="boton" disabled>
+              Añadir a favoritos
+            </button>
+            <button className="botonGlass">Ver Detalle</button>
             <button className="boton">Agregar al carrito</button>
           </div>
         </div>

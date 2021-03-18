@@ -20,7 +20,6 @@ const createProductResolver = async (
   await product.$add("category", CategoriesId);// 3er arg , throw:{}
 
   await product.$add("model", ModelsId);
-  console.log(product)
 
   return product;
 };

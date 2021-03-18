@@ -59,7 +59,7 @@ export default function SearchBar() {
           value={searchValue}
           placeholder="Zapatilla Nike Airmax..."
         ></input>
-        <input type="submit" value="search" className="boton"></input>
+        <input type="submit" value="search" className="botonSearch"></input>
       </form>
       {called && loading ? null : activeAutoComplete ? (
         <div className="contentResult">
@@ -76,8 +76,7 @@ export default function SearchBar() {
                   }
                   return 0;
                 })
-                .map((item, i) => {
-                  if (i < 3) {
+                .slice(0,3).map((item, i) => {
                     return (
                       <div key={i} className="contentResultItem">
                         <div>
@@ -91,7 +90,6 @@ export default function SearchBar() {
                         </div>
                       </div>
                     );
-                  }
                 })
             : null}
         </div>
