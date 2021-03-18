@@ -6,19 +6,19 @@ import {
     Table
   } from "sequelize-typescript";
   
-  import Product from './products'
-  import Models from './models'
+  import Product from './products';
+  import User from './users';
   
   // Definitions of tables and sequelize models
-  // Table productmodels
+  // Table productcategory
   @Table({
     defaultScope: {
       attributes: { exclude: ["deleteAt"] },
     },
     paranoid: true,
-    tableName: "productmodels",
+    tableName: "wishlist",
   })
-  export class ProductModel extends Model {
+  export class WishList extends Model {
     @Column({
       allowNull: false,
       autoIncrement: true,
@@ -38,17 +38,9 @@ import {
       allowNull: false,
       type: DataType.INTEGER,
     })
-    @ForeignKey(() => Models)
-    modelId!: string;
-    
-    @Column({
-      allowNull: true,
-      type: DataType.TEXT
-    })
-    img?: string;
+    @ForeignKey(() => User)
+    userId!: string;
 
   }
-  
 
-  
-  export default ProductModel
+  export default WishList;
