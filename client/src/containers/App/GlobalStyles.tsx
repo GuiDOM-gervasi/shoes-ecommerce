@@ -1,13 +1,12 @@
 import { createGlobalStyle } from "styled-components";
 
 var verdeMain = "#64DFDF";
-var verdeDetalle = "#80FFDB"
-var verdeDetalleTrans = "#80FFDB50"
-var violeta = "#6930C3"
-var violetaHover = "#6930C350"
-var blanco = "#F0F0F0"
-var negro = "#151515"
-
+var verdeDetalle = "#80FFDB";
+var verdeDetalleTrans = "#80FFDB50";
+var violeta = "#6930C3";
+var violetaHover = "#6930C350";
+var blanco = "#F0F0F0";
+var negro = "#151515";
 
 export const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap');
@@ -53,6 +52,7 @@ export const GlobalStyles = createGlobalStyle`
         width: 60%;
         padding: 2%;
         border-radius: 35px;
+        cursor: pointer;
     }
     .botonGlass{
         color: ${blanco};
@@ -94,12 +94,12 @@ export const GlobalStyles = createGlobalStyle`
         section {
         background-color: ${verdeMain};
         height: 100%;
-        border-right: 1px solid #747474;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 500ms ease;
         flex-grow: 1;
+        cursor: pointer;
 
         &:hover {
             background-color: ${verdeDetalle};

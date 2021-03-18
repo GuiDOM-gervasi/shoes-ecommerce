@@ -62,13 +62,8 @@ const typeDefs = gql`
     brand: [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
-<<<<<<< HEAD
-    productForCategory(name:String): [Product]
-    searchProducts(name:String!):[Product!]!
-=======
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
->>>>>>> master
   }
 `;
 export default typeDefs;
