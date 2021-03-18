@@ -39,6 +39,7 @@ export const SEARCH_PRODUCTS = gql`
       name
       description
       price
+      img
       brand {
         name
       }

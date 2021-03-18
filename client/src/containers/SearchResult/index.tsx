@@ -25,7 +25,7 @@ export default function SearchResult() {
           products.map((item, i) => (
             <Link to={`/product/${item.id}`}>
               <img
-                src={item.photo || fotosZapa.photo}
+                src={item.img || fotosZapa.photo}
                 alt={item.name}
                 className="productImg"
                 key={item.id}
