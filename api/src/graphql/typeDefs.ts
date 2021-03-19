@@ -93,6 +93,7 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
+    login(email: String!, password:String!): Boolean!
   }
 `;
 export default typeDefs;

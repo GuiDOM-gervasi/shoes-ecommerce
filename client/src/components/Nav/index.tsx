@@ -7,6 +7,7 @@ export default function Nav() {
   return (
     <StyledNav>
       <NavLink to="/admin/products">CRUD</NavLink>
+      <NavLink to="/login">Iniciar sesión</NavLink>
       <NavLink to="/register">Registrarse</NavLink>
       <SearchBar/>
     </StyledNav>

@@ -9,6 +9,7 @@ import CRUDProducts from "../CRUDProducts";
 import AddProduct from "../../components/AddProduct";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
+import Login from "../../components/Login";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Route path="/admin/addProduct" component={AddProduct} />
       <Route path="/admin/editProduct/:productId" component={EditProduct} />
       <Route path="/register" component={AddUser} />
+      <Route path="/login" component={Login} />
     </div>
   );
 }

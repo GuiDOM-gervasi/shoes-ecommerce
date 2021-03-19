@@ -85,3 +85,9 @@ export const GET_MODELS = gql`
     }
   }
 `;
+
+export const GET_LOGIN = gql`
+  query Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) 
+  }
+`;
