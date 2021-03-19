@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useQuery, useMutation } from "react-apollo";
+import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_PRODUCT } from "../../graphql/mutations";
 import {
   GET_PRODUCT_DETAIL,
@@ -20,9 +20,7 @@ export default function EditProduct({ match }) {
     },
   });
 
-  const {
-    data: dataBrands,
-  } = useQuery(GET_BRANDS);
+  const { data: dataBrands } = useQuery(GET_BRANDS);
 
   const [editProduct] = useMutation(EDIT_PRODUCT, {
     refetchQueries: [

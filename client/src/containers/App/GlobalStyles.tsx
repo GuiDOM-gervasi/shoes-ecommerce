@@ -22,6 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     h1{
         font-size:3rem;
         color: ${verdeMain}
+        text-transform: uppercase;
     }
     h2{
         font-size:2.4rem;
