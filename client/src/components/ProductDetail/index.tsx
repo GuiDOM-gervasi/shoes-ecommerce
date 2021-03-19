@@ -17,6 +17,10 @@ export default function ProductDetail({ match }) {
     },
   });
 
+  useEffect(() => {
+	if(data) console.log('data', data);	
+  }, [data])
+
   const [
     getSimils,
     { loading: loadingSimil, error: errorSimil, data: similProducts },
