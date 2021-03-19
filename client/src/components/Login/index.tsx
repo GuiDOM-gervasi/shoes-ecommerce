@@ -1,24 +1,60 @@
-import React from "react";
-import { useLazyQuery } from "@apollo/client";
-import { LOGIN_USER } from "../../graphql/queries";
-export default function Nav() {
-  const [loginUser,{ data }] = useLazyQuery(
-    LOGIN_USER
-  );
+import React, { useState } from "react";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
+import { StyledLogin } from "./StyledLogin";
+import { GET_LOGIN } from "../../graphql/queries";
+// import { validateChange, check, form } from "../../helpers/validationLogin";
 
-  const handleClick = () =>{
-    const email = "nada@gmail.com";
-    const password = "12345";
-    loginUser({
+
+export default function Login() {
+  const [getLogin, { data: dataLogin, loading: loadingLogin, error: errorLogin }] = useLazyQuery(GET_LOGIN);
+
+  const [form, setForm] = useState({
+    email: "",
+    password: ""
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log("FORM", form.email, form.password)
+    let { email, password, } = form;
+    getLogin({
       variables: {
         email,
-        password,
-      },
+        password
+      }
     })
+
+    if (!loadingLogin && dataLogin) {
+      dataLogin.login ? console.log("Datos correctos", dataLogin) : console.log("ERROR", dataLogin)
+    }
+
   }
 
+  const handleChange = (e: any) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    })
+  };
   return (
-    <div>
-      <div onClick={handleClick}>{data ? <div>Logout</div> : <div>Login</div>}</div>    </div>
+    <StyledLogin>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          name="email"
+          onChange={handleChange}
+          placeholder="email@direccion.com"
+        />
+
+        <input
+          type="password"
+          name="password"
+          onChange={handleChange}
+          placeholder="password"
+        />
+
+        <input type="submit" value="Registrarse" />
+      </form>
+    </StyledLogin>
   );
 }
