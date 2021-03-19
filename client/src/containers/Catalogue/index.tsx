@@ -14,7 +14,7 @@ export default function Catalogue() {
   if (loading || !data) return <span> Loading... </span>;
   if (error) return <span>Error {error.message}</span>;
   
-  if (loadedProducts.length < 1){
+  if (loadedProducts.length > 1){
     console.log(data)
     setLoadedProduct(data.products)
   }
