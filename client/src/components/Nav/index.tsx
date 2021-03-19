@@ -11,7 +11,6 @@ export default function Nav() {
       <NavLink to="/login">Iniciar sesión</NavLink>
       <NavLink to="/register">Registrarse</NavLink>
       <SearchBar/>
-      <Login/>
     </StyledNav>
   );
 }
