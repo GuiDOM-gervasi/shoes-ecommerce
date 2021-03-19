@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from 'react-router-dom';
 import SearchBar from "../SearchBar";
+import Login from "../Login";
 import { StyledNav } from "./StyledNav";
 
 export default function Nav() {
@@ -9,6 +10,7 @@ export default function Nav() {
       <NavLink to="/admin/products">CRUD</NavLink>
       <NavLink to="/register">Registrarse</NavLink>
       <SearchBar/>
+      <Login/>
     </StyledNav>
   );
 }

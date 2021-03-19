@@ -1,7 +1,7 @@
 import User from "../../../db/models/users";
 import { UserAttributes } from '../../../db/models/types'
-
-const createUserResolver = async (context: any, {
+import * as bcrypt from "bcryptjs";
+const createUserResolver = async (parent: any,{
   firstName,
   lastName,
   userName,
@@ -9,19 +9,22 @@ const createUserResolver = async (context: any, {
   email,
   password,
   nlsuscribe
-}: UserAttributes) =>{
+}: UserAttributes, context: any , info: any) =>{
   // console.log(firstName)
-  let aux = await User.create({
-    firstName,
-    lastName,
-    userName,
-    isAdmin,
-    email,
-    password,
-    nlsuscribe
-  });
-  // console.log(aux)
-  return aux
+    const hashPassword = await bcrypt.hash(password,5)
+    let aux = await User.create({
+      firstName,
+      lastName,
+      userName,
+      isAdmin,
+      email,
+      password: hashPassword,
+      nlsuscribe,
+      count: 1
+     });
+    // console.log(aux)
+    return aux
 }
+
 
 export default createUserResolver

@@ -1,7 +1,7 @@
 import { ApolloClient,
   NormalizedCacheObject, 
   InMemoryCache, 
-  makeVar,
+  makeVar
 } from "@apollo/client";
 
 import {typeDefs} from './typeDef'
@@ -23,11 +23,12 @@ export const cache = new InMemoryCache({
 
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
-  uri: "http://localhost:3001/graphql",
+  uri: 'http://localhost:3001/graphql',
   // headers: {
   //   authorization: localStorage.getItem('token') || '',
-  // },
-  typeDefs,
+  // }
+  credentials: "same-origin",
+  typeDefs
 });
 
 // Reactive variables. Initialize as an empty array

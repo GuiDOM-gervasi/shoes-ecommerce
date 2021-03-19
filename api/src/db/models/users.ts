@@ -66,6 +66,12 @@ export class User extends Model<UserAttributes> {
   password!: string;
 
   @Column({
+    allowNull: false,
+    type: DataType.INTEGER,
+  })
+  count: Number;
+
+  @Column({
     allowNull: true,
     type: DataType.BOOLEAN,
   })

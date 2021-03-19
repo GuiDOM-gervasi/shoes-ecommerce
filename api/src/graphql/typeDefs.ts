@@ -10,7 +10,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     nlsuscribe: Boolean
-    products: [Product!]
+    products: [Product]
   }
 
   type Product {
@@ -36,6 +36,11 @@ const typeDefs = gql`
     id: ID!
     size: String!
     color: String!
+  }
+
+  type Access {
+    isAdmin: Boolean!
+    id: String
   }
 
   type ProductForCategory {
@@ -93,6 +98,7 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
+    loginUser(email: String!, password: String!) : Access
   }
 `;
 export default typeDefs;
