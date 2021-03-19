@@ -42,7 +42,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           isAdmin,
           email,
           password,
-          nlsuscribe,
+          nlsuscribe: nlsuscribe && true,
         },
       });
     } catch (err) {
