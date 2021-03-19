@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery } from "@apollo/client";
-import { GET_PRODUCT_DETAIL, GET_MODELS } from "../../graphql/queries";
+import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 
 export default function ProductDetail({ match }) {
@@ -13,13 +13,38 @@ export default function ProductDetail({ match }) {
     },
   });
 
-  const { data: dataModels } = useQuery(GET_MODELS);
-  const colors = dataModels.map((model) => model.color);
+  const [modelsState, setModelsState] = React.useState({
+    colors: [],
+    sizes: [],
+  });
+
+  let colors = [];
+  let sizes = [];
 
   if (loading) return <div>'Loading...'</div>;
   if (error) return <div>`Error! ${error.message}`</div>;
 
-  const { name, brand, description, price, categories } = data.productDetail;
+  const { name, brand, price, categories, models } = data.productDetail;
+
+  function filterModels(param, value) {
+    switch (param) {
+      case "size":
+        colors = models.filter((prop) => prop.size === value);
+        colors = colors.map((model) => model.color);
+        setModelsState({ ...modelsState, colors });
+        break;
+
+      case "color":
+        sizes = models.filter((prop) => prop.color === value);
+        sizes = sizes.map((model) => model.size);
+        setModelsState({ ...modelsState, sizes });
+        break;
+
+      default:
+        return "error";
+    }
+  }
+
   const {
     photo,
     photoDetail1,
@@ -69,7 +94,22 @@ export default function ProductDetail({ match }) {
             </div>
             <h4 className="priceBefore">${priceBefore}</h4>
             <h3 className="price">${price}</h3>
-            <select className="botonInvertido">{color.map(color => <option value={color}>{color}</option>)}</select>
+            <select
+              className="botonInvertido"
+              onChange={(e: any) => filterModels("color", e.target.value)}
+            >
+              {modelsState.colors?.map((color) => (
+                <option value={color}>{color}</option>
+              ))}
+            </select>
+            <select
+              className="botonInvertido"
+              onChange={(e: any) => filterModels("size", e.target.value)}
+            >
+              {modelsState.sizes?.map((size) => (
+                <option value={size}>{size}</option>
+              ))}
+            </select>
             <button className="boton" disabled>
               Añadir a favoritos
             </button>

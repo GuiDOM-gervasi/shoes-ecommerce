@@ -29,6 +29,10 @@ export const GET_PRODUCT_DETAIL = gql`
       categories {
         name
       }
+      models {
+      	size
+	color
+      }
     }
   }
 `;
