@@ -17,9 +17,9 @@ import Models from "./models";
 		attributes: { exclude: ["deleteAt"] },
 	},
 	paranoid: true,
-	tableName: "productmodels",
+	tableName: "finalproducts",
 })
-export class ProductModel extends Model {
+export class FinalProduct extends Model {
 	@Column({
 		allowNull: false,
 		autoIncrement: true,
@@ -53,4 +53,4 @@ export class ProductModel extends Model {
 	// img?: string;
 }
 
-export default ProductModel;
+export default FinalProduct;

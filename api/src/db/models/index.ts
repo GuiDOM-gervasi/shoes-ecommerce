@@ -4,10 +4,10 @@ import Brand from './brands'
 import Product from './products'
 import ProductCategory from './productcategory'
 import Models from './models'
-import ProductModel from './productmodel'
+import FinalProduct from './finalproduct'
 import { WishList } from "./wishlist"
 import Cart from './carts'
 import CartProduct from './cartproduct'
 
 
-export default [User, Product, Category, Brand, ProductCategory, Models, ProductModel, WishList, Cart, CartProduct];
+export default [User, Product, Category, Brand, ProductCategory, Models, FinalProduct, WishList, Cart, CartProduct];

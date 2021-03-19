@@ -16,7 +16,7 @@ import Brand from './brands'
 import Category from './category'
 
 import Models from './models'
-import ProductModel from './productmodel'
+import FinalProduct from './finalproduct'
 import User from "./users";
 import {WishList} from "./wishlist";
 import Cart from "./carts";
@@ -70,13 +70,14 @@ export class Product extends Model {
   @BelongsTo(() => Brand)
   brand!: Brand;
 
-  @HasMany(() => ProductModel,'productId')  
+  @HasMany(() => FinalProduct)
+  productsmodels!: FinalProduct[]
 
   @BelongsToMany(() => Category, { through: () => ProductCategory })
   categories?: Array<Category & { ProductCategory: ProductCategory }>;
 
-  @BelongsToMany(() => Models, { through: () => ProductModel })
-  models?: Array<Models & { ProductModels: ProductModel }>;
+  @BelongsToMany(() => Models, { through: () => FinalProduct })
+  models?: Array<Models & { FinalProducts: FinalProduct }>;
 
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;

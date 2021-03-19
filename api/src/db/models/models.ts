@@ -8,7 +8,7 @@ import {
 } from 'sequelize-typescript';
 
 import Product from './products';
-import ProductModel from './productmodel';
+import FinalProduct from './finalproduct';
 
 import {ModelAttributes} from './types';
 
@@ -33,6 +33,7 @@ export class Models extends Model<ModelAttributes> {
     @Column({
       allowNull: false,
       type: DataType.INTEGER,
+
     })
     size!: string;
 
@@ -42,10 +43,11 @@ export class Models extends Model<ModelAttributes> {
       })
       color!: string;
 
-    @HasMany(() => ProductModel,'modelId')
+    @HasMany(() => FinalProduct)
+    productsmodels!: FinalProduct[]
   
-    @BelongsToMany(() => Product, { through: () => ProductModel })
-    products?: Array<Product & { ProductModel: ProductModel }>;
+    @BelongsToMany(() => Product, { through: () => FinalProduct })
+    products?: Array<Product & { FinalProduct: FinalProduct }>;
   }
   
   export default Models
