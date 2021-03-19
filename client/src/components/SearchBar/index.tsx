@@ -3,6 +3,7 @@ import { StyledSearchBar } from "./StyledSearchBar";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { ResultSearchBarInput } from "./ResultSearchbarInput";
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -44,7 +45,7 @@ export default function SearchBar() {
     query && setActiveAutoComplete(true);
     searchProduct({
       variables: {
-        name: query,
+        name: query ? query : " ",
       },
     });
   };
@@ -61,38 +62,8 @@ export default function SearchBar() {
         ></input>
         <input type="submit" value="search" className="botonSearch"></input>
       </form>
-      {called && loading ? null : activeAutoComplete ? (
-        <div className="contentResult">
-          {searchValue && data && data["searchProducts"]
-            ? data["searchProducts"]
-                .sort((a: { name: string }, b: { name: string }) => {
-                  var nameA = a.name.toUpperCase();
-                  var nameB = b.name.toUpperCase();
-                  if (nameA < nameB) {
-                    return -1;
-                  }
-                  if (nameA > nameB) {
-                    return 1;
-                  }
-                  return 0;
-                })
-                .slice(0,3).map((item, i) => {
-                    return (
-                      <div key={i} className="contentResultItem">
-                        <div>
-                          <div
-                            className="name"
-                            id={item.id}
-                            onClick={handleClick}
-                          >
-                            {item.name}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                })
-            : null}
-        </div>
+      {activeAutoComplete && data ? (
+        <ResultSearchBarInput data={data} handleClick={handleClick} />
       ) : null}
     </StyledSearchBar>
   );
