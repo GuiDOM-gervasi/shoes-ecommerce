@@ -1,7 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
-var verdeMain = "#64DFDF";
 var verdeDetalle = "#80FFDB";
+var verdeMain = "#64DFDF";
 var verdeDetalleTrans = "#80FFDB50";
 var violeta = "#6930C3";
 var violetaHover = "#6930C350";

@@ -62,7 +62,7 @@ const typeDefs = gql`
     brand: [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
-    productForCategory(name: String!): [ProductForCategory!]!
+    productForCategory(name: String!): [Product!]!
     searchProducts(name: String!): [Product!]!
   }
 `;

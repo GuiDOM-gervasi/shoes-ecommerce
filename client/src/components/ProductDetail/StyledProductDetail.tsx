@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-var violeta = "#6930C3";
+const violeta = "#6930C3";
+const verde = (opacity) => `rgba(100, 225, 255, ${opacity})`;
 
 export const StyledProductDetail = styled.div`
   ul {
@@ -91,5 +92,25 @@ export const StyledProductDetail = styled.div`
     left: 0;
     top: 5rem;
     filter: blur(2px);
+  }
+
+  .related {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    position: sticky;
+    top: 110vh;
+
+    h3 {
+      color: ${violeta};
+      margin: 1rem 0;
+    }
+
+    background-color: ${verde(".3")};
+  }
+
+  .product {
+    display: flex;
   }
 `;
