@@ -3,6 +3,7 @@ const path= require('path')
 
 dotenv.config({path: path.resolve(__dirname, '../.env')})
 
+
 module.exports.development = {
   database: process.env.DB_NAME,
   dialect: "postgres",

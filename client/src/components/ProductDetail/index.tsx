@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 
@@ -64,7 +64,9 @@ export default function ProductDetail({ match }) {
             <h3 className="price">{price}</h3>
             <h4>{categories[0].name}</h4>
             <button className="botonInvertido">Seleccionar talle</button>
-            <button className="boton" disabled>Añadir a favoritos</button>
+            <button className="boton" disabled>
+              Añadir a favoritos
+            </button>
             <button className="botonGlass">Ver Detalle</button>
             <button className="boton">Agregar al carrito</button>
           </div>

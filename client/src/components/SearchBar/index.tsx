@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyledSearchBar } from "./StyledSearchBar";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
-import { useLazyQuery } from "@apollo/react-hooks";
+import { useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 
 export default function SearchBar() {
@@ -79,6 +79,7 @@ export default function SearchBar() {
                   }
                   return 0;
                 })
+<<<<<<< HEAD
                 .slice(0, 3)
                 .map((item, i) => {
                   return (
@@ -90,6 +91,19 @@ export default function SearchBar() {
                           onClick={handleClick}
                         >
                           {item.name}
+=======
+                .slice(0,3).map((item, i) => {
+                    return (
+                      <div key={i} className="contentResultItem">
+                        <div>
+                          <div
+                            className="name"
+                            id={item.id}
+                            onClick={handleClick}
+                          >
+                            {item.name}
+                          </div>
+>>>>>>> bec76170cf205bdf0c4d6910deb1e34045492fe4
                         </div>
                       </div>
                     </div>

@@ -42,7 +42,7 @@ export class Models extends Model<ModelAttributes> {
       color!: string;
   
     @BelongsToMany(() => Product, { through: () => ProductModel })
-    products: Array<Product & { ProductModel: ProductModel }>;
+    products?: Array<Product & { ProductModel: ProductModel }>;
   }
   
   export default Models
