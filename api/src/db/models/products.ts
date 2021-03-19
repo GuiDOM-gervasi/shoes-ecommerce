@@ -19,8 +19,6 @@ import User from "./users";
 import {WishList} from "./wishlist";
 
 
-import Models from "./models";
-import ProductModel from "./productmodel";
 
 @Table({
   defaultScope: {
