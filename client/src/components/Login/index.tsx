@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import { StyledLogin } from "./StyledLogin";
-import { GET_LOGIN } from "../../graphql/queries";
+import { LOGIN_USER } from "../../graphql/queries";
 // import { validateChange, check, form } from "../../helpers/validationLogin";
 
 
 export default function Login() {
-  const [getLogin, { data: dataLogin, loading: loadingLogin, error: errorLogin }] = useLazyQuery(GET_LOGIN);
+  const [getLogin, { data: dataLogin, loading: loadingLogin, error: errorLogin }] = useLazyQuery(LOGIN_USER);
 
   const [form, setForm] = useState({
     email: "",
