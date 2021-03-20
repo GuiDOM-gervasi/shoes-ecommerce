@@ -20,7 +20,6 @@ import {WishList} from "./wishlist";
 
 
 
-
 @Table({
   defaultScope: {
     attributes: { exclude: ["deleteAt"] },
