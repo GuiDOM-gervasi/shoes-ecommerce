@@ -23,7 +23,7 @@ const productoForCategory = async(parent, args, context, info)=>{
       Models as any,
     ],
     } )
-  
+    console.log(productsCategory)
     return productsCategory
     
   }else{  // if any parameter was passsed, return all products
@@ -36,7 +36,7 @@ const productoForCategory = async(parent, args, context, info)=>{
       Models as any,
     ],
     } )
-  
+  console.log(productsCategory)
     return productsCategory
   }
 
