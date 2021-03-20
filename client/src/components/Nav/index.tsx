@@ -1,20 +1,16 @@
-import { useMutation } from "@apollo/client";
+import { useLazyQuery } from "@apollo/client";
 import React from "react";
 import { NavLink } from 'react-router-dom';
-import { LOGOUT_USER } from "../../graphql/mutations";
+import { LOGOUT_USER } from "../../graphql/queries";
 import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
 
 export default function Nav() {
 
-  const [logoutUser] = useMutation(LOGOUT_USER)
+  const [logoutUser] = useLazyQuery(LOGOUT_USER)
 
   const handleClick= () => {
-    logoutUser({
-      variables: {
-        off: true
-      }
-    })
+    logoutUser()
   }
   return (
     <StyledNav>

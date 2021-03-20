@@ -94,7 +94,6 @@ const typeDefs = gql`
     deleteCategory(id: String!): Category
     undeleteCategory(id: String!): Category
     loginUser(email: String!, password: String!) : Access
-    logoutUser: Logout
   }
 
   type Query {
@@ -106,6 +105,7 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
+    logoutUser: Logout
   }
 
 `;
