@@ -53,6 +53,7 @@ export class User extends Model<UserAttributes> {
   @Column({
     allowNull: false,
     type: DataType.STRING,
+    unique: true,
     validate:{
       isEmail: true
     }
@@ -69,7 +70,7 @@ export class User extends Model<UserAttributes> {
     allowNull: false,
     type: DataType.INTEGER,
   })
-  count: Number;
+  count: any;
 
   @Column({
     allowNull: true,

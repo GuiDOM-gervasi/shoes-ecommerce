@@ -41,10 +41,16 @@ const typeDefs = gql`
   type Access {
     isAdmin: Boolean!
     id: String
+    accessToken: String!
+    refreshToken: String!
   }
 
   type ProductForCategory {
     products: [Product!]!
+  }
+
+  type Logout {
+    logout: Boolean
   }
 
   type Mutation {
@@ -87,6 +93,8 @@ const typeDefs = gql`
     undeleteProduct(id: String!): Product
     deleteCategory(id: String!): Category
     undeleteCategory(id: String!): Category
+    loginUser(email: String!, password: String!) : Access
+    logoutUser: Logout
   }
 
   type Query {
@@ -98,7 +106,7 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
-    loginUser(email: String!, password: String!) : Access
   }
+
 `;
 export default typeDefs;

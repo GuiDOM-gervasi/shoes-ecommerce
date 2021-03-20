@@ -27,9 +27,9 @@ const loginUser = async (parent: any, args: any , context: any , info: any ) =>{
     expiresIn: "15min"
   });
 
-  context.res.cookie("refresh-token", refreshToken);
-  context.res.cookie("access-token", accessToken);
-  return { id: aux.id, isAdmin: aux.isAdmin };
+  context.res.cookie("refresh-token", refreshToken, { domain: 'localhost', path: '/' });
+  context.res.cookie("access-token", accessToken,{ domain: 'localhost', path: '/' });
+  return { id: aux.id, isAdmin: aux.isAdmin, accessToken, refreshToken };
 }
 
 export default loginUser

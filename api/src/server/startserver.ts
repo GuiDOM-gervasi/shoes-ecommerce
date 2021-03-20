@@ -31,15 +31,16 @@ const startServer = async () => {
 
   app.use(
     cors({
-      origin: (origin, cb) => cb(null, true),
+      origin: "http://localhost:3000",
       credentials: true,
-      preflightContinue: true,
-      exposedHeaders: [
-        "Access-Control-Allow-Headers",
-        "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept",
-        "X-Password-Expired"
-      ],
-      optionsSuccessStatus: 200
+      // preflightContinue: true
+    //   exposedHeaders: [
+    //     "Access-Control-Allow-Headers",
+    //     "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept",
+    //     "X-Password-Expired"
+    //   ],
+    //   optionsSuccessStatus: 200
+    // })
     })
   );
 
@@ -79,13 +80,13 @@ const startServer = async () => {
 
     const tokens = createTokens(user);
 
-    res.cookie("refresh-token", tokens.refreshToken);
-    res.cookie("access-token", tokens.accessToken);
+    res.cookie("refresh-token", tokens.refreshToken,{ domain: 'localhoost', path: '/' });
+    res.cookie("access-token", tokens.accessToken,{ domain: 'localhost', path: '/' });
     req.userId = user.id;
     next();
   });
 
-  server.applyMiddleware({ app, path: "/graphql" }); // app is from an existing express app
+  server.applyMiddleware({ app, path: "/graphql", cors: false }); // app is from an existing express app
 
   app.listen({ port: 3001 }, () =>
     console.log(`Server ready at http://localhost:3001${server.graphqlPath}`)

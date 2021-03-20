@@ -10,3 +10,5 @@ export {default as deleteProduct} from './deleteProduct';
 export {default as undeleteProduct} from './undeleteProduct';
 export {default as deleteCategory} from './deleteCategory';
 export {default as undeleteCategory} from './undeleteCategory';
+export {default as loginUser} from './loginUser';
+export {default as logoutUser} from "./logoutUser";

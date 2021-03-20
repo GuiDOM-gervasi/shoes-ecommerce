@@ -64,17 +64,6 @@ export default function SearchBar() {
         <div className="contentResult">
           {searchValue && data && data["searchProducts"]
             ? data["searchProducts"]
-                .sort((a: { name: string }, b: { name: string }) => {
-                  var nameA = a.name.toUpperCase();
-                  var nameB = b.name.toUpperCase();
-                  if (nameA < nameB) {
-                    return -1;
-                  }
-                  if (nameA > nameB) {
-                    return 1;
-                  }
-                  return 0;
-                })
                 .slice(0,3).map((item, i) => {
                     return (
                       <div key={i} className="contentResultItem">

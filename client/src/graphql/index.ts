@@ -26,8 +26,8 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   uri: 'http://localhost:3001/graphql',
   // headers: {
   //   authorization: localStorage.getItem('token') || '',
-  // }
-  credentials: "same-origin",
+  // },
+  credentials: "include",
   typeDefs
 });
 
