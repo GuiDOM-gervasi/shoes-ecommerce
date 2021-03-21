@@ -3,6 +3,7 @@ import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
+import Loader from '../Loader';
 
 export default function ProductDetail({ match }) {
   const productId = match.params.id;
@@ -12,7 +13,7 @@ export default function ProductDetail({ match }) {
       id: productId,
     },
   });
-  if (loading) return <div>'Loading...'</div>;
+  if (loading) return <Loader />;
   if (error) return <div>`Error! ${error.message}`</div>;
 
   const { name, brand, description, price, categories } = data.productDetail;
@@ -26,9 +27,6 @@ export default function ProductDetail({ match }) {
 
   return (
     <StyledProductDetail>
-      {loading ? (
-        "Loading"
-      ) : (
         <div className="container">
           <div>
             <img className="photo" src={photo} alt={name} />
@@ -64,12 +62,13 @@ export default function ProductDetail({ match }) {
             <h3 className="price">{price}</h3>
             <h4>{categories[0].name}</h4>
             <button className="botonInvertido">Seleccionar talle</button>
-            <button className="boton" disabled>Añadir a favoritos</button>
+            <button className="boton" disabled>
+              Añadir a favoritos
+            </button>
             <button className="botonGlass">Ver Detalle</button>
             <button className="boton">Agregar al carrito</button>
           </div>
         </div>
-      )}
     </StyledProductDetail>
   );
 }

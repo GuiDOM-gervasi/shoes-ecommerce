@@ -3,6 +3,7 @@ import { StyledSearchBar } from "./StyledSearchBar";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { ResultSearchBarInput } from "./ResultSearchbarInput";
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -15,8 +16,8 @@ export default function SearchBar() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setActiveAutoComplete(false);
-    if(searchValue){
-      history.push(`/search?query=${searchValue}`)
+    if (searchValue) {
+      history.push(`/search?query=${searchValue}`);
     }
   };
 
@@ -26,16 +27,17 @@ export default function SearchBar() {
 
     if (idProduct) {
       history.push(`/product/${idProduct}`);
-      setSearchValue("")
+      setSearchValue("");
     }
   };
 
   const handleKeyPress = (e) => {
     setActiveAutoComplete(false);
-    if(e.which === 13){ // Enter code = 13;
-      history.push(`/search?query=${searchValue}`)
+    if (e.which === 13) {
+      // Enter code = 13;
+      history.push(`/search?query=${searchValue}`);
     }
-  }
+  };
 
   const handleChange = (e) => {
     const query = e.target.value;
@@ -43,7 +45,7 @@ export default function SearchBar() {
     query && setActiveAutoComplete(true);
     searchProduct({
       variables: {
-        name: query,
+        name: query ? query : " ",
       },
     });
   };
@@ -57,27 +59,17 @@ export default function SearchBar() {
           onKeyPress={handleKeyPress}
           value={searchValue}
           placeholder="Zapatilla Nike Airmax..."
+          className="searchinput"
         ></input>
-        <input type="submit" value="search" className="botonSearch"></input>
+        <button type="submit" className="botonSearch">
+          <i className="fas fa-search"></i>
+        </button>
       </form>
-      {called && loading ? null : activeAutoComplete ? (
-        <div className="contentResult">
-          {searchValue && data && data["searchProducts"]
-            ? data["searchProducts"]
-                .slice(0,3).map((item, i) => {
-                    return (
-                      <div key={i} className="contentResultItem">
-                        <div>
-                          <div className="name" id={item.id} onClick={handleClick}>
-                            {item.name}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                })
-            : null}
-        </div>
+      <div className="contentResult">
+      {activeAutoComplete && data ? (
+        <ResultSearchBarInput data={data} handleClick={handleClick} />
       ) : null}
+      </div>
     </StyledSearchBar>
   );
 }

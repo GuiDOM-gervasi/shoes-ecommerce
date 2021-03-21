@@ -6,17 +6,21 @@ import {
   ForeignKey,
   Model,
   Table,
-  Unique
+  Unique,
+  HasMany
 } from "sequelize-typescript";
 
-import ProductCategory from './productcategory'
-import Brand from './brands'
-import Category from './category'
 
+import ProductCategory from "./productcategory";
+import Brand from "./brands";
+import Category from "./category";
 import Models from './models'
-import ProductModel from './productmodel'
+import FinalProduct from './finalproduct'
 import User from "./users";
 import {WishList} from "./wishlist";
+import { ProductAttributes } from "./types";
+import { Image } from "./image";
+
 
 
 @Table({
@@ -34,7 +38,6 @@ export class Product extends Model {
     primaryKey: true,
     type: DataType.INTEGER,
   })
-
   id?: string;
 
   @Unique
@@ -57,6 +60,15 @@ export class Product extends Model {
   price!: number;
 
   @Column({
+    allowNull: true,
+    type: DataType.STRING
+  })
+  muestraimg?: string;
+
+  @HasMany (() => Image)
+  img!: Image[]
+
+  @Column({
     allowNull: false,
     type: DataType.INTEGER,
   })
@@ -66,14 +78,18 @@ export class Product extends Model {
   @BelongsTo(() => Brand)
   brand!: Brand;
 
+  @HasMany(() => FinalProduct)
+  finalproducts!: FinalProduct[]
+
   @BelongsToMany(() => Category, { through: () => ProductCategory })
   categories?: Array<Category & { ProductCategory: ProductCategory }>;
 
-  @BelongsToMany(() => Models, { through: () => ProductModel })
-  models?: Array<Models & { ProductModels: ProductModel }>;
+  @BelongsToMany(() => Models, { through: () => FinalProduct })
+  models?: Array<Models & { FinalProducts: FinalProduct }>;
 
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;
+
 }
 
-export default Product
+export default Product;

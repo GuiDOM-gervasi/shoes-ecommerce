@@ -1,24 +1,11 @@
-import { Op } from "sequelize";
-import { ProductModel } from "../../../db/models/productmodel";
+import Image from "#root/db/models/image";
 
-const addImage = async (parent:any, args )  => {
-    const {idProduct,idModel,input} = args
+const addImage = async (parent:any, {productId, image} )  => {
 
-    try {
-        await ProductModel.update( {img:input} , {
-            where: {
-                [Op.and]: [
-                    { modelId: idModel },
-                    { productId: idProduct }
-                ]
-        }})
-    
-    } catch (error) {
-        return `can't update successfully: ${error}`
-    }
-    
-    return `update successfully producto:  ${idProduct}, modelo:  ${idModel}`;
-    
+    return await Image.create({
+        productId,
+        title: image
+    })
 }
 
 export default addImage;

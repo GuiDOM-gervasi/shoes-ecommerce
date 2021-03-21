@@ -23,6 +23,15 @@ export const ADD_PRODUCT = gql`
   }
 `;
 
+export const ADD_CATEGORY = gql`
+  mutation addCategory($name: String!) {
+    createCategory(name: $name) {
+      id
+      name
+    }
+  }
+`;
+
 export const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: String!) {
     deleteProduct(id: $id) {
@@ -94,18 +103,20 @@ export const ADD_USER = gql`
 `;
 
 export const LOGIN_USER = gql`
-  mutation loginUser(
-    $email: String!
-    $password: String!
-  ) {
-    loginUser(
-      email: $email
-      password: $password
-    ) {
-      id,
-      isAdmin,
-      accessToken,
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      id
+      isAdmin
+      accessToken
       refreshToken
+    }
+  }
+`;
+
+export const EDIT_CATEGORY = gql`
+  mutation editCategory($id: String!, $input: String!) {
+    updateCategory(id: $id, input: $input) {
+      id
     }
   }
 `;
