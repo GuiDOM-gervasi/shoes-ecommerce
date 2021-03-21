@@ -40,8 +40,10 @@ export function AuthProvider(props) {
   }
 
   function logout(){
+
     console.log("Logout")
     logoutUser()
+  
   }
 
   const value = useMemo(() => {
