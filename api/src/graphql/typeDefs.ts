@@ -132,7 +132,7 @@ const typeDefs = gql`
     brand(atr: String, ord: String): [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
-    productForCategory(name: String!): [ProductForCategory!]!
+    productForCategory(name: String!): [Product!]!
     searchProducts(name: String!): [Product!]!
     logoutUser: Logout
     cart(cartId: String!): [Cart]!

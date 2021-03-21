@@ -30,8 +30,8 @@ export const GET_PRODUCT_DETAIL = gql`
         name
       }
       models {
-      	size
-	color
+        size
+        color
       }
     }
   }
@@ -77,7 +77,7 @@ export const GET_BRANDS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-  query productForCategory($name:String!) {
+  query productForCategory($name: String!) {
     productForCategory(name: $name) {
       id
       name
@@ -92,7 +92,6 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
   }
 `;
 
-
 export const GET_MODELS = gql`
   query Models {
     models {
@@ -105,8 +104,8 @@ export const GET_MODELS = gql`
 
 export const LOGOUT_USER = gql`
   query {
-    logoutUser{
+    logoutUser {
       logout
     }
   }
-`
+`;

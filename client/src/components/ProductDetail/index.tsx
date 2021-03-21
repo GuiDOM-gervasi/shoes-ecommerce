@@ -7,6 +7,7 @@ import {
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
+import Loader from "../Loader";
 
 export default function ProductDetail({ match }) {
   const productId = match.params.id;
@@ -16,8 +17,6 @@ export default function ProductDetail({ match }) {
       id: productId,
     },
   });
-  if (loading) return <Loader />;
-  if (error) return <div>`Error! ${error.message}`</div>;
 
   const [
     getSimils,
@@ -50,8 +49,8 @@ export default function ProductDetail({ match }) {
   let colors = [];
   let sizes = [];
 
-  if (loading || loadingSimil) return <div>'Loading...'</div>;
-  if (error || errorSimil) return <div>`Error! ${error}`</div>;
+  if (loading || loadingSimil) return <Loader />;
+  if (error || errorSimil) return <div>`Error! ${error?.message}`</div>;
 
   const {
     name,

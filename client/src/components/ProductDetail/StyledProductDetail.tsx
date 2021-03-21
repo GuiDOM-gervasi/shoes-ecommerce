@@ -95,7 +95,7 @@ export const StyledProductDetail = styled.div`
     height: 17rem;
     position: absolute;
     left: 0;
-    top: 5rem;
+    margin-top: 2rem;
     filter: blur(2px);
   }
 
@@ -136,8 +136,8 @@ export const StyledProductDetail = styled.div`
 
       .similData {
         opacity: 0;
-        background-color: rgba(0,0,0, .2);
-        padding: .2rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 0.2rem;
         width: 15rem;
         position: absolute;
         top: 10rem;
