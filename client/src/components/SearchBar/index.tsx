@@ -59,8 +59,11 @@ export default function SearchBar() {
           onKeyPress={handleKeyPress}
           value={searchValue}
           placeholder="Zapatilla Nike Airmax..."
+          className="searchinput"
         ></input>
-        <input type="submit" value="search" className="botonSearch"></input>
+        <button type="submit" className="botonSearch">
+          <i className="fas fa-search"></i>
+        </button>
       </form>
       {activeAutoComplete && data ? (
         <ResultSearchBarInput data={data} handleClick={handleClick} />
