@@ -26,4 +26,14 @@ export const typeDefs = gql`
   extend type Query {
     loadedProducts: [Product]
   }
+  type Access {
+    isAdmin: Boolean!
+    id: String
+    accessToken: String!
+    refreshToken: String!
+  }
+
+  type Logout {
+    logout: Boolean
+  }
 `;

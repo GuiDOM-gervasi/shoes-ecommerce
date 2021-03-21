@@ -10,7 +10,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     nlsuscribe: Boolean
-    products: [Product!]
+    products: [Product]
   }
 
   type Product {
@@ -46,6 +46,13 @@ const typeDefs = gql`
     color: String!
   }
 
+  type Access {
+    isAdmin: Boolean!
+    id: String
+    accessToken: String!
+    refreshToken: String!
+  }
+
   type FinalProduct {
     id: ID
     product: Product
@@ -72,6 +79,10 @@ const typeDefs = gql`
     cartId: String!
     quantity: Int
     price: Float
+  }
+
+  type Logout {
+    logout: Boolean
   }
 
   type Mutation {
@@ -125,6 +136,7 @@ const typeDefs = gql`
     deleteCategory(id: String!): Category
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
+    loginUser(email: String!, password: String!) : Access
   }
 
   type Query {
@@ -136,9 +148,11 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
+    logoutUser: Logout
     cart(cartId: String! ): [Cart]!
     finalproducts (productId: String! modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
   }
+
 `;
 export default typeDefs;

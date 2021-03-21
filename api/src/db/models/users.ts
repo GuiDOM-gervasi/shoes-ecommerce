@@ -56,6 +56,7 @@ export class User extends Model<UserAttributes> {
   @Column({
     allowNull: false,
     type: DataType.STRING,
+    unique: true,
     validate:{
       isEmail: true
     }
@@ -67,6 +68,12 @@ export class User extends Model<UserAttributes> {
     type: DataType.STRING,
   })
   password!: string;
+
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER,
+  })
+  count: any;
 
   @Column({
     allowNull: true,

@@ -4,8 +4,6 @@ import Category from "../../../db/models/category";
 import Models from '../../../db/models/models';
 import resolverHelper from "#root/helpers/resolverHelper"
 
-
-
 const productResolver = async(parent,args,context,info) => {
 	var obj = resolverHelper(args,true) 
 	var products = await Product.findAll({
