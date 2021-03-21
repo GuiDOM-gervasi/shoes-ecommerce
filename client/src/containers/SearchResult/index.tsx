@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router";
-import { useLazyQuery, useQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { Link } from "react-router-dom";
 import { fotosZapa } from "../../components/ProductDetail/mockup";

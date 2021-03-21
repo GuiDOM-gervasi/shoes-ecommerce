@@ -68,7 +68,6 @@ const typeDefs = gql`
     ): Product!
 
     updateCategory(id: String!, input: String!): Category!
-    updateProduct(id: String!, atr: String!, input: [String]): Product!
     updateUser(id: String!, atr: String!, input: String): String
     addImage(idProduct: String!, idModel: String!, input: String): String
     createCategory(name: String!): Category!
