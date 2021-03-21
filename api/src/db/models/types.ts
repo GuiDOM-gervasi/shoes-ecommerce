@@ -7,6 +7,7 @@ export interface UserAttributes {
   email: string;
   password: string;
   nlsuscribe: Boolean;
+  count: number;
 }
 
 export interface ProductAttributes {

@@ -1,9 +1,14 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { useAuth } from "../../hooks/AuthProvider";
 import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
 
 export default function Nav() {
+  const { logout } = useAuth();
+  const handleClick= () => {
+    logout()
+  }
   return (
     <StyledNav>
       <nav className="fullnav">

@@ -13,3 +13,4 @@ export {default as addImage} from "./addImage";
 export {default as createCart} from './createCart';
 export {default as addToCart} from './addToCart';
 export {default as updateCategory} from "./updateCategory";
+export {default as loginUser} from './loginUser';

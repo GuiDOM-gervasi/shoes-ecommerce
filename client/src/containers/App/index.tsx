@@ -14,6 +14,8 @@ import AddProduct from "../../components/AddProduct";
 import CRUDCategory from "../CRUDCategory";
 import AddCategory from "../../components/AddCategory"
 import EditProduct from "../../components/EditProduct";
+import AddUser from "../../components/AddUser";
+import Login from "../../components/Login";
 import EditCategory from "../../components/EditCategory";
 
 interface ProductAttributes {
@@ -36,10 +38,10 @@ function App() {
       <Route  path="/admin/category" component={CRUDCategory} />
       <Route path="/admin/addCategory" component={AddCategory} />
       <Route path="/admin/editProduct/:productId" component={EditProduct} />
-
+      <Route path="/register" component={AddUser} />
+      <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />
       <Route path="/admin/editCategory/:categoryId" component={EditCategory} />
-
     </div>
   );
 }

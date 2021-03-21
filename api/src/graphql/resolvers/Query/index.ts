@@ -9,3 +9,4 @@ export {default as searchProducts} from "./searchProducts";
 export {default as cart} from "./cart";
 export {default as finalproducts} from "./finalproduct";
 export {default as image} from "./image";
+export {default as logoutUser} from "./logoutUser";
