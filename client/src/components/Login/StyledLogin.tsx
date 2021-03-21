@@ -4,7 +4,7 @@ import { blanco, verdeMain, violeta, negro, productWidth, verdeDetalle, formWidt
 
 export const StyledLogin = styled.div`
   width: ${formWidth}vw;
-  height: 20vh;
+  height: 30vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;

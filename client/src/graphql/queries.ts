@@ -30,6 +30,10 @@ export const GET_PRODUCT_DETAIL = gql`
       categories {
         name
       }
+      models {
+        size
+        color
+      }
     }
   }
 `;
@@ -74,10 +78,11 @@ export const GET_BRANDS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-  query productForCategory($name:String) {
+  query productForCategory($name:String!) {
     productForCategory(name: $name) {
       id
       name
+      price
       brand {
         name
       }

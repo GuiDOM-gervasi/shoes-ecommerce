@@ -39,13 +39,15 @@ export const StyledNav = styled.div`
   }
   .cart {
     grid-area: cart;
-    a:hover{
-      .fa-shopping-cart{
+  }
+   .cart, .logo{ 
+     a:hover{
+      .fa-shopping-cart, .fa-home{
         color:${negro};
       }
     }
-  }
-  .fa-shopping-cart {
+    }
+  .fa-shopping-cart, .fa-home {
     color: ${verdeMain};
   }
   .linedown {
