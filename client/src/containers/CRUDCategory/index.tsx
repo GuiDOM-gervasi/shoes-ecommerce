@@ -1,3 +1,4 @@
+
 import { useQuery, useMutation } from "@apollo/client";
 import React from "react";
 import { StyledCRUDCategory } from "./StyledCRUDCategory";
@@ -5,6 +6,7 @@ import { CategoryAttributes } from "../../types";
 import { GET_CATEGORIES } from "../../graphql/queries";
 import { useHistory } from "react-router-dom";
 import { DELETE_CATEGORY } from "../../graphql/mutations";
+import Loader from '../../components/Loader';
 
 export default function CRUDCategory() {
 	const history = useHistory();
@@ -16,7 +18,8 @@ export default function CRUDCategory() {
 			refetchQueries: [{ query: GET_CATEGORIES }],
 		}
 	);
-	if (loading) return <span> loading </span>;
+
+	if (loading) return <Loader />;
 	if (error) return <span> error {error.message} </span>;
 	const handleClick = () => {
 		history.push("/admin/addCategory");

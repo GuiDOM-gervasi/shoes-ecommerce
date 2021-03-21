@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
+
 import { GET_CATEGORIES } from "../../graphql/queries";
 import { EDIT_CATEGORY } from "../../graphql/mutations";
 import { StyledEditCategory } from "./StyleEditCategory";

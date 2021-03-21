@@ -21,17 +21,25 @@ export default function SearchResult() {
   return (
     <StyledSearchResult className="fondoDegradado">
       <div className="filterBar">
-        {products &&
-          products.map((item, i) => (
-            <Link to={`/product/${item.id}`}>
-              <img
-                src={item.img || fotosZapa.photo}
-                alt={item.name}
-                className="productImg"
-                key={item.id}
-              />
-            </Link>
-          ))}
+        <ul>
+          {products &&
+            products.map((item, i) => (
+              <Link to={`/product/${item.id}`}>
+                <li>
+                  <img
+                    src={item.img || fotosZapa.photo}
+                    alt={item.name}
+                    className="productImg"
+                    key={item.id}
+                  />
+                  <div className="productData">
+                    <h5>{item.brand.name} {item.name}</h5>
+                    <p>${item.price}</p>
+                  </div>
+                </li>
+              </Link>
+            ))}
+        </ul>
       </div>
     </StyledSearchResult>
   );
