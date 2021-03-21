@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { StyledAddProduct } from "./StyledAddProduct";
 import { ADD_PRODUCT } from "../../graphql/mutations";
 import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
@@ -96,7 +96,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
       <form onSubmit={handleSubmit}>
         <div className="div_name">
           <input
-            type="text"
+            type="text" 
             name="name"
             onChange={handleChange}
             placeholder="Air max"

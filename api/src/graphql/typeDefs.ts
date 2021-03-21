@@ -22,6 +22,7 @@ const typeDefs = gql`
     brand: Brand
     categories: [Category!]
     models: [Model!]
+    img: String
   }
 
   type Category {
@@ -53,6 +54,9 @@ const typeDefs = gql`
 
   type ProductForCategory {
     products: [Product!]!
+  }
+  type ProductModel{
+  	products: [Product!]!
   }
 
   type Cart {
@@ -113,12 +117,13 @@ const typeDefs = gql`
       quantity: Int
       price: Float
     ): MutationCartProduct!
+    updateCategory(id: String!, input: String!): Category!
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String!, color: String!): Model!
     deleteProduct(id: String!): Product
-    undeleteProduct(id: String!): Product
     deleteCategory(id: String!): Category
+    undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
   }
 

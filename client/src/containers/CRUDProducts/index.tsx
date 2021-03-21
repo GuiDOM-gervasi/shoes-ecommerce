@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import { DELETE_PRODUCT } from "../../graphql/mutations";
 import { StyledCRUDProducts } from "./StyledCRUDProducts";

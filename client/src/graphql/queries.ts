@@ -38,6 +38,18 @@ export const SEARCH_PRODUCTS = gql`
     searchProducts(name: $name) {
       id
       name
+      description
+      price
+      img
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+      models {
+        id
+      }
     }
   }
 `;
@@ -59,6 +71,22 @@ export const GET_BRANDS = gql`
     }
   }
 `;
+
+export const GET_PRODUCTS_BY_CATEGORIES = gql`
+  query productForCategory($name:String) {
+    productForCategory(name: $name) {
+      id
+      name
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;
+
 
 export const GET_MODELS = gql`
   query Models {
