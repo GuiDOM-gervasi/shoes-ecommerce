@@ -5,6 +5,7 @@ export const GET_PRODUCTS = gql`
     products {
       id
       name
+      muestraimg
       price
       brand {
         name
@@ -40,7 +41,7 @@ export const SEARCH_PRODUCTS = gql`
       name
       description
       price
-      img
+      muestraimg
       brand {
         name
       }

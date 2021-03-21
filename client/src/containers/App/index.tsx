@@ -28,7 +28,7 @@ interface ProductAttributes {
 
 function App() {
   return (
-    <div className="App">
+    <div className="App fondoDegradado">
       <Nav />
       <GlobalStyles/>
       <Route exact path="/" component={Catalogue}/>

@@ -21,7 +21,7 @@ export default function Nav() {
               <SearchBar />
             </li>
             <li className="cart">
-              <NavLink to="" className="hover">
+              <NavLink to="">
                 <i className="fas fa-shopping-cart"></i>
               </NavLink>
             </li>
@@ -43,12 +43,12 @@ export default function Nav() {
               <NavLink to="">About us</NavLink>
             </li>
             <li className="login">
-              <NavLink to="" className="hover">
+              <NavLink to="/login" className="hover">
                 Login
               </NavLink>
             </li>
             <li className="register">
-              <NavLink to="" className="hover">
+              <NavLink to="/register" className="hover">
                 Register
               </NavLink>
             </li>

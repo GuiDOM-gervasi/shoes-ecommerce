@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {blanco, verdeMain, violeta, negro, productWidth,navHeight, verdeDetalle} from '../../containers/App/GlobalStyles'
 
 export const StyledNav = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
@@ -11,7 +12,7 @@ export const StyledNav = styled.div`
 
   nav {
     background: #151515;
-    height: 160px;
+    height: ${navHeight}vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -38,11 +39,18 @@ export const StyledNav = styled.div`
   }
   .cart {
     grid-area: cart;
+    a:hover{
+      .fa-shopping-cart{
+        color:${negro};
+      }
+    }
   }
-
+  .fa-shopping-cart {
+    color: ${verdeMain};
+  }
   .linedown {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 9fr 1fr 1fr;
+    grid-template-columns: 1fr 3fr 3fr 3fr 5fr 3fr 3fr;
     grid-template-areas: ". catalogue offers aboutus . login register";
   }
   .catalogue {
@@ -61,16 +69,13 @@ export const StyledNav = styled.div`
     grid-area: register;
   }
 
-  .fa-shopping-cart {
-    color: #64dfdf;
-  }
   nav ul li {
     display: inline-block;
     line-height: 80px;
     margin: 0 5px;
   }
   nav ul li a {
-    color: #f2f2f2;
+    color: ${blanco};
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 3px;
@@ -78,14 +83,14 @@ export const StyledNav = styled.div`
   }
 
   a:hover {
-    background: #80ffdb;
+    background: ${verdeDetalle};
     transition: 0.5s;
-    color: #151515;
+    color: ${negro};
   }
 
   .checkbtn {
     font-size: 30px;
-    color: #f2f2f2;
+    color: ${blanco};
     float: right;
     line-height: 80px;
     margin-right: 40px;
@@ -125,7 +130,7 @@ export const StyledNav = styled.div`
       position: fixed;
       width: 100%;
       height: 100vh;
-      background: #151515;
+      background: ${negro};
       top: 80px;
       left: 0;
       text-align: center;
@@ -145,7 +150,7 @@ export const StyledNav = styled.div`
 
     a:hover {
       background: none;
-      color: #80ffdb;
+      color: ${verdeDetalle};
     }
     #check:checked ~ ul {
       left: 0;

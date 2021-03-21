@@ -6,6 +6,7 @@ export const typeDefs = gql`
     name: String!
     description: String
     price: Float
+    muestraimg: String
     brand: Brand!
     categories: [Category]
     models: [Model]

@@ -7,7 +7,9 @@ export var violeta = "#6930C3"
 export var violetaHover = "#6930C350"
 export var blanco = "#F0F0F0"
 export var negro = "#151515"
-
+export var productWidth = 20
+export var navHeight = 18
+export var formWidth = 40
 
 export const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap');
@@ -16,6 +18,12 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
+    }
+    .App{
+        min-height:100vh;
+    }
+    a{
+        text-decoration: none;
     }
     h1,h2,h3,h4,h5,h6{
         font-weight: bold;

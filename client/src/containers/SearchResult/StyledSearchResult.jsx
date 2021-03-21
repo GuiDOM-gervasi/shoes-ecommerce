@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {blanco, verdeMain, violeta} from '../App/GlobalStyles'
-var productWidth = 20
+import {blanco, verdeMain, violeta, productWidth} from '../App/GlobalStyles'
+
 
 export const StyledSearchResult = styled.div`
   min-height:100vh;
