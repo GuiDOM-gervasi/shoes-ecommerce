@@ -18,6 +18,7 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
+        transition: all 300ms ease;
     }
     .App{
         min-height:100vh;

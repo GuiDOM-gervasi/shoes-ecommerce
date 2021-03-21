@@ -14,6 +14,7 @@ export const StyledAddUser = styled.div`
   justify-content: center;
   background-color: ${blanco};
   position: relative;
+  color: ${violeta};
 
   form {
     height: 80%;
@@ -39,8 +40,12 @@ export const StyledAddUser = styled.div`
 
     input {
       border: none;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid ${violeta};
       width: 80%;
+    }
+    input::placeholder {
+      color: ${violeta};
+      opacity: 0.5;
     }
     .register{
       background-color:${blanco};
