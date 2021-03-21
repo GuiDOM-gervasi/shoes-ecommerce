@@ -17,6 +17,7 @@ import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
 import EditCategory from "../../components/EditCategory";
+import { useAuth } from "../../hooks/AuthProvider";
 
 interface ProductAttributes {
   name: String;
@@ -24,6 +25,13 @@ interface ProductAttributes {
   price: Number;
   brandId: String;
   CategoriesId: String[];
+}
+
+function Protect(){
+  const { user } = useAuth();
+  if(user.isAdmin){
+    
+  }
 }
 
 function App() {

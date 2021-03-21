@@ -5,10 +5,12 @@ import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
 
 export default function Nav() {
-  const { logout } = useAuth();
+
+  const { logout, user } = useAuth();
   const handleClick= () => {
     logout()
   }
+
   return (
     <StyledNav>
       <nav className="fullnav">
@@ -33,6 +35,11 @@ export default function Nav() {
             <i className="fas fa-bars"></i>
           </label>
           <ul className="linedown">
+            {
+              user && user.isAdmin ? <li>
+                <NavLink to="/admin">Admin</NavLink>
+              </li> : null
+            }
             <li className="catalogue">
               <NavLink to="">Catalogue</NavLink>
             </li>
@@ -42,16 +49,22 @@ export default function Nav() {
             <li className="aboutus">
               <NavLink to="">About us</NavLink>
             </li>
+            {user ? <li className="login">
+              <div onClick={handleClick} className="hover">
+                <p>Logout</p>
+              </div>
+            </li> : <> 
             <li className="login">
-              <NavLink to="" className="hover">
+              <NavLink to="/login" className="hover">
                 Login
               </NavLink>
             </li>
             <li className="register">
-              <NavLink to="" className="hover">
+              <NavLink to="/register" className="hover">
                 Register
               </NavLink>
-            </li>
+            </li></>
+            }
           </ul>
         </div>
       </nav>

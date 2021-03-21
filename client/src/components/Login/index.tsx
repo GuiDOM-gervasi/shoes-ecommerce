@@ -7,6 +7,7 @@ import { StyledLogin } from "./StyledLogin";
 
 export default function Login() {
   const { login } = useAuth();
+  
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -24,6 +25,7 @@ export default function Login() {
       [e.target.name]: e.target.value
     })
   };
+  
   return (
     <StyledLogin>
       <form onSubmit={handleSubmit}>
