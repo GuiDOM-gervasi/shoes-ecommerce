@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 export default function ProductDetail({ match }) {
   const productId = match.params.id;
 
-  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {
+  const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
     },
@@ -23,10 +23,10 @@ export default function ProductDetail({ match }) {
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
 
   useEffect(() => {
-    if (data) {
+    if (mainProduct) {
       const {
         productDetail: { models, categories },
-      } = data;
+      } = mainProduct;
       colors = models.map((model) => model.color);
       colors = Array.from(new Set(colors));
 
@@ -38,7 +38,7 @@ export default function ProductDetail({ match }) {
 
       getSimils({ variables: { name: categories[0].name } });
     }
-  }, [data]);
+  }, [mainProduct]);
 
   const [modelsState, setModelsState] = React.useState({
     colors: [],
@@ -51,7 +51,7 @@ export default function ProductDetail({ match }) {
   if (loading || loadingSimil) return <div>'Loading...'</div>;
   if (error || errorSimil) return <div>`Error! ${error}`</div>;
 
-  const { name, brand, price, categories, models, id } = data.productDetail;
+  const { name, brand, price, categories, models, id } = mainProduct.productDetail;
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -67,70 +67,76 @@ export default function ProductDetail({ match }) {
     priceBefore,
   } = fotosZapa;
 
+
+  console.log(categories);
   return (
     <StyledProductDetail>
       {loading ? (
         "Loading"
       ) : (
         <div className="container">
-          <div>
-            <div className="fondoVioleta"></div>
-            <img className="photo" src={photo} alt={name} />
-            <ul>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail1}
-                  alt={`photoDetail 1 - ${name}`}
-                />
-              </li>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail2}
-                  alt={`photoDetail 2 - ${name}`}
-                />
-              </li>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail3}
-                  alt={`photoDetail 3 - ${name}`}
-                />
-              </li>
-            </ul>
-          </div>
-          <div className="info">
-            <h1>{name}</h1>
-            <div className="description">
-              <span>{categories.map((category) => category.name + ", ")}</span>
-              <span>{brand.name}</span>
+          <div className="mainProduct">
+            <div>
+              <div className="fondoVioleta"></div>
+              <img className="photo" src={photo} alt={name} />
+              <ul>
+                <li>
+                  <img
+                    className="photoDetail"
+                    src={photoDetail1}
+                    alt={`photoDetail 1 - ${name}`}
+                  />
+                </li>
+                <li>
+                  <img
+                    className="photoDetail"
+                    src={photoDetail2}
+                    alt={`photoDetail 2 - ${name}`}
+                  />
+                </li>
+                <li>
+                  <img
+                    className="photoDetail"
+                    src={photoDetail3}
+                    alt={`photoDetail 3 - ${name}`}
+                  />
+                </li>
+              </ul>
             </div>
-            <div className="precios">
-              <h4 className="priceBefore">${priceBefore}</h4>
-              <h2 className="price">${price}</h2>
-            </div>
-            <div className="botones">
-              <select
-                className="botonInvertido"
-                onChange={(e: any) => filterModels(e.target.value)}
-              >
-                {modelsState.colors?.map((color, i) => (
-                  <option value={color} key={`${color} ${i}`}>
-                    {color}
-                  </option>
-                ))}
-              </select>
-              <select className="botonInvertido">
-                {modelsState.sizes?.map((size, i) => (
-                  <option value={size} key={`${size} ${i}`}>
-                    {size}
-                  </option>
-                ))}
-              </select>
-              <button className="boton" disabled>
-                Agregar al carrito
-              </button>
+            <div className="info">
+              <h1>{name}</h1>
+              <div className="description">
+                <span>
+                  {categories?.map((category) => category.name + ", ")}
+                </span>
+                <span>{brand.name}</span>
+              </div>
+              <div className="precios">
+                <h4 className="priceBefore">${priceBefore}</h4>
+                <h2 className="price">${price}</h2>
+              </div>
+              <div className="botones">
+                <select
+                  className="botonInvertido"
+                  onChange={(e: any) => filterModels(e.target.value)}
+                >
+                  {modelsState.colors?.map((color, i) => (
+                    <option value={color} key={`${color} ${i}`}>
+                      {color}
+                    </option>
+                  ))}
+                </select>
+                <select className="botonInvertido">
+                  {modelsState.sizes?.map((size, i) => (
+                    <option value={size} key={`${size} ${i}`}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+                <button className="boton" disabled>
+                  Agregar al carrito
+                </button>
+              </div>
             </div>
           </div>
           <div className="related">
@@ -138,12 +144,16 @@ export default function ProductDetail({ match }) {
             <div className="photo">
               {similProducts?.productForCategory?.map((item, i) =>
                 item.id === id ? null : (
-                  <Link to={`/product/${item.id || 1}`} key={item.id}>
+                  <Link to={`/product/${item.id || 1}`} key={item.id} onClick={() => window.scroll(0, 0)}>
                     <img
                       src={item.photo || fotosZapa.photo}
                       alt="name"
                       className="productImg"
                     />
+                    <div className ="similData">
+                      <h5>{item.name}</h5>
+                      <h5>${item.price}</h5>
+                    </div>
                   </Link>
                 )
               )}
