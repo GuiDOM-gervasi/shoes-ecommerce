@@ -1,5 +1,3 @@
-import { Product } from './../db/models/products';
-import { ProductModel } from './../db/models/productmodel';
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
@@ -20,7 +18,8 @@ const typeDefs = gql`
     name: String!
     description: String
     price: Float
-    brand: Brand!
+    muestraimg: String
+    brand: Brand
     categories: [Category!]
     models: [Model!]
     img: String
@@ -35,10 +34,22 @@ const typeDefs = gql`
     name: String!
   }
 
+  type Image{
+    id: ID!
+    productId: String!
+    title: String!
+  }
+
   type Model {
     id: ID!
     size: String!
     color: String!
+  }
+
+  type FinalProduct {
+    id: ID
+    product: Product
+    model: Model
   }
 
   type ProductForCategory {
@@ -46,6 +57,21 @@ const typeDefs = gql`
   }
   type ProductModel{
   	products: [Product!]!
+  }
+
+  type Cart {
+    id: ID
+    finalproducts: [FinalProduct]
+    userId: String
+    state: String
+  }
+
+  type MutationCartProduct{
+    id: ID!
+    finalproductId: String!
+    cartId: String!
+    quantity: Int
+    price: Float
   }
 
   type Mutation {
@@ -62,14 +88,36 @@ const typeDefs = gql`
       name: String!
       description: String
       price: Float
+      muestraimg: String
       brandId: ID!
       CategoriesId: [String]
       ModelsId: [String]
     ): Product!
-
+    updateProduct(
+    id:String!
+    atr:String!
+    input:[String]
+    ): Product! 
+    updateUser(
+      id: String!
+      atr:String!
+      input: String
+    ): String
+    addImage(
+      productId: String!
+      image: String!
+    ): Image!
+    createCart(
+      userId: String!
+      state: String!
+    ): Cart!
+    addToCart(
+      finalproductId: String!
+      cartId: String!
+      quantity: Int
+      price: Float
+    ): MutationCartProduct!
     updateCategory(id: String!, input: String!): Category!
-    updateUser(id: String!, atr: String!, input: String): String
-    addImage(idProduct: String!, idModel: String!, input: String): String
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
     createModel(size: String!, color: String!): Model!
@@ -77,7 +125,6 @@ const typeDefs = gql`
     deleteCategory(id: String!): Category
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
-    updateProduct(id: String!, atr: String!, input: [String]): Product!
   }
 
   type Query {
@@ -87,9 +134,11 @@ const typeDefs = gql`
     brand: [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
-    productForCategory(name:String!): [ProductForCategory!]!
-    searchProducts(name:String!):[Product!]!
-    productModel:[Product!]!
+    productForCategory(name: String!): [ProductForCategory!]!
+    searchProducts(name: String!): [Product!]!
+    cart(cartId: String! ): [Cart]!
+    finalproducts (productId: String! modelId: String!): [FinalProduct!]!
+    image(productId: String!): [Image]!
   }
 `;
 export default typeDefs;
