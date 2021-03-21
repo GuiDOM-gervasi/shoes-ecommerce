@@ -1,4 +1,5 @@
 import {
+  BelongsTo,
     Column,
     DataType,
     ForeignKey,
@@ -6,55 +7,58 @@ import {
     Table
   } from "sequelize-typescript";
 import Cart from "./carts";
-  
-  import Product from './products'
-  
-  // Definitions of tables and sequelize models
-  // Table cartproduct
-  @Table({
-    defaultScope: {
-      attributes: { exclude: ["deleteAt"] },
-    },
-    paranoid: true,
-    tableName: "cartproduct",
+import FinalProduct from './finalproduct';  
+
+// Definitions of tables and sequelize models
+// Table cartproduct
+@Table({
+  defaultScope: {
+    attributes: { exclude: ["deleteAt"] },
+  },
+  paranoid: true,
+  tableName: "cartproduct",
+})
+export class CartProduct extends Model {
+  @Column({
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
+    type: DataType.INTEGER,
   })
-  export class CartProduct extends Model {
-    @Column({
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataType.INTEGER,
-    })
-    id?: string;
-    
-    @Column({
-      allowNull: false,
-      type: DataType.INTEGER,
-    })
-    @ForeignKey(() => Cart)
-    cartId!: string;
-    
-    @Column({
-      allowNull: false,
-      type: DataType.INTEGER,
-    })
-    @ForeignKey(() => Product)
-    productId!: string;
-    
-    @Column({
+  id?: string;
+  
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER,
+  })
+  @ForeignKey(() => Cart)
+  cartId!: string;
+  @BelongsTo(() => Cart)
+  cart!: Cart;
+  
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER,
+  })
+  @ForeignKey(() => FinalProduct)
+  finalproductId!: string;
+  @BelongsTo(() => FinalProduct)
+  finalproducts!: FinalProduct;
+  
+  @Column({
+    allowNull: true,
+    type: DataType.INTEGER
+  })
+  quantity?: number;
+
+  @Column({
       allowNull: true,
-      type: DataType.INTEGER
+      type: DataType.FLOAT
     })
-    quantity?: number;
+  price?: number;
 
-    @Column({
-        allowNull: true,
-        type: DataType.FLOAT
-      })
-    price?: number;
+}
 
-  }
-  
 
-  
-  export default CartProduct
+
+export default CartProduct

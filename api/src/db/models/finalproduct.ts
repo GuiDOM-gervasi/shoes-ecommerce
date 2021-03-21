@@ -1,14 +1,18 @@
 import {
 	Column,
 	DataType,
-  ForeignKey,
-  BelongsTo,
+	ForeignKey,
+	BelongsTo,
+	BelongsToMany,
+	HasMany,
 	Model,
 	Table,
 } from "sequelize-typescript";
 
 import Product from "./products";
 import Models from "./models";
+import Cart from "./carts";
+import CartProduct from "./cartproduct";
 
 // Definitions of tables and sequelize models
 // Table productmodels
@@ -33,8 +37,8 @@ export class FinalProduct extends Model {
 		type: DataType.INTEGER,
 	})
 	@ForeignKey(() => Product)
-  productId!: string;
-  @BelongsTo(() => Product)
+	productId!: string;
+	@BelongsTo(() => Product)
     product: Product;
 
 	@Column({
@@ -42,15 +46,15 @@ export class FinalProduct extends Model {
 		type: DataType.INTEGER,
 	})
 	@ForeignKey(() => Models)
-  modelId!: string;
-  @BelongsTo(() => Models)
-    models: Models;
+	modelId!: string;
+	@BelongsTo(() => Models)
+	model: Models;
+	
+	@HasMany(() => CartProduct)
+  	cartproducts!: CartProduct[]
 
-	// @Column({
-	// 	allowNull: true,
-	// 	type: DataType.TEXT,
-	// })
-	// img?: string;
+	@BelongsToMany(() => Cart, { through: () => CartProduct })
+  	carts?: Array<Cart & { CartProduct: CartProduct }>;
 }
 
 export default FinalProduct;

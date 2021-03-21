@@ -18,7 +18,8 @@ const typeDefs = gql`
     name: String!
     description: String
     price: Float
-    brand: Brand!
+    muestraimg: String
+    brand: Brand
     categories: [Category!]
     models: [Model!]
   }
@@ -32,33 +33,38 @@ const typeDefs = gql`
     name: String!
   }
 
+  type Image{
+    id: ID!
+    productId: String!
+    title: String!
+  }
+
   type Model {
     id: ID!
     size: String!
     color: String!
   }
 
+  type FinalProduct {
+    id: ID
+    product: Product
+    model: Model
+  }
+
   type ProductForCategory {
     products: [Product!]!
   }
 
-  type Cart{
-    id: ID!
-    state: String!
-    userId: String!
-  }
-
-  type CartProduct {
-    id: ID!
-    productId: Product
-    cartId: Cart
-    quantity: Int
-    price: Float
+  type Cart {
+    id: ID
+    finalproducts: [FinalProduct]
+    userId: String
+    state: String
   }
 
   type MutationCartProduct{
     id: ID!
-    productId: String!
+    finalproductId: String!
     cartId: String!
     quantity: Int
     price: Float
@@ -78,6 +84,7 @@ const typeDefs = gql`
       name: String!
       description: String
       price: Float
+      muestraimg: String
       brandId: ID!
       CategoriesId: [String]
       ModelsId: [String]
@@ -93,16 +100,15 @@ const typeDefs = gql`
       input: String
     ): String
     addImage(
-      idProduct: String!
-      idModel: String!
-      input: String
-    ): String
+      productId: String!
+      image: String!
+    ): Image!
     createCart(
       userId: String!
       state: String!
     ): Cart!
     addToCart(
-      productId: String!
+      finalproductId: String!
       cartId: String!
       quantity: Int
       price: Float
@@ -125,8 +131,9 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [ProductForCategory!]!
     searchProducts(name: String!): [Product!]!
-    carts: [Cart]!
-    cartsproducts (cartId: String! ): [MutationCartProduct]!
+    cart(cartId: String! ): [Cart]!
+    finalproducts (productId: String! modelId: String!): [FinalProduct!]!
+    image(productId: String!): [Image]!
   }
 `;
 export default typeDefs;

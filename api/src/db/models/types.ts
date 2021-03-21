@@ -14,6 +14,7 @@ export interface ProductAttributes {
   name: string;
   description: string;
   price: number;
+  muestraimg: string;
   brandId: string;
   CategoriesId: [string];
   ModelsId: [string];
@@ -27,6 +28,12 @@ export interface CategoryAttributes {
 export interface BrandAttributes {
   id?: string;
   name: string;
+}
+
+export interface ImageAttributes {
+  id?: string;
+  title: string;
+  productId: string;
 }
 
 export interface ModelAttributes {
@@ -43,7 +50,7 @@ export interface CartAttributes {
 
 export interface CartProductAttributes{
   id?: string;
-  productId: string;
+  finalproductId: string;
   cartId: string;
   quantity: number;
   price: number;

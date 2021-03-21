@@ -44,7 +44,7 @@ export class Models extends Model<ModelAttributes> {
       color!: string;
 
     @HasMany(() => FinalProduct)
-    productsmodels!: FinalProduct[]
+    finalproducts!: FinalProduct[]
   
     @BelongsToMany(() => Product, { through: () => FinalProduct })
     products?: Array<Product & { FinalProduct: FinalProduct }>;

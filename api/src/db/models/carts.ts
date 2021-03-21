@@ -5,11 +5,12 @@ import {
     DataType,
     Model,
     BelongsTo,
-    ForeignKey
+    ForeignKey,
+    HasMany
 } from 'sequelize-typescript';
 import CartProduct from './cartproduct';
+import FinalProduct from './finalproduct';
 
-import Product from './products';
 import { CartAttributes } from './types';
 import User from './users';
 
@@ -46,8 +47,11 @@ export class Cart extends Model<CartAttributes> {
     @BelongsTo(() => User)
     user: User;
 
-    // @BelongsToMany(() => Product, { through: () => CartProduct })
-    // products?: Array<Product & { CartProduct: CartProduct }>;
+    @HasMany(() => CartProduct)
+  	cartproducts!: CartProduct[]
+
+    @BelongsToMany(() => FinalProduct, { through: () => CartProduct })
+    finalproducts?: Array<FinalProduct & { CartProduct: CartProduct }>;
 }
   
 export default Cart;

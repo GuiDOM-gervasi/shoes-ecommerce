@@ -6,5 +6,6 @@ export {default as models} from "./models";
 export {default as productForCategory} from "./productForCategory";
 export {default as productDetail} from "./productDetail";
 export {default as searchProducts} from "./searchProducts";
-export {default as carts} from "./carts";
-export {default as cartsproducts} from "./cartsproducts";
+export {default as cart} from "./cart";
+export {default as finalproducts} from "./finalproduct";
+export {default as image} from "./image";

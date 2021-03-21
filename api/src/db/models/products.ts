@@ -7,7 +7,6 @@ import {
   Model,
   Table,
   Unique,
-  HasOne,
   HasMany
 } from "sequelize-typescript";
 
@@ -19,8 +18,8 @@ import Models from './models'
 import FinalProduct from './finalproduct'
 import User from "./users";
 import {WishList} from "./wishlist";
-import Cart from "./carts";
-import CartProduct from "./cartproduct";
+import { ProductAttributes } from "./types";
+import { Image } from "./image";
 
 
 @Table({
@@ -61,6 +60,15 @@ export class Product extends Model {
   price!: number;
 
   @Column({
+    allowNull: true,
+    type: DataType.STRING
+  })
+  muestraimg?: string;
+
+  @HasMany (() => Image)
+  img!: Image[]
+
+  @Column({
     allowNull: false,
     type: DataType.INTEGER,
   })
@@ -71,7 +79,7 @@ export class Product extends Model {
   brand!: Brand;
 
   @HasMany(() => FinalProduct)
-  productsmodels!: FinalProduct[]
+  finalproducts!: FinalProduct[]
 
   @BelongsToMany(() => Category, { through: () => ProductCategory })
   categories?: Array<Category & { ProductCategory: ProductCategory }>;
@@ -82,8 +90,6 @@ export class Product extends Model {
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;
 
-  // @BelongsToMany(() => Cart, { through: () => CartProduct })
-  // carts?: Array<Cart & { CartProduct: CartProduct }>;
 }
 
 export default Product
