@@ -5,6 +5,7 @@ import { DELETE_PRODUCT } from "../../graphql/mutations";
 import { StyledCRUDProducts } from "./StyledCRUDProducts";
 import { ProductAttributes } from "../../types";
 import { useHistory } from "react-router-dom";
+import Loader from '../../components/Loader';
 
 export default function CRUDProducts() {
   const history = useHistory();
@@ -17,7 +18,7 @@ export default function CRUDProducts() {
     }
   );
 
-  if (loading) return <span> loading </span>;
+  if (loading) return <Loader />;
   if (error) return <span> error {error.message} </span>;
 
   const handleClick = () => {

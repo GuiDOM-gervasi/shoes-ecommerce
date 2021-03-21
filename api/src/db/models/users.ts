@@ -3,9 +3,12 @@ import {
   DataType,
   Model,
   BelongsToMany,
+  ForeignKey,
+  HasOne,
   Table
 } from "sequelize-typescript";
 import Product from "./products";
+import Cart from './carts';
 import {WishList} from './wishlist';
 
 import { UserAttributes } from './types'
@@ -70,6 +73,9 @@ export class User extends Model<UserAttributes> {
     type: DataType.BOOLEAN,
   })
   nlsuscribe?: Boolean;
+
+  @HasOne(() => Cart)
+  cartId!: Cart;
 
   @BelongsToMany(() => Product, { through: () => WishList })
   products?: Array<Product & { WishList: WishList }>;
