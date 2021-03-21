@@ -1,4 +1,3 @@
-import ProductModel  from './../../../db/models/productmodel';
 import Brand from "../../../db/models/brands";
 import Product from "../../../db/models/products";
 import Category from "../../../db/models/category";

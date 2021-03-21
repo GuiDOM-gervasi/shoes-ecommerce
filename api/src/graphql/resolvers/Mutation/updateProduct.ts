@@ -1,7 +1,7 @@
 import ProductCategory from "#root/db/models/productcategory";
 import { handlerUpdate } from "#root/helpers/updateProduct";
 import Product from "../../../db/models/products";
-import ProductModel from "#root/db/models/productmodel";
+import FinalProduct from "#root/db/models/finalproduct";
 import {UpdateProductAttributes} from '../../../db/models/types';
 
 
@@ -20,7 +20,7 @@ const updateProduct = async ( parent:any, args: UpdateProductAttributes )  => {
     }
     
     if(atr === "model"){
-        await ProductModel.destroy({
+        await FinalProduct.destroy({
             where: {
                 productId:id
             },
