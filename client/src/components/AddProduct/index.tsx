@@ -4,6 +4,7 @@ import { StyledAddProduct } from "./StyledAddProduct";
 import { ADD_PRODUCT } from "../../graphql/mutations";
 import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
 import { validateChange, check, form } from "../../helpers/validation";
+import Loader from '../Loader';
 
 interface AddProductAttributes {
   className: String;
@@ -41,7 +42,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
     console.log(errorMutationProduct);
   }
 
-  if (loadingCat || loadingBrands || loadingMod) return <span>loading...</span>;
+  if (loadingCat || loadingBrands || loadingMod) return <Loader />;
   if (errorCat || errorBrands || errorMod)
     return (
       <span>
@@ -95,7 +96,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
       <form onSubmit={handleSubmit}>
         <div className="div_name">
           <input
-            type="text"
+            type="text" 
             name="name"
             onChange={handleChange}
             placeholder="Air max"

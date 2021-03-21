@@ -16,6 +16,10 @@ export const handlerUpdate = (atr,input) => {
             return {
                 brandId: input[0]
             }
+        case "muestraimg":
+            return {
+                muestraimg: input[0]
+            }
         default:
             return atr
     }

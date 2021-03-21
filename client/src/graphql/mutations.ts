@@ -23,6 +23,15 @@ export const ADD_PRODUCT = gql`
   }
 `;
 
+export const ADD_CATEGORY = gql`
+  mutation addCategory($name: String!) {
+    createCategory(name: $name) {
+      id
+      name
+    }
+  }
+`;
+
 export const DELETE_PRODUCT = gql`
   mutation deleteProduct($id: String!) {
     deleteProduct(id: $id) {
@@ -64,6 +73,49 @@ export const ADD_MODEL = gql`
 export const EDIT_PRODUCT = gql`
   mutation editProduct($id: String!, $atr: String!, $input: [String]) {
     updateProduct(id: $id, atr: $atr, input: $input) {
+      id
+    }
+  }
+`;
+
+export const ADD_USER = gql`
+  mutation addUser(
+    $firstName: String!
+    $lastName: String!
+    $userName: String!
+    $isAdmin: Boolean!
+    $email: String!
+    $password: String!
+    $nlsuscribe: Boolean!
+  ) {
+    createUser(
+      firstName: $firstName
+      lastName: $lastName
+      userName: $userName
+      isAdmin: $isAdmin
+      email: $email
+      password: $password
+      nlsuscribe: $nlsuscribe
+    ) {
+      userName
+    }
+  }
+`;
+
+export const LOGIN_USER = gql`
+  mutation loginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
+      id
+      isAdmin
+      accessToken
+      refreshToken
+    }
+  }
+`;
+
+export const EDIT_CATEGORY = gql`
+  mutation editCategory($id: String!, $input: String!) {
+    updateCategory(id: $id, input: $input) {
       id
     }
   }

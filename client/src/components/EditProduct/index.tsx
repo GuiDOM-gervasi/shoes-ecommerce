@@ -9,6 +9,7 @@ import {
 } from "../../graphql/queries";
 import { fotosZapa } from "../ProductDetail/mockup";
 import { StyledEditProduct } from "./StyledEditProduct";
+import Loader from '../Loader';
 
 export default function EditProduct({ match }) {
   const productId = match.params.productId;
@@ -28,7 +29,7 @@ export default function EditProduct({ match }) {
     ],
   });
 
-  if (loading) return <div>'Loading...'</div>;
+  if (loading) return <Loader />;
   if (error) return <div>`Error! ${error.message}`</div>;
 
   const { name, brand, description, price, categories } = data.productDetail;

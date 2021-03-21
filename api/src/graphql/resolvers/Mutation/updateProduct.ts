@@ -1,8 +1,11 @@
 import ProductCategory from "#root/db/models/productcategory";
-import { handlerUpdate } from "#root/helpers/handlerUpdate";
+import { handlerUpdate } from "#root/helpers/updateProduct";
 import Product from "../../../db/models/products";
-import ProductModel from "#root/db/models/productmodel"
-const updateProduct = async (parent, args, context, info)  => {
+import FinalProduct from "#root/db/models/finalproduct";
+import {UpdateProductAttributes} from '../../../db/models/types';
+
+
+const updateProduct = async ( parent:any, args: UpdateProductAttributes )  => {
     const {id,atr,input} = args
     
     const prod = await Product.findByPk(parseInt(id))
@@ -17,7 +20,7 @@ const updateProduct = async (parent, args, context, info)  => {
     }
     
     if(atr === "model"){
-        await ProductModel.destroy({
+        await FinalProduct.destroy({
             where: {
                 productId:id
             },

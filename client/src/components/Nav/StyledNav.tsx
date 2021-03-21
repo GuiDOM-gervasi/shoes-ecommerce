@@ -2,24 +2,153 @@ import styled from "styled-components";
 
 export const StyledNav = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-  height: 2.5rem;
-  background-color: #151515;
-  color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 
-  a {
-   color: #f0f0f0;
-   font-weight: 800;
-   text-decoration: none;
-   margin: 0 3rem;
-   opacity: .5;
-   transition: opacity 500ms ease;
+  nav {
+    background: #151515;
+    height: 160px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-   &:hover {
-     opacity: 1;
-   }
+  .logo {
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    font-weight: bold;
+  }
+
+  .lineup {
+    display: grid;
+    grid-template-columns: 1fr 2fr 10fr 1fr 1fr;
+    grid-template-areas: "logo . searchbar . cart";
+  }
+
+  .logo {
+    grid-area: logo;
+  }
+  .searchbar {
+    grid-area: searchbar;
+  }
+  .cart {
+    grid-area: cart;
+  }
+
+  .linedown {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 9fr 1fr 1fr;
+    grid-template-areas: ". catalogue offers aboutus . login register";
+  }
+  .catalogue {
+    grid-area: catalogue;
+  }
+  .offers {
+    grid-area: offers;
+  }
+  .aboutus {
+    grid-area: aboutus;
+  }
+  .login {
+    grid-area: login;
+  }
+  .register {
+    grid-area: register;
+  }
+
+  .fa-shopping-cart {
+    color: #64dfdf;
+  }
+  nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 5px;
+  }
+  nav ul li a {
+    color: #f2f2f2;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  a:hover {
+    background: #80ffdb;
+    transition: 0.5s;
+    color: #151515;
+  }
+
+  .checkbtn {
+    font-size: 30px;
+    color: #f2f2f2;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+  }
+
+  #check {
+    display: none;
+  }
+
+  @media (max-width: 952px) {
+    label.logo {
+      font-size: 30px;
+      padding-left: 50px;
+    }
+    nav ul li a {
+      font-size: 16px;
+    }
+    nav ul {
+      float: right;
+      margin-right: 20px;
+    }
+  }
+
+  @media (max-width: 858px) {
+    .checkbtn {
+      display: block;
+    }
+    .linedown {
+      display: block;
+    }
+    nav {
+      height: 80px;
+    }
+    ul {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: #151515;
+      top: 80px;
+      left: 0;
+      text-align: center;
+      left: -200%;
+      transition: all 0.5s;
+    }
+
+    nav ul li {
+      display: block;
+      margin: 50px 0;
+      line-height: 30px;
+    }
+
+    nav ul li a {
+      font-size: 20px;
+    }
+
+    a:hover {
+      background: none;
+      color: #80ffdb;
+    }
+    #check:checked ~ ul {
+      left: 0;
+    }
   }
 `;

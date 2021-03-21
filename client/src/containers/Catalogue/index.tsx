@@ -6,11 +6,12 @@ import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Slider from "../../components/Slider";
 import Filter from "../../components/Filter";
+import Loader from "../../components/Loader";
 
 export default function Catalogue() {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
   const [loadedProducts, setLoadedProduct] = React.useState([]);
-  if (loading || !data) return <span> Loading... </span>;
+  if (loading || !data) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
 
   if (loadedProducts.length < 1) {

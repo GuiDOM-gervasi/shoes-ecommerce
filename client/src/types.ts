@@ -29,7 +29,15 @@ export interface QueryProducts {
   products: ProductAttributes[];
 }
 
-export interface Brand{
+export interface CategoryAttributes {
+  id?: string;
+  name: String;
+}
+
+export interface QuertCategories {
+  categories: CategoryAttributes[];
+}
+export interface Brand {
   id: String;
   name: String;
   __typename: String;

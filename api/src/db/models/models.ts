@@ -2,12 +2,13 @@ import {
     BelongsToMany,
     Table,
     Column,
+    HasMany,
     DataType,
     Model
 } from 'sequelize-typescript';
 
 import Product from './products';
-import ProductModel from './productmodel';
+import FinalProduct from './finalproduct';
 
 import {ModelAttributes} from './types';
 
@@ -32,6 +33,7 @@ export class Models extends Model<ModelAttributes> {
     @Column({
       allowNull: false,
       type: DataType.INTEGER,
+
     })
     size!: string;
 
@@ -40,9 +42,12 @@ export class Models extends Model<ModelAttributes> {
         type: DataType.STRING,
       })
       color!: string;
+
+    @HasMany(() => FinalProduct)
+    finalproducts!: FinalProduct[]
   
-    @BelongsToMany(() => Product, { through: () => ProductModel })
-    products: Array<Product & { ProductModel: ProductModel }>;
+    @BelongsToMany(() => Product, { through: () => FinalProduct })
+    products?: Array<Product & { FinalProduct: FinalProduct }>;
   }
   
   export default Models

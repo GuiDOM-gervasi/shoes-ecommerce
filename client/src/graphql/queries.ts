@@ -42,6 +42,18 @@ export const SEARCH_PRODUCTS = gql`
     searchProducts(name: $name) {
       id
       name
+      description
+      price
+      img
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+      models {
+        id
+      }
     }
   }
 `;
@@ -89,3 +101,11 @@ export const GET_MODELS = gql`
     }
   }
 `;
+
+export const LOGOUT_USER = gql`
+  query {
+    logoutUser{
+      logout
+    }
+  }
+`

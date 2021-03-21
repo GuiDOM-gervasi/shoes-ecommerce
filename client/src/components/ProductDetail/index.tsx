@@ -16,6 +16,8 @@ export default function ProductDetail({ match }) {
       id: productId,
     },
   });
+  if (loading) return <Loader />;
+  if (error) return <div>`Error! ${error.message}`</div>;
 
   const [
     getSimils,
@@ -69,9 +71,6 @@ export default function ProductDetail({ match }) {
 
   return (
     <StyledProductDetail>
-      {loading ? (
-        "Loading"
-      ) : (
         <div className="container">
           <div>
             <div className="fondoVioleta"></div>
@@ -102,6 +101,7 @@ export default function ProductDetail({ match }) {
           </div>
           <div className="info">
             <h1>{name}</h1>
+<<<<<<< HEAD
             <div className="description">
               <span>{categories.map((category) => category.name + ", ")}</span>
               <span>{brand.name}</span>
@@ -148,9 +148,21 @@ export default function ProductDetail({ match }) {
                 )
               )}
             </div>
+=======
+            <h2>{brand.name}</h2>
+            <p>{description}</p>
+            <h4 className="priceBefore">{priceBefore}</h4>
+            <h3 className="price">{price}</h3>
+            <h4>{categories[0].name}</h4>
+            <button className="botonInvertido">Seleccionar talle</button>
+            <button className="boton" disabled>
+              Añadir a favoritos
+            </button>
+            <button className="botonGlass">Ver Detalle</button>
+            <button className="boton">Agregar al carrito</button>
+>>>>>>> d03ff6025fdfd682be6cba1bafd42821b3619584
           </div>
         </div>
-      )}
     </StyledProductDetail>
   );
 }
