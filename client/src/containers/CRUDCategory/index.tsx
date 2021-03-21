@@ -1,4 +1,4 @@
-import { useQuery , useMutation} from "@apollo/react-hooks";
+import { useQuery , useMutation} from "@apollo/client";
 import React from "react";
 import { StyledCRUDCategory } from "./StyledCRUDCategory";
 import { CategoryAttributes } from "../../types"

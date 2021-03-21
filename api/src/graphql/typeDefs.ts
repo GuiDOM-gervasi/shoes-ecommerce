@@ -82,9 +82,9 @@ const typeDefs = gql`
 
   type Query {
     users: [User!]!
-    products: [Product!]!
-    categories: [Category!]!
-    brand: [Brand!]!
+    products(atr:String,ord:String): [Product!]!
+    categories(atr:String,ord:String): [Category!]!
+    brand(atr:String,ord:String): [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
     productForCategory(name:String!): [ProductForCategory!]!

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation} from "@apollo/react-hooks";
+import { useMutation} from "@apollo/client";
 import { StyledAddCategory } from "./StyledAddCategory";
 import { ADD_CATEGORY } from "../../graphql/mutations";
 import { validateChange, check, formCategory} from "../../helpers/validation";

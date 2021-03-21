@@ -1,14 +1,13 @@
-import Category from '../../../db/models/category';
+import Category from '#root/db/models/category';
+import resolverHelper from "#root/helpers/resolverHelper"
 
-const CategoriesResolver = async() => {
-	var categories = await Category.findAll();
-	return categories.sort(function(a,b){
-		if(a.id > b.id){
-			return 1
-		}else{
-			return -1
-		}
-	})
+const CategoriesResolver = async(parent,args,context,info) => {
+	var obj= resolverHelper(args,false)
+	var category = await Category.findAll({
+		order:[[obj.atr,obj.ord]]
+	});
+	return category
+
 }
 
 export default CategoriesResolver;
