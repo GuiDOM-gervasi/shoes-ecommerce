@@ -30,6 +30,7 @@ interface ProductAttributes {
 function Protect(){
   const { user } = useAuth();
   if(user.isAdmin){
+
     
   }
 }
