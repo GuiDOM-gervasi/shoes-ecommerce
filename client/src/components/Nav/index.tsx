@@ -1,16 +1,13 @@
-import { useLazyQuery } from "@apollo/client";
 import React from "react";
 import { NavLink } from 'react-router-dom';
-import { LOGOUT_USER } from "../../graphql/queries";
+import { useAuth } from "../../hooks/AuthProvider";
 import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
 
 export default function Nav() {
-
-  const [logoutUser] = useLazyQuery(LOGOUT_USER)
-
+  const { logout } = useAuth();
   const handleClick= () => {
-    logoutUser()
+    logout()
   }
   return (
     <StyledNav>

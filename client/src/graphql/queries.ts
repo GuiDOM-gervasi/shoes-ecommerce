@@ -87,7 +87,9 @@ export const GET_MODELS = gql`
 `;
 
 export const LOGOUT_USER = gql`
-  query logoutUser{
-    logout
+  query {
+    logoutUser{
+      logout
+    }
   }
 `
