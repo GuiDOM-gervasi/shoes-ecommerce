@@ -14,9 +14,14 @@ export const StyledProductDetail = styled.div`
   }
   .container {
     border: 1px black solid;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
   }
+
+  .mainProduct {
+    display: flex;
+  }
+
   .price {
   }
   .photo {
@@ -98,19 +103,67 @@ export const StyledProductDetail = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
     width: 100vw;
-    position: sticky;
-    top: 110vh;
+    margin-top: 3rem;
+    background-color: ${verde(".3")};
 
     h3 {
       color: ${violeta};
       margin: 1rem 0;
     }
 
-    background-color: ${verde(".3")};
+    img {
+      width: 15rem;
+    }
+
+    .photo {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-weight: 750;
+      display: inherit;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      width: 15rem;
+      margin: 0 3rem;
+
+      .similData {
+        opacity: 0;
+        background-color: rgba(0,0,0, .2);
+        padding: .2rem;
+        width: 15rem;
+        position: absolute;
+        top: 10rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: opacity 500ms ease;
+      }
+
+      &:hover .similData {
+        opacity: 1;
+      }
+    }
   }
 
   .product {
     display: flex;
+  }
+
+  .category {
+    opacity: 70%;
+    cursor: pointer;
+    transition: opacity 500ms ease;
+
+    &:hover {
+      opacity: 100%;
+    }
   }
 `;

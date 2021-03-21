@@ -11,13 +11,19 @@ import Loader from "../../components/Loader";
 export default function Catalogue() {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
   const [loadedProducts, setLoadedProduct] = React.useState([]);
+
+  // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
+  // if (loadedProducts.length < 1) {
+  //   console.log(data);
+  //   setLoadedProduct(data.products);
+  // }
+
+  React.useEffect(() => {
+    data && setLoadedProduct(data.products);
+  }, [data]);
+
   if (loading || !data) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
-
-  if (loadedProducts.length < 1) {
-    console.log(data);
-    setLoadedProduct(data.products);
-  }
 
   return (
     <StyledCatalogue className="fondoDegradado">

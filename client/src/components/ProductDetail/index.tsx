@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 export default function ProductDetail({ match }) {
   const productId = match.params.id;
 
-  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {
+  const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
     },
@@ -25,10 +25,10 @@ export default function ProductDetail({ match }) {
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
 
   useEffect(() => {
-    if (data) {
+    if (mainProduct) {
       const {
         productDetail: { models, categories },
-      } = data;
+      } = mainProduct;
       colors = models.map((model) => model.color);
       colors = Array.from(new Set(colors));
 
@@ -40,7 +40,7 @@ export default function ProductDetail({ match }) {
 
       getSimils({ variables: { name: categories[0].name } });
     }
-  }, [data]);
+  }, [mainProduct]);
 
   const [modelsState, setModelsState] = React.useState({
     colors: [],
@@ -53,7 +53,14 @@ export default function ProductDetail({ match }) {
   if (loading || loadingSimil) return <div>'Loading...'</div>;
   if (error || errorSimil) return <div>`Error! ${error}`</div>;
 
-  const { name, brand, price, categories, models, id } = data.productDetail;
+  const {
+    name,
+    brand,
+    price,
+    categories,
+    models,
+    id,
+  } = mainProduct.productDetail;
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -69,9 +76,11 @@ export default function ProductDetail({ match }) {
     priceBefore,
   } = fotosZapa;
 
+  console.log(categories);
   return (
     <StyledProductDetail>
-        <div className="container">
+      <div className="container">
+        <div className="mainProduct">
           <div>
             <div className="fondoVioleta"></div>
             <img className="photo" src={photo} alt={name} />
@@ -101,9 +110,17 @@ export default function ProductDetail({ match }) {
           </div>
           <div className="info">
             <h1>{name}</h1>
-<<<<<<< HEAD
             <div className="description">
-              <span>{categories.map((category) => category.name + ", ")}</span>
+              {categories?.map((category) => (
+                <span
+                  className="category"
+                  onClick={() =>
+                    getSimils({ variables: { name: category.name } })
+                  }
+                >
+                  {category.name},{" "}
+                </span>
+              ))}
               <span>{brand.name}</span>
             </div>
             <div className="precios">
@@ -133,36 +150,32 @@ export default function ProductDetail({ match }) {
               </button>
             </div>
           </div>
-          <div className="related">
-            <h3>Relacionados</h3>
-            <div className="photo">
-              {similProducts?.productForCategory?.map((item, i) =>
-                item.id === id ? null : (
-                  <Link to={`/product/${item.id || 1}`} key={item.id}>
-                    <img
-                      src={item.photo || fotosZapa.photo}
-                      alt="name"
-                      className="productImg"
-                    />
-                  </Link>
-                )
-              )}
-            </div>
-=======
-            <h2>{brand.name}</h2>
-            <p>{description}</p>
-            <h4 className="priceBefore">{priceBefore}</h4>
-            <h3 className="price">{price}</h3>
-            <h4>{categories[0].name}</h4>
-            <button className="botonInvertido">Seleccionar talle</button>
-            <button className="boton" disabled>
-              Añadir a favoritos
-            </button>
-            <button className="botonGlass">Ver Detalle</button>
-            <button className="boton">Agregar al carrito</button>
->>>>>>> d03ff6025fdfd682be6cba1bafd42821b3619584
+        </div>
+        <div className="related">
+          <h3>Relacionados</h3>
+          <div className="photo">
+            {similProducts?.productForCategory?.map((item, i) =>
+              item.id === id ? null : (
+                <Link
+                  to={`/product/${item.id || 1}`}
+                  key={item.id}
+                  onClick={() => window.scroll(0, 0)}
+                >
+                  <img
+                    src={item.photo || fotosZapa.photo}
+                    alt="name"
+                    className="productImg"
+                  />
+                  <div className="similData">
+                    <h5>{item.name}</h5>
+                    <h5>${item.price}</h5>
+                  </div>
+                </Link>
+              )
+            )}
           </div>
         </div>
+      </div>
     </StyledProductDetail>
   );
 }

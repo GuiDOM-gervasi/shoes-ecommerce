@@ -81,6 +81,7 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
     productForCategory(name: $name) {
       id
       name
+      price
       brand {
         name
       }
