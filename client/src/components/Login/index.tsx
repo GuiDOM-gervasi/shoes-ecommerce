@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/AuthProvider";
 import { StyledLogin } from "./StyledLogin";
+import { useHistory } from "react-router-dom";
 
 // import { validateChange, check, form } from "../../helpers/validationLogin";
 
 
 export default function Login() {
   const { login } = useAuth();
-  
+  const history = useHistory();
+
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -16,7 +18,7 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
     let { email, password} = form;
-    login(email,password)
+    login(email,password, () => history.push("/"))
   }
 
   const handleChange = (e: any) => {
