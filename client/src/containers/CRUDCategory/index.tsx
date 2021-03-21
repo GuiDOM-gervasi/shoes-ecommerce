@@ -1,4 +1,5 @@
-import { useQuery, useMutation } from "@apollo/react-hooks";
+
+import { useQuery, useMutation } from "@apollo/client";
 import React from "react";
 import { StyledCRUDCategory } from "./StyledCRUDCategory";
 import { CategoryAttributes } from "../../types";
@@ -17,6 +18,7 @@ export default function CRUDCategory() {
 			refetchQueries: [{ query: GET_CATEGORIES }],
 		}
 	);
+
 	if (loading) return <Loader />;
 	if (error) return <span> error {error.message} </span>;
 	const handleClick = () => {
