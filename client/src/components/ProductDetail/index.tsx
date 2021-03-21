@@ -106,9 +106,7 @@ export default function ProductDetail({ match }) {
             <div className="info">
               <h1>{name}</h1>
               <div className="description">
-                <span>
-                  {categories?.map((category) => category.name + ", ")}
-                </span>
+                  {categories?.map((category) => <span className="category" onClick={() => getSimils({variables: {name: category.name}})}>{category.name}, </span>)}
                 <span>{brand.name}</span>
               </div>
               <div className="precios">

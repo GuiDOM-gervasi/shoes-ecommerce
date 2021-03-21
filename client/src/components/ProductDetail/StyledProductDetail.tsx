@@ -156,4 +156,14 @@ export const StyledProductDetail = styled.div`
   .product {
     display: flex;
   }
+
+  .category {
+    opacity: 70%;
+    cursor: pointer;
+    transition: opacity 500ms ease;
+
+    &:hover {
+      opacity: 100%;
+    }
+  }
 `;
