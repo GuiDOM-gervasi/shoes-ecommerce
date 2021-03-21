@@ -19,21 +19,14 @@ export const StyledNav = styled.div`
   }
 
   .logo {
+    grid-area: logo;
     color: white;
     font-size: 35px;
     line-height: 80px;
     font-weight: bold;
   }
 
-  .lineup {
-    display: grid;
-    grid-template-columns: 1fr 2fr 10fr 1fr 1fr;
-    grid-template-areas: "logo . searchbar . cart";
-  }
 
-  .logo {
-    grid-area: logo;
-  }
   .searchbar {
     grid-area: searchbar;
   }
@@ -49,6 +42,11 @@ export const StyledNav = styled.div`
     }
   .fa-shopping-cart, .fa-home {
     color: ${verdeMain};
+  }
+  .lineup {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 10fr 1fr 1fr 1fr;
+    grid-template-areas: ". logo . searchbar . cart .";
   }
   .linedown {
     display: grid;
