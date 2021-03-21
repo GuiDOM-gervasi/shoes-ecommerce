@@ -23,7 +23,7 @@ const loginUser = async (parent: any, args: any , context: any , info: any ) =>{
       expiresIn: "7d"
     }
   );
-  const accessToken = sign({ id: aux.id }, process.env.ACCESS_TOKEN_SECRET!, {
+  const accessToken = sign({ id: aux.id, count: aux.count, isAdmin: aux.isAdmin }, process.env.ACCESS_TOKEN_SECRET!, {
     expiresIn: "15min"
   });
 

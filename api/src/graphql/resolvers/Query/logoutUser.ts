@@ -2,7 +2,7 @@ import User from "../../../db/models/users";
 
 const logoutUser = async (parent: any, args: any , context: any , info: any ) => {
   if (!context.req.userId) {
-    return {logout: false};
+    return {logout: true};
   }
 
   const user = await User.findOne({
@@ -11,7 +11,7 @@ const logoutUser = async (parent: any, args: any , context: any , info: any ) =>
     }
   });
   if (!user) {
-    return {logout: false};
+    return {logout: true};
   }
   user.count += 1; 
   await user.save();

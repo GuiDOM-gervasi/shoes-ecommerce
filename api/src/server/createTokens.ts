@@ -9,7 +9,7 @@ export const createTokens = (user: User) => {
       expiresIn: "7d"
     }
   );
-  const accessToken = sign({ userId: user.id }, process.env.ACCESS_TOKEN_SECRET, {
+  const accessToken = sign({ id: user.id, count: user.count, isAdmin: user.isAdmin}, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: "15min"
   });
 
