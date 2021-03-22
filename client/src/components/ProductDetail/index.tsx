@@ -40,7 +40,6 @@ export default function ProductDetail({ match }: any) {
   const [finalproducts, {data: finalData, loading: finalLoading, error : finalError}] = useLazyQuery(FINAL_PRODUCTS,
   {
     onCompleted: (finalData)=>{
-      console.log(dataCart)
      addToCart({
         variables:{
           finalproductId: finalData.finalproducts[0].id,
@@ -77,7 +76,6 @@ export default function ProductDetail({ match }: any) {
 
   if (loading || loadingSimil) return <Loader />;
   if (error || errorSimil) return <div>`Error! ${error?.message}`</div>;
-  console.log(mainProduct)
   const {
     name,
     brand,
@@ -104,23 +102,18 @@ export default function ProductDetail({ match }: any) {
 
 
 
-  const handleClick = async () =>{
+  const handleClick = () =>{
     const sizeSelect : any = document.querySelector("#size-select")
     const colorSelect : any = document.querySelector("#color-select")
     const model = models.find((current)=>(
       current.size === sizeSelect.value && current.color === colorSelect.value
     ))
-    const finalproductId = await finalproducts({
+    const finalproductId = finalproducts({
       variables:{
         productId: id,
         modelId: model.id
       },
     })
-    console.log(finalData)
-    console.log(id,model.id)
-   
-
-
   }
   return (
     <StyledProductDetail>
