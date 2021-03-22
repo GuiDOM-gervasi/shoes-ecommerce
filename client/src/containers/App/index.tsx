@@ -62,10 +62,6 @@ function App() {
         path="/admin/editCategory/:categoryId"
         component={isAdmin ? EditCategory : Login}
       />
-      <Route 
-        path="*"
-        component={Loader}
-      />
     </div>
   );
 }
