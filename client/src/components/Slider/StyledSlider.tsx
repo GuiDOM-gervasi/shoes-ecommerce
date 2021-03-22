@@ -11,4 +11,6 @@ export const StyledSlider = styled.div`
         object-position: 20% 130%;
         object-fit: cover;
   }
+  @media (max-width: 858px){
+  }
 `;

@@ -55,4 +55,20 @@ export const StyledCatalogue = styled.div`
     background-color: ${violeta};
     padding: 0.5vh 0 0.5vh 0;
   }
+
+  @media (max-width: 858px){
+    .productImg{
+      width: 100vw;
+      height:100vw;
+    }
+    .create, .trend, .sale{
+      display:none;
+    }
+    .productData{
+      width:100vw;
+    }
+    ul{
+      flex-direction: column;
+    }
+  }
 `;
