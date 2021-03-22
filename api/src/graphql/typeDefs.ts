@@ -152,6 +152,7 @@ const typeDefs = gql`
     cart(cartId: String! ): [Cart]!
     finalproducts (productId: String! modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
+    deleted: [Product!]!
   }
 
 `;

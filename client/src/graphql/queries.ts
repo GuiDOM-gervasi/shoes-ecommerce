@@ -16,6 +16,22 @@ export const GET_PRODUCTS = gql`
   }
 `;
 
+export const GET_DELETED = gql`
+  query Deleted {
+    deleted {
+      id
+      name
+      price
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;
+
 export const GET_PRODUCT_DETAIL = gql`
   query ProductDetail($id: String!) {
     productDetail(id: $id) {
