@@ -128,6 +128,7 @@ const typeDefs = gql`
       quantity: Int
       price: Float
     ): MutationCartProduct!
+    removeFromCart( finalproductId: String! ): String!
     updateCategory(id: String!, input: String!): Category!
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
