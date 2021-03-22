@@ -6,7 +6,8 @@ import {
     Model,
     BelongsTo,
     ForeignKey,
-    HasMany
+    HasMany,
+    Unique
 } from 'sequelize-typescript';
 import CartProduct from './cartproduct';
 import FinalProduct from './finalproduct';
@@ -38,9 +39,11 @@ export class Cart extends Model<CartAttributes> {
     })
     state!: string;
 
+    @Unique
     @Column({
         allowNull: false,
         type: DataType.INTEGER,
+        unique: true
     })
     @ForeignKey(() => User)
     userId: string;
