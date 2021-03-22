@@ -14,6 +14,7 @@ import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
 import EditCategory from "../../components/EditCategory";
+import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 
 interface ProductAttributes {
@@ -59,6 +60,7 @@ function App() {
         path="/admin/editCategory/:categoryId"
         component={isAdmin ? EditCategory : Login}
       />
+      <Route exact path="/admin" component={Admin} />
     </div>
   );
 }
