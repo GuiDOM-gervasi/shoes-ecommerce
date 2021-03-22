@@ -11,7 +11,6 @@ export function AuthProvider(props) {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const completeUser = JSON.parse(localStorage.getItem("user"));
-    console.log(completeUser);
     completeUser && completeUser.isAdmin
       ? setIsAdmin(completeUser.isAdmin)
       : setIsAdmin(false);
@@ -59,13 +58,14 @@ export function AuthProvider(props) {
         email,
         password,
       },
-    });
-    cb();
+    }).then(()=>{
+      cb();
+    })
   }
 
   function logout(cb) {
     console.log("Logout");
-    logoutUser();
+    logoutUser()
     cb();
   }
 
