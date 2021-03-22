@@ -20,7 +20,7 @@ export interface ProductAttributes {
   id: string;
   name: String;
   description: String;
-  price: Number;
+  price: number;
   brandId: String;
   CategoriesId: String[];
 }

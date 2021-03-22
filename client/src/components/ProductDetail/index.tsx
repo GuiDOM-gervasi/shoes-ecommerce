@@ -5,7 +5,7 @@ import { GET_PRODUCT_DETAIL } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import Loader from '../Loader';
 
-export default function ProductDetail({ match }) {
+export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
 
   const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {
