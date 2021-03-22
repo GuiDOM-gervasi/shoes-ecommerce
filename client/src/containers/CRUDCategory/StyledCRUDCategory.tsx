@@ -5,7 +5,7 @@ export const StyledCRUDCategory = styled.div`
   display: flex;
   flex-direction: column;
   width: ${formWidth * 2}vw;
-  height: 30vh;
+  min-height: 30vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
