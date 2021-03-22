@@ -24,18 +24,18 @@ export default function ProductDetail({ match }) {
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
 
   useEffect(() => {
-    // if (mainProduct) {
-    //   const {
-    //     productDetail: { models, categories },
-    //   } = mainProduct;
-    //   colors = models.map((model) => model.color);
-    //   colors = Array.from(new Set(colors));
-    //   sizes = models.filter((model) => model.color === colors[0]);
-    //   sizes = sizes.map((model) => model.size);
-    //   sizes = Array.from(new Set(sizes));
-    //   setModelsState({ sizes, colors });
-    //   getSimils({ variables: { name: categories[0].name } });
-    // }
+    if (mainProduct) {
+      const {
+        productDetail: { models, categories },
+      } = mainProduct;
+      colors = models.map((model) => model.color);
+      colors = Array.from(new Set(colors));
+      sizes = models.filter((model) => model.color === colors[0]);
+      sizes = sizes.map((model) => model.size);
+      sizes = Array.from(new Set(sizes));
+      setModelsState({ sizes, colors });
+      if(categories[0]){getSimils({ variables: { name: categories[0].name } });}
+    }
   }, [mainProduct]);
 
   const [modelsState, setModelsState] = React.useState({
@@ -48,11 +48,12 @@ export default function ProductDetail({ match }) {
 
   if (loading || loadingSimil) return <Loader />;
   if (error || errorSimil) return <div>`Error! ${error?.message}`</div>;
-
+  console.log(mainProduct)
   const {
     name,
     brand,
     price,
+    muestraimg,
     categories,
     models,
     id,
@@ -79,7 +80,7 @@ export default function ProductDetail({ match }) {
         <div className="mainProduct">
           <div>
             <div className="fondoVioleta"></div>
-            <img className="photoMain" src={photo} alt={name} />
+            <img className="photoMain" src={muestraimg || photo} alt={name} />
             <ul>
               <li>
                 <img
@@ -105,7 +106,7 @@ export default function ProductDetail({ match }) {
             </ul>
           </div>
           <div className="info">
-            <h1>{name}</h1>
+            <h1 className={name.length > 20? "tituloLargo": "tituloCorto"}>{name}</h1>
             <div className="description">
               {categories?.map((category) => (
                 <span
@@ -160,7 +161,7 @@ export default function ProductDetail({ match }) {
                       onClick={() => window.scroll(0, 0)}
                     >
                       <img
-                        src={item.photo || fotosZapa.photo}
+                        src={item.muestraimg || fotosZapa.photo}
                         alt="name"
                         className="productImg"
                       />

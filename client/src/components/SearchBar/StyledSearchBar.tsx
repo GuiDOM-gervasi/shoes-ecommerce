@@ -15,7 +15,7 @@ export const StyledSearchBar = styled.div`
   }
   .contentResult{
     width:100%;
-    max-width: 20rem;
+    max-width: 25rem;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -29,6 +29,12 @@ export const StyledSearchBar = styled.div`
     top: 100%;
     left: 0;
     right: 0;
+    img{
+      width:5vw;
+      height:5vw;
+      object-fit: cover;
+      margin:auto;
+    }
     div {
     padding: 0.3rem 0.5rem;
     cursor: pointer;

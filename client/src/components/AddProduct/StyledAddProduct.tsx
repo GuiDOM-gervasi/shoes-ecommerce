@@ -14,7 +14,7 @@ export const StyledAddProduct = styled.div`
   flex-direction: column;
   justify-content: center;
   width: ${formWidth}vw;
-  min-height: 20vh;
+  height: 65vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
@@ -60,10 +60,8 @@ export const StyledAddProduct = styled.div`
       resize: none;
     }
   }
-
-  input[type="submit"] {
-    position: absolute;
-    bottom: 0;
+  input, textarea, .selectsMultiple{
+    margin-bottom:4vh;
   }
 
   .selectsMultiple {
@@ -84,5 +82,24 @@ export const StyledAddProduct = styled.div`
     option {
       color: black;
     }
+  }
+  .addButton, .crudNewButton {
+      border-radius: 3px;
+      border: 2px solid ${violeta};
+      color: ${violeta};
+      font-weight: bold;
+      &:hover {
+        background-color: ${violeta};
+        color: ${blanco};
+      }
+    }
+  .addButton{
+    width: 10vw;
+    padding: 1vh 0 1vh 0;
+  }
+  .crudNewButton, button{
+    margin-top:1vh;
+    font-size: 0.8rem;
+    padding: 1vh;
   }
 `;

@@ -33,11 +33,6 @@ function App() {
       <GlobalStyles/>
       <Route exact path="/" component={Catalogue}/>
       <Route path="/product/:id" component={ProductDetail}/>
-      <Route path="/admin/products" component={CRUDProducts} />
-      <Route path="/admin/addProduct" component={AddProduct} />
-      <Route path="/admin/category" component={CRUDCategory} />
-      <Route path="/admin/addCategory" component={AddCategory} />
-      <Route path="/admin/editProduct/:productId" component={EditProduct} />
       <Route path="/register" component={AddUser} />
       <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />

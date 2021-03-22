@@ -83,10 +83,10 @@ export default function CRUDProducts() {
               <span className="name"> {item.name} </span>
               <span className="price"> {item.price} </span>
               <div className="buttons">
-                <button onClick={() => handleRestore(item.id)}>
-                  {" "}
-                  restore{" "}
-                </button>
+                <i
+                  onClick={() => handleRestore(item.id)}
+                  className="fas fa-trash-restore"
+                />
               </div>
             </li>
           ))}

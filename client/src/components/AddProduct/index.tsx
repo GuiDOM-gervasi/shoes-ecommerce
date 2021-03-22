@@ -4,7 +4,8 @@ import { StyledAddProduct } from "./StyledAddProduct";
 import { ADD_PRODUCT } from "../../graphql/mutations";
 import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
 import { validateChange, check, form } from "../../helpers/validation";
-import Loader from '../Loader';
+import Loader from "../Loader";
+import { NavLink } from "react-router-dom";
 
 interface AddProductAttributes {
   className: String;
@@ -96,7 +97,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
       <form onSubmit={handleSubmit}>
         <div className="div_name">
           <input
-            type="text" 
+            type="text"
             name="name"
             onChange={handleChange}
             placeholder="Air max"
@@ -148,6 +149,7 @@ export default function AddProduct({ className }: AddProductAttributes) {
                 ))}
               </optgroup>
             </select>
+            <NavLink className="crudNewButton" to="/admin/addCategory">New category</NavLink>
           </div>
           <div className="div_models">
             <select
@@ -167,7 +169,12 @@ export default function AddProduct({ className }: AddProductAttributes) {
             <button disabled>New model</button>
           </div>
         </div>
-        <input type="submit" value="Add product" disabled={form.error} />
+        <input
+          className="addButton"
+          type="submit"
+          value="Add product"
+          disabled={form.error}
+        />
       </form>
     </StyledAddProduct>
   );

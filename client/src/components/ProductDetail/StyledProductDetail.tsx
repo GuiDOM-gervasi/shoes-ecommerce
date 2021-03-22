@@ -37,13 +37,18 @@ export const StyledProductDetail = styled.div`
     height: 50vw;
   }
   h1 {
-    font-size: 4.5rem;
     position: relative;
     top: 5rem;
     width: 25rem;
-    height: 15rem;
+    height:15rem;
     margin: 0 3rem;
     align-self: flex-start;
+  }
+  .tituloLargo{
+    font-size:3rem
+  }
+  .tituloCorto{
+    font-size:4.5rem
   }
   .info {
     width: 100%;
@@ -108,6 +113,8 @@ export const StyledProductDetail = styled.div`
     }
     img {
       width: 15rem;
+      height:15rem;
+      object-fit: cover;
     }
     .photo {
       display: flex;
