@@ -53,6 +53,9 @@ export const GlobalStyles = createGlobalStyle`
         font-weight:400;
         font-size: 1rem;
     }
+    ul{
+        list-style-type:none;
+    }
     .priceBefore{
         text-decoration:line-through;
         font-weight: 400;

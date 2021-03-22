@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {blanco, verdeMain, violeta, productWidth} from '../App/GlobalStyles'
+import { blanco, verdeMain, violeta, productWidth } from "../App/GlobalStyles";
 
 export const StyledCatalogue = styled.div`
   display: flex;
@@ -18,36 +18,41 @@ export const StyledCatalogue = styled.div`
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
-  a, a:active, a:focus {
+  a,
+  a:active,
+  a:focus {
     outline: none;
   }
 
-  ul{
-      padding:5vh 0 0 0;
-      display: flex;
-      list-style:none;
-      li{
-        padding:0 1vw 0 1vw;
-        position: relative;
-      }
-      a{
-        text-decoration:none;
-        color:${blanco};
-        text-align:center;
-        img {
-          &:hover{
-            -webkit-filter: blur(2px);
-            filter: blur(2px);
-            transition: all 300ms ease;
-          }
+  ul {
+    padding: 5vh 0 0 0;
+    display: flex;
+    flex-flow: row wrap;
+    list-style: none;
+    gap: 12px;
+    justify-content:center;
+
+    li {
+      position: relative;
+    }
+    a {
+      text-decoration: none;
+      color: ${blanco};
+      text-align: center;
+      img {
+        &:hover {
+          -webkit-filter: blur(2px);
+          filter: blur(2px);
+          transition: all 300ms ease;
         }
       }
     }
-    .productData{
+  }
+  .productData {
     position: absolute;
-    bottom:0;
-    width:${productWidth}vw;
-    background-color:${violeta};
-    padding:0.5vh 0 0.5vh 0;
+    bottom: 0;
+    width: ${productWidth}vw;
+    background-color: ${violeta};
+    padding: 0.5vh 0 0.5vh 0;
   }
 `;

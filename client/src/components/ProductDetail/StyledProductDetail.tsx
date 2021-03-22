@@ -8,15 +8,15 @@ import {
 
 export const StyledProductDetail = styled.div`
   ul {
-    list-style-type: none;
     display: flex;
-    justify-content: space-around;
-    width: 50vw;
-    padding-inline-start: 0;
-    margin: 0;
+    flex-flow: row wrap;
+    list-style: none;
+    gap: 12px;
+    justify-content: center;
   }
   .container {
     border: 1px black solid;
+    background-color:${blanco};
     display: flex;
     flex-direction: column;
   }
@@ -25,14 +25,16 @@ export const StyledProductDetail = styled.div`
     display: flex;
   }
 
-  .photo {
+  .photo, .photoMain {
     width: 50vw;
-    height: 70vh;
     object-position: 20% 90%;
     object-fit: cover;
-    margin: 2rem;
+    margin: 0 2rem 2rem 2rem;
     position: relative;
     top: 2.5rem;
+  }
+  .photoMain{
+    height: 50vw;
   }
   h1 {
     font-size: 4.5rem;
@@ -83,7 +85,7 @@ export const StyledProductDetail = styled.div`
   }
   .fondoVioleta {
     background-color: ${violeta};
-    width: 100vw;
+    width: 100%;
     height: 17rem;
     position: absolute;
     left: 0;
@@ -95,12 +97,14 @@ export const StyledProductDetail = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     margin-top: 3rem;
+    padding-bottom:1rem;
+    border-top:solid 3px black;
     background-color: rgba(100, 223, 223, 0.3);
     h3 {
       color: ${violeta};
-      margin: 1rem 0;
+      margin: 1rem 0 0 0;
     }
     img {
       width: 15rem;

@@ -79,7 +79,7 @@ export default function ProductDetail({ match }) {
         <div className="mainProduct">
           <div>
             <div className="fondoVioleta"></div>
-            <img className="photo" src={photo} alt={name} />
+            <img className="photoMain" src={photo} alt={name} />
             <ul>
               <li>
                 <img
@@ -150,25 +150,29 @@ export default function ProductDetail({ match }) {
         <div className="related">
           <h3>Relacionados</h3>
           <div className="photo">
-            {similProducts?.productForCategory?.map((item, i) =>
-              item.id === id ? null : (
-                <Link
-                  to={`/product/${item.id || 1}`}
-                  key={item.id}
-                  onClick={() => window.scroll(0, 0)}
-                >
-                  <img
-                    src={item.photo || fotosZapa.photo}
-                    alt="name"
-                    className="productImg"
-                  />
-                  <div className="similData">
-                    <h5>{item.name}</h5>
-                    <h5>${item.price}</h5>
-                  </div>
-                </Link>
-              )
-            )}
+            <ul>
+              {similProducts?.productForCategory?.map((item, i) =>
+                item.id === id ? null : (
+                  <li>
+                    <Link
+                      to={`/product/${item.id || 1}`}
+                      key={item.id}
+                      onClick={() => window.scroll(0, 0)}
+                    >
+                      <img
+                        src={item.photo || fotosZapa.photo}
+                        alt="name"
+                        className="productImg"
+                      />
+                      <div className="similData">
+                        <h5>{item.name}</h5>
+                        <h5>${item.price}</h5>
+                      </div>
+                    </Link>
+                  </li>
+                )
+              )}
+            </ul>
           </div>
         </div>
       </div>

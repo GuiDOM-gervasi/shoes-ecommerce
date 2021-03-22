@@ -1,17 +1,25 @@
 import styled from "styled-components";
+import {
+  blanco,
+  verdeMain,
+  violeta,
+  negro,
+  productWidth,
+  verdeDetalle,
+  formWidth,
+} from "../../containers/App/GlobalStyles";
 
 export const StyledAddProduct = styled.div`
-  width: 60vw;
-  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: ${formWidth}vw;
+  min-height: 20vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  position: relative;
+  background-color: ${blanco};
 
   form {
     height: 80%;
@@ -39,6 +47,7 @@ export const StyledAddProduct = styled.div`
       border: none;
       border-bottom: 1px solid black;
       width: 80%;
+      background-color: ${blanco};
     }
 
     input[type="number"] {

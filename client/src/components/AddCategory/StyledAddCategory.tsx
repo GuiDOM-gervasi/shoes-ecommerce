@@ -1,11 +1,18 @@
 import styled from "styled-components";
-import { blanco, verdeMain, violeta, negro, productWidth, verdeDetalle, formWidth } from '../../containers/App/GlobalStyles'
-
+import {
+  blanco,
+  verdeMain,
+  violeta,
+  negro,
+  productWidth,
+  verdeDetalle,
+  formWidth,
+} from "../../containers/App/GlobalStyles";
 
 export const StyledAddCategory = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content:center;
+  justify-content: center;
   width: ${formWidth}vw;
   height: 20vh;
   margin: 2rem auto;
@@ -48,19 +55,17 @@ export const StyledAddCategory = styled.div`
       width: 100%;
       resize: none;
     }
-    .addButton{
-      width:10vw;
-      padding:1vh 0 1vh 0;
-      border-radius:3px;
+    .addButton {
+      width: 10vw;
+      padding: 1vh 0 1vh 0;
+      border-radius: 3px;
       border: 2px solid ${violeta};
       color: ${violeta};
-      font-weight:bold;
-      &:hover{
+      font-weight: bold;
+      &:hover {
         background-color: ${violeta};
-        color:${blanco};
+        color: ${blanco};
       }
     }
   }
-
-
 `;
