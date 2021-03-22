@@ -1,5 +1,13 @@
 import styled from "styled-components";
-import {blanco, verdeMain, violeta, negro, productWidth,navHeight, verdeDetalle} from '../../containers/App/GlobalStyles'
+import {
+  blanco,
+  verdeMain,
+  violeta,
+  negro,
+  productWidth,
+  navHeight,
+  verdeDetalle,
+} from "../../containers/App/GlobalStyles";
 
 export const StyledNav = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
@@ -26,21 +34,23 @@ export const StyledNav = styled.div`
     font-weight: bold;
   }
 
-
   .searchbar {
     grid-area: searchbar;
   }
   .cart {
     grid-area: cart;
   }
-   .cart, .logo{ 
-     a:hover{
-      .fa-shopping-cart, .fa-home{
-        color:${negro};
+  .cart,
+  .logo {
+    a:hover {
+      .fa-shopping-cart,
+      .fa-home {
+        color: ${negro};
       }
     }
-    }
-  .fa-shopping-cart, .fa-home {
+  }
+  .fa-shopping-cart,
+  .fa-home {
     color: ${verdeMain};
   }
   .lineup {
@@ -74,18 +84,25 @@ export const StyledNav = styled.div`
     line-height: 80px;
     margin: 0 5px;
   }
-  nav ul li a {
+  nav ul li p {
+    display: inline-block;
+    margin-block-end: 0;
+    margin-block-start: 0;
+    line-height: 20px;
+    cursor: pointer;
+  }
+  nav ul li a,
+  nav ul li p {
     color: ${blanco};
     font-size: 17px;
     padding: 7px 13px;
     border-radius: 3px;
     text-transform: uppercase;
-  }
-
-  a:hover {
-    background: ${verdeDetalle};
-    transition: 0.5s;
-    color: ${negro};
+    &:hover {
+      background: ${verdeDetalle};
+      transition: 0.5s;
+      color: ${negro};
+    }
   }
 
   .checkbtn {

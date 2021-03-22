@@ -5,12 +5,16 @@ import { DELETE_PRODUCT, UNDELETE_PRODUCT } from "../../graphql/mutations";
 import { StyledCRUDProducts } from "./StyledCRUDProducts";
 import { ProductAttributes } from "../../types";
 import { useHistory } from "react-router-dom";
-import Loader from '../../components/Loader';
+import Loader from "../../components/Loader";
 
 export default function CRUDProducts() {
   const history = useHistory();
   const { data, loading, error } = useQuery(GET_PRODUCTS);
-  const { data: deletedQuery, loading: loadingDeleted, error: errorDeleted } = useQuery(GET_DELETED);
+  const {
+    data: deletedQuery,
+    loading: loadingDeleted,
+    error: errorDeleted,
+  } = useQuery(GET_DELETED);
   const allProducts = data ? data.products : null;
   const deletedProducts = deletedQuery ? deletedQuery.deleted : null;
   const [deleteProduct, { loading: loadingDelete }] = useMutation(
@@ -19,14 +23,15 @@ export default function CRUDProducts() {
       refetchQueries: [{ query: GET_PRODUCTS }, { query: GET_DELETED }],
     }
   );
-  const [undeleteProduct, { loading: loadingRestore }] = useMutation (
+  const [undeleteProduct, { loading: loadingRestore }] = useMutation(
     UNDELETE_PRODUCT,
     {
-      refetchQueries: [{ query: GET_PRODUCTS }, { query: GET_DELETED }], 
+      refetchQueries: [{ query: GET_PRODUCTS }, { query: GET_DELETED }],
     }
   );
 
-  if (loading || loadingDeleted || loadingDelete || loadingRestore) return <Loader />;
+  if (loading || loadingDeleted || loadingDelete || loadingRestore)
+    return <Loader />;
   if (error || errorDeleted) return <span> error {error.message} </span>;
 
   const handleClick = () => {
@@ -38,8 +43,8 @@ export default function CRUDProducts() {
   };
 
   const handleRestore = (id) => {
-    undeleteProduct({ variables: { id } })
-  }
+    undeleteProduct({ variables: { id } });
+  };
 
   const handleEdit = (id) => {
     history.push(`/admin/editProduct/${id}`);
@@ -58,26 +63,34 @@ export default function CRUDProducts() {
             <span className="price"> {item.price} </span>
 
             <div className="buttons">
-              <button onClick={() => handleEdit(item.id)}> edit </button>
-              <button onClick={() => handleDelete(item.id)}> delete </button>
+              <i onClick={() => handleEdit(item.id)} className="fas fa-edit" />
+              <i
+                onClick={() => handleDelete(item.id)}
+                className="fas fa-trash-alt"
+              />
+              {/* <button onClick={() => handleEdit(item.id)}> edit </button>
+              <button onClick={() => handleDelete(item.id)}> delete </button> */}
             </div>
           </li>
         ))}
       </ul>
       <div className="deleted">
         <h4> Deleted products </h4>
-      <ul className="deletedProducts">
-        {deletedProducts?.map((item: ProductAttributes) => (
-          <li key={item.id}>
-            <span className="id"> {item.id} </span>
-            <span className="name"> {item.name} </span>
-            <span className="price"> {item.price} </span>
-	    <div className="buttons">            
-              <button onClick={() => handleRestore(item.id)}> restore </button>
-	    </div>
-          </li>
-        ))}
-      </ul>
+        <ul className="deletedProducts">
+          {deletedProducts?.map((item: ProductAttributes) => (
+            <li key={item.id}>
+              <span className="id"> {item.id} </span>
+              <span className="name"> {item.name} </span>
+              <span className="price"> {item.price} </span>
+              <div className="buttons">
+                <button onClick={() => handleRestore(item.id)}>
+                  {" "}
+                  restore{" "}
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </StyledCRUDProducts>
   );

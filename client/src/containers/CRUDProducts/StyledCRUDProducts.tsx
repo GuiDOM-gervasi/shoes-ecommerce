@@ -44,10 +44,17 @@ export const StyledCRUDProducts = styled.div`
   .deleted {
     margin-top: 3rem;
     text-align: center;
-    
-
     h4 {
       margin-bottom: 1rem;
     }
+  }
+
+  .fas{
+    color:${negro};
+    margin-left:1vw;
+    &:hover{
+      color:${violeta};
+    }
+    
   }
 `;
