@@ -31,6 +31,9 @@ export function AuthProvider(props) {
         data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
       }
     },
+    onError:(error) => {
+      console.log(error)
+    }
   });
 
   const [logoutUser] = useLazyQuery(LOGOUT_USER, {
@@ -44,6 +47,9 @@ export function AuthProvider(props) {
         setIsAdmin(false);
       }
     },
+    onError:(error)=>{
+        console.log(error)
+    }
   });
 
   function login(email: string, password: string, cb) {
