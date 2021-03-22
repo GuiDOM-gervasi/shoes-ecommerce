@@ -46,6 +46,7 @@ export const GET_PRODUCT_DETAIL = gql`
         name
       }
       models {
+        id
         size
         color
       }
@@ -125,3 +126,27 @@ export const LOGOUT_USER = gql`
     }
   }
 `;
+
+export const GET_CART = gql`
+ query cart($userId:String!){
+    cart(userId:$userId){
+      id
+      finalproducts{
+      product{
+        id
+        name
+        price
+        muestraimg
+      }
+    }
+    }
+  }
+`
+
+export const FINAL_PRODUCTS = gql`
+query finalproducts($productId:String! $modelId:String!){
+  finalproducts(productId:$productId,modelId:$modelId){
+  id
+  }
+}
+`

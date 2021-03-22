@@ -16,6 +16,13 @@ export interface QueryUsers {
   users: User[];
 }
 
+export interface CartAttributes {
+  id: String
+  finalproducts: []
+  userId: String
+  state: String
+}
+
 export interface ProductAttributes {
   id: string;
   name: String;

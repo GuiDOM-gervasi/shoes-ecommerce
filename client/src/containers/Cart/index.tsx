@@ -1,38 +1,63 @@
 import React from 'react'
-import { GET_PRODUCTS } from '../../graphql/queries'
+import { GET_CART } from '../../graphql/queries'
 import { StyledCart } from './StyledCart'
-import {useQuery} from "@apollo/client"
-import { ProductAttributes } from '../../types'
+import {useMutation, useQuery} from "@apollo/client"
+import { CartAttributes } from '../../types'
 import { fotosZapa } from '../../components/ProductDetail/mockup'
+import { useAuth } from '../../hooks/AuthProvider'
+import { DELETE_TO_CART } from '../../graphql/mutations'
 
 
 const Cart = () => {
-const {data, loading, error} = useQuery(GET_PRODUCTS)
+const {userId} = useAuth()
+ const {data, loading, error} = useQuery(GET_CART, {
+        variables: {
+          userId: userId&&userId
+        },})
+const [deleteProductCart, { loading: loadingDelete }] = useMutation(
+    DELETE_TO_CART,
+        {
+            refetchQueries: [{ query: GET_CART, variables:{
+             userId: userId&&userId   
+            }}],
+        }
+);
+
 if (loading) return <span>Loading</span>;
 if (error) return <span>Error {error.message}</span>;
-const products: ProductAttributes[] = data.products
-
+const products= data.cart[0]?.finalproducts
+console.log(products)
 
 const {
     photo,
   } = fotosZapa;
 let count = 0;
+
+const handleDelete = (finalproduct) => {
+    console.log(data.cart[0]?.id,finalproduct)
+    deleteProductCart({
+        variables:{
+            cartId: data.cart[0]?.id,
+            finalproductId: finalproduct
+        } 
+    })
+}
     return (
        <StyledCart className="fondoDegradado">
            <div className="container ">
            {
                
-               products?.map((p:ProductAttributes)=>{
-                count += p.price  
+               products?.map((p)=>{
+                count += p.product.price  
                 return (
                     <div>
                         <img
-                            src={photo}
-                            alt={`photoDetail 3 - ${p.name}`}
+                            src={p.product.muestraimg}
+                            alt={`photoDetail 3 - ${p.product.name}`}
                         />            
-                        <h4>{p.name}</h4> 
-                        <p>Price: {p.price}</p>
-                        <button className="buttonDelete">X</button>                  
+                        <h4>{p.product.name}</h4> 
+                        <p>Price: {p.product.price}</p>
+                        <button className="buttonDelete" onClick={()=>handleDelete(p.product.id)}>X</button>                  
                     </div>
                 )
                })
