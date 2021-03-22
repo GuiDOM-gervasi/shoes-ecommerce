@@ -1,16 +1,30 @@
 import React, { useEffect } from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
-import { useQuery, useLazyQuery } from "@apollo/client";
+import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
 import {
+  FINAL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_BY_CATEGORIES,
+  GET_CART,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
+import { ADD_TO_CART } from "../../graphql/mutations";
+import { useAuth } from "../../hooks/AuthProvider";
 
-export default function ProductDetail({ match }) {
+
+export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
+  const {userId} = useAuth()
+  const [addToCart, { error: errorMutationCart }] = useMutation(
+    ADD_TO_CART
+  );
+
+  const {data : dataCart, loading : loadingCart , error : errorCart} = useQuery(GET_CART, {
+    variables: {
+      userId: userId&&userId
+    },})  
 
   const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
@@ -23,6 +37,21 @@ export default function ProductDetail({ match }) {
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
 
+  const [finalproducts, {data: finalData, loading: finalLoading, error : finalError}] = useLazyQuery(FINAL_PRODUCTS,
+  {
+    onCompleted: (finalData)=>{
+      console.log(dataCart)
+     addToCart({
+        variables:{
+          finalproductId: finalData.finalproducts[0].id,
+          cartId: dataCart.cart[0]?.id,
+          price,
+          quantity: 1
+        } 
+      })
+    }
+
+  })
   useEffect(() => {
     if (mainProduct) {
       const {
@@ -73,7 +102,26 @@ export default function ProductDetail({ match }) {
     priceBefore,
   } = fotosZapa;
 
-  console.log(categories);
+
+
+  const handleClick = async () =>{
+    const sizeSelect : any = document.querySelector("#size-select")
+    const colorSelect : any = document.querySelector("#color-select")
+    const model = models.find((current)=>(
+      current.size === sizeSelect.value && current.color === colorSelect.value
+    ))
+    const finalproductId = await finalproducts({
+      variables:{
+        productId: id,
+        modelId: model.id
+      },
+    })
+    console.log(finalData)
+    console.log(id,model.id)
+   
+
+
+  }
   return (
     <StyledProductDetail>
       <div className="container">
@@ -128,6 +176,7 @@ export default function ProductDetail({ match }) {
               <select
                 className="botonInvertido"
                 onChange={(e: any) => filterModels(e.target.value)}
+                id="color-select"
               >
                 {modelsState.colors?.map((color, i) => (
                   <option value={color} key={`${color} ${i}`}>
@@ -135,14 +184,14 @@ export default function ProductDetail({ match }) {
                   </option>
                 ))}
               </select>
-              <select className="botonInvertido">
+              <select className="botonInvertido" id="size-select">
                 {modelsState.sizes?.map((size, i) => (
                   <option value={size} key={`${size} ${i}`}>
                     {size}
                   </option>
                 ))}
               </select>
-              <button className="boton" disabled>
+              <button className="boton" onClick={()=>handleClick()}>
                 Agregar al carrito
               </button>
             </div>

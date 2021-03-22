@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
 import React from "react";
 import { StyledCatalogue } from "./StyledCatalogue";
@@ -7,11 +7,28 @@ import { GET_PRODUCTS } from "../../graphql/queries";
 import Slider from "../../components/Slider";
 import Filter from "../../components/Filter";
 import Loader from "../../components/Loader";
+import {useAuth} from "../../hooks/AuthProvider";
+import { CREATE_CART } from "../../graphql/mutations";
 
-export default function Catalogue() {
+
+
+export default function Catalogue () {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
+  const [createCart, { error: errorMutationCart }] = useMutation(
+    CREATE_CART
+  );
   const [loadedProducts, setLoadedProduct] = React.useState([]);
-
+  const {userId} = useAuth()
+  if(userId){
+    const carrito = createCart({
+      variables :{
+        userId: userId,
+        state:'reserved'
+      },
+    })
+    console.log(carrito)
+  }
+  //console.log(carrito)
   // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
   // if (loadedProducts.length < 1) {
   //   console.log(data);

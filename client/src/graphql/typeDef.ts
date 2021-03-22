@@ -7,10 +7,12 @@ export const typeDefs = gql`
     description: String
     price: Float
     muestraimg: String
-    brand: Brand!
-    categories: [Category]
-    models: [Model]
+    brand: Brand
+    categories: [Category!]
+    models: [Model!]
+    img: String
   }
+
   type Category {
     id: ID!
     name: String!
@@ -24,6 +26,20 @@ export const typeDefs = gql`
     size: String!
     color: String!
   }
+
+  type Cart {
+    id: ID
+    finalproducts: [FinalProduct]
+    userId: String
+    state: String
+  }
+
+  type FinalProduct {
+    id: ID
+    product: Product
+    model: Model
+  }
+
   extend type Query {
     loadedProducts: [Product]
   }

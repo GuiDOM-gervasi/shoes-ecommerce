@@ -49,12 +49,6 @@ export class FinalProduct extends Model {
 	modelId!: string;
 	@BelongsTo(() => Models)
 	model: Models;
-
-	@Column({
-		allowNull: false,
-		type: DataType.INTEGER,
-	})
-	stock!: number;
 	
 	@HasMany(() => CartProduct)
   	cartproducts!: CartProduct[]

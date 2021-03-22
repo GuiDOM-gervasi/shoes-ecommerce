@@ -5,11 +5,11 @@ import FinalProduct from "#root/db/models/finalproduct";
 import Models from "#root/db/models/models";
 import Product from "#root/db/models/products";
 
-const cartResolver = async (parent, { cartId }) => {
+const cartResolver = async (parent, { userId }) => {
 	
 	return await Cart.findAll({
 		where: {
-			userId: cartId,
+			userId
 		},
 		include: [
 			{
