@@ -16,11 +16,11 @@ import Brand from "./brands";
 import Category from "./category";
 import Models from './models'
 import FinalProduct from './finalproduct'
-import User from "./users";
 import {WishList} from "./wishlist";
 import { ProductAttributes } from "./types";
 import { Image } from "./image";
-
+import User from "./users"
+import Review from "./1review";
 
 
 @Table({
@@ -89,6 +89,9 @@ export class Product extends Model {
 
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;
+
+		@BelongsToMany(() => User, {through: () => Review })
+		user?: Array<User & {Review: Review}>;
 
 }
 

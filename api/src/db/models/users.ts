@@ -10,6 +10,7 @@ import {
 import Product from "./products";
 import Cart from './carts';
 import {WishList} from './wishlist';
+import {Review} from "./1review";
 
 import { UserAttributes } from './types'
 
@@ -86,6 +87,9 @@ export class User extends Model<UserAttributes> {
 
   @BelongsToMany(() => Product, { through: () => WishList })
   products?: Array<Product & { WishList: WishList }>;
+
+		@BelongsToMany(() => Product, { through: () => Review})
+		product?: Array<Product & {Review: Review}>;
 
 }
 
