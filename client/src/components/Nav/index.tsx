@@ -18,13 +18,13 @@ export default function Nav() {
         <div>
           <ul className="lineup">
             <li className="logo">
-              <NavLink to="">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li className="searchbar">
               <SearchBar />
             </li>
             <li className="cart">
-              <NavLink to="" className="hover">
+              <NavLink to="/cart" className="hover">
                 <i className="fas fa-shopping-cart"></i>
               </NavLink>
             </li>
@@ -42,7 +42,7 @@ export default function Nav() {
               </li>
             ) : null}
             <li className="catalogue">
-              <NavLink to="">Catalogue</NavLink>
+              <NavLink to="/">Catalogue</NavLink>
             </li>
             <li className="offers">
               <NavLink to="">Offers</NavLink>
