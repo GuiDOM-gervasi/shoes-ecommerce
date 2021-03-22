@@ -34,6 +34,7 @@ const {
 let count = 0;
 
 const handleDelete = (finalproduct) => {
+    console.log(data.cart[0]?.id, finalproduct);
     deleteProductCart({
         variables:{
             cartId: data.cart[0]?.id,
@@ -56,7 +57,7 @@ const handleDelete = (finalproduct) => {
                         />            
                         <h4>{p.product.name}</h4> 
                         <p>Price: {p.product.price}</p>
-                        <button className="buttonDelete" onClick={()=>handleDelete(p.product.id)}>X</button>                  
+                        <button className="buttonDelete" onClick={()=>handleDelete(p.id)}>X</button>                  
                     </div>
                 )
                })
