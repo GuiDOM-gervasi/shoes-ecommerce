@@ -8,6 +8,7 @@ export function ResultSearchBarInput({ data, handleClick }) {
             return (
               <div key={i} className="contentResultItem">
                 <div>
+                  <img src={item.muestraimg} />
                   <div className="name" id={item.id} onClick={handleClick}>
                     {item.name}
                   </div>

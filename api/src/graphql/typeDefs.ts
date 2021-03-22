@@ -34,7 +34,7 @@ const typeDefs = gql`
     name: String!
   }
 
-  type Image{
+  type Image {
     id: ID!
     productId: String!
     title: String!
@@ -62,8 +62,8 @@ const typeDefs = gql`
   type ProductForCategory {
     products: [Product!]!
   }
-  type ProductModel{
-  	products: [Product!]!
+  type ProductModel {
+    products: [Product!]!
   }
 
   type Cart {
@@ -73,7 +73,7 @@ const typeDefs = gql`
     state: String
   }
 
-  type MutationCartProduct{
+  type MutationCartProduct {
     id: ID!
     finalproductId: String!
     cartId: String!
@@ -104,24 +104,10 @@ const typeDefs = gql`
       CategoriesId: [String]
       ModelsId: [String]
     ): Product!
-    updateProduct(
-    id:String!
-    atr:String!
-    input:[String]
-    ): Product! 
-    updateUser(
-      id: String!
-      atr:String!
-      input: String
-    ): String
-    addImage(
-      productId: String!
-      image: String!
-    ): Image!
-    createCart(
-      userId: String!
-      state: String!
-    ): Cart!
+    updateProduct(id: String!, atr: String!, input: [String]): Product!
+    updateUser(id: String!, atr: String!, input: String): String
+    addImage(productId: String!, image: String!): Image!
+    createCart(userId: String!, state: String!): Cart!
     addToCart(
       finalproductId: String!
       cartId: String!
@@ -137,24 +123,23 @@ const typeDefs = gql`
     deleteCategory(id: String!): Category
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
-    loginUser(email: String!, password: String!) : Access
+    loginUser(email: String!, password: String!): Access
   }
 
   type Query {
     users: [User!]!
-    products(atr:String,ord:String): [Product!]!
-    categories(atr:String,ord:String): [Category!]!
-    brand(atr:String,ord:String): [Brand!]!
+    products(atr: String, ord: String): [Product!]!
+    categories(atr: String, ord: String): [Category!]!
+    brand(atr: String, ord: String): [Brand!]!
     productDetail(id: String!): Product!
     models: [Model!]!
-    productForCategory(name: String!): [ProductForCategory!]!
+    productForCategory(name: String!): [Product!]!
     searchProducts(name: String!): [Product!]!
     logoutUser: Logout
-    cart(cartId: String! ): [Cart]!
-    finalproducts (productId: String! modelId: String!): [FinalProduct!]!
+    cart(cartId: String!): [Cart]!
+    finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!
   }
-
 `;
 export default typeDefs;

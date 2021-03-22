@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import {blanco, verdeMain, violeta} from '../App/GlobalStyles'
-var productWidth = 20
+import {blanco, verdeMain, violeta, productWidth} from '../App/GlobalStyles'
+
 
 export const StyledSearchResult = styled.div`
   min-height:100vh;
@@ -10,6 +10,9 @@ export const StyledSearchResult = styled.div`
     ul{
       padding:5vh 0 0 0;
       display: flex;
+      gap: 12px;
+      justify-content:center;
+      flex-flow: row wrap;
       list-style:none;
       li{
         padding:0 1vw 0 1vw;

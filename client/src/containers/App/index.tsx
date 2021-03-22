@@ -16,6 +16,7 @@ import Login from "../../components/Login";
 import EditCategory from "../../components/EditCategory";
 import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
+import Loader from "../../components/Loader";
 
 interface ProductAttributes {
   name: String;
@@ -28,14 +29,15 @@ interface ProductAttributes {
 function App() {
   const { isAdmin } = useAuth();
   return (
-    <div className="App">
+    <div className="App fondoDegradado">
       <Nav />
-      <GlobalStyles />
-      <Route exact path="/" component={Catalogue} />
-      <Route path="/product/:id" component={ProductDetail} />
+      <GlobalStyles/>
+      <Route exact path="/" component={Catalogue}/>
+      <Route path="/product/:id" component={ProductDetail}/>
       <Route path="/register" component={AddUser} />
       <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />
+      <Route exact path="/admin" component={isAdmin ? Admin : Login} />
       <Route
         path="/admin/products"
         component={isAdmin ? CRUDProducts : Login}
@@ -60,7 +62,6 @@ function App() {
         path="/admin/editCategory/:categoryId"
         component={isAdmin ? EditCategory : Login}
       />
-      <Route exact path="/admin" component={Admin} />
     </div>
   );
 }

@@ -5,6 +5,7 @@ export const GET_PRODUCTS = gql`
     products {
       id
       name
+      muestraimg
       price
       brand {
         name
@@ -39,11 +40,16 @@ export const GET_PRODUCT_DETAIL = gql`
       description
       price
       name
+      muestraimg
       brand {
         name
       }
       categories {
         name
+      }
+      models {
+        size
+        color
       }
     }
   }
@@ -56,7 +62,7 @@ export const SEARCH_PRODUCTS = gql`
       name
       description
       price
-      img
+      muestraimg
       brand {
         name
       }
@@ -89,10 +95,12 @@ export const GET_BRANDS = gql`
 `;
 
 export const GET_PRODUCTS_BY_CATEGORIES = gql`
-  query productForCategory($name:String) {
+  query productForCategory($name: String!) {
     productForCategory(name: $name) {
       id
       name
+      muestraimg
+      price
       brand {
         name
       }
@@ -102,7 +110,6 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
     }
   }
 `;
-
 
 export const GET_MODELS = gql`
   query Models {
@@ -116,8 +123,8 @@ export const GET_MODELS = gql`
 
 export const LOGOUT_USER = gql`
   query {
-    logoutUser{
+    logoutUser {
       logout
     }
   }
-`
+`;
