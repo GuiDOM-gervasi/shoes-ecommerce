@@ -4,7 +4,18 @@ import Cart from '../../../db/models/carts';
 
 const createCartResolver = async (context: any, {userId,state}: CartAttributes) =>{
   
-    return await Cart.create({userId,state});
+    const [cart, created] = await Cart.findOrCreate({
+        where: {
+            userId
+        },
+        defaults: {userId, state}
+    });
+
+    if(created){
+        return cart;
+    }
+    return 'This user alredy has a cart';
+
 }
   
 export default createCartResolver
