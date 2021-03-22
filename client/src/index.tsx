@@ -9,13 +9,13 @@ import { AuthProvider } from "./hooks/AuthProvider";
 
 ReactDOM.render(
   <ApolloProvider client={graphClient}>
-    <Router>
-      <AuthProvider>
+    <AuthProvider>
+      <Router>
         <React.StrictMode>
           <App />
         </React.StrictMode>
-      </AuthProvider>
-    </Router>
+      </Router>
+    </AuthProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );

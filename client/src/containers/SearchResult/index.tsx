@@ -12,11 +12,15 @@ function useQueryParams() {
 
 export default function SearchResult() {
   const query = useQueryParams();
+  var products = []
   query.get("query");
   const { data, loading, error } = useQuery(SEARCH_PRODUCTS, {
     variables: { name: query.get("query") },
   });
-  const products = data["searchProducts"];
+  if(data){
+  		products = data["searchProducts"];
+
+  }
 
   return (
     <StyledSearchResult className="fondoDegradado">
