@@ -34,7 +34,6 @@ const {
 let count = 0;
 
 const handleDelete = (finalproduct) => {
-    console.log(data.cart[0]?.id,finalproduct)
     deleteProductCart({
         variables:{
             cartId: data.cart[0]?.id,
