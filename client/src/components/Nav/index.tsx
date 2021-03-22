@@ -18,7 +18,9 @@ export default function Nav() {
         <div>
           <ul className="lineup">
             <li className="logo">
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="">
+                <i className="fas fa-home"></i>
+              </NavLink>
             </li>
             <li className="searchbar">
               <SearchBar />
@@ -51,13 +53,10 @@ export default function Nav() {
               <NavLink to="">About us</NavLink>
             </li>
             {userId ? (
-              <li className="login">
-                <div onClick={handleClick} className="hover">
-                  <p>Logout</p>
-                </div>
+              <li onClick={handleClick} className="login">
+                <a href="#" className="hover">Logout</a>
               </li>
-            ) : (
-              <>
+            ) : <>
                 <li className="login">
                   <NavLink to="/login" className="hover">
                     Login
@@ -68,8 +67,7 @@ export default function Nav() {
                     Register
                   </NavLink>
                 </li>
-              </>
-            )}
+              </>}
           </ul>
         </div>
       </nav>

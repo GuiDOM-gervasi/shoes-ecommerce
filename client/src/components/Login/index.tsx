@@ -31,20 +31,20 @@ export default function Login() {
   return (
     <StyledLogin>
       <form onSubmit={handleSubmit}>
-        <input
+        <input className="login"
           type="email"
           name="email"
           onChange={handleChange}
           placeholder="email@direccion.com"
         />
 
-        <input
+        <input className="login"
           type="password"
           name="password"
           onChange={handleChange}
           placeholder="password"
         />
-        <input type="submit" value="Iniciar sesión" />
+        <input className="boton" type="submit" value="Iniciar sesión" />
       </form>
     </StyledLogin>
   );

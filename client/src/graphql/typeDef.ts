@@ -26,7 +26,7 @@ export const typeDefs = gql`
     size: String!
     color: String!
   }
- 
+
   type Cart {
     id: ID
     finalproducts: [FinalProduct]
@@ -39,7 +39,6 @@ export const typeDefs = gql`
     product: Product
     model: Model
   }
-
 
   extend type Query {
     loadedProducts: [Product]

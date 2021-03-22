@@ -1,9 +1,26 @@
 import styled from "styled-components";
+import {
+  blanco,
+  verdeMain,
+  violeta,
+  negro,
+  productWidth,
+  verdeDetalle,
+  formWidth,
+  violetaHover,
+} from "../../containers/App/GlobalStyles";
 
 export const StyledCRUDProducts = styled.div`
   display: flex;
   flex-direction: column;
-
+  width: ${formWidth * 2}vw;
+  min-height: 30vh;
+  margin: 2rem auto;
+  margin-bottom: 0;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: ${blanco};
   ul li {
     width: 100%;
     display: flex;
@@ -22,11 +39,30 @@ export const StyledCRUDProducts = styled.div`
   button,
   .addButton {
     margin: 1rem 0;
-    padding: .5rem;
+    padding: 0.5rem;
     border-radius: 5px;
-    border: 1px solid rgba(0,0,0,.3);
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     align-self: center;
   }
-  
+
+  .modal {
+    position: absolute;
+  }
+
+  .deleted {
+    margin-top: 3rem;
+    text-align: center;
+    h4 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .fas {
+    color: ${negro};
+    margin-left: 1vw;
+    &:hover {
+      color: ${violeta};
+    }
+  }
 `;

@@ -51,16 +51,28 @@ export default function Catalogue () {
         <section className="sale">Ofertas</section>
         <Filter setLoadedProduct={setLoadedProduct} />
       </div>
+      {console.log("data.products", data.products)}
+      {console.log("loadedProducts", loadedProducts)}
+      <ul>
+        {loadedProducts.map((item, i) => (
+          <li>
+            <Link to={`/product/${item.id || 1}`} key={item.id}>
+              <img
+                src={item.muestraimg || fotosZapa.photo}
+                alt="name"
+                className="productImg"
+              />
 
-      {loadedProducts.map((item, i) => (
-        <Link to={`/product/${item.id || 1}`} key={item.id}>
-          <img
-            src={item.photo || fotosZapa.photo}
-            alt="name"
-            className="productImg"
-          />
-        </Link>
-      ))}
+              <div className="productData">
+                <h5>
+                  {item.brand.name} {item.name}
+                </h5>
+                <p>${item.price}</p>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </StyledCatalogue>
   );
 }

@@ -71,7 +71,7 @@ export default function AddUser({ className }: AddUserAttributes) {
     <StyledAddUser>
       <form onSubmit={handleSubmit}>
         <div className="div_firstName">
-          <input
+          <input className="register"
             type="text"
             name="firstName"
             onChange={handleChange}
@@ -81,7 +81,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           <span className="span_firstName"></span>
         </div>
         <div className="div_lastName">
-          <input
+          <input className="register"
             type="text"
             name="lastName"
             onChange={handleChange}
@@ -91,7 +91,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           <span className="span_lastName"></span>
         </div>
         <div className="div_userName">
-          <input
+          <input className="register"
             type="text"
             name="userName"
             onChange={handleChange}
@@ -101,7 +101,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           <span className="span_userName"></span>
         </div>
         <div className="div_email">
-          <input
+          <input className="register"
             type="email"
             name="email"
             onChange={handleChange}
@@ -111,7 +111,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           <span className="span_email"></span>
         </div>
         <div className="div_password">
-          <input
+          <input className="register"
             type="password"
             name="password"
             onChange={handleChange}
@@ -130,7 +130,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           <span className="span_nlsuscribe"></span>
         </div>
 
-        <input type="submit" value="Registrarse" disabled={form.error} />
+        <input className="boton" type="submit" value="Registrarse" disabled={form.error} />
       </form>
     </StyledAddUser>
   );

@@ -5,6 +5,7 @@ export const GET_PRODUCTS = gql`
     products {
       id
       name
+      muestraimg
       price
       brand {
         name
@@ -39,6 +40,7 @@ export const GET_PRODUCT_DETAIL = gql`
       description
       price
       name
+      muestraimg
       brand {
         name
       }
@@ -61,7 +63,7 @@ export const SEARCH_PRODUCTS = gql`
       name
       description
       price
-      img
+      muestraimg
       brand {
         name
       }
@@ -98,6 +100,7 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
     productForCategory(name: $name) {
       id
       name
+      muestraimg
       price
       brand {
         name

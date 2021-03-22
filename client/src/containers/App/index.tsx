@@ -19,6 +19,8 @@ import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
+import Loader from "../../components/Loader";
+
 interface ProductAttributes {
   name: String;
   description: String;
@@ -30,7 +32,7 @@ interface ProductAttributes {
 function App() {
   const { isAdmin } = useAuth();
   return (
-    <div className="App">
+    <div className="App fondoDegradado">
       <Nav />
       <GlobalStyles />
       <Route exact path="/" component={Catalogue} />
@@ -38,6 +40,7 @@ function App() {
       <Route path="/register" component={AddUser} />
       <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />
+      <Route exact path="/admin" component={isAdmin ? Admin : Login} />
       <Route
         path="/admin/products"
         component={isAdmin ? CRUDProducts : Login}
@@ -63,12 +66,9 @@ function App() {
         component={isAdmin ? EditCategory : Login}
       />
       <Route exact path="/admin" component={Admin} />
-      <Route path="/cart" component={Cart}
-      />
-      <Route exact path="/admin/orders" component={OrderTable}
-      />
-      <Route path="/admin/orders/:id" component={Order}
-      /> 
+      <Route path="/cart" component={Cart} />
+      <Route exact path="/admin/orders" component={OrderTable} />
+      <Route path="/admin/orders/:id" component={Order} />
     </div>
   );
 }

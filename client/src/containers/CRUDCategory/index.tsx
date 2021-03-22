@@ -5,54 +5,53 @@ import { CategoryAttributes } from "../../types";
 import { GET_CATEGORIES } from "../../graphql/queries";
 import { useHistory } from "react-router-dom";
 import { DELETE_CATEGORY } from "../../graphql/mutations";
-import Loader from '../../components/Loader';
+import Loader from "../../components/Loader";
 
 export default function CRUDCategory() {
-	const history = useHistory();
-	const { data, loading, error } = useQuery(GET_CATEGORIES);
-	const allCategory = data ? data.categories : null;
-	const [deleteCategory, { loading: loadingDelete }] = useMutation(
-		DELETE_CATEGORY,
-		{
-			refetchQueries: [{ query: GET_CATEGORIES }],
-		}
-	);
+  const history = useHistory();
+  const { data, loading, error } = useQuery(GET_CATEGORIES);
+  const allCategory = data ? data.categories : null;
+  const [deleteCategory, { loading: loadingDelete }] = useMutation(
+    DELETE_CATEGORY,
+    {
+      refetchQueries: [{ query: GET_CATEGORIES }],
+    }
+  );
 
-	if (loading) return <Loader />;
-	if (error) return <span> error {error.message} </span>;
-	const handleClick = () => {
-		history.push("/admin/addCategory");
-	};
-	const handleDelete = (id) => {
-		deleteCategory({ variables: { id } });
-	};
-	const handleEdit = (id) => {
-		history.push(`/admin/editCategory/${id}`);
-	};
+  if (loading) return <Loader />;
+  if (error) return <span> error {error.message} </span>;
+  const handleClick = () => {
+    history.push("/admin/addCategory");
+  };
+  const handleDelete = (id) => {
+    deleteCategory({ variables: { id } });
+  };
+  const handleEdit = (id) => {
+    history.push(`/admin/editCategory/${id}`);
+  };
 
-	return (
-		<StyledCRUDCategory>
-			<button className="addButton" onClick={handleClick}>
-				Add new Category
-			</button>
-			<ul>
-				{allCategory?.map((item: CategoryAttributes) => (
-					<li key={item.id}>
-						<span className="id"> {item.id} </span>
-						<span className="name"> {item.name} </span>
-						<div className="buttons">
-							<button onClick={() => handleEdit(item.id)}>
-								{" "}
-								Edit{" "}
-							</button>
-							<button onClick={() => handleDelete(item.id)}>
-								{" "}
-								Delete{" "}
-							</button>
-						</div>
-					</li>
-				))}
-			</ul>
-		</StyledCRUDCategory>
-	);
+  return (
+    <StyledCRUDCategory>
+      <button className="addButton" onClick={handleClick}>
+        Add new Category
+      </button>
+      <ul>
+        {allCategory?.map((item: CategoryAttributes) => (
+          <li key={item.id}>
+            <span className="id"> {item.id} </span>
+            <span className="name"> {item.name} </span>
+            <div className="buttons">
+              <i onClick={() => handleEdit(item.id)} className="fas fa-edit" />
+              <i
+                onClick={() => handleDelete(item.id)}
+                className="fas fa-trash-alt"
+              />
+              {/* <button onClick={() => handleEdit(item.id)}> Edit </button> */}
+              {/* <button onClick={() => handleDelete(item.id)}> Delete </button> */}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </StyledCRUDCategory>
+  );
 }
