@@ -1,7 +1,7 @@
 import React from 'react'
 import { GET_PRODUCTS } from '../../graphql/queries'
 import { StyledCart } from './StyledCart'
-import {useQuery} from "react-apollo"
+import {useQuery} from "@apollo/client"
 import { ProductAttributes } from '../../types'
 import { fotosZapa } from '../../components/ProductDetail/mockup'
 
