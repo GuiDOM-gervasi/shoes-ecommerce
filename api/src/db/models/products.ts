@@ -43,7 +43,7 @@ export class Product extends Model {
   @Unique
   @Column({
     allowNull: false,
-    type: DataType.STRING,
+				type: DataType.STRING,
   })
   name!: string;
 
@@ -61,7 +61,7 @@ export class Product extends Model {
 
   @Column({
     allowNull: true,
-    type: DataType.STRING
+				type: DataType.STRING(1000),
   })
   muestraimg?: string;
 

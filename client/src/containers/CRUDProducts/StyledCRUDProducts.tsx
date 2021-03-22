@@ -40,4 +40,14 @@ export const StyledCRUDProducts = styled.div`
   .modal {
     position: absolute;
   }
+
+  .deleted {
+    margin-top: 3rem;
+    text-align: center;
+    
+
+    h4 {
+      margin-bottom: 1rem;
+    }
+  }
 `;

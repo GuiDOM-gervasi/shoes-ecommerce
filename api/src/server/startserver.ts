@@ -80,7 +80,7 @@ const startServer = async () => {
 
     const tokens = createTokens(user);
 
-    res.cookie("refresh-token", tokens.refreshToken,{ domain: 'localhoost', path: '/' });
+    res.cookie("refresh-token", tokens.refreshToken,{ domain: 'localhost', path: '/' });
     res.cookie("access-token", tokens.accessToken,{ domain: 'localhost', path: '/' });
     req.userId = user.id;
     next();
