@@ -1,13 +1,19 @@
-import Cart from '#root/db/models/carts';
 import CartProduct from '../../../db/models/cartproduct';
 
-const removeformcartresolver = async (parent, {finalproductId} ) => {
+const removeformcartresolver = async (parent, {cartId, finalproductId} ) => {
     if (finalproductId === 'empty'){
-        await Cart.destroy( {force: true} );
+        await CartProduct.destroy( 
+            {   
+                where:{
+                    cartId
+                },
+                force: true
+            } );
         return 'The cart was successfully emptied'; 
     }else{
         await CartProduct.destroy({
             where:{
+                cartId,
                 finalproductId
             },
             force: true
