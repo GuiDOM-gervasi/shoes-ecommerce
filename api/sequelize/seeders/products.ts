@@ -93,7 +93,7 @@ module.exports = {
 						price: 25738,
 						description: "Zapatillas de Columbia",
 						brandId:"6",
-						muestraimg:"https://columbiasportswear.com.ar/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/m/a/maso_1.jpegi",
+						muestraimg:"https://columbiasportswear.com.ar/media/catalog/product/cache/c687aa7517cf01e65c009f6943c2b1e9/m/a/maso_1.jpeg",
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
