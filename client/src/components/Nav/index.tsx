@@ -15,13 +15,13 @@ export default function Nav() {
         <div>
           <ul className="lineup">
             <li className="logo">
-              <NavLink to="">Home</NavLink>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li className="searchbar">
               <SearchBar />
             </li>
             <li className="cart">
-              <NavLink to="" className="hover">
+              <NavLink to="/cart" className="hover">
                 <i className="fas fa-shopping-cart"></i>
               </NavLink>
             </li>
@@ -34,7 +34,7 @@ export default function Nav() {
           </label>
           <ul className="linedown">
             <li className="catalogue">
-              <NavLink to="">Catalogue</NavLink>
+              <NavLink to="/">Catalogue</NavLink>
             </li>
             <li className="offers">
               <NavLink to="">Offers</NavLink>
@@ -43,12 +43,12 @@ export default function Nav() {
               <NavLink to="">About us</NavLink>
             </li>
             <li className="login">
-              <NavLink to="" className="hover">
+              <NavLink to="/login" className="hover">
                 Login
               </NavLink>
             </li>
             <li className="register">
-              <NavLink to="" className="hover">
+              <NavLink to="/register" className="hover">
                 Register
               </NavLink>
             </li>
