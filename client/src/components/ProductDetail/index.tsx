@@ -78,7 +78,7 @@ export default function ProductDetail({ match }) {
     <StyledProductDetail>
       <div className="container">
         <div className="mainProduct">
-          <div>
+          <div className="imagenes">
             <div className="fondoVioleta"></div>
             <img className="photoMain" src={muestraimg || photo} alt={name} />
             <ul>

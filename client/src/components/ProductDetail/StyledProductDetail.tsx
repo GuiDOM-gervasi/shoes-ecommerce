@@ -159,4 +159,45 @@ export const StyledProductDetail = styled.div`
       opacity: 100%;
     }
   }
+
+  @media (max-width: 858px){
+    h1, .tituloCorto, .tituloLargo{
+      font-size:2rem;
+      background-color:${violeta};
+      margin:0;
+      height:inherit;
+      width:100vw;
+      text-align:center;
+      padding:2vh 0 2vh 0;
+      top:2rem;
+    }
+    .info{
+      order:1;
+    }
+    .botones, .precios, .description, h1, .imagenes{
+      position:static;
+    }
+    .imagenes{
+      order:2;
+      margin:auto;
+      /* z-index:98;
+      top:25%;
+      left:25%;*/
+      .photoMain{
+        position:static;
+      } 
+    }
+    .related{
+      display:none;
+    }
+    .precios{
+      margin:auto;
+    }
+    .fondoVioleta{
+      display:none;
+    }
+    .mainProduct{
+      flex-direction:column;
+    }
+    }
 `;
