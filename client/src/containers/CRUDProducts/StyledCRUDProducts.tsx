@@ -1,9 +1,17 @@
 import styled from "styled-components";
+import { blanco, verdeMain, violeta, negro, productWidth, verdeDetalle, formWidth, violetaHover } from '../../containers/App/GlobalStyles'
 
 export const StyledCRUDProducts = styled.div`
   display: flex;
   flex-direction: column;
-
+  width: ${formWidth * 2}vw;
+  min-height: 30vh;
+  margin: 2rem auto;
+  margin-bottom:0;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: ${blanco};
   ul li {
     width: 100%;
     display: flex;
@@ -36,10 +44,17 @@ export const StyledCRUDProducts = styled.div`
   .deleted {
     margin-top: 3rem;
     text-align: center;
-    
-
     h4 {
       margin-bottom: 1rem;
     }
+  }
+
+  .fas{
+    color:${negro};
+    margin-left:1vw;
+    &:hover{
+      color:${violeta};
+    }
+    
   }
 `;

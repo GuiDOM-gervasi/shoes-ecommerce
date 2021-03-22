@@ -18,7 +18,9 @@ export default function Nav() {
         <div>
           <ul className="lineup">
             <li className="logo">
-              <NavLink to="/">Home</NavLink>
+              <NavLink to="">
+                <i className="fas fa-home"></i>
+              </NavLink>
             </li>
             <li className="searchbar">
               <SearchBar />
