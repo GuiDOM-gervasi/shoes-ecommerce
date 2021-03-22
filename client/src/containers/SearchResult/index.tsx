@@ -31,7 +31,7 @@ export default function SearchResult() {
               <Link to={`/product/${item.id}`}>
                 <li>
                   <img
-                    src={item.img || fotosZapa.photo}
+                    src={item.muestraimg || fotosZapa.photo}
                     alt={item.name}
                     className="productImg"
                     key={item.id}

@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import { blanco, verdeMain, violeta, negro, productWidth, verdeDetalle, formWidth } from '../../containers/App/GlobalStyles'
+
 
 export const StyledAddUser = styled.div`
-  width: 60vw;
-  height: 80vh;
+  width: ${formWidth}vw;
+  height: 60vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
@@ -10,8 +12,9 @@ export const StyledAddUser = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  background-color: ${blanco};
   position: relative;
+  color: ${violeta};
 
   form {
     height: 80%;
@@ -37,43 +40,15 @@ export const StyledAddUser = styled.div`
 
     input {
       border: none;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid ${violeta};
       width: 80%;
     }
-
-    input[type="number"] {
-      width: 40%;
+    input::placeholder {
+      color: ${violeta};
+      opacity: 0.5;
     }
-
-    textarea {
-      height: 10rem;
-      width: 100%;
-      resize: none;
-    }
-  }
-
-  input[type="submit"] {
-    position: absolute;
-    bottom: 0;
-  }
-
-  .selectsMultiple {
-    display: flex;
-    flex-direction: row;
-
-    .divModels {
-      width: 50%;
-      select {
-        width: 30%;
-      }
-    }
-  }
-
-  optgroup {
-    color: rgba(0, 0, 0, 0.3);
-
-    option {
-      color: black;
+    .register{
+      background-color:${blanco};
     }
   }
 `;

@@ -45,7 +45,7 @@ export const StyledLoader = styled.div`
 		height: 211px;
 		display: inline-block;
 		overflow: hidden;
-		background: #ffffff;
+		/* background: #ffffff; */
 	}
 	.innerCircle {
 		width: 100%;

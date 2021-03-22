@@ -28,11 +28,11 @@ interface ProductAttributes {
 function App() {
   const { isAdmin } = useAuth();
   return (
-    <div className="App">
+    <div className="App fondoDegradado">
       <Nav />
-      <GlobalStyles />
-      <Route exact path="/" component={Catalogue} />
-      <Route path="/product/:id" component={ProductDetail} />
+      <GlobalStyles/>
+      <Route exact path="/" component={Catalogue}/>
+      <Route path="/product/:id" component={ProductDetail}/>
       <Route path="/register" component={AddUser} />
       <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />
