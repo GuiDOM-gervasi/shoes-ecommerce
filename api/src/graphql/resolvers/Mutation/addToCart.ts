@@ -1,4 +1,5 @@
 import CartProduct from '#root/db/models/cartproduct';
+import Cart from '#root/db/models/carts';
 import { CartProductAttributes } from '#root/db/models/types';
 
 

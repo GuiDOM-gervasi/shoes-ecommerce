@@ -136,7 +136,7 @@ const typeDefs = gql`
     productForCategory(name: String!): [Product!]!
     searchProducts(name: String!): [Product!]!
     logoutUser: Logout
-    cart(cartId: String!): [Cart]!
+    cart(userId: String!): [Cart]!
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!
