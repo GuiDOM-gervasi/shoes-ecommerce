@@ -1,8 +1,17 @@
 import styled from "styled-components";
+import { blanco, verdeMain, violeta, negro, productWidth, verdeDetalle, formWidth } from '../../containers/App/GlobalStyles'
 
 export const StyledCRUDCategory = styled.div`
   display: flex;
   flex-direction: column;
+  width: ${formWidth * 2}vw;
+  min-height: 30vh;
+  margin: 2rem auto;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: ${blanco};
+
   ul li {
     width: 100%;
     display: flex;

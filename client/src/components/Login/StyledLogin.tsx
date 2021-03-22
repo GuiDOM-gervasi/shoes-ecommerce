@@ -15,6 +15,11 @@ export const StyledLogin = styled.div`
   background-color: ${blanco};
   position: relative;
 
+  input::placeholder {
+    color: ${violeta};
+    opacity: 0.5;
+  }
+  
   form {
     height: 80%;
     width: 100%;
@@ -39,7 +44,7 @@ export const StyledLogin = styled.div`
 
     input {
       border: none;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid ${violeta};
       width: 80%;
     }
     .login{

@@ -24,6 +24,7 @@ export default function AddCategory({ className }: AddCategoryAttributes) {
 					name,
 				},
 			});
+			alert("Categoría agregada")
 		} catch (err) {
 			console.log(err);
 		} finally {
@@ -50,7 +51,7 @@ export default function AddCategory({ className }: AddCategoryAttributes) {
 					/>
 					<span className="span_name"></span>
 				</div>
-				<input type="submit" value="Add Category" />
+				<input className="addButton" type="submit" value="Add Category" />
 			</form>
 		</StyledAddCategory>
 	);
