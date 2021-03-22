@@ -1,24 +1,29 @@
 import { useQuery } from "@apollo/client";
 import { Link } from "react-router-dom";
-import React from 'react';
+import React from "react";
 import { StyledCatalogue } from "./StyledCatalogue";
 import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Slider from "../../components/Slider";
 import Filter from "../../components/Filter";
-import Loader from '../../components/Loader';
+import Loader from "../../components/Loader";
 
 export default function Catalogue() {
-
   let { data, loading, error } = useQuery(GET_PRODUCTS);
-  const [loadedProducts, setLoadedProduct] = React.useState([])
+  const [loadedProducts, setLoadedProduct] = React.useState([]);
+
+  // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
+  // if (loadedProducts.length < 1) {
+  //   console.log(data);
+  //   setLoadedProduct(data.products);
+  // }
+
+  React.useEffect(() => {
+    data && setLoadedProduct(data.products);
+  }, [data]);
+
   if (loading || !data) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
-
-  if (loadedProducts.length < 1) {
-    console.log(data)
-    setLoadedProduct(data.products)
-  }
 
   return (
     <StyledCatalogue className="fondoDegradado">
@@ -40,11 +45,13 @@ export default function Catalogue() {
                 alt="name"
                 className="productImg"
               />
-            
-            <div className="productData">
-              <h5>{item.brand.name} {item.name}</h5>
-              <p>${item.price}</p>
-            </div>
+
+              <div className="productData">
+                <h5>
+                  {item.brand.name} {item.name}
+                </h5>
+                <p>${item.price}</p>
+              </div>
             </Link>
           </li>
         ))}

@@ -11,10 +11,9 @@ interface AddProductAttributes {
 }
 
 export default function AddProduct({ className }: AddProductAttributes) {
-  const [
-    createProduct,
-    { error: errorMutationProduct },
-  ] = useMutation(ADD_PRODUCT);
+  const [createProduct, { error: errorMutationProduct }] = useMutation(
+    ADD_PRODUCT
+  );
   // const [createModel, { error: errorMutationModel }] = useMutation(ADD_MODEL);
 
   const { data: dataCat, loading: loadingCat, error: errorCat } = useQuery(

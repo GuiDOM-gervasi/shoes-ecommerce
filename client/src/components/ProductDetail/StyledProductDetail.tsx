@@ -1,6 +1,10 @@
 import styled from "styled-components";
-import {blanco, verdeMain, violeta, productWidth} from '../../containers/App/GlobalStyles' 
-const verde = (opacity) => `rgba(100, 225, 255, ${opacity})`;
+import {
+  blanco,
+  verdeMain,
+  violeta,
+  productWidth,
+} from "../../containers/App/GlobalStyles";
 
 export const StyledProductDetail = styled.div`
   ul {
@@ -16,11 +20,11 @@ export const StyledProductDetail = styled.div`
     display: flex;
     flex-direction: column;
   }
+
   .mainProduct {
     display: flex;
   }
-  .price {
-  }
+
   .photo {
     width: 50vw;
     height: 70vh;
@@ -83,15 +87,17 @@ export const StyledProductDetail = styled.div`
     height: 17rem;
     position: absolute;
     left: 0;
+    margin-top: 2rem;
     filter: blur(2px);
   }
+
   .related {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100vw;
     margin-top: 3rem;
-    background-color: ${verde(".3")};
+    background-color: rgba(100, 223, 223, 0.3);
     h3 {
       color: ${violeta};
       margin: 1rem 0;
@@ -116,8 +122,8 @@ export const StyledProductDetail = styled.div`
       margin: 0 3rem;
       .similData {
         opacity: 0;
-        background-color: rgba(0,0,0, .2);
-        padding: .2rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        padding: 0.2rem;
         width: 15rem;
         position: absolute;
         top: 10rem;

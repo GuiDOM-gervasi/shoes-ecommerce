@@ -16,6 +16,6 @@ const sequelize = new Sequelize(
   }
 );
 
-sequelize.sync({ force: false});
+sequelize.sync({ force: false });
 
 export default sequelize;

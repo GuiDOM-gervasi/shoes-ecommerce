@@ -1,15 +1,15 @@
 import { createGlobalStyle } from "styled-components";
 
 export var verdeMain = "#64DFDF";
-export var verdeDetalle = "#80FFDB"
-export var verdeDetalleTrans = "#80FFDB50"
-export var violeta = "#6930C3"
-export var violetaHover = "#6930C350"
-export var blanco = "#F0F0F0"
-export var negro = "#151515"
-export var productWidth = 20
-export var navHeight = 18
-export var formWidth = 40
+export var verdeDetalle = "#80FFDB";
+export var verdeDetalleTrans = "#80FFDB50";
+export var violeta = "#6930C3";
+export var violetaHover = "#6930C350";
+export var blanco = "#F0F0F0";
+export var negro = "#151515";
+export var productWidth = 20;
+export var navHeight = 18;
+export var formWidth = 40;
 
 export const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap');
@@ -31,6 +31,7 @@ export const GlobalStyles = createGlobalStyle`
     h1{
         font-size:3rem;
         color: ${verdeMain}
+        text-transform: uppercase;
     }
     h2{
         font-size:2.4rem;
@@ -61,6 +62,7 @@ export const GlobalStyles = createGlobalStyle`
         width: 60%;
         padding: 2%;
         border-radius: 35px;
+        cursor: pointer;
     }
     .botonGlass{
         color: ${blanco};
@@ -102,12 +104,12 @@ export const GlobalStyles = createGlobalStyle`
         section {
         background-color: ${verdeMain};
         height: 100%;
-        border-right: 1px solid #747474;
         display: flex;
         align-items: center;
         justify-content: center;
         transition: all 500ms ease;
         flex-grow: 1;
+        cursor: pointer;
 
         &:hover {
             background-color: ${verdeDetalle};
