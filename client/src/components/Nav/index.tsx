@@ -1,14 +1,17 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
 import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
+import { useHistory } from "react-router-dom";
 
 export default function Nav() {
-  const { logout } = useAuth();
-  const handleClick= () => {
-    logout()
-  }
+  const history = useHistory();
+  const { logout, isAdmin, userId } = useAuth();
+  const handleClick = () => {
+    logout(() => history.push("/"));
+  };
+
   return (
     <StyledNav>
       <nav className="fullnav">
@@ -33,6 +36,11 @@ export default function Nav() {
             <i className="fas fa-bars"></i>
           </label>
           <ul className="linedown">
+            {isAdmin ? (
+              <li>
+                <NavLink to="/admin">Admin</NavLink>
+              </li>
+            ) : null}
             <li className="catalogue">
               <NavLink to="/">Catalogue</NavLink>
             </li>
@@ -42,16 +50,26 @@ export default function Nav() {
             <li className="aboutus">
               <NavLink to="">About us</NavLink>
             </li>
-            <li className="login">
-              <NavLink to="/login" className="hover">
-                Login
-              </NavLink>
-            </li>
-            <li className="register">
-              <NavLink to="/register" className="hover">
-                Register
-              </NavLink>
-            </li>
+            {userId ? (
+              <li className="login">
+                <div onClick={handleClick} className="hover">
+                  <p>Logout</p>
+                </div>
+              </li>
+            ) : (
+              <>
+                <li className="login">
+                  <NavLink to="/login" className="hover">
+                    Login
+                  </NavLink>
+                </li>
+                <li className="register">
+                  <NavLink to="/register" className="hover">
+                    Register
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>
