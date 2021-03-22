@@ -21,9 +21,7 @@ export default function EditProduct({ match }) {
     },
   });
 
-  const {
-    data: dataBrands,
-  } = useQuery(GET_BRANDS);
+  const { data: dataBrands } = useQuery(GET_BRANDS);
 
   const [editProduct] = useMutation(EDIT_PRODUCT, {
     refetchQueries: [
