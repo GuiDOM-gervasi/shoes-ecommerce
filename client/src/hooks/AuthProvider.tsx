@@ -11,7 +11,6 @@ export function AuthProvider(props) {
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const completeUser = JSON.parse(localStorage.getItem("user"));
-    console.log(completeUser);
     completeUser && completeUser.isAdmin
       ? setIsAdmin(completeUser.isAdmin)
       : setIsAdmin(false);
@@ -31,6 +30,9 @@ export function AuthProvider(props) {
         data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
       }
     },
+    onError:(error) => {
+      console.log(error)
+    }
   });
 
   const [logoutUser] = useLazyQuery(LOGOUT_USER, {
@@ -44,6 +46,9 @@ export function AuthProvider(props) {
         setIsAdmin(false);
       }
     },
+    onError:(error)=>{
+        console.log(error)
+    }
   });
 
   function login(email: string, password: string, cb) {
@@ -53,13 +58,14 @@ export function AuthProvider(props) {
         email,
         password,
       },
-    });
-    cb();
+    }).then(()=>{
+      cb();
+    })
   }
 
   function logout(cb) {
     console.log("Logout");
-    logoutUser();
+    logoutUser()
     cb();
   }
 

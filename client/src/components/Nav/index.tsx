@@ -54,10 +54,9 @@ export default function Nav() {
             </li>
             {userId ? (
               <li onClick={handleClick} className="login">
-                <p>Logout</p>
+                <a href="#" className="hover">Logout</a>
               </li>
-            ) : (
-              <>
+            ) : <>
                 <li className="login">
                   <NavLink to="/login" className="hover">
                     Login
@@ -68,8 +67,7 @@ export default function Nav() {
                     Register
                   </NavLink>
                 </li>
-              </>
-            )}
+              </>}
           </ul>
         </div>
       </nav>
