@@ -65,7 +65,6 @@ function App() {
         path="/admin/editCategory/:categoryId"
         component={isAdmin ? EditCategory : Login}
       />
-      <Route exact path="/admin" component={Admin} />
       <Route path="/cart" component={Cart} />
       <Route exact path="/admin/orders" component={OrderTable} />
       <Route path="/admin/orders/:id" component={Order} />

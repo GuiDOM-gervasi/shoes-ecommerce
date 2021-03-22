@@ -26,7 +26,6 @@ export default function Catalogue () {
         state:'reserved'
       },
     })
-    console.log(carrito)
   }
   //console.log(carrito)
   // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
