@@ -6,12 +6,14 @@ import {
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_BY_CATEGORIES,
   GET_CART,
+  GET_REVIEWS,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
 import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
+import Reviews from "../../containers/Reviews";
 
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
@@ -30,6 +32,16 @@ export default function ProductDetail({ match }: any) {
   const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
+    },
+  });
+
+  const {
+    data: reviewData,
+    loading: reviewLoading,
+    error: reviewError,
+  } = useQuery(GET_REVIEWS, {
+    variables: {
+      productId,
     },
   });
 
@@ -192,6 +204,11 @@ export default function ProductDetail({ match }: any) {
               Agregar al carrito
             </button>
           </div>
+        </div>
+        <div className="reviewsSection">
+        {reviewData && (
+          <Reviews className="review" allReviews={reviewData.getReviews} />
+        )}
         </div>
         <div className="related">
           <h3>Relacionados</h3>
