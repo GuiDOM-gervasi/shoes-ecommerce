@@ -20,6 +20,7 @@ import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Loader from "../../components/Loader";
+import AddReview from "../../components/AddReview";
 import CRUDUsers from "../CRUDUsers";
 
 interface ProductAttributes {
@@ -66,6 +67,7 @@ function App() {
       <Route exact path="/admin/orders" component={isAdmin ? OrderTable : Login} />
       <Route path="/admin/orders/:id" component={isAdmin ? Order : Login} />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
+      <Route exact path="/addReview/:id/:user" component={AddReview} />
     </div>
   );
 }
