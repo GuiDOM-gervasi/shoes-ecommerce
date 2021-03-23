@@ -9,6 +9,8 @@ export interface formReview {
 
 export function validateChange(e: any, form: formReview, error: boolean) {
   switch (e.target.name) {
+    case "score":
+      return { ...form, score: Number(e.target.value), error };
     default:
       return { ...form, [e.target.name]: e.target.value, error };
   }

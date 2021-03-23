@@ -205,11 +205,11 @@ export default function ProductDetail({ match }: any) {
             </button>
           </div>
         </div>
-        
+        <div className="reviewsSection">
         {reviewData && (
           <Reviews className="review" allReviews={reviewData.getReviews} />
         )}
-
+        </div>
         <div className="related">
           <h3>Relacionados</h3>
           <div className="photo">

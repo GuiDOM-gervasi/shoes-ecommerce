@@ -121,7 +121,6 @@ export const StyledProductDetail = styled.div`
       }
     }
   }
-
   .related {
     margin-top: 1rem;
     grid-row: 2 / 3;

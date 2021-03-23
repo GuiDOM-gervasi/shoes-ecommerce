@@ -164,14 +164,14 @@ export const ADD_REVIEW = gql`
     $title: String!
     $description: String!
   ) {
-    createReview(
+    addReview(
       productId: $productId
       userId: $userId
       score: $score
       title: $title
       description: $description
     ) {
-      productId
+      title
       score
     }
   }

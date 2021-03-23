@@ -2,14 +2,11 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { StyledAddReview } from "./StyledAddReview";
 import { ADD_REVIEW } from "../../graphql/mutations";
-import { GET_CATEGORIES, GET_BRANDS, GET_MODELS } from "../../graphql/queries";
 import {
   validateChange,
   check,
   formReview,
 } from "../../helpers/validationReview";
-import Loader from "../Loader";
-import { NavLink } from "react-router-dom";
 
 interface AddProductAttributes {
   className: String;
@@ -41,6 +38,7 @@ export default function AddReview(
   const handleSubmit = async (e) => {
     e.preventDefault();
     let { title, description, score, userId, productId } = form;
+    console.log(form)
     try {
       await createReview({
         variables: {
@@ -73,6 +71,8 @@ export default function AddReview(
 
   return (
     <StyledAddReview>
+      <p>Usuario {userId}</p>
+      <p>Producto {productId}</p>
       <form onSubmit={handleSubmit}>
         <div className="div_title">
           <input

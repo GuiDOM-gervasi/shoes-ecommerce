@@ -1,6 +1,6 @@
 export const ratingStars = (rating, id) => {
   var divId = "rating" + id
-  var stars = Math.round(rating)
+  var stars = Math.floor(rating)
   var emptyStars = 5 - rating
   for (let i = 0; i < stars; i++) {
     var div = document.createElement("div");
