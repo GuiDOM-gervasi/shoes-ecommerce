@@ -14,12 +14,16 @@ export const StyledReview = styled.div`
   display: flex;
   flex-direction:column;
   justify-content:space-between;
-  width: ${formWidth}vw;
-  margin: 2rem auto;
+  width: ${formWidth *0.95}vw;
+  margin: 1rem 1rem 0 1rem;
   border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: ${blanco};
+  .review{
+    width:95%;
+    margin:auto;
+  }
   .rating{
     margin: 2vh 0 0 0;
   }

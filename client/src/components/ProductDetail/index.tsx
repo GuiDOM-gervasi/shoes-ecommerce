@@ -6,6 +6,7 @@ import {
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_BY_CATEGORIES,
   GET_CART,
+  GET_REVIEWS,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
@@ -14,22 +15,33 @@ import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
 import Reviews from "../../containers/Reviews";
 
-
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
-  const {userId} = useAuth()
-  const [addToCart, { error: errorMutationCart }] = useMutation(
-    ADD_TO_CART
-  );
+  const { userId } = useAuth();
+  const [addToCart, { error: errorMutationCart }] = useMutation(ADD_TO_CART);
 
-  const {data : dataCart, loading : loadingCart , error : errorCart} = useQuery(GET_CART, {
-    variables: {
-      userId: userId&&userId
-    },})  
+  const { data: dataCart, loading: loadingCart, error: errorCart } = useQuery(
+    GET_CART,
+    {
+      variables: {
+        userId: userId && userId,
+      },
+    }
+  );
 
   const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
+    },
+  });
+
+  const {
+    data: reviewData,
+    loading: reviewLoading,
+    error: reviewError,
+  } = useQuery(GET_REVIEWS, {
+    variables: {
+      productId,
     },
   });
 
@@ -38,20 +50,21 @@ export default function ProductDetail({ match }: any) {
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
 
-  const [finalproducts, {data: finalData, loading: finalLoading, error : finalError}] = useLazyQuery(FINAL_PRODUCTS,
-  {
-    onCompleted: (finalData)=>{
-     addToCart({
-        variables:{
+  const [
+    finalproducts,
+    { data: finalData, loading: finalLoading, error: finalError },
+  ] = useLazyQuery(FINAL_PRODUCTS, {
+    onCompleted: (finalData) => {
+      addToCart({
+        variables: {
           finalproductId: finalData.finalproducts[0].id,
           cartId: dataCart.cart[0]?.id,
           price,
-          quantity: 1
-        } 
-      })
-    }
-
-  })
+          quantity: 1,
+        },
+      });
+    },
+  });
   useEffect(() => {
     if (mainProduct) {
       const {
@@ -63,7 +76,9 @@ export default function ProductDetail({ match }: any) {
       sizes = sizes.map((model) => model.size);
       sizes = Array.from(new Set(sizes));
       setModelsState({ sizes, colors });
-      if(categories[0]){getSimils({ variables: { name: categories[0].name } });}
+      if (categories[0]) {
+        getSimils({ variables: { name: categories[0].name } });
+      }
     }
   }, [mainProduct]);
 
@@ -101,21 +116,20 @@ export default function ProductDetail({ match }: any) {
     priceBefore,
   } = fotosZapa;
 
-
-
-  const handleClick = () =>{
-    const sizeSelect : any = document.querySelector("#size-select")
-    const colorSelect : any = document.querySelector("#color-select")
-    const model = models.find((current)=>(
-      current.size === sizeSelect.value && current.color === colorSelect.value
-    ))
+  const handleClick = () => {
+    const sizeSelect: any = document.querySelector("#size-select");
+    const colorSelect: any = document.querySelector("#color-select");
+    const model = models.find(
+      (current) =>
+        current.size === sizeSelect.value && current.color === colorSelect.value
+    );
     const finalproductId = finalproducts({
-      variables:{
+      variables: {
         productId: id,
-        modelId: model.id
+        modelId: model.id,
       },
-    })
-  }
+    });
+  };
   return (
     <StyledProductDetail>
       <div className="container">
@@ -148,7 +162,9 @@ export default function ProductDetail({ match }: any) {
             </ul>
           </div>
           <div className="info">
-            <h1 className={name.length > 20? "tituloLargo": "tituloCorto"}>{name}</h1>
+            <h1 className={name.length > 20 ? "tituloLargo" : "tituloCorto"}>
+              {name}
+            </h1>
             <div className="description">
               {categories?.map((category) => (
                 <span
@@ -185,14 +201,16 @@ export default function ProductDetail({ match }: any) {
                   </option>
                 ))}
               </select>
-              <button className="boton" onClick={()=>handleClick()}>
+              <button className="boton" onClick={() => handleClick()}>
                 Agregar al carrito
               </button>
             </div>
           </div>
         </div>
-
-        <Reviews className="review" productId={id}/>
+        
+        {reviewData && (
+          <Reviews className="review" allReviews={reviewData.getReviews} />
+        )}
 
         <div className="related">
           <h3>Relacionados</h3>

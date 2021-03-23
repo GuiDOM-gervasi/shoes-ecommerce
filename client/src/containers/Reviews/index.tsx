@@ -1,35 +1,58 @@
 import React, { useEffect } from "react";
 import { StyledReviews } from "./StyledReviews";
 import { useQuery } from "@apollo/client";
-import {GET_REVIEWS} from "../../graphql/queries";
-import Review from "../../components/Review";
-import { ratingStars } from "./ratingStars";
+import { GET_REVIEWS } from "../../graphql/queries";
+import { Review, ReviewAttributes } from "../../components/Review";
 
-
+interface GetReviews {
+  count: number;
+  average: number;
+  reviews: [ReviewAttributes];
+}
 interface ReviewsAttributes {
   className: String;
-  productId: String;
+  allReviews: GetReviews;
 }
+export default function Reviews({ className, allReviews }: ReviewsAttributes) {
+  useEffect(() => {
+    var stars = Math.round(allReviews.average);
+    var emptyStars = 5 - allReviews.average;
+    for (let i = 0; i < stars; i++) {
+      console.log("CLIPSTAR");
+      var div = document.createElement("div");
+      div.className = "clip-star2";
+      document.getElementById("ratingAverage").appendChild(div);
+    }
+    for (let i = 0; i < emptyStars; i++) {
+      console.log("EMPTYSTAR");
+      var div = document.createElement("div");
+      div.className = "empty-star2";
+      document.getElementById("ratingAverage").appendChild(div);
+    }
+  }, []);
 
-export default function Reviews({ className, productId }: ReviewsAttributes, props) {
-
-  const {data, loading , error} = useQuery(GET_REVIEWS, {
-    variables: {
-      productId
-    },})  
-  if(loading){return <div>Loading...</div>}
-  if(data){
-    var reviews = data.getReviews.reviews
-    console.log("id", reviews[0].id)
-  }
+  var averageDecimal = allReviews.average.toFixed(1);
   return (
     <StyledReviews>
-      <h2>{data.getReviews.average}</h2>
-      <h3>Promedio sobre {data.getReviews.count} opiniones</h3>
+      <div className="reviewsHeader">
+        <div className="reviewsAverage">{averageDecimal}</div>
+        <div className="reviewsCount">
+          <div className="ratingAverage" id="ratingAverage"></div>
+          <h4>Promedio sobre {allReviews.count} opiniones</h4>
+        </div>
+      </div>
       <ul>
-        {reviews.map(review =>
-          <li><Review  className="review" id={review.id} description={review.description} score={review.score} title={review.title} /></li>
-        )}
+        {allReviews.reviews.map((review) => (
+          <li>
+            <Review
+              className="review"
+              id={review.id}
+              description={review.description}
+              score={review.score}
+              title={review.title}
+            />
+          </li>
+        ))}
       </ul>
     </StyledReviews>
   );
