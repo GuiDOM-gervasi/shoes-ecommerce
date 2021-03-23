@@ -9,8 +9,7 @@ import {
   import Product from './products';
   import User from './users';
   
-  // Definitions of tables and sequelize models
-  // Table productcategory
+
   @Table({
     defaultScope: {
       attributes: { exclude: ["deleteAt"] },

@@ -85,6 +85,15 @@ const typeDefs = gql`
     logout: Boolean
   }
 
+  type Review {
+    id: ID
+    productId: String
+    userId: String
+    title: String
+    score: Float!
+    description: String
+  }
+
   type Mutation {
     createUser(
       firstName: String!
@@ -124,6 +133,7 @@ const typeDefs = gql`
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
     loginUser(email: String!, password: String!): Access
+    addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
   }
 
   type Query {

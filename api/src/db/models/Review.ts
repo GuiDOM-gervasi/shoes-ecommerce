@@ -3,21 +3,22 @@ import {
   DataType,
   ForeignKey,
   Model,
+  BelongsTo,
   Table
 } from "sequelize-typescript";
 
 import Product from './products'
 import User from './users'
 import {ReviewAttributes} from "./types"
-// Definitions of tables and sequelize models
-// Table productcategory
+
 @Table({
   defaultScope: {
     attributes: { exclude: ["deleteAt"] },
   },
   paranoid: true,
-  tableName: "review",
+  tableName: "reviews",
 })
+
 export class Review extends Model<ReviewAttributes>{
   @Column({
     allowNull: false,
@@ -27,25 +28,32 @@ export class Review extends Model<ReviewAttributes>{
   })
   id?: string;
 
-  @Column({
-    allowNull: false,
-    type: DataType.INTEGER,
-  })
   @ForeignKey(() => Product)
-  productId!: string;
-
   @Column({
     allowNull: false,
     type: DataType.INTEGER,
   })
+  productId!: string;
+  
+  @BelongsTo(() => Product)
+  product: Product
+  
   @ForeignKey(() => User)
-  userId!: string;
+  @Column({
+    allowNull: false,
+    type: DataType.INTEGER,
+  })
+  userId: string;
+  
+  @BelongsTo(() => User)
+  user: User
+  
 
   @Column({
   		allowNull: false,
   		type: DataType.FLOAT,
    })
-  score!: string;
+  score!: number;
 
 		@Column({
   		allowNull: false,
@@ -59,7 +67,5 @@ export class Review extends Model<ReviewAttributes>{
    })
   description!: string;
 }
-
-  //delete inutil brand table
 
 export default Review
