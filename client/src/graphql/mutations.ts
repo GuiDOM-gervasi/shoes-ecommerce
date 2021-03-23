@@ -120,29 +120,33 @@ export const EDIT_CATEGORY = gql`
     }
   }
 `;
-export const CREATE_CART =  gql`
-mutation createCart($state:String!, $userId:String!){
-createCart(state:$state,userId:$userId){
-  state
-  userId
-}
-}
-`
+export const CREATE_CART = gql`
+  mutation createCart($state: String!, $userId: String!) {
+    createCart(state: $state, userId: $userId) {
+      state
+      userId
+    }
+  }
+`;
 
 export const ADD_TO_CART = gql`
-mutation addtoCart($finalproductId:String!
-$cartId: String!,
-$quantity:Int,
-$price: Float){
- addToCart(finalproductId:$finalproductId
-cartId: $cartId
-quantity: $quantity
-price: $price){
-    finalproductId
-  price
+  mutation addtoCart(
+    $finalproductId: String!
+    $cartId: String!
+    $quantity: Int
+    $price: Float
+  ) {
+    addToCart(
+      finalproductId: $finalproductId
+      cartId: $cartId
+      quantity: $quantity
+      price: $price
+    ) {
+      finalproductId
+      price
+    }
   }
-}
-`
+`;
 
 export const DELETE_TO_CART = gql`
 mutation removeFromCart(
@@ -173,3 +177,20 @@ export const ADD_REVIEW = gql`
   }
 `;
 
+export const DELETE_USER = gql`
+  mutation DeleteUser($id: String!) {
+    deleteUser(id: $id)
+  }
+`;
+
+export const UPDATE_USER = gql`
+  mutation UpdateUser($id: String!, $atr: String!, $input: String) {
+    updateUser(id: $id, atr: $atr, input: $input)
+  }
+`;
+
+export const RESTORE_USER = gql`
+  mutation RestoreUser($id: String!) {
+    undeleteUser(id: $id)
+  }
+`;

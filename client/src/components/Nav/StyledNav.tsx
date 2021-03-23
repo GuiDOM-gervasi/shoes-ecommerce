@@ -153,6 +153,7 @@ export const StyledNav = styled.div`
       text-align: center;
       left: -200%;
       transition: all 0.5s;
+      z-index: 3;
     }
 
     nav ul li {

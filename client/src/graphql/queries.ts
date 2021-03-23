@@ -165,6 +165,31 @@ export const GET_REVIEWS = gql`
         description
         id
       }
+      `;
+export const GET_USERS = gql`
+  query GetUsers {
+    users {
+      id
+      firstName
+      lastName
+      userName
+      email
+      isAdmin
+      nlsuscribe
+    }
+  }
+`;
+
+export const GET_DELETED_USERS = gql`
+  query GetDeletedUsers {
+    deletedUsers {
+      id
+      firstName
+      lastName
+      userName
+      email
+      isAdmin
+      nlsuscribe
     }
   }
 `;

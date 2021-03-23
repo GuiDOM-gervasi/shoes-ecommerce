@@ -133,78 +133,76 @@ export default function ProductDetail({ match }: any) {
   return (
     <StyledProductDetail>
       <div className="container">
-        <div className="mainProduct">
-          <div className="imagenes">
-            <div className="fondoVioleta"></div>
-            <img className="photoMain" src={muestraimg || photo} alt={name} />
-            <ul>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail1}
-                  alt={`photoDetail 1 - ${name}`}
-                />
-              </li>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail2}
-                  alt={`photoDetail 2 - ${name}`}
-                />
-              </li>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail3}
-                  alt={`photoDetail 3 - ${name}`}
-                />
-              </li>
-            </ul>
-          </div>
-          <div className="info">
-            <h1 className={name.length > 20 ? "tituloLargo" : "tituloCorto"}>
-              {name}
-            </h1>
-            <div className="description">
-              {categories?.map((category) => (
-                <span
-                  className="category"
-                  onClick={() =>
-                    getSimils({ variables: { name: category.name } })
-                  }
-                >
-                  {category.name},{" "}
-                </span>
-              ))}
-              <span>{brand.name}</span>
-            </div>
-            <div className="precios">
-              <h4 className="priceBefore">${priceBefore}</h4>
-              <h2 className="price">${price}</h2>
-            </div>
-            <div className="botones">
-              <select
-                className="botonInvertido"
-                onChange={(e: any) => filterModels(e.target.value)}
-                id="color-select"
+        <div className="fondoVioleta"></div>
+        <div className="imagenes">
+          <img className="photoMain" src={muestraimg || photo} alt={name} />
+          <ul>
+            <li>
+              <img
+                className="photoDetail"
+                src={photoDetail1}
+                alt={`photoDetail 1 - ${name}`}
+              />
+            </li>
+            <li>
+              <img
+                className="photoDetail"
+                src={photoDetail2}
+                alt={`photoDetail 2 - ${name}`}
+              />
+            </li>
+            <li>
+              <img
+                className="photoDetail"
+                src={photoDetail3}
+                alt={`photoDetail 3 - ${name}`}
+              />
+            </li>
+          </ul>
+        </div>
+        <div className="info">
+          <h1 className={name.length > 20 ? "tituloLargo" : "tituloCorto"}>
+            {name}
+          </h1>
+          <div className="description">
+            {categories?.map((category) => (
+              <span
+                className="category"
+                onClick={() =>
+                  getSimils({ variables: { name: category.name } })
+                }
               >
-                {modelsState.colors?.map((color, i) => (
-                  <option value={color} key={`${color} ${i}`}>
-                    {color}
-                  </option>
-                ))}
-              </select>
-              <select className="botonInvertido" id="size-select">
-                {modelsState.sizes?.map((size, i) => (
-                  <option value={size} key={`${size} ${i}`}>
-                    {size}
-                  </option>
-                ))}
-              </select>
-              <button className="boton" onClick={() => handleClick()}>
-                Agregar al carrito
-              </button>
-            </div>
+                {category.name},{" "}
+              </span>
+            ))}
+            <span>{brand.name}</span>
+          </div>
+          <div className="precios">
+            <h4 className="priceBefore">${priceBefore}</h4>
+            <h2 className="price">${price}</h2>
+          </div>
+          <div className="botones">
+            <select
+              className="botonInvertido"
+              onChange={(e: any) => filterModels(e.target.value)}
+              id="color-select"
+            >
+              {modelsState.colors?.map((color, i) => (
+                <option value={color} key={`${color} ${i}`}>
+                  {color}
+                </option>
+              ))}
+            </select>
+            <select className="botonInvertido" id="size-select">
+              {modelsState.sizes?.map((size, i) => (
+                <option value={size} key={`${size} ${i}`}>
+                  {size}
+                </option>
+              ))}
+            </select>
+            <button className="boton" onClick={() => handleClick()}>
+              Agregar al carrito
+            </button>
           </div>
         </div>
         

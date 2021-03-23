@@ -17,10 +17,10 @@ export interface QueryUsers {
 }
 
 export interface CartAttributes {
-  id: String
-  finalproducts: []
-  userId: String
-  state: String
+  id: String;
+  finalproducts: [];
+  userId: String;
+  state: String;
 }
 
 export interface ProductAttributes {
@@ -58,4 +58,14 @@ export interface ProductBasic {
   brandId: Brand;
   categories: String[];
   __typename: String;
+}
+
+export interface UserAttributes {
+  id: string;
+  userName: String;
+  firstName: String;
+  lastName: String;
+  email: String;
+  nlsuscribe: Boolean;
+  isAdmin: Boolean;
 }
