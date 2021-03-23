@@ -29,8 +29,11 @@ export const StyledReviews = styled.div`
   .empty-star2 {
     background: ${violetaHover};
   }
+  .half-star2 {
+    background: linear-gradient(90deg, ${violeta} 50%, ${violetaHover} 50%)
+  }
   .clip-star2,
-  .empty-star2 {
+  .empty-star2,.half-star2 {
     clip-path: polygon(
       50% 0%,
       61% 35%,
