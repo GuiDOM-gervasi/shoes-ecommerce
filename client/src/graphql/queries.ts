@@ -131,26 +131,40 @@ export const LOGOUT_USER = gql`
 `;
 
 export const GET_CART = gql`
- query cart($userId:String!){
-    cart(userId:$userId){
+  query cart($userId: String!) {
+    cart(userId: $userId) {
       id
-      finalproducts{
-      id
-      product{
+      finalproducts {
         id
-        name
-        price
-        muestraimg
+        product {
+          id
+          name
+          price
+          muestraimg
+        }
       }
     }
-    }
   }
-`
+`;
 
 export const FINAL_PRODUCTS = gql`
-query finalproducts($productId:String! $modelId:String!){
-  finalproducts(productId:$productId,modelId:$modelId){
-  id
+  query finalproducts($productId: String!, $modelId: String!) {
+    finalproducts(productId: $productId, modelId: $modelId) {
+      id
+    }
   }
-}
-`
+`;
+export const GET_REVIEWS = gql`
+  query GetReviews($productId: String!) {
+    getReviews(productId: $productId) {
+      count
+      average
+      reviews {
+        title
+        score
+        description
+        id
+      }
+    }
+  }
+`;

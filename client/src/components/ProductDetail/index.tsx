@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Loader from "../Loader";
 import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
+import Reviews from "../../containers/Reviews";
 
 
 export default function ProductDetail({ match }: any) {
@@ -190,6 +191,9 @@ export default function ProductDetail({ match }: any) {
             </div>
           </div>
         </div>
+
+        <Reviews className="review" productId={id}/>
+
         <div className="related">
           <h3>Relacionados</h3>
           <div className="photo">
