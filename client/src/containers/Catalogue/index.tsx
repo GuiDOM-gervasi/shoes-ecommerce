@@ -50,8 +50,7 @@ export default function Catalogue () {
         <section className="sale">Ofertas</section>
         <Filter setLoadedProduct={setLoadedProduct} />
       </div>
-      {console.log("data.products", data.products)}
-      {console.log("loadedProducts", loadedProducts)}
+      
       <ul>
         {loadedProducts.map((item, i) => (
           <li>

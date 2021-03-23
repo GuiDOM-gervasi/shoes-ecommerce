@@ -17,7 +17,7 @@ export default function Filter({setLoadedProduct}) {
   const [getProducts, { data:productsData, loading:productsLoading }] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
 
   const handleCategoryFilter = (value) => {
-    console.log(value)
+
     getProducts({
       variables: {
         name: value,
@@ -32,9 +32,7 @@ export default function Filter({setLoadedProduct}) {
   if (error) {
     return <div>something go wrong loading the filter bar</div>
   }
-  console.log('filter component')
-  console.log(productsLoading)
-  console.log(productsData)
+
   if(!productsLoading && !!productsData) {
     setLoadedProduct(productsData.productForCategory)
   }

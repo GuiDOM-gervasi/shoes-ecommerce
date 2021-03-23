@@ -26,7 +26,7 @@ const [deleteProductCart, { loading: loadingDelete }] = useMutation(
 if (loading) return <Loader />;
 if (error) return <span>Error {error.message}</span>;
 const products= data.cart[0]?.finalproducts
-console.log(products)
+
 
 const {
     photo,
@@ -34,7 +34,7 @@ const {
 let count = 0;
 
 const handleDelete = (finalproduct) => {
-    console.log(data.cart[0]?.id, finalproduct);
+    
     deleteProductCart({
         variables:{
             cartId: data.cart[0]?.id,
