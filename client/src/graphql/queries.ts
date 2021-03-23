@@ -136,6 +136,9 @@ export const GET_CART = gql`
       id
       finalproducts{
       id
+      cartproducts{
+        quantity
+      }
       product{
         id
         name

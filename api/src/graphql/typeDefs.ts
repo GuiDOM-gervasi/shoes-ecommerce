@@ -57,6 +57,7 @@ const typeDefs = gql`
     id: ID
     product: Product
     model: Model
+    cartproducts: [MutationCartProduct]!
   }
 
   type ProductForCategory {
@@ -137,6 +138,8 @@ const typeDefs = gql`
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
     loginUser(email: String!, password: String!): Access
+    updateState(userId:String!, state:String!): String!
+    controlQuantity(id:String!, quantity:Int!): String!
   }
 
   type Query {
@@ -149,7 +152,7 @@ const typeDefs = gql`
     productForCategory(name: String!): [Product!]!
     searchProducts(name: String!): [Product!]!
     logoutUser: Logout
-    cart(userId: String!): [Cart]!
+    cart(userId: String!): Cart!
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!

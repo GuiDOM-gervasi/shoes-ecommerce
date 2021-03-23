@@ -7,7 +7,7 @@ const AuthContext = React.createContext(null);
 
 export function AuthProvider(props) {
   const [user, setUser] = useState(false);
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     const completeUser = JSON.parse(localStorage.getItem("user"));
@@ -16,7 +16,7 @@ export function AuthProvider(props) {
       : setIsAdmin(false);
     completeUser && completeUser.id
       ? setUserId(completeUser.id)
-      : setUserId(0);
+      : setUserId("0");
   }, []);
 
   const [getLogin] = useMutation(LOGIN_USER, {
@@ -42,7 +42,7 @@ export function AuthProvider(props) {
         localStorage.removeItem("refresh-token");
         localStorage.removeItem("user");
         setUser(false);
-        setUserId(0);
+        setUserId("0");
         setIsAdmin(false);
       }
     },

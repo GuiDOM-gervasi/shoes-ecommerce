@@ -5,7 +5,7 @@ import {useMutation, useQuery} from "@apollo/client"
 import { CartAttributes } from '../../types'
 import { fotosZapa } from '../../components/ProductDetail/mockup'
 import { useAuth } from '../../hooks/AuthProvider'
-import { DELETE_TO_CART } from '../../graphql/mutations'
+import { DELETE_TO_CART, QUANTITY } from '../../graphql/mutations'
 import Loader from '../../components/Loader';
 
 const Cart = () => {
@@ -23,9 +23,18 @@ const [deleteProductCart, { loading: loadingDelete }] = useMutation(
         }
 );
 
+const [controlQuantity, {loading: loadingQuantity}] = useMutation(
+    QUANTITY,
+    {
+        refetchQueries: [{ query: GET_CART, variables:{
+            userId: userId&&userId   
+           }}],
+    }
+)
+
 if (loading) return <Loader />;
 if (error) return <span>Error {error.message}</span>;
-const products= data.cart[0]?.finalproducts
+const products= data.cart?.finalproducts
 console.log(products)
 
 const {
@@ -34,13 +43,16 @@ const {
 let count = 0;
 
 const handleDelete = (finalproduct) => {
-    console.log(data.cart[0]?.id, finalproduct);
     deleteProductCart({
         variables:{
-            cartId: data.cart[0]?.id,
+            cartId: data.cart?.id,
             finalproductId: finalproduct
         } 
     })
+}
+
+const value = products[0].cartproducts.quantity
+const handleQuantity = () => {
 }
     return (
        <StyledCart className="fondoDegradado">
@@ -57,7 +69,11 @@ const handleDelete = (finalproduct) => {
                         />            
                         <h4>{p.product.name}</h4> 
                         <p>Price: {p.product.price}</p>
-                        <button className="buttonDelete" onClick={()=>handleDelete(p.id)}>X</button>                  
+                        <button className="buttonDelete" onClick={()=>handleDelete(p.id)}>X</button>
+                        <input type="number" 
+                            value={value}
+                            
+                        />      
                     </div>
                 )
                })

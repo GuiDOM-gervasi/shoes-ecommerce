@@ -15,3 +15,5 @@ export {default as addToCart} from './addToCart';
 export {default as updateCategory} from "./updateCategory";
 export {default as loginUser} from './loginUser';
 export {default as removeFromCart} from './removefromcart';
+export {default as updateState} from "./stateUpdate";
+export {default as controlQuantity} from "./controlQuantity";
