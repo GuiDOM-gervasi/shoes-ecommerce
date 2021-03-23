@@ -122,14 +122,6 @@ export const GET_MODELS = gql`
   }
 `;
 
-export const LOGOUT_USER = gql`
-  query {
-    logoutUser {
-      logout
-    }
-  }
-`;
-
 export const GET_CART = gql`
   query cart($userId: String!) {
     cart(userId: $userId) {

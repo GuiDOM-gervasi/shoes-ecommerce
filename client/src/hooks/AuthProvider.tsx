@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { useMutation, useLazyQuery } from "@apollo/client";
-import { LOGIN_USER } from "../graphql/mutations";
-import { LOGOUT_USER } from "../graphql/queries";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER, LOGOUT_USER } from "../graphql/mutations";
 
 const AuthContext = React.createContext(null);
 
@@ -35,7 +34,7 @@ export function AuthProvider(props) {
     }
   });
 
-  const [logoutUser] = useLazyQuery(LOGOUT_USER, {
+  const [logoutUser] = useMutation(LOGOUT_USER, {
     onCompleted: (data) => {
       if (data) {
         localStorage.removeItem("access-token");
@@ -48,11 +47,12 @@ export function AuthProvider(props) {
     },
     onError:(error)=>{
         console.log(error)
-    }
+    },
   });
 
   function login(email: string, password: string, cb) {
     console.log("Login");
+  
     getLogin({
       variables: {
         email,
@@ -64,9 +64,14 @@ export function AuthProvider(props) {
   }
 
   function logout(cb) {
-    console.log("Logout");
-    logoutUser()
-    cb();
+    logoutUser({
+      variables:{
+        id: userId
+      }
+    })
+    .then(()=>{
+        cb();
+      })
   }
 
   const value = useMemo(() => {

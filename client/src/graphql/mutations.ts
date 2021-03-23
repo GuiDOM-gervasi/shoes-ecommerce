@@ -171,3 +171,12 @@ export const RESTORE_USER = gql`
     undeleteUser(id: $id)
   }
 `;
+
+export const LOGOUT_USER = gql`
+  mutation LogoutUser($id: String!){
+    logoutUser(id: $id) {
+      logout
+    }
+  }
+`;
+

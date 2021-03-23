@@ -47,7 +47,7 @@ export default function Filter({setLoadedProduct}) {
             ): void => handleCategoryFilter(ev.target.value)}>
           <option id="zzz" value = ''>todas</option>
         {categories.map((e) =>
-          <option id={e.id} value={e.name}>{e.name} </option>)
+          <option id={e.id} value={e.name} key={e.id}>{e.name} </option>)
         }
       </select>
     </div>

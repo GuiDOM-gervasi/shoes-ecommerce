@@ -50,11 +50,11 @@ export default function Catalogue () {
         <section className="sale">Ofertas</section>
         <Filter setLoadedProduct={setLoadedProduct} />
       </div>
-      
+
       <ul>
         {loadedProducts.map((item, i) => (
-          <li>
-            <Link to={`/product/${item.id || 1}`} key={item.id}>
+          <li key={item.id}>
+            <Link to={`/product/${item.id || 1}`}>
               <img
                 src={item.muestraimg || fotosZapa.photo}
                 alt="name"
