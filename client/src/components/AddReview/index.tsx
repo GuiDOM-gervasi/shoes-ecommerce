@@ -35,10 +35,32 @@ export default function AddReview(
     console.log(errorMutationReview);
   }
 
+  var formScore;
+
+  switch (form.score) {
+    case 1:
+      formScore = "Muy Malas";
+      break;
+    case 2:
+      formScore = "Malas";
+      break;
+    case 3:
+      formScore = "Regulares";
+      break;
+    case 4:
+      formScore = "Buenas";
+      break;
+    case 5:
+      formScore = "Excelentes";
+      break;
+    default:
+      ;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let { title, description, score, userId, productId } = form;
-    console.log(form)
+    console.log(form);
     try {
       await createReview({
         variables: {
@@ -71,15 +93,15 @@ export default function AddReview(
 
   return (
     <StyledAddReview>
+      <form onSubmit={handleSubmit}>
       <p>Usuario {userId}</p>
       <p>Producto {productId}</p>
-      <form onSubmit={handleSubmit}>
         <div className="div_title">
           <input
             type="text"
             name="title"
             onChange={handleChange}
-            placeholder="Review Title"
+            placeholder="Título"
             value={form.title}
           />
           <span className="span_title"></span>
@@ -88,14 +110,16 @@ export default function AddReview(
           <textarea
             name="description"
             onChange={handleChange}
-            placeholder="Product description"
+            placeholder="Descripción"
             value={form.description}
           />
           <span className="span_description"></span>
         </div>
-        <div className="div_title">
+        <div className="div_score">
+          <h6>¿Cómo calificarías tus zapatillas?</h6>
+          <p>{formScore}</p>
           <input
-            type="number"
+            type="range"
             name="score"
             min="1"
             max="5"
@@ -104,7 +128,7 @@ export default function AddReview(
             placeholder="Review Score"
             value={form.score}
           />
-          <span className="span_title"></span>
+          <span className="span_score"></span>
         </div>
         <input
           className="addButton"

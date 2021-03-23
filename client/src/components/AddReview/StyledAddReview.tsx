@@ -13,7 +13,8 @@ import {
 export const StyledAddReview = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  height: 50vh;
   width: ${formWidth}vw;
   margin: 2rem auto;
   border: 2px solid black;
@@ -31,6 +32,7 @@ export const StyledAddReview = styled.div`
 
     div {
       width: 80%;
+      margin: 1vh;
       height: min-content;
       display: flex;
       flex-direction: column;
@@ -66,8 +68,41 @@ export const StyledAddReview = styled.div`
         background-color: ${violeta};
         color: ${blanco};
       }
-      &:disabled{
+      &:disabled {
         background-color: ${violetaHover};
+      }
+    }
+    .clip-star {
+      background: ${violeta};
+    }
+    .empty-star {
+      background: ${violetaHover};
+    }
+    .clip-star,
+    .empty-star {
+      clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+      );
+      display: inline-block;
+      height: 1.5vw;
+      width: 1.5vw;
+    }
+  }
+  @media screen and (max-width: 870px) {
+    width: 90vw;
+    height: 80vh;
+    form {
+      .addButton {
+        width: 50%;
       }
     }
   }

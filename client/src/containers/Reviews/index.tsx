@@ -18,13 +18,11 @@ export default function Reviews({ className, allReviews }: ReviewsAttributes) {
     var stars = Math.floor(allReviews.average);
     var emptyStars = 5 - allReviews.average;
     for (let i = 0; i < stars; i++) {
-      console.log("CLIPSTAR");
       var div = document.createElement("div");
       div.className = "clip-star2";
       document.getElementById("ratingAverage").appendChild(div);
     }
     for (let i = 0; i < emptyStars; i++) {
-      console.log("EMPTYSTAR");
       var div = document.createElement("div");
       div.className = "empty-star2";
       document.getElementById("ratingAverage").appendChild(div);

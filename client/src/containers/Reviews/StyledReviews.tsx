@@ -14,14 +14,14 @@ export const StyledReviews = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: ${formWidth}vw;
+  width: ${formWidth * 2}vw;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: ${blanco};
-  ul li:last-of-type{
-    margin-bottom:1rem;
+  ul li:last-of-type {
+    margin-bottom: 1rem;
   }
   .clip-star2 {
     background: ${violeta};
@@ -55,10 +55,26 @@ export const StyledReviews = styled.div`
     margin-left: 1vw;
     .reviewsAverage {
       font-size: 4rem;
-      font-weight:bold;
+      font-weight: bold;
     }
     .reviewsCount {
       margin-left: 1vw;
+    }
+  }
+
+  @media screen and (max-width: 870px) {
+
+  border: none;
+  box-shadow: none;
+    .clip-star2,
+    .empty-star2 {
+      height: 7vw;
+      width: 7vw;
+    }
+    .clip-star,
+    .empty-star {
+      height: 5vw;
+      width: 5vw;
     }
   }
 `;

@@ -14,7 +14,7 @@ export const StyledReview = styled.div`
   display: flex;
   flex-direction:column;
   justify-content:space-between;
-  width: ${formWidth *0.95}vw;
+  width: ${formWidth *1.9}vw;
   margin: 1rem 1rem 0 1rem;
   border: 2px solid black;
   border-radius: 15px;
