@@ -10,7 +10,7 @@ import {
   violetaHover,
 } from "../../containers/App/GlobalStyles";
 
-export const StyledCRUDProducts = styled.div`
+export const StyledCRUDUsers = styled.div`
   display: flex;
   flex-direction: column;
   width: ${formWidth * 2}vw;
@@ -30,6 +30,7 @@ export const StyledCRUDProducts = styled.div`
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
     span,
+    h5,
     div {
       width: 20%;
       display: flex;
@@ -60,5 +61,20 @@ export const StyledCRUDProducts = styled.div`
     &:hover {
       color: ${violeta};
     }
+  }
+
+  .adminSpan,
+  .clientSpan {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+  }
+
+  .adminSpan {
+    background-color: rgba(0, 128, 0, 0.8);
+  }
+
+  .clientSpan {
+    background-color: rgba(255, 0, 0, 0.6);
   }
 `;
