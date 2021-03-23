@@ -165,7 +165,8 @@ export const GET_REVIEWS = gql`
         description
         id
       }
-      `;
+    }
+  }`;
 export const GET_USERS = gql`
   query GetUsers {
     users {
