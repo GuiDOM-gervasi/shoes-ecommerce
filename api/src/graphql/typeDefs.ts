@@ -142,12 +142,12 @@ const typeDefs = gql`
     deleteUser(id: String!): String!
     undeleteUser(id: String!): String!
     addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
-    addReview(
-      userId: String!, 
+    updateReview(
+      id: String!, 
       title: String!, 
       score: Float!, 
       description: String
-      ): Review!
+      ): String
     deleteReview(id: String!): String
   }
 
