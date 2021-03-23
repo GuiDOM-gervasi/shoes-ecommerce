@@ -26,7 +26,9 @@ export const StyledProductDetail = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr auto;
   }
-
+  .reviewsSection{
+    grid-column: 1 / 3;
+  }
   .imagenes {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
@@ -121,7 +123,6 @@ export const StyledProductDetail = styled.div`
       }
     }
   }
-
   .related {
     margin-top: 1rem;
     grid-row: 2 / 3;
