@@ -16,7 +16,8 @@ import { useAuth } from "../../hooks/AuthProvider";
 
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
-  const {userId} = useAuth()
+  const {userId} = useAuth();
+
   const [addToCart, { error: errorMutationCart }] = useMutation(
     ADD_TO_CART
   );
@@ -196,7 +197,7 @@ export default function ProductDetail({ match }: any) {
             <ul>
               {similProducts?.productForCategory?.map((item, i) =>
                 item.id === id ? null : (
-                  <li>
+                  <li key={i}>
                     <Link
                       to={`/product/${item.id || 1}`}
                       key={item.id}

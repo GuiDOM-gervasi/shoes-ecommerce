@@ -7,6 +7,7 @@ import { fotosZapa } from '../../components/ProductDetail/mockup'
 import { useAuth } from '../../hooks/AuthProvider'
 import { DELETE_TO_CART } from '../../graphql/mutations'
 import Loader from '../../components/Loader';
+import { LocalPersistence } from '../../helpers/localPersistence';
 
 const Cart = () => {
 const {userId} = useAuth()
@@ -14,6 +15,7 @@ const {data, loading, error} = useQuery(GET_CART, {
         variables: {
           userId: userId&&userId
         },})
+
 const [deleteProductCart, { loading: loadingDelete }] = useMutation(
     DELETE_TO_CART,
         {

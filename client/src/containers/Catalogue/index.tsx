@@ -53,7 +53,7 @@ export default function Catalogue () {
 
       <ul>
         {loadedProducts.map((item, i) => (
-          <li key={item.id}>
+          <li >
             <Link to={`/product/${item.id || 1}`}>
               <img
                 src={item.muestraimg || fotosZapa.photo}

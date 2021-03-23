@@ -46,6 +46,7 @@ export class User extends Model<UserAttributes> {
   @Column({
     allowNull: false,
     type: DataType.STRING,
+    unique: true,
   })
   userName!: string;
 
