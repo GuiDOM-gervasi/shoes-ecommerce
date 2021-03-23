@@ -85,6 +85,21 @@ const typeDefs = gql`
     logout: Boolean
   }
 
+  type Review {
+    id: ID
+    productId: String
+    userId: String
+    title: String
+    score: Float!
+    description: String
+  }
+
+  type Reviews{
+    count: Float
+    average: Float
+    reviews: [Review]
+  }
+
   type Mutation {
     createUser(
       firstName: String!
@@ -124,6 +139,8 @@ const typeDefs = gql`
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
     loginUser(email: String!, password: String!): Access
+    addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
+    deleteReview(id: String!): String
   }
 
   type Query {
@@ -140,6 +157,7 @@ const typeDefs = gql`
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!
+    getReviews(productId: String!): Reviews
   }
 `;
 export default typeDefs;
