@@ -96,6 +96,19 @@ const typeDefs = gql`
     quantity: Int!
     finalproducts: FinalProduct
     cart: CartWithUser
+  type Review {
+    id: ID
+    productId: String
+    userId: String
+    title: String
+    score: Float!
+    description: String
+  }
+
+  type Reviews{
+    count: Float
+    average: Float
+    reviews: [Review]
   }
 
   type Mutation {
@@ -127,7 +140,7 @@ const typeDefs = gql`
       quantity: Int
       price: Float
     ): MutationCartProduct!
-    removeFromCart( cartId: String! finalproductId: String! ): String!
+    removeFromCart(cartId: String!, finalproductId: String!): String!
     updateCategory(id: String!, input: String!): Category!
     createCategory(name: String!): Category!
     createBrand(name: String!): Brand!
@@ -137,6 +150,10 @@ const typeDefs = gql`
     undeleteProduct(id: String!): Product
     undeleteCategory(id: String!): Category
     loginUser(email: String!, password: String!): Access
+    deleteUser(id: String!): String!
+    undeleteUser(id: String!): String!
+    addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
+    deleteReview(id: String!): String
   }
 
   type Query {
@@ -154,6 +171,8 @@ const typeDefs = gql`
     image(productId: String!): [Image]!
     deleted: [Product!]!
     viewOrders( orderId: String! ): [Orders]!
+    deletedUsers: [User!]!
+    getReviews(productId: String!): Reviews
   }
 `;
 export default typeDefs;

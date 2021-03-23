@@ -20,6 +20,7 @@ import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Loader from "../../components/Loader";
+import CRUDUsers from "../CRUDUsers";
 
 interface ProductAttributes {
   name: String;
@@ -61,13 +62,10 @@ function App() {
         path="/admin/editProduct/:productId"
         component={isAdmin ? EditProduct : Login}
       />
-      <Route
-        path="/admin/editCategory/:categoryId"
-        component={isAdmin ? EditCategory : Login}
-      />
       <Route path="/cart" component={Cart} />
       <Route exact path="/admin/orders" component={OrderTable} />
       <Route path="/admin/orders/:id" component={Order} />
+      <Route path="/admin/users" component={CRUDUsers} />
     </div>
   );
 }
