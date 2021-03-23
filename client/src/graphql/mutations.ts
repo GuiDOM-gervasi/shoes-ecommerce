@@ -152,5 +152,24 @@ $finalproductId: String!
   removeFromCart(cartId:$cartId finalproductId:$finalproductId)
 }
 `
-;
+export const ADD_REVIEW = gql`
+  mutation addReview(
+    $productId: String!
+    $userId: String!
+    $score: Float!
+    $title: String!
+    $description: String!
+  ) {
+    createReview(
+      productId: $productId
+      userId: $userId
+      score: $score
+      title: $title
+      description: $description
+    ) {
+      productId
+      score
+    }
+  }
+`;
 
