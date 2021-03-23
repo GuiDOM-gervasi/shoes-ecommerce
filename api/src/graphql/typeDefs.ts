@@ -73,6 +73,12 @@ const typeDefs = gql`
     state: String
   }
 
+  type CartWithUser {
+    id: ID
+    user: User
+    state: String
+  }
+
   type MutationCartProduct {
     id: ID!
     finalproductId: String!
@@ -83,6 +89,13 @@ const typeDefs = gql`
 
   type Logout {
     logout: Boolean
+  }
+
+  type Orders {
+    price: Float!
+    quantity: Int!
+    finalproducts: FinalProduct
+    cart: CartWithUser
   }
 
   type Mutation {
@@ -140,6 +153,7 @@ const typeDefs = gql`
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!
+    viewOrders( orderId: String! ): [Orders]!
   }
 `;
 export default typeDefs;
