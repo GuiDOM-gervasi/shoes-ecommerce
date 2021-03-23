@@ -51,7 +51,7 @@ export interface CartAttributes {
   state: string;
 }
 
-export interface CartProductAttributes{
+export interface CartProductAttributes {
   id?: string;
   finalproductId: string;
   cartId: string;
