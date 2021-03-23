@@ -5,13 +5,15 @@ import {
   BelongsToMany,
   ForeignKey,
   HasOne,
+  HasMany,
   Table
 } from "sequelize-typescript";
 import Product from "./products";
 import Cart from './carts';
 import {WishList} from './wishlist';
+import {Review} from "./review";
 
-import { UserAttributes } from './types'
+import { UserAttributes, ReviewAttributes } from './types'
 
 @Table({
   defaultScope: {
@@ -84,9 +86,16 @@ export class User extends Model<UserAttributes> {
   @HasOne(() => Cart)
   cartId!: Cart;
 
+  // @Column({
+  //   allowNull: true,
+  //   type: DataType.BOOLEAN,
+  // })
+
+  @HasMany(() => Review)
+  reviews: ReviewAttributes[]
+
   @BelongsToMany(() => Product, { through: () => WishList })
   products?: Array<Product & { WishList: WishList }>;
-
 }
 
 export default User

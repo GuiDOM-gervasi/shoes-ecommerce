@@ -8,6 +8,7 @@ export interface UserAttributes {
   password: string;
   nlsuscribe: Boolean;
   count: number;
+		ReviewId?: [string];
 }
 
 export interface ProductAttributes {
@@ -19,6 +20,7 @@ export interface ProductAttributes {
   brandId: string;
   CategoriesId: [string];
   ModelsId: [string];
+		ReviewId?: [string];
 }
 
 export interface CategoryAttributes {
@@ -67,4 +69,13 @@ export interface UpdateUserAttributes {
   id?: string;
   atr: string;
   input: string;
+}
+
+export interface ReviewAttributes{
+		id?: string;
+		productId:string;
+		userId:string;
+		score: number;
+		title:string;
+		description:string;
 }
