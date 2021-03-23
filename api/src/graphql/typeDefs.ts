@@ -150,6 +150,7 @@ const typeDefs = gql`
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!
+    getReviews(productId: String!): [Review]!
   }
 `;
 export default typeDefs;
