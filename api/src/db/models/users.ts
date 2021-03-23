@@ -11,7 +11,7 @@ import {
 import Product from "./products";
 import Cart from './carts';
 import {WishList} from './wishlist';
-import {Review} from "./review";
+import {Review} from "./Review";
 
 import { UserAttributes, ReviewAttributes } from './types'
 

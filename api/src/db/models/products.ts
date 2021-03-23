@@ -20,7 +20,7 @@ import {WishList} from "./wishlist";
 import { ProductAttributes, ReviewAttributes  } from "./types";
 import { Image } from "./image";
 import User from "./users"
-import Review from "./review";
+import Review from "./Review";
 
 
 @Table({

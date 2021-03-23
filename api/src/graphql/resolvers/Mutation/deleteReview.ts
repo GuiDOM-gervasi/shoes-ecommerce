@@ -1,4 +1,4 @@
-import Review from "#root/db/models/review";
+import Review from "#root/db/models/Review";
 
 const deleteReview = async (parent:any, {id} )  => {
   

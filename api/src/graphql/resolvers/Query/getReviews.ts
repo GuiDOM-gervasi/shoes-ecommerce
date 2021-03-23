@@ -1,4 +1,4 @@
-import Review from "#root/db/models/review";
+import Review from "#root/db/models/Review";
 import User from "#root/db/models/users";
 
 const getReview = async (parent:any, {productId} )  => {

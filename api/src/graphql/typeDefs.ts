@@ -140,6 +140,12 @@ const typeDefs = gql`
     undeleteCategory(id: String!): Category
     loginUser(email: String!, password: String!): Access
     addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
+    addReview(
+      userId: String!, 
+      title: String!, 
+      score: Float!, 
+      description: String
+      ): Review!
     deleteReview(id: String!): String
   }
 
