@@ -9,14 +9,18 @@ const getReview = async (parent:any, {productId} )  => {
         },
         // include: [ User as any ]
   })
+  let average = 0;
+  let count = search.length
+  const reducer = (accumulator, currentValue) => accumulator + parseFloat(currentValue.score);
+  if (count > 0){
+    average = search.reduce(reducer, 0)/ count;
+  }
 
-  // console.log(search)
-  // let count = search.length
-  // console.log('count: ' , count)
-  // let average = search.reduce((ac, i) => ac = ac + parseFloat(i.score) ) / count;
-  // console.log('average: ', average)
-
-  return search
+  return {
+    count,
+    average,
+    reviews: search
+    }
 }
 
 export default getReview;

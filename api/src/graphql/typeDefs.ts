@@ -94,6 +94,12 @@ const typeDefs = gql`
     description: String
   }
 
+  type Reviews{
+    count: Float
+    average: Float
+    reviews: [Review]
+  }
+
   type Mutation {
     createUser(
       firstName: String!
@@ -151,7 +157,7 @@ const typeDefs = gql`
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!
     deleted: [Product!]!
-    getReviews(productId: String!): [Review]!
+    getReviews(productId: String!): Reviews
   }
 `;
 export default typeDefs;
