@@ -13,6 +13,12 @@ export default function Admin() {
         <Link to="/admin/category"> Categories </Link>
         <Link to="/admin/addCategory"> Add category </Link>
       </div>
+      <div>
+        <Link to="/admin/orders"> Orders </Link>
+      </div>
+      <div>
+        <Link to="/admin/users"> Users </Link>
+      </div>
     </StyledAdmin>
   )
 }
