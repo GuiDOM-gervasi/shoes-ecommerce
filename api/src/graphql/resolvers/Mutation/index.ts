@@ -19,3 +19,5 @@ export { default as addReview } from './addReview';
 export { default as deleteReview } from './deleteReview';
 export { default as deleteUser } from "./deleteUser";
 export { default as undeleteUser } from "./undeleteUser";
+export {default as updateState} from "./stateUpdate";
+export {default as controlQuantity} from "./controlQuantity";

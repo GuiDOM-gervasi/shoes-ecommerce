@@ -171,3 +171,9 @@ export const RESTORE_USER = gql`
     undeleteUser(id: $id)
   }
 `;
+
+export const QUANTITY = gql`
+mutation controlQuantity ($id:String! $quantity:Int!){
+  controlQuantity(id:$id quantity:$quantity)
+}
+`;
