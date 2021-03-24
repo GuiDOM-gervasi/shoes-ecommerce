@@ -8,17 +8,12 @@ import * as cookieParser from "cookie-parser";
 import { verify } from "jsonwebtoken";
 import User from "../db/models/users";
 import { createTokens } from "./createTokens"
-// const PORT = accessEnv('PORT', 3001);
-// const apolloServer = new ApolloServer({ resolvers, typeDefs, });
+import Stripe from 'stripe';
+import { v4 as uuidv4 } from 'uuid';
 
-// const app = express();
-
-// apolloServer.applyMiddleware({ app, path: "/graphql" });
-
-// app.listen(PORT, "0.0.0.0", () => {
-//   console.info(`GSD service listening on ${PORT}`);
-// });
-
+const stripe = new Stripe('sk_test_51IYWrFKvrKT0hMD3VGaum9Pt8mt9zuz1JYA1rOPZnGuPXfJ8FjtWdgyRdL2T3tDhvQqHx5YciHk867wy5Q53W5iz00QMvzb6p0', {
+  apiVersion: '2020-08-27',  // to ensure compatibility with TS
+});
 
 const startServer = async () => {
   const server = new ApolloServer({
@@ -27,7 +22,11 @@ const startServer = async () => {
     context: ({ req, res }: any) => ({ req, res })
   });
 
+
   const app = express();
+
+  app.use(express.json());  
+  app.use(cookieParser());
 
   app.use(
     cors({
@@ -44,8 +43,53 @@ const startServer = async () => {
     })
   );
 
-  app.use(cookieParser());
+  // Checkout for stripe end point
+  app.post("/checkout", async (req, res) => {
+    console.log("Request:", req.body);
+  
+    let error;
+    let status;
+    try {
+      const { product, token } = req.body;
+  
+      const customer = await stripe.customers.create({
+        email: token.email,
+        source: token.id
+      });
+  
+      const idempotency_key = uuidv4();
+      const charge = await stripe.charges.create(
+        {
+          amount: product.price * 100,   //always should be converted to cents
+          currency: "usd",
+          customer: customer.id,
+          receipt_email: token.email,
+          description: `Purchased the ${product.name}`,
+          // shipping: {
+          //   name: token.card.name,
+          //   address: {
+          //     line1: token.card.address_line1,
+          //     line2: token.card.address_line2,
+          //     city: token.card.address_city,
+          //     country: token.card.address_country,
+          //     postal_code: token.card.address_zip
+          //   }
+          // }
+        },
+        {
+          idempotency_key
+        }
+      );
+      console.log("Charge:", { charge });
+      status = "success";
+    } catch (error) {
+      console.error("Error:", error);
+      status = "failure";
+    }
+    res.json({ error, status });
+  });
 
+  // Loggin endpoint  --------------------------------------------
   app.use(async (req: any, res, next) => {
     const refreshToken = req.cookies["refresh-token"];
     const accessToken = req.cookies["access-token"];
@@ -86,6 +130,7 @@ const startServer = async () => {
     next();
   });
 
+  // GraphQL endpoint
   server.applyMiddleware({ app, path: "/graphql", cors: false }); // app is from an existing express app
 
   app.listen({ port: 3001 }, () =>
