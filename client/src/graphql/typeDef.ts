@@ -38,6 +38,7 @@ export const typeDefs = gql`
     id: ID
     product: Product
     model: Model
+    stock: String
   }
 
   extend type Query {
