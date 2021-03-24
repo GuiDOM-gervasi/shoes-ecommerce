@@ -18,7 +18,14 @@ import Reviews from "../../containers/Reviews";
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
-  const [addToCart, { error: errorMutationCart }] = useMutation(ADD_TO_CART);
+  console.log(userId)
+  const [addToCart, { error: errorMutationCart }] = useMutation(ADD_TO_CART,
+    {
+    refetchQueries: [{ query: GET_CART, variables:{
+      userId: userId&&userId   
+     }}],
+    }
+    );
 
   const { data: dataCart, loading: loadingCart, error: errorCart } = useQuery(
     GET_CART,
@@ -44,7 +51,7 @@ export default function ProductDetail({ match }: any) {
       productId,
     },
   });
-
+  
   const [
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },

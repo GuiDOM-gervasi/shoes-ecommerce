@@ -63,13 +63,23 @@ const handleQuantity = (e,id) => {
         }
     })    
 }
+
+const handleClick = (e) => {
+    const input : any = e.target.parentNode.querySelector("#quantity")
+    if(e.target.id === "mas"){
+       return input.value ++
+    }
+    if(input.value > 1){
+        input.value --
+    }
+}
     return (
        <StyledCart className="fondoDegradado">
            <div className="container ">
            {
                
                products?.map((p)=>{
-                count += p.product.price  
+                count += p.product.price * p.cartproducts[0].quantity
                 return (
                     <div>
                         <img
@@ -79,12 +89,17 @@ const handleQuantity = (e,id) => {
                         <h4>{p.product.name}</h4> 
                         <p>Price: {p.product.price}</p>
                         <button className="buttonDelete" onClick={()=>handleDelete(p.id)}>X</button>
+                        <div className="number-input">
+                        <button id="-" onClick={handleClick} ></button>
                         <input 
+                        id="quantity"
+                        className="quantity"
                         type="number" 
                         onChange={(e)=>handleQuantity(e,p.cartproducts[0].id)}
                         value={p.cartproducts[0].quantity}
-                        />      
-                        {console.log("cartId",p.cartproducts[0].id)}
+                        /> 
+                        <button id="mas" onClick={handleClick} className="plus"></button>
+                        </div>    
                     </div>
                 )
                })
