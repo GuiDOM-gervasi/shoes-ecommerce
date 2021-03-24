@@ -157,9 +157,15 @@ export const FINAL_PRODUCTS = gql`
 `;
 
 export const GET_STOCK = gql`
-  query stockProduct($productId: String!, $modelId: String!) {
-    stockProduct(productId: $productId, modelId: $modelId) {
+  query getStock($productId: String!) {
+    allModelsProduct(productId: $productId) {
+      id
       stock
+      model {
+        id
+        size
+        color
+      }
     }
   }
 `;

@@ -5,7 +5,8 @@ import {
   FINAL_PRODUCTS,
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_BY_CATEGORIES,
-  GET_CART, GET_STOCK
+  GET_CART,
+  GET_STOCK,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
@@ -33,15 +34,20 @@ export default function ProductDetail({ match }: any) {
     },
   });
 
+  const {
+    data: dataStock,
+    loading: loadingStock,
+    error: errorStock,
+  } = useQuery(GET_STOCK, {
+    variables: {
+      productId,
+    },
+  });
+
   const [
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
-
-  const [
-    getStock,
-    { data: dataStock, loading: loadingStock, error: errorStock },
-  ] = useLazyQuery(GET_STOCK);
 
   const [
     finalproducts,
@@ -57,10 +63,9 @@ export default function ProductDetail({ match }: any) {
             quantity: 1,
           },
         });
-        alert("Producto añadido al carrito")
-      }
-      else{
-        alert("No queda stock de ese modelo")
+        alert("Producto añadido al carrito");
+      } else {
+        alert("No queda stock de ese modelo");
       }
     },
   });
@@ -70,9 +75,6 @@ export default function ProductDetail({ match }: any) {
       const {
         productDetail: { models, categories },
       } = mainProduct;
-      // getStock({variables:{productId, modelId:"5"}})
-      getStock({variables:{productId, modelId:"3"}})
-      console.log(models)
       colors = models.map((model) => model.color);
       colors = Array.from(new Set(colors));
       sizes = models.filter((model) => model.color === colors[0]);
@@ -85,6 +87,11 @@ export default function ProductDetail({ match }: any) {
     }
   }, [mainProduct]);
 
+  // useEffect(() => {
+
+  // }, [dataStock]);
+
+  // const [stock, setStock] = React.useState(false);
   const [modelsState, setModelsState] = React.useState({
     colors: [],
     sizes: [],
@@ -94,7 +101,8 @@ export default function ProductDetail({ match }: any) {
   let sizes = [];
 
   if (loading || loadingSimil || loadingStock) return <Loader />;
-  if (error || errorSimil || errorStock) return <div>`Error! ${error?.message}`</div>;
+  if (error || errorSimil || errorStock)
+    return <div>`Error! ${error?.message}`</div>;
   const {
     name,
     brand,
@@ -111,6 +119,36 @@ export default function ProductDetail({ match }: any) {
     setModelsState({ ...modelsState, sizes });
   }
 
+  function findStock() {
+    const sizeSelect: any = document.querySelector("#size-select");
+    const colorSelect: any = document.querySelector("#color-select");
+    const noStock = document.querySelector("#noStock");
+    const model = models.find(
+      (current) =>
+        current.size === sizeSelect?.value &&
+        current.color === colorSelect?.value
+    );
+
+    if (dataStock) {
+      const modelsStock = dataStock.allModelsProduct;
+      for (let i = 0; i < modelsStock.length; i++) {
+        if (modelsStock[i].model.id === model?.id) {
+          if (modelsStock[i].stock > 0) {
+            (document.getElementById(
+              "addToCart"
+            ) as HTMLInputElement).disabled = false;
+            noStock.innerHTML = ""
+          } else {
+            (document.getElementById(
+              "addToCart"
+              ) as HTMLInputElement).disabled = true;
+              noStock.innerHTML = "No tenemos stock en ese color y talle"
+          }
+        }
+      }
+    }
+  }
+
   const {
     photo,
     photoDetail1,
@@ -118,7 +156,6 @@ export default function ProductDetail({ match }: any) {
     photoDetail3,
     priceBefore,
   } = fotosZapa;
-  
 
   const handleClick = () => {
     const sizeSelect: any = document.querySelector("#size-select");
@@ -186,10 +223,12 @@ export default function ProductDetail({ match }: any) {
             <h2 className="price">${price}</h2>
           </div>
           <div className="botones">
-            {dataStock? <h3>Stock: {dataStock.stockProduct.stock}</h3>: console.log("no hay stock")}
             <select
               className="botonInvertido"
-              onChange={(e: any) => filterModels(e.target.value)}
+              onChange={(e: any) => {
+                filterModels(e.target.value);
+                findStock();
+              }}
               id="color-select"
             >
               {modelsState.colors?.map((color, i) => (
@@ -198,16 +237,25 @@ export default function ProductDetail({ match }: any) {
                 </option>
               ))}
             </select>
-            <select className="botonInvertido" id="size-select">
+            <select
+              onChange={() => findStock()}
+              className="botonInvertido"
+              id="size-select"
+            >
               {modelsState.sizes?.map((size, i) => (
                 <option value={size} key={`${size} ${i}`}>
                   {size}
                 </option>
               ))}
             </select>
-            <button className="boton" onClick={() => handleClick()}>
+            <button
+              className="boton"
+              id="addToCart"
+              onClick={() => handleClick()}
+            >
               Agregar al carrito
             </button>
+            <div id="noStock"></div>
           </div>
         </div>
         <div className="related">
