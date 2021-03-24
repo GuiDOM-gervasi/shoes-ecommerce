@@ -33,7 +33,7 @@ export default function Filter({ setLoadedProduct }) {
     return <div>Loading ...</div>;
   }
   if (error) {
-    return <div>something go wrong loading the filter bar</div>;
+    return <div>Something go wrong loading the filter bar</div>;
   }
 
   if(!productsLoading && !!productsData) {
