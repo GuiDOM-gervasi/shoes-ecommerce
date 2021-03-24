@@ -51,12 +51,11 @@ export default function Catalogue () {
         <section className="sale">Ofertas</section>
         <Filter setLoadedProduct={setLoadedProduct} />
       </div>
-      {console.log("data.products", data.products)}
-      {console.log("loadedProducts", loadedProducts)}
+
       <ul>
         {loadedProducts.map((item, i) => (
-          <li>
-            <Link to={`/product/${item.id || 1}`} key={item.id}>
+          <li >
+            <Link to={`/product/${item.id || 1}`}>
               <img
                 src={item.muestraimg || fotosZapa.photo}
                 alt="name"

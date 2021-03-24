@@ -22,3 +22,4 @@ export { default as deleteUser } from "./deleteUser";
 export { default as undeleteUser } from "./undeleteUser";
 export {default as updateState} from "./stateUpdate";
 export {default as controlQuantity} from "./controlQuantity";
+export {default as logoutUser} from "./logoutUser";

@@ -54,7 +54,7 @@ export default function Nav() {
             </li>
             {userId ? (
               <li onClick={handleClick} className="login">
-                <a href="#" className="hover">Logout</a>
+                <p className="hover">Logout</p>
               </li>
             ) : <>
                 <li className="login">

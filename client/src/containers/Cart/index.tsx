@@ -7,6 +7,7 @@ import { fotosZapa } from '../../components/ProductDetail/mockup'
 import { useAuth } from '../../hooks/AuthProvider'
 import { DELETE_TO_CART, QUANTITY } from '../../graphql/mutations'
 import Loader from '../../components/Loader';
+import { LocalPersistence } from '../../helpers/localPersistence';
 
 const Cart = () => {
 const {userId} = useAuth()
@@ -14,6 +15,7 @@ const {data, loading, error} = useQuery(GET_CART, {
         variables: {
           userId: userId&&userId
         },})
+
 const [deleteProductCart, { loading: loadingDelete }] = useMutation(
     DELETE_TO_CART,
         {
@@ -43,6 +45,7 @@ const {
 let count = 0;
 
 const handleDelete = (finalproduct) => {
+    
     deleteProductCart({
         variables:{
             cartId: data.cart?.id,
@@ -58,9 +61,7 @@ const handleQuantity = (e,id) => {
             id,
             quantity: parseInt(e.target.value)
         }
-    })
-    
-    console.log(e.target.value)
+    })    
 }
     return (
        <StyledCart className="fondoDegradado">
