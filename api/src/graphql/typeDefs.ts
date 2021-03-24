@@ -149,6 +149,7 @@ const typeDefs = gql`
       description: String
       ): String
     deleteReview(id: String!): String
+    logoutUser(id: String!): Logout
   }
 
   type Query {
@@ -160,7 +161,6 @@ const typeDefs = gql`
     models: [Model!]!
     productForCategory(name: String!): [Product!]!
     searchProducts(name: String!): [Product!]!
-    logoutUser: Logout
     cart(userId: String!): [Cart]!
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     image(productId: String!): [Image]!

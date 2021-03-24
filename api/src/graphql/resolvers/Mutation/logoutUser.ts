@@ -1,6 +1,7 @@
 import User from "../../../db/models/users";
 
 const logoutUser = async (parent: any, args: any , context: any , info: any ) => {
+
   if (!context.req.userId) {
     return {logout: true};
   }
@@ -10,6 +11,7 @@ const logoutUser = async (parent: any, args: any , context: any , info: any ) =>
       id:context.req.userId
     }
   });
+  
   if (!user) {
     return {logout: true};
   }

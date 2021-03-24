@@ -20,3 +20,4 @@ export { default as deleteReview } from './deleteReview';
 export { default as updateReview } from './updateReview';
 export { default as deleteUser } from "./deleteUser";
 export { default as undeleteUser } from "./undeleteUser";
+export {default as logoutUser} from "./logoutUser";
