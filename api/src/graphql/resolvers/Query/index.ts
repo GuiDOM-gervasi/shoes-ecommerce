@@ -14,3 +14,4 @@ export { default as deleted } from "./deletedProducts";
 export { default as deletedUsers } from "./deletedUsers";
 export { default as getReviews } from "./getReviews";
 export { default as stockProduct } from "./stockProduct";
+export { default as allModelsProduct} from "./allModelsProduct";

@@ -94,6 +94,11 @@ const typeDefs = gql`
     score: Float!
     description: String
   }
+  type CartProduct{
+    cartId:String
+    finalProductId:String
+    quantity:Int
+  }
 
   type Reviews{
     count: Float
@@ -145,6 +150,7 @@ const typeDefs = gql`
     addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
     deleteReview(id: String!): String
     updateStock(productId:String!,modelId:String!, input:Int):String
+    checkStock(cartId:String!): String
   }
 
   type Query {
@@ -164,6 +170,7 @@ const typeDefs = gql`
     deletedUsers: [User!]!
     getReviews(productId: String!): Reviews
     stockProduct(productId:String!,modelId:String!):FinalProduct!
+    allModelsProduct(productId:String!):[FinalProduct!]!
   }
 `;
 export default typeDefs;
