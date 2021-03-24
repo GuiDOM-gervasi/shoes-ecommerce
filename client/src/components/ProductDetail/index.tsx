@@ -58,7 +58,7 @@ export default function ProductDetail({ match }: any) {
       addToCart({
         variables: {
           finalproductId: finalData.finalproducts[0].id,
-          cartId: dataCart.cart[0]?.id,
+          cartId: dataCart.cart?.id,
           price,
           quantity: 1,
         },
