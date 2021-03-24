@@ -146,7 +146,19 @@ export const FINAL_PRODUCTS = gql`
     }
   }
 `;
-
+export const GET_REVIEWS = gql`
+  query GetReviews($productId: String!) {
+    getReviews(productId: $productId) {
+      count
+      average
+      reviews {
+        title
+        score
+        description
+        id
+      }
+    }
+  }`;
 export const GET_USERS = gql`
   query GetUsers {
     users {
