@@ -57,6 +57,7 @@ const typeDefs = gql`
     id: ID
     product: Product
     model: Model
+    stock:String!
   }
 
   type ProductForCategory {
@@ -143,6 +144,7 @@ const typeDefs = gql`
     undeleteUser(id: String!): String!
     addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
     deleteReview(id: String!): String
+    updateStock(productId:String!,modelId:String!, input:Int):String
   }
 
   type Query {
@@ -161,6 +163,7 @@ const typeDefs = gql`
     deleted: [Product!]!
     deletedUsers: [User!]!
     getReviews(productId: String!): Reviews
+    stockProduct(productId:String!,modelId:String!):FinalProduct!
   }
 `;
 export default typeDefs;

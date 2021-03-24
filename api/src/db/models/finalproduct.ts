@@ -33,6 +33,11 @@ export class FinalProduct extends Model {
 	id?: string;
 
 	@Column({
+		type:DataType.INTEGER
+	})
+	stock?:number;
+
+	@Column({
 		allowNull: false,
 		type: DataType.INTEGER,
 	})
