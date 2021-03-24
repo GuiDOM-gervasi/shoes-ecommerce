@@ -49,7 +49,7 @@ export default function ProductDetail({ match }: any) {
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
-
+  console.log(dataCart)
   const [
     finalproducts,
     { data: finalData, loading: finalLoading, error: finalError },

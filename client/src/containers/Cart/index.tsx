@@ -51,8 +51,16 @@ const handleDelete = (finalproduct) => {
     })
 }
 
-const value = products[0].cartproducts.quantity
-const handleQuantity = () => {
+
+const handleQuantity = (e,id) => {
+    controlQuantity({
+        variables:{
+            id,
+            quantity: parseInt(e.target.value)
+        }
+    })
+    
+    console.log(e.target.value)
 }
     return (
        <StyledCart className="fondoDegradado">
@@ -70,10 +78,12 @@ const handleQuantity = () => {
                         <h4>{p.product.name}</h4> 
                         <p>Price: {p.product.price}</p>
                         <button className="buttonDelete" onClick={()=>handleDelete(p.id)}>X</button>
-                        <input type="number" 
-                            value={value}
-                            
+                        <input 
+                        type="number" 
+                        onChange={(e)=>handleQuantity(e,p.cartproducts[0].id)}
+                        value={p.cartproducts[0].quantity}
                         />      
+                        {console.log("cartId",p.cartproducts[0].id)}
                     </div>
                 )
                })
