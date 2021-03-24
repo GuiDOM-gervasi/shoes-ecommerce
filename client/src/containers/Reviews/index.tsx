@@ -22,6 +22,16 @@ export default function Reviews({ className, allReviews }: ReviewsAttributes) {
       div.className = "clip-star2";
       document.getElementById("ratingAverage").appendChild(div);
     }
+    var decimal = false;
+    if (stars - allReviews.average < 0) {
+      decimal = true;
+    }
+    if (decimal) {
+      var div = document.createElement("div");
+      div.className = "half-star2";
+      document.getElementById("ratingAverage").appendChild(div);
+      emptyStars--
+    }
     for (let i = 0; i < emptyStars; i++) {
       var div = document.createElement("div");
       div.className = "empty-star2";
@@ -33,6 +43,7 @@ export default function Reviews({ className, allReviews }: ReviewsAttributes) {
   return (
     <StyledReviews>
       <div className="reviewsHeader">
+        <div className="half-star2"></div>
         <div className="reviewsAverage">{averageDecimal}</div>
         <div className="reviewsCount">
           <div className="ratingAverage" id="ratingAverage"></div>

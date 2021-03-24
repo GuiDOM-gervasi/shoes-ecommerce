@@ -11,7 +11,7 @@ import {
 import Product from "./products";
 import Cart from './carts';
 import {WishList} from './wishlist';
-import {Review} from "./review";
+import Review from "./review";
 
 import { UserAttributes, ReviewAttributes } from './types'
 
@@ -46,6 +46,7 @@ export class User extends Model<UserAttributes> {
   @Column({
     allowNull: false,
     type: DataType.STRING,
+    unique: true,
   })
   userName!: string;
 

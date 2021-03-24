@@ -216,7 +216,7 @@ export default function ProductDetail({ match }: any) {
             <ul>
               {similProducts?.productForCategory?.map((item, i) =>
                 item.id === id ? null : (
-                  <li>
+                  <li key={i}>
                     <Link
                       to={`/product/${item.id || 1}`}
                       key={item.id}

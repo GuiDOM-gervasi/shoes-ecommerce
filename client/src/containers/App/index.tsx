@@ -64,10 +64,10 @@ function App() {
         component={isAdmin ? EditProduct : Login}
       />
       <Route path="/cart" component={Cart} />
-      <Route exact path="/admin/orders" component={OrderTable} />
-      <Route path="/admin/orders/:id" component={Order} />
+      <Route exact path="/admin/orders" component={isAdmin ? OrderTable : Login} />
+      <Route path="/admin/orders/:id" component={isAdmin ? Order : Login} />
+      <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
-      <Route path="/admin/users" component={CRUDUsers} />
     </div>
   );
 }
