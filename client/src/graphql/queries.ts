@@ -127,8 +127,12 @@ export const GET_CART = gql`
     cart(userId: $userId) {
       id
       finalproducts {
+      id
+      cartproducts{
+        quantity
         id
-        product {
+      }
+      product{
           id
           name
           price

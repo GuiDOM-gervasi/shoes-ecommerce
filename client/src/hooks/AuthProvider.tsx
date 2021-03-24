@@ -7,7 +7,7 @@ const AuthContext = React.createContext(null);
 
 export function AuthProvider(props) {
   const [user, setUser] = useState(false);
-  const [userId, setUserId] = useState(0);
+  const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);
   useEffect(() => {
     LocalPersistence("user",METHODS.get).then(
@@ -17,7 +17,7 @@ export function AuthProvider(props) {
         : setIsAdmin(false);
       completeUser && completeUser.id
         ? setUserId(completeUser.id)
-        : setUserId(0);
+        : setUserId("0");
       }
     )
   }, []);
@@ -45,7 +45,7 @@ export function AuthProvider(props) {
         LocalPersistence("refresh-token", METHODS.remove);
         LocalPersistence("user", METHODS.remove);
         setUser(false);
-        setUserId(0);
+        setUserId("0");
         setIsAdmin(false);
       }
     },
