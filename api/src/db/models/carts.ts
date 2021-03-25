@@ -37,7 +37,7 @@ export class Cart extends Model<CartAttributes> {
     @Column({
         allowNull: false,
         type: DataType.INTEGER,
-        unique: true
+        
     })
     @ForeignKey(() => User)
     userId: string;

@@ -168,7 +168,7 @@ const typeDefs = gql`
 
 		updateCategory(id: String!, input: String!): Category!
 		updateProduct(id: String!, atr: String!, input: [String]): Product!
-    updateReview(
+    	updateReview(
 			id: String!
 			title: String!
 			score: Float!
@@ -177,7 +177,7 @@ const typeDefs = gql`
 		updateState(orderId: String!, state: String!): CartProduct!
 		updateUser(id: String!, atr: String!, input: String): String
 		
-	}
+		}
 
 	type Query {
 		brand(atr: String, ord: String): [Brand!]!

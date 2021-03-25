@@ -195,6 +195,11 @@ export const RESTORE_USER = gql`
   }
 `;
 
+export const QUANTITY = gql`
+mutation controlQuantity ($id:String! $quantity:Int!){
+  controlQuantity(id:$id quantity:$quantity)
+}
+`;
 export const LOGOUT_USER = gql`
   mutation LogoutUser($id: String!){
     logoutUser(id: $id) {
@@ -203,8 +208,3 @@ export const LOGOUT_USER = gql`
   }
 `;
 
-export const QUANTITY = gql`
-mutation controlQuantity ($id:String! $quantity:Int!){
-  controlQuantity(id:$id quantity:$quantity)
-}
-`;
