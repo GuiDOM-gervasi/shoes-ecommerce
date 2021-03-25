@@ -162,6 +162,8 @@ const typeDefs = gql`
 		loginUser(email: String!, password: String!): Access
 		logoutUser(id: String!): Logout
 		removeFromCart(cartId: String!, finalproductId: String!): String!
+		passwordReset(email:String!): String!
+		updatePassword(userId: String!, password:String!, token: String!): String!
 
 		undeleteCategory(id: String!): Category
 		undeleteProduct(id: String!): Product
@@ -178,7 +180,6 @@ const typeDefs = gql`
 		updateState(orderId: String!, state: String!): CartProduct!
 		updateStock(productId:String!,modelId:String!, input:Int):String
 		updateUser(id: String!, atr: String!, input: String): String
-		
 		}
 
 	type Query {
@@ -204,6 +205,7 @@ const typeDefs = gql`
 		stockProduct(productId:String!,modelId:String!):FinalProduct!
     	allModelsProduct(productId:String!):[FinalProduct!]!
     	allStock:[FinalProduct!]!
+		userEmail(email: String!):[User!]!
 	}
 `;
 export default typeDefs;

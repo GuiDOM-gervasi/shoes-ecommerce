@@ -127,6 +127,18 @@ export const EDIT_STOCK = gql`
     }
 `;
 
+export const PASSWORD_RESET = gql`
+  mutation passwordReset($email: String!) {
+    passwordReset(email: $email)
+    }
+`;
+
+export const UPDATE_PASSWORD = gql`
+  mutation updatePassword($userId: String!, $password: String!, $token: String!) {
+    updatePassword(userId: $userId, password: $password, token: $token)
+    }
+`;
+
 export const CREATE_CART = gql`
   mutation createCart( $userId: String!) {
     createCart( userId: $userId) {

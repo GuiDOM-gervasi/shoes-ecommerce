@@ -24,6 +24,8 @@ import AddReview from "../../components/AddReview";
 import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
 import CRUDStock from "../CRUDStock";
+import PasswordReset from "../../components/PasswordReset";
+import NewPassword from "../../components/NewPassword";
 
 interface ProductAttributes {
   name: String;
@@ -72,6 +74,8 @@ function App() {
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
       <Route exact path="/admin/editStock/:productId/:modelId" component={EditStock} />
+      <Route path="/forgotpassword" component={PasswordReset} />
+      <Route path="/resetpassword/:userId/:token" component={NewPassword} />
     </div>
   );
 }
