@@ -22,6 +22,9 @@ import Checkout from "../../components/Checkout";
 import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
 import CRUDUsers from "../CRUDUsers";
+import Success from "../../components/Checkout/Success";
+import Cancel from "../../components/Checkout/Cancel";
+
 require('dotenv').config();
 
 interface ProductAttributes {
@@ -45,6 +48,8 @@ function App() {
       <Route exact path="/search" component={SearchResult} />
 
       <Route exact path="/checkout" component={Checkout} />   {/*testing only */}
+      <Route exact path="/success" component={Success} />
+      <Route exact path="/cancel" component={Cancel} />
       
       <Route exact path="/admin" component={isAdmin ? Admin : Login} />
       <Route
