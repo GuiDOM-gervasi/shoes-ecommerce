@@ -20,6 +20,7 @@ import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Loader from "../../components/Loader";
+import AddReview from "../../components/AddReview";
 import CRUDUsers from "../CRUDUsers";
 import CRUDStock from "../CRUDStock";
 
@@ -64,10 +65,11 @@ function App() {
         component={isAdmin ? EditProduct : Login}
       />
       <Route path="/cart" component={Cart} />
-      <Route exact path="/admin/orders" component={OrderTable} />
-      <Route path="/admin/orders/:id" component={Order} />
-      <Route path="/admin/users" component={CRUDUsers} />
       <Route path="/admin/stock" component={CRUDStock} />
+      <Route exact path="/admin/orders" component={isAdmin ? OrderTable : Login} />
+      <Route path="/admin/orders/:id" component={isAdmin ? Order : Login} />
+      <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
+      <Route exact path="/addReview/:id/:user" component={AddReview} />
     </div>
   );
 }

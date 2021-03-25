@@ -155,8 +155,31 @@ export const ADD_TO_CART = gql`
 `;
 
 export const DELETE_TO_CART = gql`
-  mutation removeFromCart($cartId: String!, $finalproductId: String!) {
-    removeFromCart(cartId: $cartId, finalproductId: $finalproductId)
+mutation removeFromCart(
+$cartId: String!
+$finalproductId: String!
+){
+  removeFromCart(cartId:$cartId finalproductId:$finalproductId)
+}
+`
+export const ADD_REVIEW = gql`
+  mutation addReview(
+    $productId: String!
+    $userId: String!
+    $score: Float!
+    $title: String!
+    $description: String!
+  ) {
+    addReview(
+      productId: $productId
+      userId: $userId
+      score: $score
+      title: $title
+      description: $description
+    ) {
+      title
+      score
+    }
   }
 `;
 
@@ -177,3 +200,17 @@ export const RESTORE_USER = gql`
     undeleteUser(id: $id)
   }
 `;
+
+export const QUANTITY = gql`
+mutation controlQuantity ($id:String! $quantity:Int!){
+  controlQuantity(id:$id quantity:$quantity)
+}
+`;
+export const LOGOUT_USER = gql`
+  mutation LogoutUser($id: String!){
+    logoutUser(id: $id) {
+      logout
+    }
+  }
+`;
+

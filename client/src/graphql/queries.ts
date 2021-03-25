@@ -122,21 +122,17 @@ export const GET_MODELS = gql`
   }
 `;
 
-export const LOGOUT_USER = gql`
-  query {
-    logoutUser {
-      logout
-    }
-  }
-`;
-
 export const GET_CART = gql`
   query cart($userId: String!) {
     cart(userId: $userId) {
       id
       finalproducts {
+      id
+      cartproducts{
+        quantity
         id
-        product {
+      }
+      product{
           id
           name
           price
@@ -187,7 +183,19 @@ export const GET_ALL_STOCK = gql`
     }
   }
 `;
-
+export const GET_REVIEWS = gql`
+  query GetReviews($productId: String!) {
+    getReviews(productId: $productId) {
+      count
+      average
+      reviews {
+        title
+        score
+        description
+        id
+      }
+    }
+  }`;
 export const GET_USERS = gql`
   query GetUsers {
     users {

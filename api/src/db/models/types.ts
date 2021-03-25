@@ -48,7 +48,6 @@ export interface ModelAttributes {
 export interface CartAttributes {
   id?: string;
   userId: string;
-  state: string;
 }
 
 export interface CartProductAttributes {
@@ -57,6 +56,7 @@ export interface CartProductAttributes {
   cartId: string;
   quantity: number;
   price: number;
+  state: string;
 }
 
 export interface UpdateProductAttributes {

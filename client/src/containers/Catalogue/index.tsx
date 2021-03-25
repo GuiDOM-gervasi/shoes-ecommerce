@@ -8,7 +8,7 @@ import Slider from "../../components/Slider";
 import Filter from "../../components/Filter";
 import Loader from "../../components/Loader";
 import {useAuth} from "../../hooks/AuthProvider";
-import { CREATE_CART } from "../../graphql/mutations";
+import { CREATE_CART,} from "../../graphql/mutations";
 
 
 
@@ -19,7 +19,9 @@ export default function Catalogue () {
   );
   const [loadedProducts, setLoadedProduct] = React.useState([]);
   const {userId} = useAuth()
-  if(userId){
+  console.log(userId)
+  if(parseInt(userId) > 0){
+    console.log(userId)
     const carrito = createCart({
       variables :{
         userId: userId,
@@ -50,12 +52,11 @@ export default function Catalogue () {
         <section className="sale">Ofertas</section>
         <Filter setLoadedProduct={setLoadedProduct} />
       </div>
-      {console.log("data.products", data.products)}
-      {console.log("loadedProducts", loadedProducts)}
+
       <ul>
         {loadedProducts.map((item, i) => (
-          <li>
-            <Link to={`/product/${item.id || 1}`} key={item.id}>
+          <li >
+            <Link to={`/product/${item.id || 1}`}>
               <img
                 src={item.muestraimg || fotosZapa.photo}
                 alt="name"

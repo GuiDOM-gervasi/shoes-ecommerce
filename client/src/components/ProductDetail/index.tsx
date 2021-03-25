@@ -7,17 +7,26 @@ import {
   GET_PRODUCTS_BY_CATEGORIES,
   GET_CART,
   GET_STOCK,
+  GET_REVIEWS,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
 import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
+import Reviews from "../../containers/Reviews";
 
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
-  const [addToCart, { error: errorMutationCart }] = useMutation(ADD_TO_CART);
+  console.log(userId)
+  const [addToCart, { error: errorMutationCart }] = useMutation(ADD_TO_CART,
+    {
+    refetchQueries: [{ query: GET_CART, variables:{
+      userId: userId&&userId   
+     }}],
+    }
+    );
 
   const { data: dataCart, loading: loadingCart, error: errorCart } = useQuery(
     GET_CART,
@@ -41,14 +50,24 @@ export default function ProductDetail({ match }: any) {
   } = useQuery(GET_STOCK, {
     variables: {
       productId,
+    }
+  });
+  const {
+    data: reviewData,
+    loading: reviewLoading,
+    error: reviewError,
+  } = useQuery(GET_REVIEWS, {
+    variables: {
+      productId,
     },
   });
 
+  
   const [
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
-
+  console.log(dataCart)
   const [
     finalproducts,
     { data: finalData, loading: finalLoading, error: finalError },
@@ -258,13 +277,18 @@ export default function ProductDetail({ match }: any) {
             <div id="noStock"></div>
           </div>
         </div>
+        <div className="reviewsSection">
+        {reviewData && (
+          <Reviews className="review" allReviews={reviewData.getReviews} />
+        )}
+        </div>
         <div className="related">
           <h3>Relacionados</h3>
           <div className="photo">
             <ul>
               {similProducts?.productForCategory?.map((item, i) =>
                 item.id === id ? null : (
-                  <li>
+                  <li key={i}>
                     <Link
                       to={`/product/${item.id || 1}`}
                       key={item.id}
