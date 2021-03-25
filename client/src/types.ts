@@ -18,9 +18,9 @@ export interface QueryUsers {
 
 export interface CartAttributes {
   id: String;
-  finalproducts: [];
+  //finalproducts: [];
+  cartproducts: [];
   userId: String;
-  state: String;
 }
 
 export interface ProductAttributes {

@@ -121,9 +121,8 @@ export const EDIT_CATEGORY = gql`
   }
 `;
 export const CREATE_CART = gql`
-  mutation createCart($state: String!, $userId: String!) {
-    createCart(state: $state, userId: $userId) {
-      state
+  mutation createCart( $userId: String!) {
+    createCart( userId: $userId) {
       userId
     }
   }
