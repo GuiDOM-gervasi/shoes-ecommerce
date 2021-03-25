@@ -21,6 +21,7 @@ import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Loader from "../../components/Loader";
 import CRUDUsers from "../CRUDUsers";
+import CRUDStock from "../CRUDStock";
 
 interface ProductAttributes {
   name: String;
@@ -66,6 +67,7 @@ function App() {
       <Route exact path="/admin/orders" component={OrderTable} />
       <Route path="/admin/orders/:id" component={Order} />
       <Route path="/admin/users" component={CRUDUsers} />
+      <Route path="/admin/stock" component={CRUDStock} />
     </div>
   );
 }

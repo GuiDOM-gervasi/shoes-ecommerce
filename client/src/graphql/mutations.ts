@@ -120,6 +120,12 @@ export const EDIT_CATEGORY = gql`
     }
   }
 `;
+
+export const EDIT_STOCK = gql`
+  mutation editStock($productId: String!,$modelId: String! , $input: String!) {
+    updateStock(productId: $productId, modelId: $modelId, input: $input)}
+`;
+
 export const CREATE_CART = gql`
   mutation createCart($state: String!, $userId: String!) {
     createCart(state: $state, userId: $userId) {

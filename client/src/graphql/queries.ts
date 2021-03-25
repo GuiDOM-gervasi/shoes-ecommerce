@@ -170,6 +170,24 @@ export const GET_STOCK = gql`
   }
 `;
 
+export const GET_ALL_STOCK = gql`
+  query allStock{
+    allStock {
+      id
+      product {
+        name
+        id
+      }
+      model {
+        color
+        size
+        id
+      }
+      stock
+    }
+  }
+`;
+
 export const GET_USERS = gql`
   query GetUsers {
     users {
