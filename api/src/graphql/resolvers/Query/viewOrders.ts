@@ -8,10 +8,13 @@ import Models from "#root/db/models/models";
 import User from "#root/db/models/users";
 
 
-const ordersResolver = async (parent, { orderId }) => {
+const ordersResolver = async (parent, { orderId, state = 'reserved' }) => {
     
     if (orderId === 'all'){
         return await CartProduct.findAll({
+            where: {
+                state
+            },
             include: [
                 {
                     model: FinalProduct as any,
