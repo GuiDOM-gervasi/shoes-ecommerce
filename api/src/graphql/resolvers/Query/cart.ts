@@ -6,7 +6,7 @@ import FinalProduct from "#root/db/models/finalproduct";
 import Models from "#root/db/models/models";
 import Product from "#root/db/models/products";
 
-const cartResolver = async (parent, { userId }) => {
+const cartResolver = async (parent, { userId, state = 'reserved' }) => {
 	
 	return await Cart.findOne({
 		where: {
@@ -14,13 +14,20 @@ const cartResolver = async (parent, { userId }) => {
 		},
 		include: [
 			{
-				model: FinalProduct as any,
+				model: CartProduct,
+				where: {
+					state
+				},
 				include: [
-					{ model : CartProduct as any},
-					{ model: Product as any, include: [Category as any, Brand as any] },
-					{ model: Models as any },
-				],
-			},
+					{
+						model: FinalProduct as any,
+						include: [
+							{ model: Product as any, include: [Category as any, Brand as any] },
+							{ model: Models as any },
+						],
+					},
+				]
+			}		
 		],
 	});
 };

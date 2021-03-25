@@ -48,7 +48,6 @@ const Cart = () => {
   if (loading) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
   const products = data.cart?.finalproducts;
-  console.log(products);
 
   const { photo } = fotosZapa;
   let count = 0;

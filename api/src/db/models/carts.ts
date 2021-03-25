@@ -33,12 +33,6 @@ export class Cart extends Model<CartAttributes> {
     })
     id?: string;
 
-    @Column({
-        allowNull: false,
-        type: DataType.ENUM('reserved','payed','finish'),
-    })
-    state!: string;
-
     @Unique
     @Column({
         allowNull: false,

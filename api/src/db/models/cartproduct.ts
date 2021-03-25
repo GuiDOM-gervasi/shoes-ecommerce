@@ -57,6 +57,12 @@ export class CartProduct extends Model {
     })
   price?: number;
 
+  @Column({
+    allowNull: false,
+    type: DataType.ENUM('reserved','payed','finish','rejected'),
+  })
+  state!: string;
+
 }
 
 

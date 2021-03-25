@@ -16,6 +16,7 @@ const addToCartResolver = async (
 			cartId,
 			price,
 			quantity,
+			state: 'reserved'
 		},
 	});
 
