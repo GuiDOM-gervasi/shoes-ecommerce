@@ -123,20 +123,24 @@ export const GET_MODELS = gql`
 `;
 
 export const GET_CART = gql`
-  query cart($userId: String!) {
-    cart(userId: $userId) {
-      id
-      finalproducts {
+  query cart($userId: String! $state: String) {
+    cart(userId: $userId state: $state) {
       id
       cartproducts{
-        quantity
         id
-      }
-      product{
-          id
-          name
-          price
-          muestraimg
+        quantity
+        state
+        finalproducts{
+          product{
+            id
+            name
+            price
+            muestraimg
+          }
+          model{
+            size
+            color
+          }
         }
       }
     }

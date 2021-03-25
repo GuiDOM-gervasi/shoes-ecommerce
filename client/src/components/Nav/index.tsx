@@ -52,7 +52,7 @@ export default function Nav() {
             <li className="aboutus">
               <NavLink to="">About us</NavLink>
             </li>
-            {userId ? (
+            {userId && userId !== '0' ? (
               <li onClick={handleClick} className="login">
                 <p className="hover">Logout</p>
               </li>
