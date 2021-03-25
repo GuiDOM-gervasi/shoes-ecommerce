@@ -171,6 +171,7 @@ const typeDefs = gql`
     getReviews(productId: String!): Reviews
     stockProduct(productId:String!,modelId:String!):FinalProduct!
     allModelsProduct(productId:String!):[FinalProduct!]!
+    allStock:[FinalProduct!]!
   }
 `;
 export default typeDefs;
