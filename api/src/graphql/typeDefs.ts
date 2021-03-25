@@ -57,6 +57,7 @@ const typeDefs = gql`
 		id: ID
 		product: Product
 		model: Model
+		stock: String!
 		cartproducts: [CartProduct]!
 	}
 
@@ -127,7 +128,7 @@ const typeDefs = gql`
 			quantity: Int
 			price: Float
 		): CartProduct!
-
+		checkStock(cartId:String!): String
     controlQuantity(id: String!, quantity: Int!): String!
 
 		createBrand(name: String!): Brand!
@@ -175,6 +176,7 @@ const typeDefs = gql`
 			description: String
 		): String
 		updateState(orderId: String!, state: String!): CartProduct!
+		updateStock(productId:String!,modelId:String!, input:Int):String
 		updateUser(id: String!, atr: String!, input: String): String
 		
 		}
@@ -198,6 +200,10 @@ const typeDefs = gql`
 		searchProducts(name: String!): [Product!]!
 		users: [User!]!
 		viewOrders(orderId: String! state: String): [Orders]!
+
+		stockProduct(productId:String!,modelId:String!):FinalProduct!
+    	allModelsProduct(productId:String!):[FinalProduct!]!
+    	allStock:[FinalProduct!]!
 	}
 `;
 export default typeDefs;

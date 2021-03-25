@@ -20,9 +20,12 @@ export { default as loginUser } from "./loginUser";
 export { default as logoutUser } from "./logoutUser";
 
 export { default as removeFromCart } from "./removefromcart";
+
+export { default as undeleteUser } from "./undeleteUser";
+export { default as updateStock } from "./updateStock";
+export { default as checkStock } from "./checkStock";
 export { default as undeleteCategory } from "./undeleteCategory";
 export { default as undeleteProduct } from "./undeleteProduct";
-export { default as undeleteUser } from "./undeleteUser";
 
 export { default as updateCategory } from "./updateCategory";
 export { default as updateProduct } from "./updateProduct";

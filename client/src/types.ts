@@ -69,3 +69,16 @@ export interface UserAttributes {
   nlsuscribe: Boolean;
   isAdmin: Boolean;
 }
+
+export interface ModelAttributes {
+  color: string;
+  size: string;
+  id: string;
+}
+
+export interface StockAttributes{
+  id: string;
+  stock: string;
+  model:ModelAttributes;
+  product:ProductAttributes;
+}

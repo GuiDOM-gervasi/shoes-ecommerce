@@ -147,6 +147,39 @@ export const FINAL_PRODUCTS = gql`
   query finalproducts($productId: String!, $modelId: String!) {
     finalproducts(productId: $productId, modelId: $modelId) {
       id
+      stock
+    }
+  }
+`;
+
+export const GET_STOCK = gql`
+  query getStock($productId: String!) {
+    allModelsProduct(productId: $productId) {
+      id
+      stock
+      model {
+        id
+        size
+        color
+      }
+    }
+  }
+`;
+
+export const GET_ALL_STOCK = gql`
+  query allStock{
+    allStock {
+      id
+      product {
+        name
+        id
+      }
+      model {
+        color
+        size
+        id
+      }
+      stock
     }
   }
 `;

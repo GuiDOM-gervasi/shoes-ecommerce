@@ -6,6 +6,7 @@ import {
   GET_PRODUCT_DETAIL,
   GET_PRODUCTS_BY_CATEGORIES,
   GET_CART,
+  GET_STOCK,
   GET_REVIEWS,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
@@ -43,6 +44,15 @@ export default function ProductDetail({ match }: any) {
   });
 
   const {
+    data: dataStock,
+    loading: loadingStock,
+    error: errorStock,
+  } = useQuery(GET_STOCK, {
+    variables: {
+      productId,
+    }
+  });
+  const {
     data: reviewData,
     loading: reviewLoading,
     error: reviewError,
@@ -51,6 +61,7 @@ export default function ProductDetail({ match }: any) {
       productId,
     },
   });
+
   
   const [
     getSimils,
@@ -62,16 +73,22 @@ export default function ProductDetail({ match }: any) {
     { data: finalData, loading: finalLoading, error: finalError },
   ] = useLazyQuery(FINAL_PRODUCTS, {
     onCompleted: (finalData) => {
-      addToCart({
-        variables: {
-          finalproductId: finalData.finalproducts[0].id,
-          cartId: dataCart.cart?.id,
-          price,
-          quantity: 1,
-        },
-      });
+      if (finalData.finalproducts[0].stock > 0) {
+        addToCart({
+          variables: {
+            finalproductId: finalData.finalproducts[0].id,
+            cartId: dataCart.cart[0]?.id,
+            price,
+            quantity: 1,
+          },
+        });
+        alert("Producto añadido al carrito");
+      } else {
+        alert("No queda stock de ese modelo");
+      }
     },
   });
+
   useEffect(() => {
     if (mainProduct) {
       const {
@@ -89,6 +106,11 @@ export default function ProductDetail({ match }: any) {
     }
   }, [mainProduct]);
 
+  // useEffect(() => {
+
+  // }, [dataStock]);
+
+  // const [stock, setStock] = React.useState(false);
   const [modelsState, setModelsState] = React.useState({
     colors: [],
     sizes: [],
@@ -97,8 +119,9 @@ export default function ProductDetail({ match }: any) {
   let colors = [];
   let sizes = [];
 
-  if (loading || loadingSimil) return <Loader />;
-  if (error || errorSimil) return <div>`Error! ${error?.message}`</div>;
+  if (loading || loadingSimil || loadingStock) return <Loader />;
+  if (error || errorSimil || errorStock)
+    return <div>`Error! ${error?.message}`</div>;
   const {
     name,
     brand,
@@ -113,6 +136,36 @@ export default function ProductDetail({ match }: any) {
     sizes = models.filter((prop) => prop.color === value);
     sizes = sizes.map((model) => model.size);
     setModelsState({ ...modelsState, sizes });
+  }
+
+  function findStock() {
+    const sizeSelect: any = document.querySelector("#size-select");
+    const colorSelect: any = document.querySelector("#color-select");
+    const noStock = document.querySelector("#noStock");
+    const model = models.find(
+      (current) =>
+        current.size === sizeSelect?.value &&
+        current.color === colorSelect?.value
+    );
+
+    if (dataStock) {
+      const modelsStock = dataStock.allModelsProduct;
+      for (let i = 0; i < modelsStock.length; i++) {
+        if (modelsStock[i].model.id === model?.id) {
+          if (modelsStock[i].stock > 0) {
+            (document.getElementById(
+              "addToCart"
+            ) as HTMLInputElement).disabled = false;
+            noStock.innerHTML = ""
+          } else {
+            (document.getElementById(
+              "addToCart"
+              ) as HTMLInputElement).disabled = true;
+              noStock.innerHTML = "No tenemos stock en ese color y talle"
+          }
+        }
+      }
+    }
   }
 
   const {
@@ -191,7 +244,10 @@ export default function ProductDetail({ match }: any) {
           <div className="botones">
             <select
               className="botonInvertido"
-              onChange={(e: any) => filterModels(e.target.value)}
+              onChange={(e: any) => {
+                filterModels(e.target.value);
+                findStock();
+              }}
               id="color-select"
             >
               {modelsState.colors?.map((color, i) => (
@@ -200,16 +256,25 @@ export default function ProductDetail({ match }: any) {
                 </option>
               ))}
             </select>
-            <select className="botonInvertido" id="size-select">
+            <select
+              onChange={() => findStock()}
+              className="botonInvertido"
+              id="size-select"
+            >
               {modelsState.sizes?.map((size, i) => (
                 <option value={size} key={`${size} ${i}`}>
                   {size}
                 </option>
               ))}
             </select>
-            <button className="boton" onClick={() => handleClick()}>
+            <button
+              className="boton"
+              id="addToCart"
+              onClick={() => handleClick()}
+            >
               Agregar al carrito
             </button>
+            <div id="noStock"></div>
           </div>
         </div>
         <div className="reviewsSection">

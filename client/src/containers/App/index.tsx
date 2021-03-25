@@ -21,7 +21,9 @@ import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
+import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
+import CRUDStock from "../CRUDStock";
 
 interface ProductAttributes {
   name: String;
@@ -64,10 +66,12 @@ function App() {
         component={isAdmin ? EditProduct : Login}
       />
       <Route path="/cart" component={Cart} />
+      <Route path="/admin/stock" component={CRUDStock} />
       <Route exact path="/admin/orders" component={isAdmin ? OrderTable : Login} />
       <Route path="/admin/orders/:id" component={isAdmin ? Order : Login} />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
+      <Route exact path="/admin/editStock/:productId/:modelId" component={EditStock} />
     </div>
   );
 }
