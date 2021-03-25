@@ -8,14 +8,16 @@ import * as cookieParser from "cookie-parser";
 import { verify } from "jsonwebtoken";
 import User from "../db/models/users";
 import { createTokens } from "./createTokens"
-import Stripe from 'stripe';
+// import Stripe from 'stripe';
+
 import { v4 as uuidv4 } from 'uuid';
 
 const apiKey = accessEnv("STRIPE_KEY");
-
-const stripe = new Stripe(apiKey, {
-  apiVersion: '2020-08-27',  // to ensure compatibility with TS
-});
+console.log(apiKey)
+const stripe = require('stripe')("sk_test_51IYWrFKvrKT0hMD3VGaum9Pt8mt9zuz1JYA1rOPZnGuPXfJ8FjtWdgyRdL2T3tDhvQqHx5YciHk867wy5Q53W5iz00QMvzb6p0")
+// const stripe = new Stripe(apiKey, {
+//   apiVersion: '2020-08-27',  // to ensure compatibility with TS
+// });
 
 const startServer = async () => {
   const server = new ApolloServer({
@@ -32,7 +34,7 @@ const startServer = async () => {
 
   app.use(
     cors({
-      origin: "http://localhost:3000",
+      origin: "*",
       credentials: true,
       // preflightContinue: true
     //   exposedHeaders: [
@@ -45,50 +47,38 @@ const startServer = async () => {
     })
   );
 
-  // Checkout for stripe end point
+  // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
     console.log("Request:", req.body);
   
-    let error;
-    let status;
-    try {
-      const { product, token } = req.body;
-  
-      const customer = await stripe.customers.create({
-        email: token.email,
-        source: token.id
+    try{
+      const session = await stripe.checkout.sessions.create({
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price_data: {
+              currency: 'usd',
+              product_data: {
+                name: 'T-shirt',
+              },
+              unit_amount: 2000,
+            },
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: 'http://localhost:3001/success',
+        cancel_url: 'http://localhost:3001/cancel',
       });
   
-      const idempotency_key = uuidv4();
-      const charge = await stripe.charges.create(
-        {
-          amount: product.price * 100,   //always should be converted to cents
-          currency: "usd",
-          customer: customer.id,
-          receipt_email: token.email,
-          description: `Purchased the ${product.name}`,
-          // shipping: {
-          //   name: token.card.name,
-          //   address: {
-          //     line1: token.card.address_line1,
-          //     line2: token.card.address_line2,
-          //     city: token.card.address_city,
-          //     country: token.card.address_country,
-          //     postal_code: token.card.address_zip
-          //   }
-          // }
-        },
-        {
-          idempotency_key
-        }
-      );
-      console.log("Charge:", { charge });
-      status = "success";
-    } catch (error) {
-      console.error("Error:", error);
-      status = "failure";
+      res.json({ id: session.id });
     }
-    res.json({ error, status });
+    catch(e){
+      console.error(e)
+      res.json({ error: 'something went worng' });
+    }
+    
+  
   });
 
   // Loggin endpoint  --------------------------------------------

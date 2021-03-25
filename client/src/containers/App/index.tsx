@@ -2,7 +2,6 @@ import React from "react";
 import { GlobalStyles } from "./GlobalStyles";
 import Nav from "../../components/Nav";
 import Catalogue from "../Catalogue";
-
 import { Route } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail";
 import SearchResult from "../SearchResult";
@@ -23,7 +22,7 @@ import Checkout from "../../components/Checkout";
 import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
 import CRUDUsers from "../CRUDUsers";
-
+require('dotenv').config();
 
 interface ProductAttributes {
   name: String;
