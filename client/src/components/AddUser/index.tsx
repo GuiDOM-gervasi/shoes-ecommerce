@@ -3,12 +3,13 @@ import { useMutation, useQuery } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
 import { validateChange, check, form } from "../../helpers/validationUser";
-
+import { useHistory } from "react-router-dom"
 interface AddUserAttributes {
   className: String;
 }
 
 export default function AddUser({ className }: AddUserAttributes) {
+  const history = useHistory();
   const [
     createUser,
     { error: errorMutationUser },
@@ -44,7 +45,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           password,
           nlsuscribe: nlsuscribe && true,
         },
-      });
+      }).then(() => history.push("/login"))
     } catch (err) {
       console.log(err);
       return;
@@ -59,7 +60,6 @@ export default function AddUser({ className }: AddUserAttributes) {
       nlsuscribe: false,
       error: true,
     });
-    alert("Usuario creado");
   };
 
   const handleChange = async (e: any) => {

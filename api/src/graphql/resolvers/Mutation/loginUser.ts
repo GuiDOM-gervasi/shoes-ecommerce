@@ -29,7 +29,7 @@ const loginUser = async (parent: any, args: any , context: any , info: any ) =>{
 
   context.res.cookie("refresh-token", refreshToken, { domain: 'localhost', path: '/' });
   context.res.cookie("access-token", accessToken,{ domain: 'localhost', path: '/' });
-  console.log(JSON.stringify({ id: aux.id, isAdmin: aux.isAdmin, accessToken, refreshToken }))
+  
   return { id: aux.id, isAdmin: aux.isAdmin, accessToken, refreshToken };
 }
 

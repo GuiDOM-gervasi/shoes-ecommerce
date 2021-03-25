@@ -10,7 +10,7 @@ const createUserResolver = async (parent: any,{
   password,
   nlsuscribe
 }: UserAttributes, context: any , info: any) =>{
-  // console.log(firstName)
+
     const hashPassword = await bcrypt.hash(password,5)
     let aux = await User.create({
       firstName,
@@ -22,7 +22,7 @@ const createUserResolver = async (parent: any,{
       nlsuscribe,
       count: 1
      });
-    // console.log(aux)
+
     return aux
 }
 
