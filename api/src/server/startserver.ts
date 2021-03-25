@@ -10,9 +10,11 @@ import User from "../db/models/users";
 import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
 
-import { v4 as uuidv4 } from 'uuid';
+// Use body-parser to retrieve the raw body as a buffer
+const bodyParser = require('body-parser');
 
 const apiKey = accessEnv("STRIPE_KEY");
+// const endpointSecret = 'whsec_...';   //check on dashboard if it is enable for testing accounts
 const client = accessEnv("CLIENT_ADDRESS")
 
 const stripe = new Stripe(apiKey, {
@@ -29,9 +31,6 @@ const startServer = async () => {
 
   const app = express();
 
-  app.use(express.json());  
-  app.use(cookieParser());
-
   app.use(
     cors({
       origin: client,
@@ -47,12 +46,38 @@ const startServer = async () => {
     })
   );
 
+  app.use(express.json());  
+  app.use(cookieParser());
+
+    // Stripe fullfil EndPoing
+    app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
+      const payload = request.body;
+  
+      // const sig = request.headers['stripe-signature'];
+  
+      let event = request.body;
+      console.log('event:', event)
+      console.log('event type:', event.type)
+    
+      // try {
+      //   event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
+      // } catch (err) {
+      //   return response.status(400).send(`Webhook Error: ${err.message}`);
+      // }
+    
+      // console.log("Got payload: " + payload);
+    
+      response.status(200);
+    });
+
+
+
+
+
   // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
-    console.log("Request:", req.body);
     const input  = req.body;
-    console.log(input)
-  
+
     try{
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -61,7 +86,7 @@ const startServer = async () => {
         ],
         mode: 'payment',
         success_url: `${client}/success`,
-        cancel_url: `${client}//cancel`,
+        cancel_url: `${client}/cancel`,
       });
   
       res.json({ id: session.id });
@@ -73,6 +98,8 @@ const startServer = async () => {
     
   
   });
+
+
 
   // Loggin endpoint  --------------------------------------------
   app.use(async (req: any, res, next) => {
