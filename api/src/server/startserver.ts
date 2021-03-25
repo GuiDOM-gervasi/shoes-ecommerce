@@ -11,7 +11,9 @@ import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';
 
-const stripe = new Stripe('sk_test_51IYWrFKvrKT0hMD3VGaum9Pt8mt9zuz1JYA1rOPZnGuPXfJ8FjtWdgyRdL2T3tDhvQqHx5YciHk867wy5Q53W5iz00QMvzb6p0', {
+const apiKey = accessEnv("STRIPE_KEY");
+
+const stripe = new Stripe(apiKey, {
   apiVersion: '2020-08-27',  // to ensure compatibility with TS
 });
 
