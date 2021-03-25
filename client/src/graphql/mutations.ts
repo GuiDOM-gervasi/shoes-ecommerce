@@ -71,7 +71,7 @@ export const ADD_MODEL = gql`
 `;
 
 export const EDIT_PRODUCT = gql`
-  mutation editProduct($id: String!, $atr: String!, $input: [String]) {
+  mutation updateProduct($id: String!, $atr: String!, $input: [String]) {
     updateProduct(id: $id, atr: $atr, input: $input) {
       id
     }
@@ -122,8 +122,9 @@ export const EDIT_CATEGORY = gql`
 `;
 
 export const EDIT_STOCK = gql`
-  mutation editStock($productId: String!,$modelId: String! , $input: String!) {
-    updateStock(productId: $productId, modelId: $modelId, input: $input)}
+  mutation editStock($productId: String!,$modelId: String! , $input: Int!) {
+    updateStock(productId: $productId, modelId: $modelId, input: $input)
+    }
 `;
 
 export const CREATE_CART = gql`

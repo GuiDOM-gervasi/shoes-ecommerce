@@ -21,6 +21,7 @@ import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
+import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
 import CRUDStock from "../CRUDStock";
 
@@ -70,6 +71,7 @@ function App() {
       <Route path="/admin/orders/:id" component={isAdmin ? Order : Login} />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
+      <Route exact path="/admin/editStock/:productId/:modelId" component={EditStock} />
     </div>
   );
 }
