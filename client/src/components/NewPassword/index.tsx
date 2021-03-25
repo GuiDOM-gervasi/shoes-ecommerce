@@ -9,7 +9,6 @@ import { useMutation } from "@apollo/client";
 export default function NewPassword({match}) {
 
 
-  const userId = match.params.userId;
   const token = match.params.token;
 
   const [
@@ -25,7 +24,8 @@ export default function NewPassword({match}) {
     e.preventDefault();
     let { password } = form;
     try{
-      await updatePassword({variables:{userId, password, token}});
+      await updatePassword({variables:{password, token}});
+      alert("Password updated")
     }
     catch (err) {
       console.log(err);
@@ -45,7 +45,7 @@ export default function NewPassword({match}) {
       <form onSubmit={handleSubmit}>
         <input
           className="login"
-          type="text"
+          type="password"
           name="password"
           onChange={handleChange}
           placeholder="Enter your new password..."

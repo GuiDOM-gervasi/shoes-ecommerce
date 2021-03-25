@@ -134,8 +134,8 @@ export const PASSWORD_RESET = gql`
 `;
 
 export const UPDATE_PASSWORD = gql`
-  mutation updatePassword($userId: String!, $password: String!, $token: String!) {
-    updatePassword(userId: $userId, password: $password, token: $token)
+  mutation updatePassword($password: String!, $token: String!) {
+    updatePassword(password: $password, token: $token)
     }
 `;
 

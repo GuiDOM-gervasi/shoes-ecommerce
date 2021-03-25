@@ -163,7 +163,7 @@ const typeDefs = gql`
 		logoutUser(id: String!): Logout
 		removeFromCart(cartId: String!, finalproductId: String!): String!
 		passwordReset(email:String!): String!
-		updatePassword(userId: String!, password:String!, token: String!): String!
+		updatePassword(password:String!, token: String!): String!
 
 		undeleteCategory(id: String!): Category
 		undeleteProduct(id: String!): Product

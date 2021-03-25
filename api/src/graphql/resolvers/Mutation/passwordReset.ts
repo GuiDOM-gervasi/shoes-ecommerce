@@ -27,7 +27,7 @@ const passwordReset = async (
 
     var token = jwt.encode(payload, secret);
 
-    var url = "/resetpassword/" + payload.id + "/" + token
+    var url = "/resetpassword/" + token
     return url
     // TODO: Send email containing link to reset password.
     // In our case, will just return a link to click.

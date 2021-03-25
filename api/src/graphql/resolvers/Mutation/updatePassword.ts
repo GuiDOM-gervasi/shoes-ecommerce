@@ -4,17 +4,16 @@ const jwt = require('jwt-simple');
 
 const updatePassword = async (parent, args, context, info) => {
 
-  const { userId, password, token } = args;
+  const { password, token } = args;
   const hashPassword = await bcrypt.hash(password,5)
 
   var payload = jwt.decode(token, process.env.PASSWORD_RESET_SECRET);
-  console.log(payload)
 
   await User.update(
     { password:hashPassword },
     {
       where: {
-        id:userId
+        id:payload.id
       },
     }
   );
