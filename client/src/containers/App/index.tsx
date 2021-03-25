@@ -19,10 +19,10 @@ import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
+import Checkout from "../../components/Checkout";
 import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
 import CRUDUsers from "../CRUDUsers";
-import Payment from "../../components/Payment";
 
 
 interface ProductAttributes {
@@ -45,7 +45,7 @@ function App() {
       <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />
 
-      <Route exact path="/payment" component={Payment} />   {/* testing only */}
+      <Route exact path="/checkout" component={Checkout} />   {/*testing only */}
       
       <Route exact path="/admin" component={isAdmin ? Admin : Login} />
       <Route
