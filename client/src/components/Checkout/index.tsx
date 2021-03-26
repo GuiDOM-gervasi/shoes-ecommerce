@@ -6,16 +6,7 @@ const stripePromise = loadStripe('pk_test_51IYWrFKvrKT0hMD3gSFxlJd8ljQvDJBYWVaI0
 
 export default function Checkout() {
 
-  let input =  {
-    price_data: {
-      currency: 'ars',
-      product_data: {
-        name: 'LA ZAPATILLA',
-      },
-      unit_amount: 99999,
-    },
-    quantity: 1,
-  }
+  let userId =  4;
 
   const handleClick = async (event) => {
     // Get Stripe.js instance
@@ -24,7 +15,7 @@ export default function Checkout() {
     // Call your backend to create the Checkout Session
     const response = await fetch("http://localhost:3001/checkout", { 
       method: 'POST', 
-      body: JSON.stringify(input), // data can be `string` or {object}!
+      body: JSON.stringify(userId), // data can be `string` or {object}!
       headers:{
         'Content-Type': 'application/json'
       }

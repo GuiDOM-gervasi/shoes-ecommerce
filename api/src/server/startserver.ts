@@ -2,6 +2,7 @@ import {ApolloServer } from 'apollo-server-express'
 import * as cors from 'cors';
 import * as express from 'express';
 import accessEnv from '#root/helpers/accessEnv';
+import getCartForPayment from '#root/helpers/getCartForPayment';
 import resolvers from '#root/graphql/resolvers';
 import typeDefs from '#root/graphql/typeDefs';
 import * as cookieParser from "cookie-parser";
@@ -9,6 +10,7 @@ import { verify } from "jsonwebtoken";
 import User from "../db/models/users";
 import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
+
 
 // Use body-parser to retrieve the raw body as a buffer
 const bodyParser = require('body-parser');
@@ -52,37 +54,55 @@ const startServer = async () => {
     // Stripe fullfil EndPoing
     app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
       const payload = request.body;
-  
       // const sig = request.headers['stripe-signature'];
-  
       let event = request.body;
-      console.log('event:', event)
+      // console.log('event:', event)
       console.log('event type:', event.type)
-    
-      // try {
-      //   event = stripe.webhooks.constructEvent(payload, sig, endpointSecret);
-      // } catch (err) {
-      //   return response.status(400).send(`Webhook Error: ${err.message}`);
-      // }
-    
-      // console.log("Got payload: " + payload);
-    
+
+      // Handle the event
+      switch (event.type) {
+        case 'payment_intent.succeeded':
+          const paymentIntent = event.data.object;
+          console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
+          // Then define and call a method to handle the successful payment intent.
+          // handlePaymentIntentSucceeded(paymentIntent);
+          break;
+        case 'payment_method.attached':
+          const paymentMethod = event.data.object;
+          // Then define and call a method to handle the successful attachment of a PaymentMethod.
+          // handlePaymentMethodAttached(paymentMethod);
+          break;
+        default:
+          // Unexpected event type
+          console.log(`Unhandled event type ${event.type}.`);
+      }
+
       response.status(200);
     });
-
-
-
-
-
+    let cart = await getCartForPayment(4)
   // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
-    const input  = req.body;
+    const userId  = req.body;
+
+    let {count, price} = await getCartForPayment(4)
+    // console.log(cart)
+    let payment =  {
+      price_data: {
+        currency: 'ars',
+        product_data: {
+          name: `este carrito con ${count} productos esta a punto de ser tuyo`,
+        },
+        unit_amount: price * 100,  // price should be always on cents. 
+      },
+      quantity: 1,
+    }
+
 
     try{
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
-          input
+          payment
         ],
         mode: 'payment',
         success_url: `${client}/success`,
