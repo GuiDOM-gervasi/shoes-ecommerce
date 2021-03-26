@@ -22,6 +22,7 @@ export default function PasswordReset() {
     let { email } = form;
     try{
       await resetPassword({variables:{email}});
+      alert('Check your email to change the password')
     }
     catch (err) {
       console.log(err);
