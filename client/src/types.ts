@@ -18,9 +18,9 @@ export interface QueryUsers {
 
 export interface CartAttributes {
   id: String;
-  finalproducts: [];
+  //finalproducts: [];
+  cartproducts: [];
   userId: String;
-  state: String;
 }
 
 export interface ProductAttributes {
@@ -68,4 +68,17 @@ export interface UserAttributes {
   email: String;
   nlsuscribe: Boolean;
   isAdmin: Boolean;
+}
+
+export interface ModelAttributes {
+  color: string;
+  size: string;
+  id: string;
+}
+
+export interface StockAttributes{
+  id: string;
+  stock: string;
+  model:ModelAttributes;
+  product:ProductAttributes;
 }

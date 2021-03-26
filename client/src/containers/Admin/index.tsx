@@ -19,6 +19,9 @@ export default function Admin() {
       <div>
         <Link to="/admin/users"> Users </Link>
       </div>
+      <div>
+        <Link to="/admin/stock"> Stock </Link>
+      </div>
     </StyledAdmin>
   )
 }

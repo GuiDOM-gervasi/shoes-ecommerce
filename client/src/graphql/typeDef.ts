@@ -27,17 +27,27 @@ export const typeDefs = gql`
     color: String!
   }
 
+  type Orders{
+    id: ID!
+		finalproducts: FinalProduct
+		cart: CartWithUser
+		quantity: Int!
+		price: Float!
+		state: String!
+  }
+
   type Cart {
     id: ID
-    finalproducts: [FinalProduct]
+    #finalproducts: [FinalProduct]
+    cartproducts: [Orders]
     userId: String
-    state: String
   }
 
   type FinalProduct {
     id: ID
     product: Product
     model: Model
+    stock: String
   }
 
   extend type Query {

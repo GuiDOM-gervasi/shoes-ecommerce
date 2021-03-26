@@ -1,188 +1,209 @@
 import { gql } from "apollo-server";
 
 const typeDefs = gql`
-  type User {
+	type User {
+		id: ID!
+		firstName: String!
+		lastName: String!
+		userName: String!
+		isAdmin: Boolean!
+		email: String!
+		password: String!
+		nlsuscribe: Boolean
+		products: [Product]
+	}
+
+	type Product {
+		id: ID!
+		name: String!
+		description: String
+		price: Float
+		muestraimg: String
+		brand: Brand
+		categories: [Category!]
+		models: [Model!]
+		img: String
+	}
+
+	type Category {
+		id: ID!
+		name: String!
+	}
+	type Brand {
+		id: ID!
+		name: String!
+	}
+
+	type Image {
+		id: ID!
+		productId: String!
+		title: String!
+	}
+
+	type Model {
+		id: ID!
+		size: String!
+		color: String!
+	}
+
+	type Access {
+		isAdmin: Boolean!
+		id: String
+		accessToken: String!
+		refreshToken: String!
+	}
+
+	type FinalProduct {
+		id: ID
+		product: Product
+		model: Model
+		stock: String!
+		cartproducts: [CartProduct]!
+	}
+
+	type ProductForCategory {
+		products: [Product!]!
+	}
+
+	type Cart {
+		id: ID
+		userId: String
+		cartproducts: [Orders]
+	}
+
+	type CartWithUser {
+		id: ID
+		user: User
+	}
+
+	type Logout {
+		logout: Boolean
+	}
+
+	type CartProduct {
+		id: ID!
+		finalproductId: String!
+		cartId: String!
+		quantity: Int
+		price: Float
+		state: String
+	}
+
+	type Orders {
     id: ID!
-    firstName: String!
-    lastName: String!
-    userName: String!
-    isAdmin: Boolean!
-    email: String!
-    password: String!
-    nlsuscribe: Boolean
-    products: [Product]
-  }
+		finalproducts: FinalProduct
+		cart: CartWithUser
+		quantity: Int!
+		price: Float!
+		state: String!
+	}
+	type Review {
+		id: ID
+		productId: String
+		userId: String
+		title: String
+		score: Float!
+		description: String
+	}
 
-  type Product {
-    id: ID!
-    name: String!
-    description: String
-    price: Float
-    muestraimg: String
-    brand: Brand
-    categories: [Category!]
-    models: [Model!]
-    img: String
-  }
+	type Reviews {
+		count: Float
+		average: Float
+		reviews: [Review]
+	}
 
-  type Category {
-    id: ID!
-    name: String!
-  }
-  type Brand {
-    id: ID!
-    name: String!
-  }
-
-  type Image {
-    id: ID!
-    productId: String!
-    title: String!
-  }
-
-  type Model {
-    id: ID!
-    size: String!
-    color: String!
-  }
-
-  type Access {
-    isAdmin: Boolean!
-    id: String
-    accessToken: String!
-    refreshToken: String!
-  }
-
-  type FinalProduct {
-    id: ID
-    product: Product
-    model: Model
-    cartproducts: [MutationCartProduct]!
-  }
-
-  type ProductForCategory {
-    products: [Product!]!
-  }
-  type ProductModel {
-    products: [Product!]!
-  }
-
-  type Cart {
-    id: ID
-    finalproducts: [FinalProduct]
-    userId: String
-    state: String
-  }
-
-  type CartWithUser {
-    id: ID
-    user: User
-    state: String
-  }
-
-  type MutationCartProduct {
-    id: ID!
-    finalproductId: String!
-    cartId: String!
-    quantity: Int
-    price: Float
-  }
-
-  type Logout {
-    logout: Boolean
-  }
-
-  type Orders {
-    price: Float!
-    quantity: Int!
-    finalproducts: FinalProduct
-    cart: CartWithUser
-  }
-  type Review {
-    id: ID
-    productId: String
-    userId: String
-    title: String
-    score: Float!
-    description: String
-  }
-
-  type Reviews{
-    count: Float
-    average: Float
-    reviews: [Review]
-  }
-
-  type Mutation {
-    createUser(
-      firstName: String!
-      lastName: String!
-      userName: String!
-      isAdmin: Boolean!
-      email: String!
-      password: String!
-      nlsuscribe: Boolean
-    ): User!
-    createProduct(
-      name: String!
-      description: String
-      price: Float
-      muestraimg: String
-      brandId: ID!
-      CategoriesId: [String]
-      ModelsId: [String]
-    ): Product!
-    updateProduct(id: String!, atr: String!, input: [String]): Product!
-    updateUser(id: String!, atr: String!, input: String): String
-    addImage(productId: String!, image: String!): Image!
-    createCart(userId: String!, state: String!): Cart!
+	type Mutation {
+		
+		addImage(productId: String!, image: String!): Image!
+		addReview(
+			productId: String!
+			userId: String!
+			title: String!
+			score: Float!
+			description: String
+		): Review!
     addToCart(
-      finalproductId: String!
-      cartId: String!
-      quantity: Int
-      price: Float
-    ): MutationCartProduct!
-    removeFromCart(cartId: String!, finalproductId: String!): String!
-    updateCategory(id: String!, input: String!): Category!
-    createCategory(name: String!): Category!
-    createBrand(name: String!): Brand!
-    createModel(size: String!, color: String!): Model!
-    deleteProduct(id: String!): Product
-    deleteCategory(id: String!): Category
-    undeleteProduct(id: String!): Product
-    undeleteCategory(id: String!): Category
-    loginUser(email: String!, password: String!): Access
-    deleteUser(id: String!): String!
-    undeleteUser(id: String!): String!
-    addReview(productId: String!, userId: String!, title: String!, score: Float!, description: String): Review!
-    updateReview(
-      id: String!, 
-      title: String!, 
-      score: Float!, 
-      description: String
-      ): String
-    deleteReview(id: String!): String
-    updateState(userId:String!, state:String!): String!
-    controlQuantity(id:String!, quantity:Int!): String!
-    logoutUser(id: String!): Logout
-  }
+			finalproductId: String!
+			cartId: String!
+			quantity: Int
+			price: Float
+		): CartProduct!
+		checkStock(cartId:String!): String
+    controlQuantity(id: String!, quantity: Int!): String!
 
-  type Query {
-    users: [User!]!
-    products(atr: String, ord: String): [Product!]!
-    categories(atr: String, ord: String): [Category!]!
-    brand(atr: String, ord: String): [Brand!]!
-    productDetail(id: String!): Product!
-    models: [Model!]!
-    productForCategory(name: String!): [Product!]!
-    searchProducts(name: String!): [Product!]!
-    cart(userId: String!): Cart!
-    finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
-    image(productId: String!): [Image]!
-    deleted: [Product!]!
-    viewOrders( orderId: String! ): [Orders]!
-    deletedUsers: [User!]!
-    getReviews(productId: String!): Reviews
-  }
+		createBrand(name: String!): Brand!
+		createCart(userId: String!): Cart!
+		createCategory(name: String!): Category!
+		createModel(size: String!, color: String!): Model!
+		createProduct(
+			name: String!
+			description: String
+			price: Float
+			muestraimg: String
+			brandId: ID!
+			CategoriesId: [String]
+			ModelsId: [String]
+		): Product!
+		createUser(
+			firstName: String!
+			lastName: String!
+			userName: String!
+			isAdmin: Boolean!
+			email: String!
+			password: String!
+			nlsuscribe: Boolean
+		): User!
+
+		deleteCategory(id: String!): Category
+		deleteProduct(id: String!): Product
+		deleteReview(id: String!): String
+		deleteUser(id: String!): String!
+
+		loginUser(email: String!, password: String!): Access
+		logoutUser(id: String!): Logout
+		removeFromCart(cartId: String!, finalproductId: String!): String!
+
+		undeleteCategory(id: String!): Category
+		undeleteProduct(id: String!): Product
+		undeleteUser(id: String!): String!
+
+		updateCategory(id: String!, input: String!): Category!
+		updateProduct(id: String!, atr: String!, input: [String]): Product!
+    	updateReview(
+			id: String!
+			title: String!
+			score: Float!
+			description: String
+		): String
+		updateState(orderId: String!, state: String!): CartProduct!
+		updateStock(productId:String!,modelId:String!, input:Int):String
+		updateUser(id: String!, atr: String!, input: String): String
+		
+		}
+
+	type Query {
+		brand(atr: String, ord: String): [Brand!]!
+		cart(userId: String!, state: String): Cart
+		categories(atr: String, ord: String): [Category!]!
+		deleted: [Product!]!
+		deletedUsers: [User!]!
+
+		finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
+		getReviews(productId: String!): Reviews
+		image(productId: String!): [Image]!
+		models: [Model!]!
+
+		productDetail(id: String!): Product!
+		productForCategory(name: String!): [Product!]!
+		products(atr: String, ord: String): [Product!]!
+
+		searchProducts(name: String!): [Product!]!
+		users: [User!]!
+		viewOrders(orderId: String! state: String): [Orders]!
+
+		stockProduct(productId:String!,modelId:String!):FinalProduct!
+    	allModelsProduct(productId:String!):[FinalProduct!]!
+    	allStock:[FinalProduct!]!
+	}
 `;
 export default typeDefs;
