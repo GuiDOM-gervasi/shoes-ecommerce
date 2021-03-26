@@ -51,52 +51,59 @@ const startServer = async () => {
   app.use(express.json());  
   app.use(cookieParser());
 
-    // Stripe fullfil EndPoing
-    app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
-      const payload = request.body;
-      // const sig = request.headers['stripe-signature'];
-      let event = request.body;
-      // console.log('event:', event)
-      console.log('event type:', event.type)
+  // Stripe fullfil EndPoing
+  app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
+    const payload = request.body;
+    // const sig = request.headers['stripe-signature'];
+    let event = request.body;
+    // console.log('event:', event)
+    console.log('event type:', event.type)
 
-      // Handle the event
-      switch (event.type) {
-        case 'payment_intent.succeeded':
-          const paymentIntent = event.data.object;
-          console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
-          // Then define and call a method to handle the successful payment intent.
-          // handlePaymentIntentSucceeded(paymentIntent);
-          break;
-        case 'payment_method.attached':
-          const paymentMethod = event.data.object;
-          // Then define and call a method to handle the successful attachment of a PaymentMethod.
-          // handlePaymentMethodAttached(paymentMethod);
-          break;
-        default:
-          // Unexpected event type
-          console.log(`Unhandled event type ${event.type}.`);
-      }
+    // Handle the event
+    switch (event.type) {
+      case 'payment_intent.succeeded':
+        const paymentIntent = event.data.object;
+        console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
+        // Then define and call a method to handle the successful payment intent.
+        // handlePaymentIntentSucceeded(paymentIntent);
+        break;
+      case 'payment_method.attached':
+        const paymentMethod = event.data.object;
+        // Then define and call a method to handle the successful attachment of a PaymentMethod.
+        // handlePaymentMethodAttached(paymentMethod);
+        break;
+      default:
+        // Unexpected event type
+        console.log(`Unhandled event type ${event.type}.`);
+    }
 
-      response.status(200);
-    });
-    let cart = await getCartForPayment(4)
+    response.status(200);
+  });
+  let cart = await getCartForPayment(4)
   // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
     const userId  = req.body;
 
-    let {count, price} = await getCartForPayment(4)
-    // console.log(cart)
-    let payment =  {
-      price_data: {
-        currency: 'ars',
-        product_data: {
-          name: `Este carrito con ${count} productos esta a punto de ser tuyo!!!`,
-        },
-        unit_amount: price * 100,  // price should be always on cents. 
-      },
-      quantity: 1,
-    }
+    let count = 10;
+    let price = 100000;
 
+    // let {count, price, status} = await getCartForPayment(4)
+    let payment;
+    if (status === 'ok'){
+      console.log( 'req.body:', userId)
+      payment =  {
+        price_data: {
+          currency: 'ars',
+          product_data: {
+            name: `Este carrito con ${count} productos esta a punto de ser tuyo!!!`,
+          },
+          unit_amount: price * 100,  // price should be always on cents. 
+        },
+        quantity: 1,
+      }
+    }else{
+      res.json({ error: 'seems that the cart for this user is empty' });
+    }
 
     try{
       const session = await stripe.checkout.sessions.create({

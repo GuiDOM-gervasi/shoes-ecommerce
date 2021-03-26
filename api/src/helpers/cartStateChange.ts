@@ -2,7 +2,7 @@ import CartProduct from "#root/db/models/cartproduct";
 import Cart from "#root/db/models/carts";
 
 const cartStateChange = async (userId:number) => {
-	
+  
 	let cart =  await Cart.findOne({
 		where: {
 			userId
@@ -14,9 +14,13 @@ const cartStateChange = async (userId:number) => {
 		],
 	});
 
+  console.log(cart)
   cart.cartproducts.forEach(element => {
-    // count = count + element.quantity;
-    // price = price + (element.quantity * element.price)
+    console.log('element.state')
+    console.log(element.state)
+    element.state = 'payed'
+    console.log('after change')
+    console.log(element.state)
   });
 
   return {status: 'ok'}

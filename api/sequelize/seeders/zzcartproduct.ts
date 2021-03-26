@@ -16,7 +16,15 @@ module.exports = {
       state: 'reserved',
       createdAt: new Date(),
       updatedAt: new Date()
-    },]);
+    },{
+      cartId: 1,    
+      finalproductId: 3,
+      quantity: 1,
+      price: 7000,
+      state: 'finish',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }]);
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('cartproduct', null, {});
