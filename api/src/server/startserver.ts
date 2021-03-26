@@ -67,18 +67,16 @@ const startServer = async () => {
       case 'payment_intent.succeeded':
         
         console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
-        // Then define and call a method to handle the successful payment intent.
-        // handlePaymentIntentSucceeded(paymentIntent);
+        // Define and call a method to handle the successful payment intent.
+ 
         break;
       case 'checkout.session.completed':
         console.log(`PaymentIntent went wrong!, ID: ${paymentIntent.id}`);
-        // Then define and call a method to handle the successful attachment of a PaymentMethod.
-        // handlePaymentMethodAttached(paymentMethod);
+        // get notification if the session expire, or is ended by payment or rejection
         break;
       case 'payment_intent.payment_failed':
           console.log(`PaymentIntent sommething went wrong with the card!, ID: ${paymentIntent.id}`);
-          // Then define and call a method to handle the successful attachment of a PaymentMethod.
-          // handlePaymentMethodAttached(paymentMethod);
+          // Define and call a method to handle the failure on payment
           break;
       default:
         // Unexpected event type
