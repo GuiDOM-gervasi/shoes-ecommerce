@@ -157,7 +157,7 @@ export default function AddUser({ className }: AddUserAttributes) {
         </div>
 
         <input className="boton" type="submit" value="Registrarse" disabled={form.error} />
-				<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle}/>
+				<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Register with Gmail"/>
       </form>
     </StyledAddUser>
   );
