@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {GoogleLogin} from "react-google-login";
 import { useMutation, useQuery } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
@@ -33,6 +34,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+		console.log(form)
     let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe } = form;
     try {
       await createUser({
@@ -63,9 +65,27 @@ export default function AddUser({ className }: AddUserAttributes) {
   };
 
   const handleChange = async (e: any) => {
+
     const error = check(e, form);
     setForm(validateChange(e, form, error));
   };
+	
+		const responseGoogle = async (response)=> {
+			try{
+			setForm({
+				firstName: response.profileObj.givenName,
+				lastName: response.profileObj.familyName,
+				userName: response.profileObj.name,
+				isAdmin: false,
+				email: response.profileObj.email,
+				password: "",
+				nlsuscribe: false,
+				error: false,
+			})
+			}catch(e){
+				alert("Su cuenta de Google no es Valida")
+			}
+	}
 
   return (
     <StyledAddUser>
@@ -131,6 +151,7 @@ export default function AddUser({ className }: AddUserAttributes) {
         </div>
 
         <input className="boton" type="submit" value="Registrarse" disabled={form.error} />
+				<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle}/>
       </form>
     </StyledAddUser>
   );
