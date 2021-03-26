@@ -86,10 +86,8 @@ const passwordReset = async (
     </body>
     </html>`
 
-    await emailService(text,subject,[emailAddress]);
+    await emailService( [emailAddress], subject, text );
     
-
-    console.log("Parece que si!")
     return "Ok"
     // TODO: Send email containing link to reset password.
     // In our case, will just return a link to click.

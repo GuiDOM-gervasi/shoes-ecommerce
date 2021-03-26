@@ -1,22 +1,25 @@
 const Mailgun = require("mailgun-js");
 
-export async function emailService(textToSend: string, subject: string, email: Array<string>){
+export async function emailService(email: Array<string>, subject: string, textToSend: string){
 
-  const mg = Mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN});
+  let mg = undefined;
+  try {
+    mg = Mailgun({apiKey: process.env.MAILGUN_API_KEY, domain: process.env.MAILGUN_DOMAIN});
+  } catch (error) {
+    console.log('ACORDARSE DE CONFIGURAR EL .ENV!!!')
+  }
   
   const data = {
-    from: 'postmaster@sandboxc71b9dbd1ed2436fae90b8416f853582.mailgun.org',
+    from: 'Grupo 1 - Ecommerce <delucaivan.01@gmail.com>',
     to: email.join(","),
     subject,
-    text: textToSend
+    html: textToSend
   };
 
-  await mg.messages().send(data, function (error, body) {
+  mg && await mg.messages().send(data, function (error, body) {
     if(error){
-      console.log(error)
-    }else{
-      return true
-    }
-    return false
+      console.log('Error: ',error)
+    }console.log('Body: ',body);
+    return
   });
 }
