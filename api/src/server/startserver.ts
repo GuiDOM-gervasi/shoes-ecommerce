@@ -53,25 +53,33 @@ const startServer = async () => {
 
   // Stripe fullfil EndPoing
   app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
+    console.log('/webhook')
     const payload = request.body;
     // const sig = request.headers['stripe-signature'];
     let event = request.body;
     // console.log('event:', event)
-    console.log('event type:', event.type)
-
+    // console.log('event type:', event.type).
+    let paymentIntent = event.data.object;
+    
     // Handle the event
     switch (event.type) {
+      
       case 'payment_intent.succeeded':
-        const paymentIntent = event.data.object;
-        console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`);
+        
+        console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
         // Then define and call a method to handle the successful payment intent.
         // handlePaymentIntentSucceeded(paymentIntent);
         break;
-      case 'payment_method.attached':
-        const paymentMethod = event.data.object;
+      case 'checkout.session.completed':
+        console.log(`PaymentIntent went wrong!, ID: ${paymentIntent.id}`);
         // Then define and call a method to handle the successful attachment of a PaymentMethod.
         // handlePaymentMethodAttached(paymentMethod);
         break;
+      case 'payment_intent.payment_failed':
+          console.log(`PaymentIntent sommething went wrong with the card!, ID: ${paymentIntent.id}`);
+          // Then define and call a method to handle the successful attachment of a PaymentMethod.
+          // handlePaymentMethodAttached(paymentMethod);
+          break;
       default:
         // Unexpected event type
         console.log(`Unhandled event type ${event.type}.`);
@@ -79,19 +87,16 @@ const startServer = async () => {
 
     response.status(200);
   });
-  let cart = await getCartForPayment(4)
+  
   // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
-    const userId  = req.body;
+    // const {userId}  = req.body;
+    let userId = 4;
+    let {count, price, status} = await getCartForPayment(userId)
 
-    let count = 10;
-    let price = 100000;
-
-    // let {count, price, status} = await getCartForPayment(4)
-    let payment;
     if (status === 'ok'){
-      console.log( 'req.body:', userId)
-      payment =  {
+      
+      let payment =  {
         price_data: {
           currency: 'ars',
           product_data: {
@@ -101,29 +106,32 @@ const startServer = async () => {
         },
         quantity: 1,
       }
+
+
+      try{
+        const session = await stripe.checkout.sessions.create({
+          payment_method_types: ['card'],
+          line_items: [
+            payment
+          ],
+          mode: 'payment',
+          success_url: `${client}/success`,
+          cancel_url: `${client}/cancel`,
+        });
+        console.log('sessionid: ',session.id)
+        console.log('payment intent: ', session.payment_intent)
+        
+        res.json({ id: session.id });
+      }
+      catch(e){
+        console.error(e)
+        res.json({ error: 'something went worng' });
+      }
+
     }else{
       res.json({ error: 'seems that the cart for this user is empty' });
     }
 
-    try{
-      const session = await stripe.checkout.sessions.create({
-        payment_method_types: ['card'],
-        line_items: [
-          payment
-        ],
-        mode: 'payment',
-        success_url: `${client}/success`,
-        cancel_url: `${client}/cancel`,
-      });
-  
-      res.json({ id: session.id });
-    }
-    catch(e){
-      console.error(e)
-      res.json({ error: 'something went worng' });
-    }
-    
-  
   });
 
 

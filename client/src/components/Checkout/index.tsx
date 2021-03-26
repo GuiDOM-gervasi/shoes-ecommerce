@@ -6,6 +6,7 @@ const stripePromise = loadStripe('pk_test_51IYWrFKvrKT0hMD3gSFxlJd8ljQvDJBYWVaI0
 
 export default function Checkout() {
 
+  // const {userId} = useAuth()
   let userId =  4;
 
   const handleClick = async (event) => {
@@ -15,10 +16,11 @@ export default function Checkout() {
     // Call your backend to create the Checkout Session
     const response = await fetch("http://localhost:3001/checkout", { 
       method: 'POST', 
-      body: JSON.stringify(userId), // data can be `string` or {object}!
+      body: JSON.stringify({userId : 4}), // data can be `string` or {object}!
       headers:{
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'include'
     });
 
     const session = await response.json();

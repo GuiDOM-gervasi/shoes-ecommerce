@@ -2,7 +2,7 @@ import CartProduct from "#root/db/models/cartproduct";
 import Cart from "#root/db/models/carts";
 
 const getCartForPayment = async (userId:number) => {
-	
+	let status= 'ok'
   try{
     let cart =  await Cart.findOne({
       where: {
@@ -21,14 +21,12 @@ const getCartForPayment = async (userId:number) => {
   
     let count = 0;
     let price = 0;
-    // console.log(cart)
     cart.cartproducts.forEach(element => {
       count = count + element.quantity;
       price = price + (element.quantity * element.price)
   
     });
-    console.log('price:', price)
-    return {count, price, status: 'ok'}
+    return {count, price, status}
   }
   catch(error){
 
