@@ -16,10 +16,11 @@ const getCartForPayment = async (userId:number) => {
 
   let count = 0;
   let price = 0;
-  cart.cartproducts.forEach(element => {
-    count = count + element.quantity;
-    price = price + (element.quantity * element.price)
-  });
+  console.log(cart)
+  // cart.cartproducts.forEach(element => {
+  //   count = count + element.quantity;
+  //   price = price + (element.quantity * element.price)
+  // });
 
   return {count, price}
 };

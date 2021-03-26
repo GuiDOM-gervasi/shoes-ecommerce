@@ -25,9 +25,10 @@ import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
 import Success from "../../components/Checkout/Success";
 import Cancel from "../../components/Checkout/Cancel";
+import CRUDStock from "../CRUDStock";
 
 require('dotenv').config();
-import CRUDStock from "../CRUDStock";
+
 
 interface ProductAttributes {
   name: String;

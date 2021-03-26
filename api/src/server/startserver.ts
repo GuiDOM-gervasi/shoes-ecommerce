@@ -90,7 +90,7 @@ const startServer = async () => {
       price_data: {
         currency: 'ars',
         product_data: {
-          name: `este carrito con ${count} productos esta a punto de ser tuyo`,
+          name: `Este carrito con ${count} productos esta a punto de ser tuyo!!!`,
         },
         unit_amount: price * 100,  // price should be always on cents. 
       },
