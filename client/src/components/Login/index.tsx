@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {GoogleLogin } from "react-google-login"
 import { useAuth } from "../../hooks/AuthProvider";
 import { StyledLogin } from "./StyledLogin";
 import { useHistory } from "react-router-dom";
@@ -12,7 +13,7 @@ export default function Login() {
 
   const [form, setForm] = useState({
     email: "",
-    password: ""
+		password: "",
   });
 
   async function handleSubmit(e) {
@@ -27,6 +28,16 @@ export default function Login() {
       [e.target.name]: e.target.value
     })
   };
+	
+	const responseGoogle = async(response) => {
+		try{
+				login(response.profileObj.email,"hola",() => history.push("/"))
+
+		}catch(e){
+			console.log(e)
+		}
+		
+	}
   
   return (
     <StyledLogin>
@@ -46,6 +57,7 @@ export default function Login() {
         />
         <input className="boton" type="submit" value="Iniciar sesión" />
       </form>
+			<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle}/>
     </StyledLogin>
   );
 }

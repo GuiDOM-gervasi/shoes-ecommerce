@@ -8,6 +8,7 @@ module.exports = {
 						email:"soyadmin@admin.com",
 						password:"12345",
 						nlsuscribe:false,
+						isGmail:false, 
 						count: 1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -19,6 +20,7 @@ module.exports = {
 						email:"ernestoramirez@gmail.com",
 						password:"12345",
 						nlsuscribe:false,
+						isGmail:false,
 						count:1,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -30,6 +32,7 @@ module.exports = {
 						email:"lautoraherrera@gmail.com",
 						password:"12345",
 						nlsuscribe:false,
+						isGmail: false,
 						count:1,
       createdAt: new Date(),
       updatedAt: new Date()

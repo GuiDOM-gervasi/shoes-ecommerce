@@ -25,6 +25,7 @@ export default function AddUser({ className }: AddUserAttributes) {
     email: "",
     password: "",
     nlsuscribe: false,
+		isGmail:false,
     error: true,
   });
 
@@ -35,7 +36,8 @@ export default function AddUser({ className }: AddUserAttributes) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 		console.log(form)
-    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe } = form;
+    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe ,isGmail} = form;
+		console.log(isGmail)
     try {
       await createUser({
         variables: {
@@ -45,7 +47,8 @@ export default function AddUser({ className }: AddUserAttributes) {
           isAdmin,
           email,
           password,
-          nlsuscribe: nlsuscribe && true,
+					nlsuscribe: nlsuscribe && true,
+					isGmail:isGmail,
         },
       }).then(() => history.push("/login"))
     } catch (err) {
@@ -60,31 +63,34 @@ export default function AddUser({ className }: AddUserAttributes) {
       email: "",
       password: "",
       nlsuscribe: false,
+			isGmail:false,
       error: true,
     });
   };
 
   const handleChange = async (e: any) => {
 
-    const error = check(e, form);
+  const error = check(e, form);
     setForm(validateChange(e, form, error));
   };
 	
-		const responseGoogle = async (response)=> {
-			try{
-			setForm({
-				firstName: response.profileObj.givenName,
-				lastName: response.profileObj.familyName,
-				userName: response.profileObj.name,
-				isAdmin: false,
-				email: response.profileObj.email,
-				password: "",
-				nlsuscribe: false,
-				error: false,
-			})
-			}catch(e){
-				alert("Su cuenta de Google no es Valida")
-			}
+	const responseGoogle = async (response)=> {
+		console.log(response)
+		try{
+		setForm({
+			firstName: response.profileObj.givenName,
+			lastName: response.profileObj.familyName,
+			userName: response.profileObj.name,
+			isAdmin: false,
+			email: response.profileObj.email,
+			password: "",
+			nlsuscribe: false,
+			isGmail:true,
+			error: false,
+		})
+		}catch(e){
+			alert("Su cuenta de Google no es Valida")
+		}
 	}
 
   return (
