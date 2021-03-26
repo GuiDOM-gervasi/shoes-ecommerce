@@ -12,14 +12,14 @@ import AddCategory from "../../components/AddCategory";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
-import EditCategory from "../../components/EditCategory";
+// import EditCategory from "../../components/EditCategory";
 import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Order from "../../components/Order";
 import Checkout from "../../components/Checkout";
-import Loader from "../../components/Loader";
+// import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
 import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
@@ -30,13 +30,13 @@ import CRUDStock from "../CRUDStock";
 require('dotenv').config();
 
 
-interface ProductAttributes {
-  name: String;
-  description: String;
-  price: Number;
-  brandId: String;
-  CategoriesId: String[];
-}
+// interface ProductAttributes {
+//   name: String;
+//   description: String;
+//   price: Number;
+//   brandId: String;
+//   CategoriesId: String[];
+// }
 
 function App() {
   const { isAdmin } = useAuth();
