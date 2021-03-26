@@ -10,7 +10,7 @@ export async function emailService(email: Array<string>, subject: string, textTo
   }
   
   const data = {
-    from: 'Grupo 1 - Ecommerce <delucaivan.01@gmail.com>',
+    from: 'Grupo 1 - Ecommerce <martintoz@gmail.com>',
     to: email.join(","),
     subject,
     html: textToSend
