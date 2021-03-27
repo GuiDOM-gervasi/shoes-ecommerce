@@ -10,21 +10,27 @@ const discountStock = async (paymentId: any) => {
       },
       include: [CartProduct as any, FinalProduct as any],
     });
-  
-  console.log('cart')
-  console.log(cart)
-  console.log('cartProduct')
-  console.log(cart.carproducts)
-  console.log(cart.carproducts.quantity)
-  console.log('finaProduct')
-  console.log(cart.finalproduct)
-  console.log('finaProduct id')
-  console.log(cart.finalproduct.id)
-  console.log(cart.finalproduct.stock)
 
+    let newStock = 0;
+    let id = "";
+    let status = {
+      status: "OK",
+      ids: [],
+      stock: [],
+    };
+
+    for (let i = 0; i < cart.cartproducts.length; i++) {
+      newStock = cart.finalproducts[i].stock - cart.cartproducts[i].quantity;
+      id = cart.finalproducts[i].id;
+      status.ids.push(id);
+      newStock < 1 ? status.stock.push(false) : status.stock.push(true);
+      await FinalProduct.update({ stock: newStock }, { where: { id: id } });
+    }
+
+    return status;
   } catch (e) {
     console.error(e);
-    return 0;
+    return { status: "ERROR" };
   }
 };
 

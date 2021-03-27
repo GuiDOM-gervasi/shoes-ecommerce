@@ -49,8 +49,11 @@ const startServer = async () => {
 
   app.use(express.json());  
   app.use(cookieParser());
-
-  let a = discountStock('pi_1IZgsLKvrKT0hMD38uia5LrT')
+  
+  app.get('/status', async (req, res) => {
+    res.json({status:'ok'})
+  })
+  
   // Stripe fullfil EndPoing
   app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
     
@@ -62,6 +65,8 @@ const startServer = async () => {
     switch (event.type) {
       case 'payment_intent.succeeded':
         console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
+        let stockStatus = await discountStock(paymentIntent.id)
+        console.log(`stockStatus: `, stockStatus)
         let isSetPayed = await setCartPayed(paymentIntent.id)
         console.log('is cart set to payed:', isSetPayed)
         break;
