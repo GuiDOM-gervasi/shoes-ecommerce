@@ -8,7 +8,7 @@ import { useMutation } from "@apollo/client";
 
 export default function NewPassword({match}) {
 
-
+  const history = useHistory();
   const token = match.params.token;
 
   const [
@@ -24,8 +24,8 @@ export default function NewPassword({match}) {
     e.preventDefault();
     let { password } = form;
     try{
-      await updatePassword({variables:{password, token}});
-      alert("Password updated")
+      await updatePassword({variables:{password, token}})
+      .then(() => history.push("/login"))
     }
     catch (err) {
       console.log(err);
