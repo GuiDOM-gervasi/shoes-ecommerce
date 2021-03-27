@@ -3,6 +3,8 @@ import * as cors from 'cors';
 import * as express from 'express';
 import accessEnv from '#root/helpers/accessEnv';
 import getCartForPayment from '#root/helpers/getCartForPayment';
+import updatePaymentId from '#root/helpers/updatePaymentId';
+import setCartPayed from '#root/helpers/setCartPayed';
 import resolvers from '#root/graphql/resolvers';
 import typeDefs from '#root/graphql/typeDefs';
 import * as cookieParser from "cookie-parser";
@@ -10,7 +12,6 @@ import { verify } from "jsonwebtoken";
 import User from "../db/models/users";
 import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
-
 
 // Use body-parser to retrieve the raw body as a buffer
 const bodyParser = require('body-parser');
@@ -51,8 +52,11 @@ const startServer = async () => {
   app.use(express.json());  
   app.use(cookieParser());
 
+  let isSetPayed = setCartPayed('pi_1IZOpRKvrKT0hMD3LcCXpgXP')
+  console.log('is cart set to payed:', isSetPayed)
+
   // Stripe fullfil EndPoing
-  app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, response) => {
+  app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
     console.log('/webhook')
     const payload = request.body;
     // const sig = request.headers['stripe-signature'];
@@ -60,15 +64,15 @@ const startServer = async () => {
     // console.log('event:', event)
     // console.log('event type:', event.type).
     let paymentIntent = event.data.object;
-    
+
     // Handle the event
     switch (event.type) {
       
       case 'payment_intent.succeeded':
         
         console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
-        // Define and call a method to handle the successful payment intent.
- 
+        let isSetPayed = await setCartPayed(paymentIntent.id)
+        console.log('is cart set to payed:', isSetPayed)
         break;
       case 'checkout.session.completed':
         console.log(`PaymentIntent went wrong!, ID: ${paymentIntent.id}`);
@@ -118,7 +122,8 @@ const startServer = async () => {
         });
         console.log('sessionid: ',session.id)
         console.log('payment intent: ', session.payment_intent)
-        
+        let isPaymentSaved = await updatePaymentId(userId, session.payment_intent)
+        console.log('isPaymentSaved: ', isPaymentSaved)
         res.json({ id: session.id });
       }
       catch(e){
