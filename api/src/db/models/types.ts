@@ -7,6 +7,7 @@ export interface UserAttributes {
   email: string;
   password: string;
   nlsuscribe: Boolean;
+	isGmail:Boolean;
   count: number;
 		ReviewId?: [string];
 }
@@ -47,6 +48,7 @@ export interface ModelAttributes {
 
 export interface CartAttributes {
   id?: string;
+  paymentId?: string;
   userId: string;
 }
 

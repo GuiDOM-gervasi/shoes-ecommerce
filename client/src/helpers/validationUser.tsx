@@ -6,6 +6,7 @@ export interface form {
   email: string;
   password: string;
   nlsuscribe: boolean;
+	isGmail: boolean;
   error: boolean;
 }
 
