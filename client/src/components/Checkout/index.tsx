@@ -2,13 +2,21 @@ import React from 'react'
 // import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { StyledChaeckout } from './StyledCheckout';
+import { useAuth } from '../../hooks/AuthProvider';
+import { GET_CART } from '../../graphql/queries';
+import { useQuery } from '@apollo/client';
 
 const stripePromise = loadStripe('pk_test_51IYWrFKvrKT0hMD3gSFxlJd8ljQvDJBYWVaI0Xtr1JxWYpliVfyIyQG4Um32fUMZS5JOj8JEyDchF5TcHmWlO4qk00TxDSLbDv');
 
 export default function Checkout() {
-
+  const { userId } = useAuth();
+  const { data, loading, error } = useQuery(GET_CART, {
+    variables: {
+      userId: userId && userId,
+    },
+  });
   // const {userId} = useAuth()
-  let userId =  3;
+ 
 
   const handleClick = async (event) => {
     // Get Stripe.js instance
@@ -37,6 +45,13 @@ export default function Checkout() {
       // using `result.error.message`.
     }
   };
+
+
+  const hardcore = [{name:"Addidas",quantity:"1",price:"555"},
+  {name:"Addidas",quantity:"1",price:"555"},
+  {name:"Addidas",quantity:"2",price:"555"},
+  {name:"Addidas",quantity:"3",price:"555"}]
+
 
   return (
     <StyledChaeckout>
