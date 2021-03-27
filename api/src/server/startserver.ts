@@ -83,8 +83,7 @@ const startServer = async () => {
   // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
     let {userId}  = req.body;
-    console.log('req userId:', userId)
-    // userId = 3;
+
     let {count, price, status} = await getCartForPayment(userId)
 
     if (status === 'ok'){
