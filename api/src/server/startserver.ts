@@ -65,7 +65,7 @@ const startServer = async () => {
         break;
 
       case 'checkout.session.completed':
-        console.log(`PaymentIntent went wrong!, ID: ${paymentIntent.id}`);
+        console.log(`PaymentIntent was finished!, ID: ${paymentIntent.id}`);
         // get notification if the session expire, or is ended by payment or rejection
         break;
 
