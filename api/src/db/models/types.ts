@@ -47,6 +47,7 @@ export interface ModelAttributes {
 
 export interface CartAttributes {
   id?: string;
+  paymentId?: string;
   userId: string;
 }
 
