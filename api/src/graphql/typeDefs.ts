@@ -122,14 +122,14 @@ const typeDefs = gql`
 			score: Float!
 			description: String
 		): Review!
-    addToCart(
+    	addToCart(
 			finalproductId: String!
 			cartId: String!
 			quantity: Int
 			price: Float
 		): CartProduct!
 		checkStock(cartId:String!): String
-    controlQuantity(id: String!, quantity: Int!): String!
+    	controlQuantity(id: String!, quantity: Int!): String!
 
 		createBrand(name: String!): Brand!
 		createCart(userId: String!): Cart!
@@ -161,15 +161,15 @@ const typeDefs = gql`
 
 		loginUser(email: String!, password: String!): Access
 		logoutUser(id: String!): Logout
-		removeFromCart(cartId: String!, finalproductId: String!): String!
 		passwordReset(email:String!): String!
-		updatePassword(password:String!, token: String!): String!
+		removeFromCart(cartId: String!, finalproductId: String!): String!
 
 		undeleteCategory(id: String!): Category
 		undeleteProduct(id: String!): Product
 		undeleteUser(id: String!): String!
 
 		updateCategory(id: String!, input: String!): Category!
+		updatePassword(password:String!, token: String!): String!
 		updateProduct(id: String!, atr: String!, input: [String]): Product!
     	updateReview(
 			id: String!
