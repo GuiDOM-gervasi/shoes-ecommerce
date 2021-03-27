@@ -83,6 +83,12 @@ export class User extends Model<UserAttributes> {
     type: DataType.BOOLEAN,
   })
   nlsuscribe?: Boolean;
+	
+	@Column({
+		allowNull: true,
+		type: DataType.BOOLEAN,
+	})
+	isGmail?:Boolean;
 
   @HasOne(() => Cart)
   cartId!: Cart;

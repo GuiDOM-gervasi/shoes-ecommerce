@@ -87,6 +87,7 @@ export const ADD_USER = gql`
     $email: String!
     $password: String!
     $nlsuscribe: Boolean!
+		$isGmail:Boolean!
   ) {
     createUser(
       firstName: $firstName
@@ -96,6 +97,7 @@ export const ADD_USER = gql`
       email: $email
       password: $password
       nlsuscribe: $nlsuscribe
+			isGmail: $isGmail
     ) {
       userName
     }
@@ -104,7 +106,7 @@ export const ADD_USER = gql`
 
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+    loginUser(email: $email, password: $password){
       id
       isAdmin
       accessToken
