@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/AuthProvider";
 import { StyledLogin } from "./StyledLogin";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+
 
 // import { validateChange, check, form } from "../../helpers/validationLogin";
 
@@ -45,6 +46,7 @@ export default function Login() {
           placeholder="password"
         />
         <input className="boton" type="submit" value="Iniciar sesión" />
+      <NavLink to="/forgotpassword">¿Olvidaste tu contraseña?</NavLink>
       </form>
     </StyledLogin>
   );

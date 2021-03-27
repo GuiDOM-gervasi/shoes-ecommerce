@@ -19,9 +19,7 @@ export default function Catalogue () {
   );
   const [loadedProducts, setLoadedProduct] = React.useState([]);
   const {userId} = useAuth()
-  console.log(userId)
   if(parseInt(userId) > 0){
-    console.log(userId)
     const carrito = createCart({
       variables :{
         userId: userId,

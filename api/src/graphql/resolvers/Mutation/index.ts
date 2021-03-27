@@ -18,6 +18,8 @@ export { default as deleteUser } from "./deleteUser";
 
 export { default as loginUser } from "./loginUser";
 export { default as logoutUser } from "./logoutUser";
+export { default as passwordReset } from "./passwordReset";
+export { default as updatePassword } from "./updatePassword";
 
 export { default as removeFromCart } from "./removefromcart";
 

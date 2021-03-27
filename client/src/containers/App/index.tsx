@@ -26,6 +26,8 @@ import CRUDUsers from "../CRUDUsers";
 import Success from "../../components/Checkout/Success";
 import Cancel from "../../components/Checkout/Cancel";
 import CRUDStock from "../CRUDStock";
+import PasswordReset from "../../components/PasswordReset";
+import NewPassword from "../../components/NewPassword";
 
 require('dotenv').config();
 
@@ -82,6 +84,8 @@ function App() {
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
       <Route exact path="/admin/editStock/:productId/:modelId" component={EditStock} />
+      <Route path="/forgotpassword" component={PasswordReset} />
+      <Route path="/resetpassword/:token" component={NewPassword} />
     </div>
   );
 }
