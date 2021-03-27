@@ -1,6 +1,7 @@
 import React from 'react'
 // import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { StyledChaeckout } from './StyledCheckout';
 
 const stripePromise = loadStripe('pk_test_51IYWrFKvrKT0hMD3gSFxlJd8ljQvDJBYWVaI0Xtr1JxWYpliVfyIyQG4Um32fUMZS5JOj8JEyDchF5TcHmWlO4qk00TxDSLbDv');
 
@@ -38,10 +39,35 @@ export default function Checkout() {
   };
 
   return (
-    <div>
-      <button role="link" onClick={handleClick}>
-        Checkout
-      </button>
-    </div>
+    <StyledChaeckout>
+      <h2>Datos de la compra</h2>
+      <ul>
+        {
+          hardcore.map((i)=>(
+      <li>
+          
+           {parseInt(i.quantity) > 1 ? <span className="name">{i.name} x {i.quantity}</span> : 
+            <span className="name">{i.name}</span>}     
+            <span className="price">{i.price}</span>
+      </li>
+          ))
+        }
+      </ul>
+      <form className="location">
+        <label>Dirección de envio</label>
+        <input
+          type="text"
+          name="Ciudad"
+          placeholder="Ciudad"
+        />
+
+        <input 
+          type="text"
+          name="Calle"
+          placeholder="Calle"
+        />
+        <input className="boton" type="submit" value="Comprar" />
+      </form>
+      </StyledChaeckout>
   )
 }
