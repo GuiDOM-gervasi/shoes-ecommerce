@@ -7,6 +7,7 @@ import User from "../db/models/users";
 import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
 import getCartForPayment from '#root/helpers/getCartForPayment';
+import discountStock from '#root/helpers/discountStock'
 import stripeCheckout from '#root/helpers/stripeCheckout';
 import setCartPayed from '#root/helpers/setCartPayed';
 import resolvers from '#root/graphql/resolvers';
@@ -49,6 +50,7 @@ const startServer = async () => {
   app.use(express.json());  
   app.use(cookieParser());
 
+  let a = discountStock('pi_1IZgsLKvrKT0hMD38uia5LrT')
   // Stripe fullfil EndPoing
   app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
     
