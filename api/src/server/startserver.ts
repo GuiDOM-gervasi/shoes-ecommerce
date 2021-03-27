@@ -51,7 +51,7 @@ const startServer = async () => {
 
   // Stripe fullfil EndPoing
   app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
-    console.log('/webhook')
+    
     const payload = request.body;
     let event = request.body;
     let paymentIntent = event.data.object;
@@ -82,8 +82,9 @@ const startServer = async () => {
   
   // Checkout for stripe EndPoint-------------------------------------
   app.post("/checkout", async (req, res) => {
-    // const {userId}  = req.body;
-    let userId = 4;
+    let {userId}  = req.body;
+    console.log('req userId:', userId)
+    // userId = 3;
     let {count, price, status} = await getCartForPayment(userId)
 
     if (status === 'ok'){

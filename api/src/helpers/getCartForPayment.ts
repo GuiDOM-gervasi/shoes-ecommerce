@@ -3,6 +3,7 @@ import Cart from "#root/db/models/carts";
 
 const getCartForPayment = async (userId:number) => {
 	let status= 'ok'
+
   try{
     let cart =  await Cart.findOne({
       where: {
@@ -18,14 +19,18 @@ const getCartForPayment = async (userId:number) => {
         },
       ],
     });
-  
     let count = 0;
     let price = 0;
-    cart.cartproducts.forEach(element => {
-      count = count + element.quantity;
-      price = price + (element.quantity * element.price)
-  
-    });
+    if(cart?.cartproducts.length > 0){
+      cart.cartproducts.forEach(element => {
+        count = count + element.quantity;
+        price = price + (element.quantity * element.price)
+    
+      });
+    }else{
+      console.error({message: `cart: ${cart?.id} has not product added`})
+      status = 'not product found'
+    }
     return {count, price, status}
   }
   catch(error){
