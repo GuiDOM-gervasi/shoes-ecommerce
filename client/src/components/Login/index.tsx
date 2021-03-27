@@ -56,10 +56,10 @@ export default function Login() {
           placeholder="password"
         />
         <input className="boton" type="submit" value="Iniciar sesión" />
-				<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>
+				
 
       </form>
-			
+			<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>
     </StyledLogin>
   );
 }
