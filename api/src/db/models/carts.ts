@@ -35,6 +35,13 @@ export class Cart extends Model<CartAttributes> {
 
     @Unique
     @Column({
+      allowNull: true,
+      type: DataType.STRING,
+    })
+    paymentId?: string;
+
+    @Unique
+    @Column({
         allowNull: false,
         type: DataType.INTEGER,
         
