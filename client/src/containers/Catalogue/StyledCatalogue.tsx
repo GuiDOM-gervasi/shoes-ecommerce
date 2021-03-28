@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blanco, verdeMain, violeta, productWidth } from "../App/GlobalStyles";
+import { blanco, violeta, productWidth } from "../App/GlobalStyles";
 
 export const StyledCatalogue = styled.div`
   display: flex;

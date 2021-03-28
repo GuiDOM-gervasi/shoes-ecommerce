@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useAuth } from "../../hooks/AuthProvider";
 import { StyledNewPassword } from "./StyledNewPassword";
 import { useHistory } from "react-router-dom";
 import { UPDATE_PASSWORD } from "../../graphql/mutations";
@@ -11,10 +10,7 @@ export default function NewPassword({match}) {
   const history = useHistory();
   const token = match.params.token;
 
-  const [
-    updatePassword,
-    { error: errorPasswordReset, data,loading },
-  ] = useMutation(UPDATE_PASSWORD);
+  const [updatePassword] = useMutation(UPDATE_PASSWORD);
 
   const [form, setForm] = useState({
     password: "",

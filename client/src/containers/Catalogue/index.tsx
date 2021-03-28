@@ -14,15 +14,13 @@ import { CREATE_CART,} from "../../graphql/mutations";
 
 export default function Catalogue () {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
-  const [createCart, { error: errorMutationCart }] = useMutation(
+  const [createCart] = useMutation(
     CREATE_CART
   );
   const [loadedProducts, setLoadedProduct] = React.useState([]);
   const {userId} = useAuth()
-  console.log(userId)
   if(parseInt(userId) > 0){
-    console.log("Entre")
-    const carrito = createCart({
+    createCart({
       variables :{
         userId: userId,
         state:'reserved'
@@ -54,7 +52,7 @@ export default function Catalogue () {
 
       <ul>
         {loadedProducts.map((item, i) => (
-          <li >
+          <li key={item.id}>
             <Link to={`/product/${item.id || 1}`}>
               <img
                 src={item.muestraimg || fotosZapa.photo}

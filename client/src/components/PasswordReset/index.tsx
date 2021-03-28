@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import { useAuth } from "../../hooks/AuthProvider";
 import { StyledPasswordReset } from "./StyledPasswordReset";
-import { useHistory } from "react-router-dom";
 import { PASSWORD_RESET } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
 
 
 export default function PasswordReset() {
 
-  const [
-    resetPassword,
-    { error: errorPasswordReset, data,loading },
-  ] = useMutation(PASSWORD_RESET);
+  const [resetPassword] = useMutation(PASSWORD_RESET);
 
   const [form, setForm] = useState({
     email: "",

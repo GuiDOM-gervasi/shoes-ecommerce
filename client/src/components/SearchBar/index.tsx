@@ -9,7 +9,7 @@ export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
   const history = useHistory();
   const [activeAutoComplete, setActiveAutoComplete] = useState(false);
-  const [searchProduct, { called, loading, data }] = useLazyQuery(
+  const [searchProduct, { data }] = useLazyQuery(
     SEARCH_PRODUCTS
   );
 

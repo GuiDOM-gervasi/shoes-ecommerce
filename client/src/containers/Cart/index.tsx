@@ -1,13 +1,10 @@
-import React,{ useEffect } from "react";
+import React from "react";
 import { GET_CART } from "../../graphql/queries";
 import { StyledCart } from "./StyledCart";
-import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
-import { CartAttributes } from "../../types";
-import { fotosZapa } from "../../components/ProductDetail/mockup";
+import { useMutation, useQuery } from "@apollo/client";
 import { useAuth } from "../../hooks/AuthProvider";
 import { DELETE_TO_CART, QUANTITY } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
-import { LocalPersistence } from "../../helpers/localPersistence";
 import { Link } from "react-router-dom";
 
 
@@ -20,7 +17,7 @@ const Cart = () => {
     },
   });
 
-  const [deleteProductCart, { loading: loadingDelete }] = useMutation(
+  const [deleteProductCart] = useMutation(
     DELETE_TO_CART,
     {
       refetchQueries: [
@@ -34,7 +31,7 @@ const Cart = () => {
     }
   );
 
-  const [controlQuantity, { loading: loadingQuantity }] = useMutation(
+  const [controlQuantity] = useMutation(
     QUANTITY,
     {
       refetchQueries: [
@@ -51,7 +48,6 @@ const Cart = () => {
   if (loading) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
   const cartProductsArray = data.cart?.cartproducts;
-  const { photo } = fotosZapa;
   let count = 0;
 
   const handleDelete = (finalproduct) => {
@@ -95,7 +91,7 @@ const Cart = () => {
           const product = cartProductItem.finalproducts.product
           count += product.price * cartProductItem.quantity;
           return (
-            <div>
+            <div key={cartProductItem.finalproducts.id}>
               <img
                 src={product.muestraimg}
                 alt={`photoDetail 3 - ${product.name}`}

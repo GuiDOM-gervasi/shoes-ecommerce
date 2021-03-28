@@ -26,7 +26,7 @@ export default function Checkout() {
     // Call your backend to create the Checkout Session
     const response = await fetch("http://localhost:3001/checkout", { 
       method: 'POST', 
-      body: JSON.stringify({userId : 3}), // data can be `string` or {object}!
+      body: JSON.stringify({userId}), // data can be `string` or {object}!
       headers:{
         'Content-Type': 'application/json'
       },
@@ -51,13 +51,6 @@ export default function Checkout() {
   if (error) return <span>Error {error.message}</span>;
   const cartProductsArray = data.cart?.cartproducts;
   let count = 0;
-  console.log(cartProductsArray[1].quantity)
-
-  const hardcore = [{name:"Addidas",quantity:"1",price:"555"},
-  {name:"Addidas",quantity:"1",price:"555"},
-  {name:"Addidas",quantity:"2",price:"555"},
-  {name:"Addidas",quantity:"3",price:"555"}]
-
 
   return (
     <StyledChaeckout>
@@ -67,7 +60,7 @@ export default function Checkout() {
           cartProductsArray.map((i:any)=>{
             count += i.finalproducts.product.price * i.quantity
             return (
-            <li>
+            <li key={i.finalproducts.id}>
           
            {i.quantity > 1 ? <span className="name">{i.finalproducts.product.name} x {i.quantity}</span> 
            : 
