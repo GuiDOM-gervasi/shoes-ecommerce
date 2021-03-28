@@ -13,6 +13,9 @@ module.exports = {
 						description:"Zapatillas de Adidas",
 						price:17499,
 						brandId:"1",
+            detalleimg1:'https://assets.adidas.com/images/w_600,f_auto,q_auto/80f4a6122a294a2684eaac5200d5eea9_9366/Zapatillas_ZX_2K_Boost_Blanco_FV9996.jpg',
+            detalleimg2:'https://assets.adidas.com/images/w_600,f_auto,q_auto/6bdd2864a71a4301abcdac5200d5efe2_9366/Zapatillas_ZX_2K_Boost_Blanco_FV9996.jpg',
+            detalleimg3:'https://assets.adidas.com/images/w_600,f_auto,q_auto/3188cac9629f472a8104ac5200d5ef49_9366/Zapatillas_ZX_2K_Boost_Blanco_FV9996.jpg',
 						muestraimg:"https://assets.adidas.com/images/h_840,f_auto,q_auto:sensitive,fl_lossy/a00e176273414e2d986babc90099fa3e_9366/Zapatillas_ZX_2K_Boost_Blanco_FV9996_01_standard.jpg",
       createdAt: new Date(),
       updatedAt: new Date()
