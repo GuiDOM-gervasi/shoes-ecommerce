@@ -51,14 +51,7 @@ export default function Checkout() {
   if (error) return <span>Error {error.message}</span>;
   const cartProductsArray = data.cart?.cartproducts;
   let count = 0;
-  console.log(cartProductsArray[1].quantity)
-
-  const hardcore = [{name:"Addidas",quantity:"1",price:"555"},
-  {name:"Addidas",quantity:"1",price:"555"},
-  {name:"Addidas",quantity:"2",price:"555"},
-  {name:"Addidas",quantity:"3",price:"555"}]
-
-
+  
   return (
     <StyledChaeckout>
       <h2>Datos de la compra</h2>
