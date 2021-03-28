@@ -33,7 +33,7 @@ export async function LocalPersistence(key: string,method: METHODS, value?: any)
 
   if(method === METHODS.write && value && key){
     localStorage.setItem(key, JSON.stringify(value))
-    const dataSave = await JSON.parse(localStorage.getItem(key))
+    const dataSave = JSON.parse(localStorage.getItem(key)) // Requiere investigación
     if(dataSave){
       return true
     }else{
@@ -43,7 +43,7 @@ export async function LocalPersistence(key: string,method: METHODS, value?: any)
 
   if(method === METHODS.remove && key){
     localStorage.removeItem(key)
-    const dataSave = await JSON.parse(localStorage.getItem(key))
+    const dataSave = JSON.parse(localStorage.getItem(key))
     if(!dataSave){
       return true
     }else{

@@ -112,6 +112,10 @@ const typeDefs = gql`
 		reviews: [Review]
 	}
 
+	type CartSimple {
+		id: String
+	}
+
 	type Mutation {
 		
 		addImage(productId: String!, image: String!): Image!
@@ -185,6 +189,7 @@ const typeDefs = gql`
 	type Query {
 		brand(atr: String, ord: String): [Brand!]!
 		cart(userId: String!, state: String): Cart
+		cartSimple(userId: String!): CartSimple!
 		categories(atr: String, ord: String): [Category!]!
 		deleted: [Product!]!
 		deletedUsers: [User!]!

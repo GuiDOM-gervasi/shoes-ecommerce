@@ -7,7 +7,6 @@ import Models from "#root/db/models/models";
 import Product from "#root/db/models/products";
 
 const cartResolver = async (parent, { userId, state = 'reserved' }) => {
-	
 	return await Cart.findOne({
 		where: {
 			userId
