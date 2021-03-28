@@ -5,6 +5,7 @@ import { StyledChaeckout } from './StyledCheckout';
 import { useAuth } from '../../hooks/AuthProvider';
 import { GET_CART } from '../../graphql/queries';
 import { useQuery } from '@apollo/client';
+import Loader from '../Loader';
 
 const stripePromise = loadStripe('pk_test_51IYWrFKvrKT0hMD3gSFxlJd8ljQvDJBYWVaI0Xtr1JxWYpliVfyIyQG4Um32fUMZS5JOj8JEyDchF5TcHmWlO4qk00TxDSLbDv');
 
@@ -18,10 +19,10 @@ export default function Checkout() {
   // const {userId} = useAuth()
  
 
-  const handleClick = async (event) => {
+  const handleSubmit = async (event) => {
     // Get Stripe.js instance
+    event.preventDefault()
     const stripe = await stripePromise;
-
     // Call your backend to create the Checkout Session
     const response = await fetch("http://localhost:3001/checkout", { 
       method: 'POST', 
@@ -46,6 +47,11 @@ export default function Checkout() {
     }
   };
 
+  if (loading) return <Loader />;
+  if (error) return <span>Error {error.message}</span>;
+  const cartProductsArray = data.cart?.cartproducts;
+  let count = 0;
+  console.log(cartProductsArray[1].quantity)
 
   const hardcore = [{name:"Addidas",quantity:"1",price:"555"},
   {name:"Addidas",quantity:"1",price:"555"},
@@ -58,17 +64,26 @@ export default function Checkout() {
       <h2>Datos de la compra</h2>
       <ul>
         {
-          hardcore.map((i)=>(
-      <li>
+          cartProductsArray.map((i:any)=>{
+            count += i.finalproducts.product.price * i.quantity
+            return (
+            <li>
           
-           {parseInt(i.quantity) > 1 ? <span className="name">{i.name} x {i.quantity}</span> : 
-            <span className="name">{i.name}</span>}     
-            <span className="price">{i.price}</span>
-      </li>
-          ))
+           {i.quantity > 1 ? <span className="name">{i.finalproducts.product.name} x {i.quantity}</span> 
+           : 
+            <span className="name">{i.finalproducts.product.name}</span>}     
+            <span className="price">${i.finalproducts.product.price * i.quantity}</span>
+           </li>
+
+            )
+          })
         }
+        <li>
+        <span className="name"><strong>Total:</strong></span>
+        <span className="price"><strong>${count}</strong></span>
+        </li>
       </ul>
-      <form className="location">
+      <form className="location" onSubmit={handleSubmit}>
         <label>Dirección de envio</label>
         <input
           type="text"
@@ -80,6 +95,12 @@ export default function Checkout() {
           type="text"
           name="Calle"
           placeholder="Calle"
+        />
+
+        <input 
+          type="text"
+          name="CP"
+          placeholder="Código Postal"
         />
         <input className="boton" type="submit" value="Comprar" />
       </form>
