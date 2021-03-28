@@ -1,7 +1,11 @@
 import CartProduct from '../../../db/models/cartproduct';
 
 const removeformcartresolver = async (parent, {cartId, finalproductId} ) => {
+    
+    console.log(cartId, finalproductId);
+
     if (finalproductId === 'empty'){
+        
         await CartProduct.destroy( 
             {   
                 where:{
@@ -9,16 +13,20 @@ const removeformcartresolver = async (parent, {cartId, finalproductId} ) => {
                 },
                 force: true
             } );
-        return 'The cart was successfully emptied'; 
+        return 'The cart was successfully emptied';
+
     }else{
-        await CartProduct.destroy({
+
+        const result = await CartProduct.destroy({
             where:{
                 cartId,
-                finalproductId
+                finalproductId,
             },
             force: true
         })
+        console.log(result);
         return 'The final product was successfully removed';
+
     }
 }
 

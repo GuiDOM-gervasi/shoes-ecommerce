@@ -1,7 +1,7 @@
-import React from "react";
+import React,{ useEffect } from "react";
 import { GET_CART } from "../../graphql/queries";
 import { StyledCart } from "./StyledCart";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery, useLazyQuery } from "@apollo/client";
 import { CartAttributes } from "../../types";
 import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { useAuth } from "../../hooks/AuthProvider";
@@ -11,7 +11,8 @@ import { LocalPersistence } from "../../helpers/localPersistence";
 
 const Cart = () => {
   const { userId } = useAuth();
-  const { data, loading, error } = useQuery(GET_CART, {
+  const { data, loading, error } = useQuery(
+    GET_CART, {
     variables: {
       userId: userId && userId,
     },
@@ -47,8 +48,7 @@ const Cart = () => {
 
   if (loading) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
-  const products = data.cart?.finalproducts;
-
+  const cartProductsArray = data.cart?.cartproducts;
   const { photo } = fotosZapa;
   let count = 0;
 
@@ -70,18 +70,18 @@ const Cart = () => {
     });
   };
 
-  const handleClick = (e, p) => {
+  const handleClick = (e, cartProductItem) => {
     const input: any = e.target.parentNode.querySelector("#quantity");
     if (e.target.id === "mas") {
       return handleQuantity(
         { target: { value: Number(input.value) + 1 } },
-        p.cartproducts[0].id
+        cartProductItem.id
       );
     }
     if (input.value > 1) {
       return handleQuantity(
         { target: { value: Number(input.value) - 1 } },
-        p.cartproducts[0].id
+        cartProductItem.id
       );
     }
   };
@@ -89,34 +89,35 @@ const Cart = () => {
   return (
     <StyledCart className="fondoDegradado">
       <div className="container ">
-        {products?.map((p) => {
-          count += p.product.price * p.cartproducts[0].quantity;
+        {cartProductsArray?.map((cartProductItem) => {
+          const product = cartProductItem.finalproducts.product
+          count += product.price * cartProductItem.quantity;
           return (
             <div>
               <img
-                src={p.product.muestraimg}
-                alt={`photoDetail 3 - ${p.product.name}`}
+                src={product.muestraimg}
+                alt={`photoDetail 3 - ${product.name}`}
               />
-              <h4>{p.product.name}</h4>
-              <p>Price: {p.product.price}</p>
+              <h4>{product.name}</h4>
+              <p>Price: {product.price}</p>
               <button
                 className="buttonDelete"
-                onClick={() => handleDelete(p.id)}
+                onClick={() => {console.log(cartProductItem.finalproducts);handleDelete(cartProductItem.finalproducts.id.toString())}}
               >
                 X
               </button>
               <div className="number-input">
-                <button id="-" onClick={(e) => handleClick(e, p)}></button>
+                <button id="-" onClick={(e) => handleClick(e, cartProductItem)}></button>
                 <input
                   id="quantity"
                   className="quantity"
                   type="number"
-                  onChange={(e) => handleQuantity(e, p.cartproducts[0].id)}
-                  value={p.cartproducts[0].quantity}
+                  onChange={(e) => handleQuantity(e, cartProductItem.id)}
+                  value={cartProductItem.quantity}
                 />
                 <button
                   id="mas"
-                  onClick={(e) => handleClick(e, p)}
+                  onClick={(e) => handleClick(e, cartProductItem)}
                   className="plus"
                 ></button>
               </div>
