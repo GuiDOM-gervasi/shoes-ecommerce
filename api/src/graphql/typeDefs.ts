@@ -10,6 +10,7 @@ const typeDefs = gql`
 		email: String!
 		password: String!
 		nlsuscribe: Boolean
+		isGmail: Boolean
 		products: [Product]
 	}
 
@@ -155,6 +156,7 @@ const typeDefs = gql`
 			isAdmin: Boolean!
 			email: String!
 			password: String!
+			isGmail:Boolean
 			nlsuscribe: Boolean
 		): User!
 

@@ -8,7 +8,8 @@ const createUserResolver = async (parent: any,{
   isAdmin,
   email,
   password,
-  nlsuscribe
+  nlsuscribe,
+	isGmail
 }: UserAttributes, context: any , info: any) =>{
 
     const hashPassword = await bcrypt.hash(password,5)
@@ -20,6 +21,7 @@ const createUserResolver = async (parent: any,{
       email,
       password: hashPassword,
       nlsuscribe,
+			isGmail,
       count: 1
      });
 
