@@ -8,6 +8,8 @@ import { useAuth } from "../../hooks/AuthProvider";
 import { DELETE_TO_CART, QUANTITY } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
 import { LocalPersistence } from "../../helpers/localPersistence";
+import { Link } from "react-router-dom";
+
 
 const Cart = () => {
   const { userId } = useAuth();
@@ -99,7 +101,7 @@ const Cart = () => {
                 alt={`photoDetail 3 - ${product.name}`}
               />
               <h4>{product.name}</h4>
-              <p>Price: {product.price}</p>
+              <p>Price: ${product.price}</p>
               <button
                 className="buttonDelete"
                 onClick={() => {console.log(cartProductItem.finalproducts);handleDelete(cartProductItem.finalproducts.id.toString())}}
@@ -126,8 +128,10 @@ const Cart = () => {
         })}
       </div>
       <footer>
-        <h5>Total: {count}</h5>
+        <h5>Total: ${count}</h5>
+        <Link to="/checkout">
         <button className="boton">Buy</button>
+        </Link>
       </footer>
     </StyledCart>
   );
