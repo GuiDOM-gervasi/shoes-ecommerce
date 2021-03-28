@@ -7,7 +7,7 @@ export interface ReviewAttributes {
   description: String;
   score: String;
   title: String;
-  id: String;
+  id: string;
 }
 
 export function Review({

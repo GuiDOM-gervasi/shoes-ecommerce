@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
-import { FINAL_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_CATEGORIES, GET_CART, GET_CART_SIMPLE, GET_STOCK, GET_REVIEWS } from "../../graphql/queries";
+import { FINAL_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_CATEGORIES, GET_CART_SIMPLE, GET_STOCK, GET_REVIEWS } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
@@ -13,7 +13,7 @@ export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
 
-  const [addToCart, { error: errorMutationCart }] = useMutation(
+  const [addToCart] = useMutation(
     ADD_TO_CART,
     {
     refetchQueries: [{ query: GET_CART_SIMPLE, variables:{
@@ -22,7 +22,7 @@ export default function ProductDetail({ match }: any) {
     }
     );
 
-  const { data, loading: loadingCart, error: errorCart } = useQuery(
+  const { data } = useQuery(
     GET_CART_SIMPLE,
     {
       variables: {
@@ -66,7 +66,6 @@ export default function ProductDetail({ match }: any) {
     { data: finalData, loading: finalLoading, error: finalError },
   ] = useLazyQuery(FINAL_PRODUCTS, {
     onCompleted: (finalData) => {
-      console.log(data);
       if (finalData.finalproducts[0].stock > 0) {
           addToCart({
             variables: {
@@ -128,7 +127,7 @@ export default function ProductDetail({ match }: any) {
     models,
     id,
   } = mainProduct.productDetail;
-  console.log("mainProduct.productDetail",mainProduct.productDetail)
+
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -223,8 +222,9 @@ export default function ProductDetail({ match }: any) {
             {name}
           </h1>
           <div className="description">
-            {categories?.map((category) => (
+            {categories?.map((category,i) => (
               <span
+              key={`${category} ${i}`}
                 className="category"
                 onClick={() =>
                   getSimils({ variables: { name: category.name } })

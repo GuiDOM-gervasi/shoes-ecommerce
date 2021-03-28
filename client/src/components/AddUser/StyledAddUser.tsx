@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blanco, verdeMain, violeta, negro, productWidth, verdeDetalle, formWidth } from '../../containers/App/GlobalStyles'
+import { blanco, violeta, formWidth } from '../../containers/App/GlobalStyles'
 
 
 export const StyledAddUser = styled.div`

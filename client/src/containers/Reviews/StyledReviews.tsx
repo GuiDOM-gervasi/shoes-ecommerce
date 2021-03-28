@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import {
   blanco,
-  verdeMain,
   violeta,
-  negro,
   violetaHover,
-  productWidth,
-  verdeDetalle,
   formWidth,
 } from "../App/GlobalStyles";
 
