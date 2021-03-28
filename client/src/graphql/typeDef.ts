@@ -63,4 +63,8 @@ export const typeDefs = gql`
   type Logout {
     logout: Boolean
   }
+
+  type CartSimple {
+		id: String
+	}
 `;

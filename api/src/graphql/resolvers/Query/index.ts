@@ -1,5 +1,6 @@
 export { default as brand } from "./brands";
 export { default as cart } from "./cart";
+export { default as cartSimple } from "./cartSimple";
 export { default as categories } from "./categories";
 export { default as deleted } from "./deletedProducts";
 export { default as deletedUsers } from "./deletedUsers";
@@ -21,3 +22,4 @@ export { default as searchProducts } from "./searchProducts";
 export { default as users } from "./users";
 export { default as viewOrders } from "./viewOrders";
 export { default as userEmail } from "./userEmail";
+

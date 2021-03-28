@@ -131,6 +131,7 @@ export const GET_CART = gql`
         quantity
         state
         finalproducts{
+          id
           product{
             id
             name
@@ -143,6 +144,14 @@ export const GET_CART = gql`
           }
         }
       }
+    }
+  }
+`;
+
+export const GET_CART_SIMPLE = gql`
+  query cartSimple($userId: String!) {
+    cartSimple(userId: $userId) {
+      id
     }
   }
 `;

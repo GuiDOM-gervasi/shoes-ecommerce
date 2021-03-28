@@ -19,7 +19,9 @@ export default function Catalogue () {
   );
   const [loadedProducts, setLoadedProduct] = React.useState([]);
   const {userId} = useAuth()
+  console.log(userId)
   if(parseInt(userId) > 0){
+    console.log("Entre")
     const carrito = createCart({
       variables :{
         userId: userId,
@@ -27,7 +29,6 @@ export default function Catalogue () {
       },
     })
   }
-  //console.log(carrito)
   // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
   // if (loadedProducts.length < 1) {
   //   console.log(data);
