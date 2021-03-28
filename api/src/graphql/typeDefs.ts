@@ -20,6 +20,9 @@ const typeDefs = gql`
 		description: String
 		price: Float
 		muestraimg: String
+		detalleimg1: String
+		detalleimg2: String
+		detalleimg3: String
 		brand: Brand
 		categories: [Category!]
 		models: [Model!]

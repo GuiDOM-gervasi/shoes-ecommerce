@@ -41,6 +41,9 @@ export const GET_PRODUCT_DETAIL = gql`
       price
       name
       muestraimg
+      detalleimg1
+      detalleimg2
+      detalleimg3
       brand {
         name
       }

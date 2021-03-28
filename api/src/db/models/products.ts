@@ -63,6 +63,24 @@ export class Product extends Model {
     allowNull: true,
 				type: DataType.STRING(1000),
   })
+  detalleimg1?: string;
+
+  @Column({
+    allowNull: true,
+				type: DataType.STRING(1000),
+  })
+  detalleimg2?: string;
+
+  @Column({
+    allowNull: true,
+				type: DataType.STRING(1000),
+  })
+  detalleimg3?: string;
+
+  @Column({
+    allowNull: true,
+				type: DataType.STRING(1000),
+  })
   muestraimg?: string;
 
   @HasMany (() => Image)

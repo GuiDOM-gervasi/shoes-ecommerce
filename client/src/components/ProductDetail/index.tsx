@@ -121,10 +121,14 @@ export default function ProductDetail({ match }: any) {
     brand,
     price,
     muestraimg,
+    detalleimg1,
+    detalleimg2,
+    detalleimg3,
     categories,
     models,
     id,
   } = mainProduct.productDetail;
+  console.log("mainProduct.productDetail",mainProduct.productDetail)
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -194,21 +198,21 @@ export default function ProductDetail({ match }: any) {
             <li>
               <img
                 className="photoDetail"
-                src={photoDetail1}
+                src={detalleimg1 || photoDetail1}
                 alt={`photoDetail 1 - ${name}`}
               />
             </li>
             <li>
               <img
                 className="photoDetail"
-                src={photoDetail2}
+                src={detalleimg2 || photoDetail2}
                 alt={`photoDetail 2 - ${name}`}
               />
             </li>
             <li>
               <img
                 className="photoDetail"
-                src={photoDetail3}
+                src={detalleimg3 || photoDetail3}
                 alt={`photoDetail 3 - ${name}`}
               />
             </li>
