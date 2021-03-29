@@ -164,6 +164,12 @@ export const FINAL_PRODUCTS = gql`
     finalproducts(productId: $productId, modelId: $modelId) {
       id
       stock
+      product {
+        id
+        name
+        price
+        muestraimg
+      }
     }
   }
 `;
