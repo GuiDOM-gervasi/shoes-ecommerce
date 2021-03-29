@@ -140,7 +140,7 @@ export const StyledNav = styled.div`
       display: block;
     }
     nav {
-      height: 80px;
+      min-height: 10vh;
     }
     ul {
       position: fixed;
