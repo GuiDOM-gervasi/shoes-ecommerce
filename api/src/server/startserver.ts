@@ -7,6 +7,7 @@ import User from "../db/models/users";
 import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
 import getCartForPayment from '#root/helpers/getCartForPayment';
+import discountStock from '#root/helpers/discountStock'
 import stripeCheckout from '#root/helpers/stripeCheckout';
 import setCartPayed from '#root/helpers/setCartPayed';
 import resolvers from '#root/graphql/resolvers';
@@ -48,7 +49,11 @@ const startServer = async () => {
 
   app.use(express.json());  
   app.use(cookieParser());
-
+  
+  app.get('/status', async (req, res) => {
+    res.json({status:'ok'})
+  })
+  
   // Stripe fullfil EndPoing
   app.post('/webhook', bodyParser.raw({type: 'application/json'}), async (request, response) => {
     
@@ -60,6 +65,8 @@ const startServer = async () => {
     switch (event.type) {
       case 'payment_intent.succeeded':
         console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
+        let stockStatus = await discountStock(paymentIntent.id)
+        console.log(`stockStatus: `, stockStatus)
         let isSetPayed = await setCartPayed(paymentIntent.id)
         console.log('is cart set to payed:', isSetPayed)
         break;

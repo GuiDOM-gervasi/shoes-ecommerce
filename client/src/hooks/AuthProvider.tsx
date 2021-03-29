@@ -6,21 +6,13 @@ import { LocalPersistence, METHODS } from "../helpers/localPersistence";
 const AuthContext = React.createContext(null);
 
 export function AuthProvider(props) {
+  const existeLocal = JSON.parse(localStorage.getItem("cart"))
+  if(!existeLocal){
+    localStorage.setItem("cart", JSON.stringify({ guess: true, items: []}));
+  }
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);
-  useEffect(() => {
-    LocalPersistence("user",METHODS.get).then(
-      (completeUser) => {
-        completeUser && completeUser.isAdmin
-        ? setIsAdmin(completeUser.isAdmin)
-        : setIsAdmin(false);
-      completeUser && completeUser.id
-        ? setUserId(completeUser.id)
-        : setUserId("0");
-      }
-    )
-  }, []);
 
   const [getLogin] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
@@ -37,7 +29,7 @@ export function AuthProvider(props) {
       console.log(error)
     }
   });
-
+  
   const [logoutUser] = useMutation(LOGOUT_USER, {
     onCompleted: (data) => {
       if (data) {
@@ -51,8 +43,22 @@ export function AuthProvider(props) {
     },
     onError:(error)=>{
         console.log(error)
-    },
+    }
   });
+
+  useEffect(() => {
+    LocalPersistence("user",METHODS.get).then(
+      (completeUser) => {
+        completeUser && completeUser.isAdmin
+        ? setIsAdmin(completeUser.isAdmin)
+        : setIsAdmin(false);
+      completeUser && completeUser.id
+        ? setUserId(completeUser.id)
+        : setUserId("0");
+      }
+    )
+
+  }, []);
 
   function login(email: string, password: string, cb) {
     getLogin({

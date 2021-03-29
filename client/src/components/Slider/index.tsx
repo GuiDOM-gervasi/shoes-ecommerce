@@ -1,8 +1,7 @@
 import React from "react";
 import { StyledSlider } from "./StyledSlider";
-import fotozapa from "../../img/fotozapa2.jpg"
 export default function Slider() {
-  const slidesArray = ["https://imgur.com/3UahomA.png"];
+  //const slidesArray = ["https://imgur.com/3UahomA.png"];
   return (
     <StyledSlider>
       {/* {slidesArray.map((photo, i) => ( */}

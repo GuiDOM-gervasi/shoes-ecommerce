@@ -11,7 +11,7 @@ export default function EditCategory({ match }) {
 	const modelId = match.params.modelId;
 	const [modify, setModify] = useState("");
 	const [error, setError] = useState(false);
-	const [editStock, { error: errorStock }] = useMutation(EDIT_STOCK);
+	const [editStock] = useMutation(EDIT_STOCK);
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();

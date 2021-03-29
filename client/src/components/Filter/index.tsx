@@ -54,7 +54,7 @@ export default function Filter({ setLoadedProduct }) {
             Todas
           </option>
           {categories.map((e) => (
-            <option className="option" id={e.id} value={e.name}>
+            <option className="option" id={e.id} value={e.name} key={e.id}>
               {e.name}{" "}
             </option>
           ))}

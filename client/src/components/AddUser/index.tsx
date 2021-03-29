@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {GoogleLogin} from "react-google-login";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
 import { validateChange, check, form } from "../../helpers/validationUser";

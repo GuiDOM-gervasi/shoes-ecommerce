@@ -2,9 +2,7 @@ import styled from "styled-components";
 import {
   blanco,
   verdeMain,
-  violeta,
   negro,
-  productWidth,
   navHeight,
   verdeDetalle,
 } from "../../containers/App/GlobalStyles";

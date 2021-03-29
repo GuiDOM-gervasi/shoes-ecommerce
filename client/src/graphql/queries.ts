@@ -41,6 +41,9 @@ export const GET_PRODUCT_DETAIL = gql`
       price
       name
       muestraimg
+      detalleimg1
+      detalleimg2
+      detalleimg3
       brand {
         name
       }
@@ -131,6 +134,7 @@ export const GET_CART = gql`
         quantity
         state
         finalproducts{
+          id
           product{
             id
             name
@@ -147,11 +151,25 @@ export const GET_CART = gql`
   }
 `;
 
+export const GET_CART_SIMPLE = gql`
+  query cartSimple($userId: String!) {
+    cartSimple(userId: $userId) {
+      id
+    }
+  }
+`;
+
 export const FINAL_PRODUCTS = gql`
   query finalproducts($productId: String!, $modelId: String!) {
     finalproducts(productId: $productId, modelId: $modelId) {
       id
       stock
+      product {
+        id
+        name
+        price
+        muestraimg
+      }
     }
   }
 `;

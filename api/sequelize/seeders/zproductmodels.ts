@@ -3,7 +3,7 @@ module.exports = {
     return queryInterface.bulkInsert('finalproducts', [{
 						productId: "1",
 						modelId:"1",
-						stock:"1",
+						stock:"10",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -33,13 +33,13 @@ module.exports = {
 				},{
 						productId:"8",
 						modelId:"1",
-						stock:"0",
+						stock:"10",
 						createdAt:new Date(),
 						updatedAt:new Date()
 				},{
 						productId:"3",
 						modelId:"4",
-						stock:"0",
+						stock:"10",
 						createdAt:new Date(),
 						updatedAt:new Date()
 				},{

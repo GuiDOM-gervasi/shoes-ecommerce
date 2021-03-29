@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { StyledAddReview } from "./StyledAddReview";
 import { ADD_REVIEW } from "../../graphql/mutations";
 import {

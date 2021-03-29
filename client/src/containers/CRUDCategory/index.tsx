@@ -11,7 +11,7 @@ export default function CRUDCategory() {
   const history = useHistory();
   const { data, loading, error } = useQuery(GET_CATEGORIES);
   const allCategory = data ? data.categories : null;
-  const [deleteCategory, { loading: loadingDelete }] = useMutation(
+  const [deleteCategory] = useMutation(
     DELETE_CATEGORY,
     {
       refetchQueries: [{ query: GET_CATEGORIES }],

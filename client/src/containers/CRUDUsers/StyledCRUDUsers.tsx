@@ -1,13 +1,9 @@
 import styled from "styled-components";
 import {
   blanco,
-  verdeMain,
   violeta,
   negro,
-  productWidth,
-  verdeDetalle,
   formWidth,
-  violetaHover,
 } from "../../containers/App/GlobalStyles";
 
 export const StyledCRUDUsers = styled.div`

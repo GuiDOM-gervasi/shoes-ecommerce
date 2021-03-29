@@ -1,14 +1,7 @@
 import React, { useEffect } from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
-import {
-  FINAL_PRODUCTS,
-  GET_PRODUCT_DETAIL,
-  GET_PRODUCTS_BY_CATEGORIES,
-  GET_CART,
-  GET_STOCK,
-  GET_REVIEWS,
-} from "../../graphql/queries";
+import { FINAL_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_CATEGORIES, GET_CART_SIMPLE, GET_STOCK, GET_REVIEWS } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
@@ -19,17 +12,18 @@ import Reviews from "../../containers/Reviews";
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
-  console.log(userId)
-  const [addToCart, { error: errorMutationCart }] = useMutation(ADD_TO_CART,
+
+  const [addToCart] = useMutation(
+    ADD_TO_CART,
     {
-    refetchQueries: [{ query: GET_CART, variables:{
-      userId: userId&&userId   
+    refetchQueries: [{ query: GET_CART_SIMPLE, variables:{
+      userId: userId&&userId,
      }}],
     }
     );
 
-  const { data: dataCart, loading: loadingCart, error: errorCart } = useQuery(
-    GET_CART,
+  const { data } = useQuery(
+    GET_CART_SIMPLE,
     {
       variables: {
         userId: userId && userId,
@@ -37,7 +31,8 @@ export default function ProductDetail({ match }: any) {
     }
   );
 
-  const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
+  const { loading, error, data: mainProduct } = useQuery(
+    GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
     },
@@ -61,28 +56,33 @@ export default function ProductDetail({ match }: any) {
       productId,
     },
   });
-
   
   const [
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
-  console.log(dataCart)
   const [
     finalproducts,
     { data: finalData, loading: finalLoading, error: finalError },
   ] = useLazyQuery(FINAL_PRODUCTS, {
     onCompleted: (finalData) => {
       if (finalData.finalproducts[0].stock > 0) {
-        addToCart({
-          variables: {
-            finalproductId: finalData.finalproducts[0].id,
-            cartId: dataCart.cart[0]?.id,
-            price,
-            quantity: 1,
-          },
-        });
-        alert("Producto añadido al carrito");
+        if(!data?.cartSimple?.id){
+          let cartLocal = JSON.parse(localStorage.getItem("cart"));
+          const itemLocal = {...finalData.finalproducts[0], quantity: 1};
+          cartLocal.items.push(itemLocal);
+          localStorage.setItem("cart", JSON.stringify(cartLocal));
+        }else{
+          addToCart({
+            variables: {
+              finalproductId: finalData.finalproducts[0].id,
+              cartId: data.cartSimple.id,
+              price,
+              quantity: 1,
+            },
+          }); 
+        }
+          alert("Producto añadido al carrito")
       } else {
         alert("No queda stock de ese modelo");
       }
@@ -127,10 +127,14 @@ export default function ProductDetail({ match }: any) {
     brand,
     price,
     muestraimg,
+    detalleimg1,
+    detalleimg2,
+    detalleimg3,
     categories,
     models,
     id,
   } = mainProduct.productDetail;
+
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -200,21 +204,21 @@ export default function ProductDetail({ match }: any) {
             <li>
               <img
                 className="photoDetail"
-                src={photoDetail1}
+                src={detalleimg1 || photoDetail1}
                 alt={`photoDetail 1 - ${name}`}
               />
             </li>
             <li>
               <img
                 className="photoDetail"
-                src={photoDetail2}
+                src={detalleimg2 || photoDetail2}
                 alt={`photoDetail 2 - ${name}`}
               />
             </li>
             <li>
               <img
                 className="photoDetail"
-                src={photoDetail3}
+                src={detalleimg3 || photoDetail3}
                 alt={`photoDetail 3 - ${name}`}
               />
             </li>
@@ -225,8 +229,9 @@ export default function ProductDetail({ match }: any) {
             {name}
           </h1>
           <div className="description">
-            {categories?.map((category) => (
+            {categories?.map((category,i) => (
               <span
+              key={`${category} ${i}`}
                 className="category"
                 onClick={() =>
                   getSimils({ variables: { name: category.name } })

@@ -14,20 +14,19 @@ import { CREATE_CART,} from "../../graphql/mutations";
 
 export default function Catalogue () {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
-  const [createCart, { error: errorMutationCart }] = useMutation(
+  const [createCart] = useMutation(
     CREATE_CART
   );
   const [loadedProducts, setLoadedProduct] = React.useState([]);
   const {userId} = useAuth()
   if(parseInt(userId) > 0){
-    const carrito = createCart({
+    createCart({
       variables :{
         userId: userId,
         state:'reserved'
       },
     })
   }
-  //console.log(carrito)
   // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
   // if (loadedProducts.length < 1) {
   //   console.log(data);
@@ -53,7 +52,7 @@ export default function Catalogue () {
 
       <ul>
         {loadedProducts.map((item, i) => (
-          <li >
+          <li key={item.id}>
             <Link to={`/product/${item.id || 1}`}>
               <img
                 src={item.muestraimg || fotosZapa.photo}

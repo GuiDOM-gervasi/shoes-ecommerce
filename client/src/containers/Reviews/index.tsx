@@ -52,7 +52,7 @@ export default function Reviews({ className, allReviews }: ReviewsAttributes) {
       </div>
       <ul>
         {allReviews.reviews.map((review) => (
-          <li>
+          <li key={review.id} >
             <Review
               className="review"
               id={review.id}

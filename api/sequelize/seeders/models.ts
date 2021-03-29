@@ -2,32 +2,32 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('models', [{
 						size:"45",
-						color:"#ffffff",
+						color:"Blanco",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
 						size:"45",
-						color:"#000000",
+						color:"Negro",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
 						size:"47",
-						color:"#ffffff",
+						color:"Blanco",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
 						size:"47",
-						color:"#000000",
+						color:"Negro",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
 						size:"41",
-						color:"#ffffff",
+						color:"Blanco",
       createdAt: new Date(),
       updatedAt: new Date()
     },{
 						size:"41",
-						color:"#000000",
+						color:"Negro",
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

@@ -1,11 +1,11 @@
-import { useQuery, useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import { useQuery } from "@apollo/client";
+import React from "react";
 import { StyledCRUDStock } from "./StyledCRUDStock";
 import { StockAttributes } from "../../types";
 
 import { useHistory } from "react-router-dom";
 import Loader from "../../components/Loader";
-import { GET_PRODUCTS, GET_ALL_STOCK } from "../../graphql/queries";
+import { GET_ALL_STOCK } from "../../graphql/queries";
 
 export default function CRUDStock() {
   const history = useHistory();
