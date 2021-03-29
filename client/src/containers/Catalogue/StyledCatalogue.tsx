@@ -57,6 +57,9 @@ export const StyledCatalogue = styled.div`
   }
 
   @media (max-width: 858px){
+    .filter{
+      width:100vw;
+    }
     .productImg{
       width: 100vw;
       height:100vw;
@@ -69,6 +72,7 @@ export const StyledCatalogue = styled.div`
     }
     ul{
       flex-direction: column;
+      padding: 2vh 0;
     }
   }
 `;

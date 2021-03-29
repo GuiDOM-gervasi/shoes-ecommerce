@@ -66,12 +66,12 @@ export const StyledReviews = styled.div`
   border: none;
   box-shadow: none;
     .clip-star2,
-    .empty-star2 {
+    .empty-star2, .half-star2 {
       height: 7vw;
       width: 7vw;
     }
     .clip-star,
-    .empty-star {
+    .empty-star, .half-star {
       height: 5vw;
       width: 5vw;
     }

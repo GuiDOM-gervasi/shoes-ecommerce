@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledSearchBar = styled.div`
   .searchinput {
-    width: 90%;
+    width: 50vw;
     height: 43px;
     border-radius: 6px;
   }
@@ -14,14 +14,13 @@ export const StyledSearchBar = styled.div`
     color: #f2f2f2;
   }
   .contentResult{
-    width:100%;
-    max-width: 25rem;
     margin: 1.4rem 0 0 0 ;
     position: absolute;
     display: flex;
     flex-direction: column;
     height: min-content;
     top: 2.5rem;
+    width:50vw;
   }
   .contentResultItem{
     position: relative;

@@ -64,10 +64,10 @@ export default function SearchBar() {
         <button type="submit" className="botonSearch">
           <i className="fas fa-search"></i>
         </button>
-      </form>
       {activeAutoComplete && data ? (
         <ResultSearchBarInput data={data} handleClick={handleClick} />
       ) : null}
+      </form>
     </StyledSearchBar>
   );
 }
