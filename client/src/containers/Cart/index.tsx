@@ -200,7 +200,7 @@ const Cart = () => {
       </div>
       <footer>
         <h5>Total: ${count}</h5>
-        <Link to="/checkout">
+        <Link to={userId!== "0" ? "/checkout" : "/login"} >
         <button className="boton">Buy</button>
         </Link>
       </footer>

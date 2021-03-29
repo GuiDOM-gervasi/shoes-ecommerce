@@ -65,11 +65,9 @@ export default function SearchBar() {
           <i className="fas fa-search"></i>
         </button>
       </form>
-      <div className="contentResult">
       {activeAutoComplete && data ? (
         <ResultSearchBarInput data={data} handleClick={handleClick} />
       ) : null}
-      </div>
     </StyledSearchBar>
   );
 }
