@@ -6,7 +6,10 @@ import { LocalPersistence, METHODS } from "../helpers/localPersistence";
 const AuthContext = React.createContext(null);
 
 export function AuthProvider(props) {
-
+  const existeLocal = JSON.parse(localStorage.getItem("cart"))
+  if(!existeLocal){
+    localStorage.setItem("cart", JSON.stringify({ guess: true, items: []}));
+  }
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);

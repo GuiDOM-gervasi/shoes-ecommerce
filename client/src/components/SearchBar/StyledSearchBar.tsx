@@ -16,6 +16,7 @@ export const StyledSearchBar = styled.div`
   .contentResult{
     width:100%;
     max-width: 25rem;
+    margin: 1.4rem 0 0 0 ;
     position: absolute;
     display: flex;
     flex-direction: column;
