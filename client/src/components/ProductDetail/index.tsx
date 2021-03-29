@@ -67,6 +67,12 @@ export default function ProductDetail({ match }: any) {
   ] = useLazyQuery(FINAL_PRODUCTS, {
     onCompleted: (finalData) => {
       if (finalData.finalproducts[0].stock > 0) {
+        if(!data?.cartSimple?.id){
+          let cartLocal = JSON.parse(localStorage.getItem("cart"));
+          const itemLocal = {...finalData.finalproducts[0], quantity: 1};
+          cartLocal.items.push(itemLocal);
+          localStorage.setItem("cart", JSON.stringify(cartLocal));
+        }else{
           addToCart({
             variables: {
               finalproductId: finalData.finalproducts[0].id,
@@ -74,7 +80,8 @@ export default function ProductDetail({ match }: any) {
               price,
               quantity: 1,
             },
-          });
+          }); 
+        }
           alert("Producto añadido al carrito")
       } else {
         alert("No queda stock de ese modelo");
