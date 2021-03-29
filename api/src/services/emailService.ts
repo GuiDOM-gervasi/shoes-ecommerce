@@ -1,6 +1,6 @@
 const Mailgun = require("mailgun-js");
 
-export async function emailService(email: Array<string>, subject: string, textToSend: string){
+export async function emailService(email: string, subject: string, textToSend: string){
 
   let mg = undefined;
   try {
@@ -10,8 +10,8 @@ export async function emailService(email: Array<string>, subject: string, textTo
   }
   
   const data = {
-    from: 'Grupo 1 - Ecommerce <ecommerce@gmail.com>',
-    to: email.join(","),
+    from: 'Grupo 1 - Ecommerce <ft09ec@gmail.com>',
+    to: email,
     subject,
     html: textToSend
   };
