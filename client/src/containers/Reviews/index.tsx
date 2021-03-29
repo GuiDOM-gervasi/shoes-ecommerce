@@ -43,7 +43,6 @@ export default function Reviews({ className, allReviews }: ReviewsAttributes) {
   return (
     <StyledReviews>
       <div className="reviewsHeader">
-        <div className="half-star2"></div>
         <div className="reviewsAverage">{averageDecimal}</div>
         <div className="reviewsCount">
           <div className="ratingAverage" id="ratingAverage"></div>
