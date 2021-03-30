@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import { EDIT_STOCK } from "../../graphql/mutations";
 import { StyleEditStock } from "./StyledEditStock";
 import { useHistory } from "react-router-dom";
+import { GET_ALL_STOCK } from "../../graphql/queries";
 
 export default function EditCategory({ match }) {
 	const history = useHistory();
@@ -11,7 +12,9 @@ export default function EditCategory({ match }) {
 	const modelId = match.params.modelId;
 	const [modify, setModify] = useState("");
 	const [error, setError] = useState(false);
-	const [editStock] = useMutation(EDIT_STOCK);
+	const [editStock] = useMutation(EDIT_STOCK, {
+		refetchQueries: [{ query: GET_ALL_STOCK }]
+	});
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -29,9 +32,9 @@ export default function EditCategory({ match }) {
 		} catch (e) {
 			console.log(e);
 		} finally {
-			console.log(productId);
-			console.log(modelId);
-			console.log(modify);
+			// console.log(productId);
+			// console.log(modelId);
+			// console.log(modify);
 		}
 	};
 	const handleChange = (e) => {

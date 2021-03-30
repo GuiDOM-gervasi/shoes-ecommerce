@@ -76,17 +76,23 @@ const OrderTable = () => {
                 history.push("/product/" + order.finalproducts.product.id)
               }
             >
-              {" "}
+              <p className="product">Product</p>{" "}
               {order.finalproducts.product.name}{" "}
             </span>
             <span className="model">
-              {" "}
+              <p className="model">Model</p>{" "}
               {order.finalproducts.model.size +
                 " - " +
                 order.finalproducts.model.color}{" "}
             </span>
-            <span className="quantity">{order.quantity}</span>
-            <span className="price"> {order.price} </span>
+            <span className="quantity">
+              <p className="quantity">Quantity</p>
+              {order.quantity}
+            </span>
+            <span className="price">
+              <p className="price">Price</p>
+              {order.price}{" "}
+            </span>
             <select
               className="state"
               value={order.state}
@@ -98,7 +104,10 @@ const OrderTable = () => {
                 </option>
               ))}
             </select>
-            <span className="username"> {order.cart.user.userName} </span>
+            <span className="username">
+              <p className="username">Username</p>
+              {order.cart.user.userName}{" "}
+            </span>
           </li>
         ))}
       </ul>
