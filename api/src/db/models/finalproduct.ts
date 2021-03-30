@@ -56,10 +56,10 @@ export class FinalProduct extends Model {
 	model: Models;
 	
 	@HasMany(() => CartProduct)
-  	cartproducts!: CartProduct[]
+  cartproducts!: CartProduct[]
 
-	@BelongsToMany(() => Cart, { through: () => CartProduct })
-  	carts?: Array<Cart & { CartProduct: CartProduct }>;
+	// @BelongsToMany(() => Cart, { through: () => CartProduct })
+  // carts?: Array<Cart & { CartProduct: CartProduct }>;
 }
 
 export default FinalProduct;
