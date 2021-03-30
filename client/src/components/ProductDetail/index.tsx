@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
-import { FINAL_PRODUCTS, GET_PRODUCT_DETAIL, GET_PRODUCTS_BY_CATEGORIES, GET_CART_SIMPLE, GET_STOCK, GET_REVIEWS } from "../../graphql/queries";
+import {
+  FINAL_PRODUCTS,
+  GET_PRODUCT_DETAIL,
+  GET_PRODUCTS_BY_CATEGORIES,
+  GET_CART,
+  GET_CART_SIMPLE,
+  GET_STOCK,
+  GET_REVIEWS,
+} from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
@@ -13,26 +21,30 @@ export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
 
-  const [addToCart] = useMutation(
-    ADD_TO_CART,
-    {
-    refetchQueries: [{ query: GET_CART_SIMPLE, variables:{
-      userId: userId&&userId,
-     }}],
-    }
-    );
-
-  const { data } = useQuery(
-    GET_CART_SIMPLE,
-    {
-      variables: {
-        userId: userId && userId,
+  const [addToCart] = useMutation(ADD_TO_CART, {
+    refetchQueries: [
+      {
+        query: GET_CART_SIMPLE,
+        variables: {
+          userId: userId && userId,
+        },
       },
-    }
-  );
+      {
+        query: GET_CART,
+        variables: {
+          userId: userId && userId,
+        },
+      },
+    ],
+  });
 
-  const { loading, error, data: mainProduct } = useQuery(
-    GET_PRODUCT_DETAIL, {
+  const { data } = useQuery(GET_CART_SIMPLE, {
+    variables: {
+      userId: userId && userId,
+    },
+  });
+
+  const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
     },
@@ -45,7 +57,7 @@ export default function ProductDetail({ match }: any) {
   } = useQuery(GET_STOCK, {
     variables: {
       productId,
-    }
+    },
   });
   const {
     data: reviewData,
@@ -56,7 +68,7 @@ export default function ProductDetail({ match }: any) {
       productId,
     },
   });
-  
+
   const [
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
@@ -67,12 +79,12 @@ export default function ProductDetail({ match }: any) {
   ] = useLazyQuery(FINAL_PRODUCTS, {
     onCompleted: (finalData) => {
       if (finalData.finalproducts[0].stock > 0) {
-        if(!data?.cartSimple?.id){
+        if (!data?.cartSimple?.id) {
           let cartLocal = JSON.parse(localStorage.getItem("cart"));
-          const itemLocal = {...finalData.finalproducts[0], quantity: 1};
+          const itemLocal = { ...finalData.finalproducts[0], quantity: 1 };
           cartLocal.items.push(itemLocal);
           localStorage.setItem("cart", JSON.stringify(cartLocal));
-        }else{
+        } else {
           addToCart({
             variables: {
               finalproductId: finalData.finalproducts[0].id,
@@ -80,9 +92,9 @@ export default function ProductDetail({ match }: any) {
               price,
               quantity: 1,
             },
-          }); 
+          });
         }
-          alert("Producto añadido al carrito")
+        alert("Producto añadido al carrito");
       } else {
         alert("No queda stock de ese modelo");
       }
@@ -103,22 +115,21 @@ export default function ProductDetail({ match }: any) {
       if (categories[0]) {
         getSimils({ variables: { name: categories[0].name } });
       }
+      if(modelsState.colors.length > 1){
+        findStock()}
     }
   }, [mainProduct]);
 
-  // useEffect(() => {
-
-  // }, [dataStock]);
-
+  
   // const [stock, setStock] = React.useState(false);
   const [modelsState, setModelsState] = React.useState({
     colors: [],
     sizes: [],
   });
-
+  
   let colors = [];
   let sizes = [];
-
+  
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
     return <div>`Error! ${error?.message}`</div>;
@@ -134,7 +145,6 @@ export default function ProductDetail({ match }: any) {
     models,
     id,
   } = mainProduct.productDetail;
-
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -160,12 +170,12 @@ export default function ProductDetail({ match }: any) {
             (document.getElementById(
               "addToCart"
             ) as HTMLInputElement).disabled = false;
-            noStock.innerHTML = ""
+            noStock.innerHTML = "";
           } else {
             (document.getElementById(
               "addToCart"
-              ) as HTMLInputElement).disabled = true;
-              noStock.innerHTML = "No tenemos stock en ese color y talle"
+            ) as HTMLInputElement).disabled = true;
+            noStock.innerHTML = "No tenemos stock en ese color y talle";
           }
         }
       }
@@ -229,9 +239,9 @@ export default function ProductDetail({ match }: any) {
             {name}
           </h1>
           <div className="description">
-            {categories?.map((category,i) => (
+            {categories?.map((category, i) => (
               <span
-              key={`${category} ${i}`}
+                key={`${category} ${i}`}
                 className="category"
                 onClick={() =>
                   getSimils({ variables: { name: category.name } })
@@ -283,9 +293,9 @@ export default function ProductDetail({ match }: any) {
           </div>
         </div>
         <div className="reviewsSection">
-        {reviewData && (
-          <Reviews className="review" allReviews={reviewData.getReviews} />
-        )}
+          {reviewData && (
+            <Reviews className="review" allReviews={reviewData.getReviews} />
+          )}
         </div>
         <div className="related">
           <h3>Relacionados</h3>
