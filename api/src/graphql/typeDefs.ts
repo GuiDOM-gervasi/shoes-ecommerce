@@ -9,6 +9,11 @@ const typeDefs = gql`
     isAdmin: Boolean!
     email: String!
     password: String!
+    city: String
+    country: String
+    addressnumber: Float
+    street: String
+    postecode: Float
     nlsuscribe: Boolean
     isGmail: Boolean
     products: [Product]
