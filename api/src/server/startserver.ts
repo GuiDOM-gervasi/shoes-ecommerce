@@ -10,6 +10,7 @@ import getCartForPayment from '#root/helpers/getCartForPayment';
 import discountStock from '#root/helpers/discountStock'
 import stripeCheckout from '#root/helpers/stripeCheckout';
 import setCartPayed from '#root/helpers/setCartPayed';
+import bilingPurchase from '#root/helpers/billingPurchase';
 import resolvers from '#root/graphql/resolvers';
 import typeDefs from '#root/graphql/typeDefs';
 import accessEnv from '#root/helpers/accessEnv';
@@ -51,6 +52,10 @@ const startServer = async () => {
   app.use(cookieParser());
   
   app.get('/status', async (req, res) => {
+    let stockStatus = await discountStock('pi_1IaPEoKvrKT0hMD3vXhmtZBp')
+    console.log(`stockStatus: `, stockStatus)
+    let mailSended = bilingPurchase('10', 'superOC');
+
     res.json({status:'ok'})
   })
   
@@ -66,9 +71,10 @@ const startServer = async () => {
       case 'payment_intent.succeeded':
         console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
         let stockStatus = await discountStock(paymentIntent.id)
-        console.log(`stockStatus: `, stockStatus)
+        console.log(`stockStatus: `, stockStatus.userId)
         let isSetPayed = await setCartPayed(paymentIntent.id)
         console.log('is cart set to payed:', isSetPayed)
+        let mailSended = bilingPurchase(`${stockStatus.userId}`, paymentIntent.id);
         break;
 
       case 'checkout.session.completed':
