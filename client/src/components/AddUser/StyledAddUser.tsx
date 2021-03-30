@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import { blanco, violeta, formWidth } from '../../containers/App/GlobalStyles'
-
+import { blanco, violeta, formWidth } from "../../containers/App/GlobalStyles";
 
 export const StyledAddUser = styled.div`
   width: ${formWidth}vw;
-  height: 72vh;
+  height: 75vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
@@ -17,7 +16,7 @@ export const StyledAddUser = styled.div`
   color: ${violeta};
 
   form {
-    height: 92%;
+    height: 90%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -46,6 +45,17 @@ export const StyledAddUser = styled.div`
         font-size: 19.5px;
       }
     }
+    .div_postcode,
+    .div_addressnumber {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      input {
+        margin-left: 3vw;
+        width: 30%;
+      }
+    }
+
     input,
     textarea,
     select {
@@ -82,8 +92,11 @@ export const StyledAddUser = styled.div`
   }
   @media (max-width: 858px) {
     width: 90vw;
-    height: 75vh;
+    height: 80vh;
     form {
+      select {
+        width: 75%;
+      }
       .boton {
         width: 80%;
       }

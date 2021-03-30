@@ -3,8 +3,14 @@ import { GoogleLogin } from "react-google-login";
 import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
+<<<<<<< HEAD
 import { validateChange, check, form } from "../../helpers/validationUser";
 import { useHistory } from "react-router-dom";
+=======
+import { validateChange, check, form, countries } from "../../helpers/validationUser";
+import { useHistory } from "react-router-dom"
+import { parse } from "graphql";
+>>>>>>> master
 interface AddUserAttributes {
 	className: String;
 }
@@ -13,53 +19,84 @@ export default function AddUser({ className }: AddUserAttributes) {
 	const history = useHistory();
 	const [createUser, { error: errorMutationUser }] = useMutation(ADD_USER);
 
-	const [form, setForm] = useState<form>({
-		firstName: "",
-		lastName: "",
-		userName: "",
-		isAdmin: false,
-		email: "",
-		password: "",
-		nlsuscribe: false,
-		isGmail: false,
-		error: true,
-	});
+  const [form, setForm] = useState<form>({
+    firstName: "",
+    lastName: "",
+    userName: "",
+    isAdmin: false,
+    email: "",
+    password: "",
+    city: "",
+    country: "",
+    street:"",
+    addressnumber:"",
+    postcode:"",
+    nlsuscribe: false,
+		isGmail:false,
+    error: true,
+  });
 
-	if (errorMutationUser) {
-		console.log(errorMutationUser);
-	}
+  if (errorMutationUser) {
+    console.log(errorMutationUser);
+  }
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(form);
-		let {
-			firstName,
-			lastName,
-			userName,
-			isAdmin,
-			email,
-			password,
-			nlsuscribe,
-			isGmail,
-		} = form;
-		console.log(isGmail);
-		try {
-			await createUser({
-				variables: {
-					firstName,
-					lastName,
-					userName,
-					isAdmin,
-					email,
-					password,
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+		console.log(form)
+    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe, isGmail, country, city, street, addressnumber, postcode} = form;
+		console.log(isGmail)
+    try {
+      await createUser({
+        variables: {
+          firstName,
+          lastName,
+          userName,
+          isAdmin,
+          email,
+          password,
+          country,
+          city, 
+          street, 
+          addressnumber: parseInt(addressnumber), 
+          postcode: parseInt(postcode),
 					nlsuscribe: nlsuscribe && true,
-					isGmail: isGmail,
-				},
-			}).then(() => history.push("/login"));
-		} catch (err) {
-			console.log(err);
-			return;
-		}
+					isGmail:isGmail,
+        },
+      }).then(
+        () => {
+          alert("Te registraste correctamente")
+          history.push("/login")})
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+    setForm({
+      firstName: "",
+      lastName: "",
+      userName: "",
+      isAdmin: false,
+      email: "",
+      password: "",
+      city: "",
+      country: "",
+      street:"",
+      addressnumber:"",
+      postcode:"",
+      nlsuscribe: false,
+			isGmail:false,
+      error: true,
+    });
+  };
+
+  const handleChange = async (e: any) => {
+
+  const error = check(e, form);
+    setForm(validateChange(e, form, error));
+  };
+	
+	const responseGoogle = async (response)=> {
+		console.log(response)
+		try{
 		setForm({
 			firstName: "",
 			lastName: "",
@@ -67,6 +104,11 @@ export default function AddUser({ className }: AddUserAttributes) {
 			isAdmin: false,
 			email: "",
 			password: "",
+      city: "",
+      country: "",
+      street:"",
+      addressnumber:"",
+      postcode:"",
 			nlsuscribe: false,
 			isGmail: false,
 			error: true,
@@ -97,69 +139,119 @@ export default function AddUser({ className }: AddUserAttributes) {
 		}
 	};
 
-	return (
-		<StyledAddUser>
-			<form onSubmit={handleSubmit}>
-				<div className="div_firstName">
-					<input
-						className="register"
-						type="text"
-						name="firstName"
-						onChange={handleChange}
-						placeholder="Nombre"
-						value={form.firstName}
-					/>
-					<span className="span_firstName"></span>
-				</div>
-				<div className="div_lastName">
-					<input
-						className="register"
-						type="text"
-						name="lastName"
-						onChange={handleChange}
-						placeholder="Apellido"
-						value={form.lastName}
-					/>
-					<span className="span_lastName"></span>
-				</div>
-				<div className="div_userName">
-					<input
-						className="register"
-						type="text"
-						name="userName"
-						onChange={handleChange}
-						placeholder="Nombre de usuario"
-						value={form.userName}
-					/>
-					<span className="span_userName"></span>
-				</div>
-				<div className="div_email">
-					<input
-						className="register"
-						type="email"
-						name="email"
-						onChange={handleChange}
-						placeholder="email@direccion.com"
-						value={form.email}
-					/>
-					<span className="span_email"></span>
-				</div>
-				<div className="div_password">
-					<input
-						className="register"
-						type="password"
-						name="password"
-						onChange={handleChange}
-						placeholder="password"
-						value={form.password}
-					/>
-					<span className="span_password"></span>
-				</div>
-				<div className="div_nlsuscribe">
-					<input type="checkbox"  name="nlsuscribe" onChange={handleChange} />
-					<label htmlFor="nlsuscribe">Recibir newsletter</label>
-					<span className="span_nlsuscribe"></span>
-				</div>
+  return (
+    <StyledAddUser>
+      <form onSubmit={handleSubmit}>
+        <div className="div_firstName">
+          <input className="register"
+            type="text"
+            name="firstName"
+            onChange={handleChange}
+            placeholder="First Name"
+            value={form.firstName}
+          />
+          <span className="span_firstName"></span>
+        </div>
+        <div className="div_lastName">
+          <input className="register"
+            type="text"
+            name="lastName"
+            onChange={handleChange}
+            placeholder="Last Name"
+            value={form.lastName}
+          />
+          <span className="span_lastName"></span>
+        </div>
+        <div className="div_userName">
+          <input className="register"
+            type="text"
+            name="userName"
+            onChange={handleChange}
+            placeholder="Username"
+            value={form.userName}
+          />
+          <span className="span_userName"></span>
+        </div>
+        <div className="div_email">
+          <input className="register"
+            type="email"
+            name="email"
+            onChange={handleChange}
+            placeholder="email@address.com"
+            value={form.email}
+          />
+          <span className="span_email"></span>
+        </div>
+        <div className="div_password">
+          <input className="register"
+            type="password"
+            name="password"
+            onChange={handleChange}
+            placeholder="password"
+            value={form.password}
+          />
+          <span className="span_password"></span>
+        </div>
+        <div className="div_country">
+          <select name="country" onChange={handleChange}>
+            <option>CHOOSE YOUR COUNTRY</option>
+            {countries.map(country => (
+              <option key={country.value} value={country.text}>{country.text}</option>
+            ))}
+          </select>
+          <span className="span_country"></span>
+        </div>
+        <div className="div_city">
+          <input className="register"
+            type="text"
+            name="city"
+            onChange={handleChange}
+            placeholder="City"
+            value={form.city}
+          />
+          <span className="span_city"></span>
+        </div>
+        <div className="div_street">
+          <input className="register"
+            type="text"
+            name="street"
+            onChange={handleChange}
+            placeholder="Street name"
+            value={form.street}
+          />
+          <span className="span_street"></span>
+        </div>
+        <div className="div_addressnumber">
+          <input className="register"
+            type="number"
+            min="0"
+            name="addressnumber"
+            onChange={handleChange}
+            value={form.addressnumber}
+          />
+          <label htmlFor="addressnumber">Street Number</label>
+          <span className="span_addressnumber"></span>
+        </div>
+        <div className="div_postcode">
+          <input className="register"
+            type="number"
+            min="0"
+            name="postcode"
+            onChange={handleChange}
+            value={form.postcode}
+          />
+          <label htmlFor="postcode">Postcode</label>
+          <span className="span_postcode"></span>
+        </div>
+        <div className="div_nlsuscribe">
+          <input
+            type="checkbox"
+            name="nlsuscribe"
+            onChange={handleChange}
+          />
+          <label htmlFor="nlsuscribe">Subscribe to newsletter</label>
+          <span className="span_nlsuscribe"></span>
+        </div>
 
 				<input
 					className="boton"
