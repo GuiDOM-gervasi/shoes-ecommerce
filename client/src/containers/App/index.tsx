@@ -17,7 +17,6 @@ import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
 import OrderTable from "../OrderTable";
-import Order from "../../components/Order";
 import Checkout from "../../components/Checkout";
 // import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
@@ -29,8 +28,7 @@ import CRUDStock from "../CRUDStock";
 import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
 
-require('dotenv').config();
-
+require("dotenv").config();
 
 // interface ProductAttributes {
 //   name: String;
@@ -51,11 +49,9 @@ function App() {
       <Route path="/register" component={AddUser} />
       <Route path="/login" component={Login} />
       <Route exact path="/search" component={SearchResult} />
-
-      <Route exact path="/checkout" component={Checkout} />   {/*testing only */}
+      <Route exact path="/checkout" component={Checkout} /> {/*testing only */}
       <Route exact path="/success" component={Success} />
       <Route exact path="/cancel" component={Cancel} />
-      
       <Route exact path="/admin" component={isAdmin ? Admin : Login} />
       <Route
         path="/admin/products"
@@ -79,11 +75,18 @@ function App() {
       />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
-      <Route exact path="/admin/orders" component={isAdmin ? OrderTable : Login} />
-      <Route path="/admin/orders/:id" component={isAdmin ? Order : Login} />
+      <Route
+        exact
+        path="/admin/orders"
+        component={isAdmin ? OrderTable : Login}
+      />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
-      <Route exact path="/admin/editStock/:productId/:modelId" component={EditStock} />
+      <Route
+        exact
+        path="/admin/editStock/:productId/:modelId"
+        component={EditStock}
+      />
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
     </div>

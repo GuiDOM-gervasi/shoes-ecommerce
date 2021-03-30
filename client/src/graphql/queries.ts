@@ -126,22 +126,22 @@ export const GET_MODELS = gql`
 `;
 
 export const GET_CART = gql`
-  query cart($userId: String! $state: String) {
-    cart(userId: $userId state: $state) {
+  query cart($userId: String!, $state: String) {
+    cart(userId: $userId, state: $state) {
       id
-      cartproducts{
+      cartproducts {
         id
         quantity
         state
-        finalproducts{
+        finalproducts {
           id
-          product{
+          product {
             id
             name
             price
             muestraimg
           }
-          model{
+          model {
             size
             color
           }
@@ -189,7 +189,7 @@ export const GET_STOCK = gql`
 `;
 
 export const GET_ALL_STOCK = gql`
-  query allStock{
+  query allStock {
     allStock {
       id
       product {
@@ -217,7 +217,8 @@ export const GET_REVIEWS = gql`
         id
       }
     }
-  }`;
+  }
+`;
 export const GET_USERS = gql`
   query GetUsers {
     users {
@@ -242,6 +243,33 @@ export const GET_DELETED_USERS = gql`
       email
       isAdmin
       nlsuscribe
+    }
+  }
+`;
+
+export const GET_ORDERS = gql`
+  query getOrders($orderId: String!, $state: String) {
+    viewOrders(orderId: $orderId, state: $state) {
+      id
+      quantity
+      price
+      state
+      finalproducts {
+        model {
+          size
+          color
+        }
+        product {
+          name
+          id
+        }
+      }
+      cart {
+        user {
+          id
+          userName
+        }
+      }
     }
   }
 `;
