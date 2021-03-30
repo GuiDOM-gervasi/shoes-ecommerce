@@ -3,14 +3,8 @@ import { GoogleLogin } from "react-google-login";
 import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
-<<<<<<< HEAD
-import { validateChange, check, form } from "../../helpers/validationUser";
-import { useHistory } from "react-router-dom";
-=======
 import { validateChange, check, form, countries } from "../../helpers/validationUser";
 import { useHistory } from "react-router-dom"
-import { parse } from "graphql";
->>>>>>> master
 interface AddUserAttributes {
 	className: String;
 }
@@ -42,9 +36,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-		console.log(form)
     let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe, isGmail, country, city, street, addressnumber, postcode} = form;
-		console.log(isGmail)
     try {
       await createUser({
         variables: {
@@ -88,40 +80,12 @@ export default function AddUser({ className }: AddUserAttributes) {
     });
   };
 
-  const handleChange = async (e: any) => {
-
-  const error = check(e, form);
-    setForm(validateChange(e, form, error));
-  };
-	
-	const responseGoogle = async (response)=> {
-		console.log(response)
-		try{
-		setForm({
-			firstName: "",
-			lastName: "",
-			userName: "",
-			isAdmin: false,
-			email: "",
-			password: "",
-      city: "",
-      country: "",
-      street:"",
-      addressnumber:"",
-      postcode:"",
-			nlsuscribe: false,
-			isGmail: false,
-			error: true,
-		});
-	};
-
 	const handleChange = async (e: any) => {
 		const error = check(e, form);
 		setForm(validateChange(e, form, error));
 	};
 
 	const responseGoogle = async (response) => {
-		console.log(response);
 		try {
 			setForm({
 				firstName: response.profileObj.givenName,
@@ -129,7 +93,12 @@ export default function AddUser({ className }: AddUserAttributes) {
 				userName: response.profileObj.name,
 				isAdmin: false,
 				email: response.profileObj.email,
-				password: "",
+        password: "",
+        city: "",
+        country: "",
+        street:"",
+        addressnumber:"",
+        postcode:"",
 				nlsuscribe: false,
 				isGmail: true,
 				error: false,
@@ -256,7 +225,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 				<input
 					className="boton"
 					type="submit"
-					value="Registrarse"
+					value="Register"
 					disabled={form.error}
 				/>
 				<GoogleLogin

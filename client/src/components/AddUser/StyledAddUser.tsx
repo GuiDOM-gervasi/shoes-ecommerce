@@ -74,7 +74,7 @@ export const StyledAddUser = styled.div`
       font-size: 17px
     }
     .register{
-      height: 3em
+      /*height: 3em*/
       background-color:${blanco};
     }
     .google_login{
