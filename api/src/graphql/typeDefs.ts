@@ -197,6 +197,7 @@ const typeDefs = gql`
     categories(atr: String, ord: String): [Category!]!
     deleted: [Product!]!
     deletedUsers: [User!]!
+    deletedCategories: [Category!]!
 
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     getReviews(productId: String!): Reviews
