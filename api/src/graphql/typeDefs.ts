@@ -193,6 +193,14 @@ const typeDefs = gql`
     updateState(orderId: String!, state: String!): CartProduct!
     updateStock(productId: String!, modelId: String!, input: Int): String
     updateUser(id: String!, atr: String!, input: String): String
+    updateUserAddress(
+      id: String!, 
+      country: String, 
+      city: String,
+      street: String,
+      addressnumber: Float,
+      postcode: Float,
+      ): String
   }
 
   type Query {
