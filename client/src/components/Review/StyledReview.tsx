@@ -8,25 +8,25 @@ import {
 
 export const StyledReview = styled.div`
   display: flex;
-  flex-direction:column;
-  justify-content:space-between;
-  width: ${formWidth *1.9}vw;
+  flex-direction: column;
+  justify-content: space-between;
+  width: ${formWidth * 1.9}vw;
   margin: 1rem 1rem 0 1rem;
   border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: ${blanco};
-  .review{
-    width:95%;
-    margin:auto;
+  .review {
+    width: 95%;
+    margin: auto;
   }
-  .rating{
+  .rating {
     margin: 2vh 0 0 0;
   }
-  .ratingTitle{
+  .ratingTitle {
     margin: 1vh 0 1vh 0;
   }
-  .ratingDescription{
+  .ratingDescription {
     margin: 0 0 2vh 0;
   }
   .clip-star {
@@ -52,5 +52,14 @@ export const StyledReview = styled.div`
     display: inline-block;
     height: 1.5vw;
     width: 1.5vw;
+  }
+  @media screen and (max-width: 870px) {
+    border: none;
+    box-shadow: none;
+    .clip-star,
+    .empty-star{
+      height: 5vw;
+      width: 5vw;
+    }
   }
 `;

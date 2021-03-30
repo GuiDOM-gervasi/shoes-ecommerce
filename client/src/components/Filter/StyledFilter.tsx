@@ -26,9 +26,6 @@ export const StyledFilter = styled.div`
   }
 
   .filter {
-    width: 100%;
-    min-width: 15ch;
-    max-width: 30ch;
     border: 1px solid var(--select-border);
     border-radius: 0.25em;
     padding: 0.25em 0.5em;
@@ -62,5 +59,11 @@ export const StyledFilter = styled.div`
     bottom: -1px;
     border: 2px solid var(--select-focus);
     border-radius: inherit;
+  }
+
+  @media (max-width: 858px){
+    .filter{
+      width:99vw;
+    }
   }
 `;
