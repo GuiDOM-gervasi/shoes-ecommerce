@@ -46,7 +46,9 @@ const OrderTable = () => {
 
   const orders = data.viewOrders;
 
-  const states = ["reserved", "payed", "finish", "rejected"];
+  let states = ["reserved", "payed", "finish", "rejected"];
+  const currentIndex = states.findIndex((state) => state === currentState);
+  let possibleStates = states.slice(currentIndex - states.length);
 
   return (
     <StyledOrderTable>
@@ -97,8 +99,9 @@ const OrderTable = () => {
               className="state"
               value={order.state}
               onChange={(e) => handleChange(e, order.id)}
+              disabled={order.state === "finish" || order.state === "rejected"}
             >
-              {states.map((state, i) => (
+              {possibleStates.map((state, i) => (
                 <option value={state} id={i.toString()}>
                   {state}
                 </option>

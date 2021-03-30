@@ -52,10 +52,10 @@ export class Cart extends Model<CartAttributes> {
     user: User;
 
     @HasMany(() => CartProduct)
-  	cartproducts!: CartProduct[]
+    cartproducts!: CartProduct[]
 
-    @BelongsToMany(() => FinalProduct, { through: () => CartProduct })
-    finalproducts?: Array<FinalProduct & { CartProduct: CartProduct }>;
+    // @BelongsToMany(() => FinalProduct, { through: () => CartProduct })
+    // finalproducts?: Array<FinalProduct & { CartProduct: CartProduct }>;
 }
   
 export default Cart;
