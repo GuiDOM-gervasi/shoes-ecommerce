@@ -3,8 +3,9 @@ import {GoogleLogin} from "react-google-login";
 import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
-import { validateChange, check, form } from "../../helpers/validationUser";
+import { validateChange, check, form, countries } from "../../helpers/validationUser";
 import { useHistory } from "react-router-dom"
+import { parse } from "graphql";
 interface AddUserAttributes {
   className: String;
 }
@@ -24,6 +25,11 @@ export default function AddUser({ className }: AddUserAttributes) {
     isAdmin: false,
     email: "",
     password: "",
+    city: "",
+    country: "",
+    street:"",
+    addressnumber:"",
+    postcode:"",
     nlsuscribe: false,
 		isGmail:false,
     error: true,
@@ -36,7 +42,7 @@ export default function AddUser({ className }: AddUserAttributes) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 		console.log(form)
-    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe ,isGmail} = form;
+    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe, isGmail, country, city, street, addressnumber, postcode} = form;
 		console.log(isGmail)
     try {
       await createUser({
@@ -47,10 +53,18 @@ export default function AddUser({ className }: AddUserAttributes) {
           isAdmin,
           email,
           password,
+          country,
+          city, 
+          street, 
+          addressnumber: parseInt(addressnumber), 
+          postcode: parseInt(postcode),
 					nlsuscribe: nlsuscribe && true,
 					isGmail:isGmail,
         },
-      }).then(() => history.push("/login"))
+      }).then(
+        () => {
+          alert("Te registraste correctamente")
+          history.push("/login")})
     } catch (err) {
       console.log(err);
       return;
@@ -62,6 +76,11 @@ export default function AddUser({ className }: AddUserAttributes) {
       isAdmin: false,
       email: "",
       password: "",
+      city: "",
+      country: "",
+      street:"",
+      addressnumber:"",
+      postcode:"",
       nlsuscribe: false,
 			isGmail:false,
       error: true,
@@ -84,6 +103,11 @@ export default function AddUser({ className }: AddUserAttributes) {
 			isAdmin: false,
 			email: response.profileObj.email,
 			password: "",
+      city: "",
+      country: "",
+      street:"",
+      addressnumber:"",
+      postcode:"",
 			nlsuscribe: false,
 			isGmail:true,
 			error: false,
@@ -101,7 +125,7 @@ export default function AddUser({ className }: AddUserAttributes) {
             type="text"
             name="firstName"
             onChange={handleChange}
-            placeholder="Nombre"
+            placeholder="First Name"
             value={form.firstName}
           />
           <span className="span_firstName"></span>
@@ -111,7 +135,7 @@ export default function AddUser({ className }: AddUserAttributes) {
             type="text"
             name="lastName"
             onChange={handleChange}
-            placeholder="Apellido"
+            placeholder="Last Name"
             value={form.lastName}
           />
           <span className="span_lastName"></span>
@@ -121,7 +145,7 @@ export default function AddUser({ className }: AddUserAttributes) {
             type="text"
             name="userName"
             onChange={handleChange}
-            placeholder="Nombre de usuario"
+            placeholder="Username"
             value={form.userName}
           />
           <span className="span_userName"></span>
@@ -131,7 +155,7 @@ export default function AddUser({ className }: AddUserAttributes) {
             type="email"
             name="email"
             onChange={handleChange}
-            placeholder="email@direccion.com"
+            placeholder="email@address.com"
             value={form.email}
           />
           <span className="span_email"></span>
@@ -146,13 +170,64 @@ export default function AddUser({ className }: AddUserAttributes) {
           />
           <span className="span_password"></span>
         </div>
+        <div className="div_country">
+          <select name="country" onChange={handleChange}>
+            <option>CHOOSE YOUR COUNTRY</option>
+            {countries.map(country => (
+              <option key={country.value} value={country.text}>{country.text}</option>
+            ))}
+          </select>
+          <span className="span_country"></span>
+        </div>
+        <div className="div_city">
+          <input className="register"
+            type="text"
+            name="city"
+            onChange={handleChange}
+            placeholder="City"
+            value={form.city}
+          />
+          <span className="span_city"></span>
+        </div>
+        <div className="div_street">
+          <input className="register"
+            type="text"
+            name="street"
+            onChange={handleChange}
+            placeholder="Street name"
+            value={form.street}
+          />
+          <span className="span_street"></span>
+        </div>
+        <div className="div_addressnumber">
+          <input className="register"
+            type="number"
+            min="0"
+            name="addressnumber"
+            onChange={handleChange}
+            value={form.addressnumber}
+          />
+          <label htmlFor="addressnumber">Street Number</label>
+          <span className="span_addressnumber"></span>
+        </div>
+        <div className="div_postcode">
+          <input className="register"
+            type="number"
+            min="0"
+            name="postcode"
+            onChange={handleChange}
+            value={form.postcode}
+          />
+          <label htmlFor="postcode">Postcode</label>
+          <span className="span_postcode"></span>
+        </div>
         <div className="div_nlsuscribe">
           <input
             type="checkbox"
             name="nlsuscribe"
             onChange={handleChange}
           />
-          <label htmlFor="nlsuscribe">Recibir newsletter</label>
+          <label htmlFor="nlsuscribe">Subscribe to newsletter</label>
           <span className="span_nlsuscribe"></span>
         </div>
 
