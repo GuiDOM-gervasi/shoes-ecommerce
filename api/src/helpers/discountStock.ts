@@ -29,11 +29,13 @@ async function discountStock<discountResponse>(paymentId: any){
     };
 
     for (let i = 0; i < cart.cartproducts.length; i++) {
-      newStock = cart.finalproducts[i].stock - cart.cartproducts[i].quantity;
-      id = cart.finalproducts[i].id;
-      status.ids.push(id);
-      newStock < 1 ? status.stock.push(false) : status.stock.push(true);
-      await FinalProduct.update({ stock: newStock }, { where: { id: id } });
+      if (cart.cartproducts[i].state === 'reserved'){
+        newStock = cart.finalproducts[i].stock - cart.cartproducts[i].quantity;
+        id = cart.finalproducts[i].id;
+        status.ids.push(id);
+        newStock < 1 ? status.stock.push(false) : status.stock.push(true);
+        await FinalProduct.update({ stock: newStock }, { where: { id: id } });
+      }
     }
 
     return status;

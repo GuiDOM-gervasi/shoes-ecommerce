@@ -37,14 +37,6 @@ const startServer = async () => {
     cors({
       origin: client,
       credentials: true,
-      // preflightContinue: true
-    //   exposedHeaders: [
-    //     "Access-Control-Allow-Headers",
-    //     "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept",
-    //     "X-Password-Expired"
-    //   ],
-    //   optionsSuccessStatus: 200
-    // })
     })
   );
 
@@ -52,9 +44,9 @@ const startServer = async () => {
   app.use(cookieParser());
   
   app.get('/status', async (req, res) => {
-    let stockStatus = await discountStock('pi_1IaPEoKvrKT0hMD3vXhmtZBp')
-    console.log(`stockStatus: `, stockStatus)
-    let mailSended = bilingPurchase('10', 'superOC');
+    // let stockStatus = await discountStock('pi_1IaPEoKvrKT0hMD3vXhmtZBp')
+    // console.log(`stockStatus: `, stockStatus)
+    // let mailSended = bilingPurchase('10', 'superOC');
 
     res.json({status:'ok'})
   })
@@ -69,12 +61,10 @@ const startServer = async () => {
     // Handle the event
     switch (event.type) {
       case 'payment_intent.succeeded':
-        console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
-        let stockStatus = await discountStock(paymentIntent.id)
-        console.log(`stockStatus: `, stockStatus.userId)
-        let isSetPayed = await setCartPayed(paymentIntent.id)
-        console.log('is cart set to payed:', isSetPayed)
-        let mailSended = bilingPurchase(`${stockStatus.userId}`, paymentIntent.id);
+        // console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
+        let setPayed = await setCartPayed(paymentIntent.id)
+        console.log('is cart set to payed:', setPayed)
+        let mailSended = bilingPurchase(`${setPayed.userId}`, paymentIntent.id);
         break;
 
       case 'checkout.session.completed':
