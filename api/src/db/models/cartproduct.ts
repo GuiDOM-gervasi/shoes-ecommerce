@@ -1,13 +1,13 @@
 import {
   BelongsTo,
-    Column,
-    DataType,
-    ForeignKey,
-    Model,
-    Table
-  } from "sequelize-typescript";
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from "sequelize-typescript";
 import Cart from "./carts";
-import FinalProduct from './finalproduct';  
+import FinalProduct from "./finalproduct";
 
 // Definitions of tables and sequelize models
 // Table cartproduct
@@ -26,7 +26,7 @@ export class CartProduct extends Model {
     type: DataType.INTEGER,
   })
   id?: string;
-  
+
   @Column({
     allowNull: false,
     type: DataType.INTEGER,
@@ -35,7 +35,7 @@ export class CartProduct extends Model {
   cartId!: string;
   @BelongsTo(() => Cart)
   cart!: Cart;
-  
+
   @Column({
     allowNull: false,
     type: DataType.INTEGER,
@@ -44,27 +44,24 @@ export class CartProduct extends Model {
   finalproductId!: string;
   @BelongsTo(() => FinalProduct)
   finalproducts!: FinalProduct;
-  
+
   @Column({
     allowNull: true,
-    type: DataType.INTEGER
+    type: DataType.INTEGER,
   })
   quantity?: number;
 
   @Column({
-      allowNull: true,
-      type: DataType.FLOAT
-    })
+    allowNull: true,
+    type: DataType.FLOAT,
+  })
   price?: number;
 
   @Column({
     allowNull: false,
-    type: DataType.ENUM('reserved','payed','finish','rejected'),
+    type: DataType.ENUM("reserved", "payed", "finish", "rejected"),
   })
   state!: string;
-
 }
 
-
-
-export default CartProduct
+export default CartProduct;

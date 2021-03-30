@@ -87,7 +87,7 @@ export const ADD_USER = gql`
     $email: String!
     $password: String!
     $nlsuscribe: Boolean!
-		$isGmail:Boolean!
+    $isGmail: Boolean!
   ) {
     createUser(
       firstName: $firstName
@@ -97,7 +97,7 @@ export const ADD_USER = gql`
       email: $email
       password: $password
       nlsuscribe: $nlsuscribe
-			isGmail: $isGmail
+      isGmail: $isGmail
     ) {
       userName
     }
@@ -106,7 +106,7 @@ export const ADD_USER = gql`
 
 export const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password){
+    loginUser(email: $email, password: $password) {
       id
       isAdmin
       accessToken
@@ -124,26 +124,26 @@ export const EDIT_CATEGORY = gql`
 `;
 
 export const EDIT_STOCK = gql`
-  mutation editStock($productId: String!,$modelId: String! , $input: Int!) {
+  mutation editStock($productId: String!, $modelId: String!, $input: Int!) {
     updateStock(productId: $productId, modelId: $modelId, input: $input)
-    }
+  }
 `;
 
 export const PASSWORD_RESET = gql`
   mutation passwordReset($email: String!) {
     passwordReset(email: $email)
-    }
+  }
 `;
 
 export const UPDATE_PASSWORD = gql`
   mutation updatePassword($password: String!, $token: String!) {
     updatePassword(password: $password, token: $token)
-    }
+  }
 `;
 
 export const CREATE_CART = gql`
-  mutation createCart( $userId: String!) {
-    createCart( userId: $userId) {
+  mutation createCart($userId: String!) {
+    createCart(userId: $userId) {
       userId
     }
   }
@@ -169,13 +169,10 @@ export const ADD_TO_CART = gql`
 `;
 
 export const DELETE_TO_CART = gql`
-mutation removeFromCart(
-$cartId: String!
-$finalproductId: String!
-){
-  removeFromCart(cartId:$cartId finalproductId:$finalproductId)
-}
-`
+  mutation removeFromCart($cartId: String!, $finalproductId: String!) {
+    removeFromCart(cartId: $cartId, finalproductId: $finalproductId)
+  }
+`;
 export const ADD_REVIEW = gql`
   mutation addReview(
     $productId: String!
@@ -216,15 +213,22 @@ export const RESTORE_USER = gql`
 `;
 
 export const QUANTITY = gql`
-mutation controlQuantity ($id:String! $quantity:Int!){
-  controlQuantity(id:$id quantity:$quantity)
-}
+  mutation controlQuantity($id: String!, $quantity: Int!) {
+    controlQuantity(id: $id, quantity: $quantity)
+  }
 `;
 export const LOGOUT_USER = gql`
-  mutation LogoutUser($id: String!){
+  mutation LogoutUser($id: String!) {
     logoutUser(id: $id) {
       logout
     }
   }
 `;
 
+export const UPDATE_STATE = gql`
+  mutation updateState($orderId: String!, $state: String!) {
+    updateState(orderId: $orderId, state: $state) {
+      state
+    }
+  }
+`;
