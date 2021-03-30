@@ -98,4 +98,12 @@ export const StyledAddProduct = styled.div`
     font-size: 0.8rem;
     padding: 1vh;
   }
+
+  @media (max-width: 858px) {
+    width: 90vw;
+    min-height:80vh;
+    .addButton{
+      width: 40vw;
+    }
+  }
 `;

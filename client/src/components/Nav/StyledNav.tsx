@@ -109,12 +109,11 @@ export const StyledNav = styled.div`
     color: ${blanco};
     float: right;
     line-height: 80px;
-    margin-right: 40px;
     cursor: pointer;
     display: none;
   }
 
-  #check {
+  #check, .fasMobile {
     display: none;
   }
 
@@ -133,14 +132,25 @@ export const StyledNav = styled.div`
   }
 
   @media (max-width: 858px) {
-    .checkbtn {
+    .checkbtn,
+    .linedown,
+    .fasMobile {
       display: block;
     }
-    .linedown {
-      display: block;
+    .lineup{
+      display:none;
     }
     nav {
       min-height: 10vh;
+    }
+    .fasMobile{
+      font-size: 22px;
+    }
+    .navMobile{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      justify-items: center;
     }
     ul {
       position: fixed;

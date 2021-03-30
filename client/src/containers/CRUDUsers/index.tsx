@@ -60,7 +60,7 @@ export default function CRUDUsers() {
   return (
     <StyledCRUDUsers>
       <ul className="activeUsers">
-        <li>
+        <li className="titles">
           <h5>Username</h5>
           <h5>Email</h5>
           <h5>isAdmin</h5>
@@ -68,44 +68,65 @@ export default function CRUDUsers() {
         </li>
         {allUsers?.users?.map((user: UserAttributes) => (
           <li key={user.id}>
-            <span className="username"> {user.userName} </span>
-            <span className="email"> {user.email} </span>
-            <div
-              className="isAdmin"
-              onClick={() => makeAdmin(user.id, user.isAdmin)}
-            >
-              <span className={user.isAdmin ? "adminSpan" : "clientSpan"} />
-            </div>
-
-            <div className="buttons">
-              <i
+            <span className="username">
+              <p className="username">Username</p>
+              {user.userName}{" "}
+            </span>
+            <span className="email">
+              <p className="email">Email</p>
+              {user.email}{" "}
+            </span>
+            <span>
+              <p className="isAdmin">isAdmin</p>
+              <div
+                className="isAdmin"
                 onClick={() => makeAdmin(user.id, user.isAdmin)}
-                className="fas fa-edit"
-              />
-              <i
-                onClick={() => handleDelete(user.id)}
-                className="fas fa-trash-alt"
-              />
-            </div>
+              >
+                <span className={user.isAdmin ? "adminSpan" : "clientSpan"} />
+              </div>
+            </span>
+            <span>
+              <div className="buttons">
+                <i
+                  onClick={() => makeAdmin(user.id, user.isAdmin)}
+                  className="fas fa-edit"
+                />
+                <i
+                  onClick={() => handleDelete(user.id)}
+                  className="fas fa-trash-alt"
+                />
+              </div>
+            </span>
           </li>
         ))}
       </ul>
       <div className="deleted">
-        <h4> Deleted products </h4>
+        <h4> Deleted users </h4>
         <ul className="deletedProducts">
           {deletedUsers?.deletedUsers?.map((user: UserAttributes) => (
             <li key={user.id}>
-              <span className="username"> {user.userName} </span>
-              <span className="email"> {user.email} </span>
-              <div className="isAdmin">
-                <span className={user.isAdmin ? "adminSpan" : "clientSpan"} />
-              </div>
-              <div className="buttons">
-                <i
-                  onClick={() => handleRestore(user.id)}
-                  className="fas fa-trash-restore"
-                />
-              </div>
+              <span className="username">
+                <p className="username">Username</p>
+                {user.userName}{" "}
+              </span>
+              <span className="email">
+                <p className="email">Email</p>
+                {user.email}{" "}
+              </span>
+              <span>
+                <p className="isAdmin">isAdmin</p>
+                <div className="isAdmin">
+                  <span className={user.isAdmin ? "adminSpan" : "clientSpan"} />
+                </div>
+              </span>
+              <span>
+                <div className="buttons">
+                  <i
+                    onClick={() => handleRestore(user.id)}
+                    className="fas fa-trash-restore"
+                  />
+                </div>
+              </span>
             </li>
           ))}
         </ul>

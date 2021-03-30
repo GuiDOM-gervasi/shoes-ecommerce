@@ -48,8 +48,14 @@ export const StyledChaeckout = styled.div`
         margin: 0.5rem 0 0.5rem 0;
       }
   }  
- 
+
+  @media (max-width: 858px) {
+    width: 90vw;
+    form {
+      .boton {
+        width: 80%;
+      }
+    }
+  }
 `
 ; 
-
- 
