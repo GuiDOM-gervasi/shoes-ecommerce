@@ -7,7 +7,7 @@ import User from "../db/models/users";
 import { createTokens } from "./createTokens"
 import Stripe from 'stripe';
 import getCartForPayment from '#root/helpers/getCartForPayment';
-import discountStock from '#root/helpers/discountStock'
+import restoreStock from '#root/helpers/restoreStock'
 import stripeCheckout from '#root/helpers/stripeCheckout';
 import setCartPayed from '#root/helpers/setCartPayed';
 import bilingPurchase from '#root/helpers/billingPurchase';
@@ -57,9 +57,14 @@ const startServer = async () => {
     const payload = request.body;
     let event = request.body;
     let paymentIntent = event.data.object;
+    let stockStatus = { 
+      userId: '',
+      status: '',
+    }
 
     // Handle the event
     switch (event.type) {
+      
       case 'payment_intent.succeeded':
         // console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
         let setPayed = await setCartPayed(paymentIntent.id)
@@ -67,14 +72,16 @@ const startServer = async () => {
         let mailSended = bilingPurchase(`${setPayed.userId}`, paymentIntent.id);
         break;
 
-      case 'checkout.session.completed':
-        console.log(`PaymentIntent was finished!, ID: ${paymentIntent.id}`);
+      case 'payment_intent.canceled':
+        stockStatus = await restoreStock(paymentIntent.id)
+        console.log(`PaymentIntent was finished!, ID: ${paymentIntent.id}. Stock has been restore: ${stockStatus}`);
         // get notification if the session expire, or is ended by payment or rejection
         break;
 
       case 'payment_intent.payment_failed':
-          console.log(`PaymentIntent sommething went wrong with the card!, ID: ${paymentIntent.id}`);
-          break;
+        stockStatus = await restoreStock(paymentIntent.id)
+        console.log(`PaymentIntent: sommething went wrong with the card!, ID: ${paymentIntent.id}. Stock has been restore: ${stockStatus}`);
+        break;
 
       default:
         // Unexpected event type
