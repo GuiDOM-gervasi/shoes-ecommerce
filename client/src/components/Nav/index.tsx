@@ -9,7 +9,14 @@ export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
   const handleClick = () => {
+    const ele = document.getElementById("check") as HTMLInputElement;
+    ele.checked = false;
     logout(() => history.push("/"));
+  };
+  const handleCheck = (url) => {
+    const ele = document.getElementById("check") as HTMLInputElement;
+    ele.checked = false;
+    history.push(url);
   };
 
   return (
@@ -33,29 +40,33 @@ export default function Nav() {
           </ul>
         </div>
         <div className="navMobile">
-          <NavLink to="">
-            <i className="fas fa-home fasMobile"></i>
-          </NavLink>
-          <NavLink to="/cart" className="hover">
-            <i className="fas fa-shopping-cart fasMobile"></i>
-          </NavLink>
+          <li onClick={() => handleCheck("/")}>
+            <NavLink to="">
+              <i className="fas fa-home fasMobile"></i>
+            </NavLink>
+          </li>
+          <li onClick={() => handleCheck("/cart")}>
+            <NavLink to="/cart" className="hover">
+              <i className="fas fa-shopping-cart fasMobile"></i>
+            </NavLink>
+          </li>
           <input type="checkbox" id="check" />
           <label htmlFor="check" className="checkbtn">
             <i className="fas fa-bars"></i>
           </label>
           <ul className="linedown">
             {isAdmin ? (
-              <li>
+              <li onClick={() => handleCheck("/admin")}>
                 <NavLink to="/admin">Admin</NavLink>
               </li>
             ) : null}
-            <li className="catalogue">
+            <li onClick={() => handleCheck("/")} className="catalogue">
               <NavLink to="/">Catalogue</NavLink>
             </li>
-            <li className="offers">
+            <li onClick={() => handleCheck("/")} className="offers">
               <NavLink to="">Offers</NavLink>
             </li>
-            <li className="aboutus">
+            <li onClick={() => handleCheck("/")} className="aboutus">
               <NavLink to="">About us</NavLink>
             </li>
             {userId && userId !== "0" ? (
@@ -64,12 +75,12 @@ export default function Nav() {
               </li>
             ) : (
               <>
-                <li className="login">
+                <li onClick={() => handleCheck("/login")} className="login">
                   <NavLink to="/login" className="hover">
                     Login
                   </NavLink>
                 </li>
-                <li className="register">
+                <li onClick={() => handleCheck("/register")} className="register">
                   <NavLink to="/register" className="hover">
                     Register
                   </NavLink>
