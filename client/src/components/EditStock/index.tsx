@@ -6,7 +6,7 @@ import { StyleEditStock } from "./StyledEditStock";
 import { useHistory } from "react-router-dom";
 import { GET_ALL_STOCK } from "../../graphql/queries";
 
-export default function EditCategory({ match }) {
+export default function EditStock({ match }) {
 	const history = useHistory();
 	const productId = match.params.productId;
 	const modelId = match.params.modelId;
