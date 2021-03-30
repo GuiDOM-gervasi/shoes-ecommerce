@@ -6,9 +6,9 @@ export const StyledSlider = styled.div`
   overflow: hidden;
 
   img {
-        min-width: 100%;
-        height: 70vh;
-        object-position: 20% 130%;
+        width: 100vw;
+        height: 100%;
+        object-position: 0 70%;
         object-fit: cover;
   }
   @media (max-width: 858px){

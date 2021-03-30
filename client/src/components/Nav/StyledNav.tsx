@@ -18,7 +18,7 @@ export const StyledNav = styled.div`
 
   nav {
     background: #151515;
-    height: ${navHeight}vh;
+    min-height: ${navHeight}vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -81,6 +81,7 @@ export const StyledNav = styled.div`
     display: inline-block;
     line-height: 80px;
     margin: 0 5px;
+    white-space: nowrap;
   }
   nav ul li p {
     display: inline-block;
@@ -139,7 +140,7 @@ export const StyledNav = styled.div`
       display: block;
     }
     nav {
-      height: 80px;
+      min-height: 10vh;
     }
     ul {
       position: fixed;

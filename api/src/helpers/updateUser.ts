@@ -20,10 +20,6 @@ export const handlerUpdateUser = (atr,input) => {
             return {
                 isAdmin: input
             }
-        case "password":
-            return {
-                password: input
-            }
         default:
             return atr
     }
