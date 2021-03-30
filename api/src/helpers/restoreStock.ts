@@ -13,7 +13,7 @@ async function restoreStock<restoreResponse>(paymentId: any){
       where: {
         paymentId: paymentId,
       },
-      include: [CartProduct as any, FinalProduct as any],
+      include:[{model: CartProduct as any , include: FinalProduct as any}],
     });
 
     let newStock = 0;
@@ -25,8 +25,8 @@ async function restoreStock<restoreResponse>(paymentId: any){
 
     for (let i = 0; i < cart.cartproducts.length; i++) {
       if (cart.cartproducts[i].state === 'reserved'){
-        newStock = cart.finalproducts[i].stock + cart.cartproducts[i].quantity;
-        id = cart.finalproducts[i].id;
+        newStock = cart.cartproducts[i].finalproducts.stock + cart.cartproducts[i].quantity;
+        id = cart.cartproducts[i].finalproducts.id;
         await FinalProduct.update({ stock: newStock }, { where: { id: id } });
       }
     }

@@ -27,7 +27,7 @@ const billingPurchase = async (id:string, orderId) => {
                   <p style="font-size: 1.3rem;color: #ffffff;">Please keep this number.</p>
               </div>
               <p style="color: #ffffff;font-size: 1.35rem;background: #64DFDF80;padding: .6rem;border-radius: .5rem;">
-              If really liked the procduct please send us your opinion
+              Please fell free to send us your opinion about this product anytime! 
               </p>
           </div>
       </div>
@@ -35,7 +35,7 @@ const billingPurchase = async (id:string, orderId) => {
   </html>
   `
 
-  emailService([email], subject, textToSend)
+  emailService(email, subject, textToSend)
 
   // console.log(`user.email`, user.email)
   // console.log(`user.firstName`, user.firstName)
