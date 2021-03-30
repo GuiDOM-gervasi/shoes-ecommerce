@@ -50,7 +50,7 @@ export default function Nav() {
               <NavLink to="">Offers</NavLink>
             </li>
             <li className="aboutus">
-              <NavLink to="">About us</NavLink>
+              <NavLink to="/about">About us</NavLink>
             </li>
             {userId && userId !== '0' ? (
               <li onClick={handleClick} className="login">
