@@ -44,7 +44,12 @@ export const StyledCRUDCategory = styled.div`
     margin-left:1vw;
     &:hover{
       color:${violeta};
+    }  
+  }
+
+  @media (max-width: 858px) {
+    .fas{
+      font-size:1.5rem;
     }
-    
   }
 `;

@@ -44,4 +44,39 @@ export const StyledOrderTable = styled.div`
       }
     }
   }
+  p.product,
+  p.model,
+  p.quantity,
+  p.price,
+  p.state,
+  p.username {
+    display: none;
+  }
+  @media (max-width: 858px) {
+    ul li {
+      width:90vw;
+      margin:3vh auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap:5vw;
+      grid-template-rows:1fr 1fr 1fr;
+      span, select{
+        width:100%;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+    .titles {
+      display: none;
+    }
+    p.product,
+    p.model,
+    p.quantity,
+    p.price,
+    p.state,
+    p.username {
+      display: inline;
+      font-weight:bold;
+    }
+  }
 `;

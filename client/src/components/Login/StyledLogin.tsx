@@ -1,17 +1,18 @@
 import styled from "styled-components";
-import { blanco, violeta, formWidth } from '../../containers/App/GlobalStyles'
-
+import { blanco, violeta, formWidth } from "../../containers/App/GlobalStyles";
 
 export const StyledLogin = styled.div`
   width: ${formWidth}vw;
-  height: 30vh;
+  height: 50vh;
+  padding: 3%;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   background-color: ${blanco};
   position: relative;
 
@@ -19,7 +20,7 @@ export const StyledLogin = styled.div`
     color: ${violeta};
     opacity: 0.5;
   }
-  
+
   form {
     height: 80%;
     width: 100%;
@@ -47,11 +48,20 @@ export const StyledLogin = styled.div`
       border-bottom: 1px solid ${violeta};
       width: 80%;
     }
-    .login{
-      background-color:${blanco};
+    .login {
+      background-color: ${blanco};
     }
-    .boton{
-      width:15vw;
+    .boton {
+      width: 15vw;
+    }
+  }
+
+  @media (max-width: 858px) {
+    width: 90vw;
+    form {
+      .boton {
+        width: 80%;
+      }
     }
   }
 `;
