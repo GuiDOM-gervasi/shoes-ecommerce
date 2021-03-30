@@ -32,7 +32,13 @@ export default function Nav() {
             </li>
           </ul>
         </div>
-        <div>
+        <div className="navMobile">
+          <NavLink to="">
+            <i className="fas fa-home fasMobile"></i>
+          </NavLink>
+          <NavLink to="/cart" className="hover">
+            <i className="fas fa-shopping-cart fasMobile"></i>
+          </NavLink>
           <input type="checkbox" id="check" />
           <label htmlFor="check" className="checkbtn">
             <i className="fas fa-bars"></i>
@@ -52,11 +58,12 @@ export default function Nav() {
             <li className="aboutus">
               <NavLink to="">About us</NavLink>
             </li>
-            {userId && userId !== '0' ? (
+            {userId && userId !== "0" ? (
               <li onClick={handleClick} className="login">
                 <p className="hover">Logout</p>
               </li>
-            ) : <>
+            ) : (
+              <>
                 <li className="login">
                   <NavLink to="/login" className="hover">
                     Login
@@ -67,7 +74,8 @@ export default function Nav() {
                     Register
                   </NavLink>
                 </li>
-              </>}
+              </>
+            )}
           </ul>
         </div>
       </nav>

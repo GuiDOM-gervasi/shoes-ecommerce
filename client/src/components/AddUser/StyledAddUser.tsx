@@ -51,4 +51,13 @@ export const StyledAddUser = styled.div`
       background-color:${blanco};
     }
   }
+  @media (max-width: 858px) {
+    width: 90vw;
+    height: 75vh;
+    form {
+      .boton {
+        width: 80%;
+      }
+    }
+  }
 `;
