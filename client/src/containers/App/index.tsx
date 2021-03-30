@@ -21,11 +21,13 @@ import Checkout from "../../components/Checkout";
 import AddReview from "../../components/AddReview";
 import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
-import Success from "../../components/Checkout/Success";
-import Cancel from "../../components/Checkout/Cancel";
+import Success from "../../components/Success";
+import Cancel from "../../components/Cancel";
 import CRUDStock from "../CRUDStock";
 import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
+import AboutUs from "../../components/AboutUs";
+
 import EditCategory from "../../components/EditCategory";
 
 require("dotenv").config();
@@ -44,6 +46,7 @@ function App() {
     <div className="App fondoDegradado">
       <Nav />
       <GlobalStyles />
+      <Route path="/about" component={AboutUs}/>
       <Route exact path="/" component={Catalogue} />
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/register" component={AddUser} />
