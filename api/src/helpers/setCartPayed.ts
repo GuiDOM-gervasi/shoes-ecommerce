@@ -17,11 +17,17 @@ const setCartPayed = async (paymentId: any) => {
           } }
     );
 
-    return numberUpdates;
+    return {
+      userId: cart.userId,
+      numberUpdates
+    }
 
   } catch (e) {
     console.error(e);
-    return 0;
+    return {
+      userId: 0,
+      numberUpdates: 0
+    }
   }
 };
 

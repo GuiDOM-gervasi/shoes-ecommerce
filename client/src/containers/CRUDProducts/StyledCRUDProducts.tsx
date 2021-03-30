@@ -57,4 +57,10 @@ export const StyledCRUDProducts = styled.div`
       color: ${violeta};
     }
   }
+
+  @media (max-width: 858px) {
+    .fas{
+      font-size:1.5rem;
+    }
+  }
 `;

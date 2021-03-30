@@ -88,6 +88,11 @@ export const ADD_USER = gql`
     $password: String!
     $nlsuscribe: Boolean!
     $isGmail: Boolean!
+    $city: String!
+    $country: String!
+    $addressnumber: Int!
+    $street: String!
+    $postcode: Int!
   ) {
     createUser(
       firstName: $firstName
@@ -98,6 +103,11 @@ export const ADD_USER = gql`
       password: $password
       nlsuscribe: $nlsuscribe
       isGmail: $isGmail
+      country: $country
+      city: $city
+      street: $street
+      addressnumber: $addressnumber
+      postcode: $postcode
     ) {
       userName
     }

@@ -17,6 +17,7 @@ export const StyledCRUDUsers = styled.div`
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: ${blanco};
+  
   ul li {
     width: 100%;
     display: flex;
@@ -72,5 +73,35 @@ export const StyledCRUDUsers = styled.div`
 
   .clientSpan {
     background-color: rgba(255, 0, 0, 0.6);
+  }
+  p.username,
+  p.email,
+  p.isAdmin {
+    display: none;
+  }
+
+  @media (max-width: 858px) {
+    ul li { 
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 5vw;
+      grid-template-rows: auto;
+        padding:5vw;
+      span{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .titles {
+      display: none;
+    }
+    p.username,
+    p.email,
+    p.isAdmin {
+      display: inline;
+      font-weight: bold;
+    }
   }
 `;

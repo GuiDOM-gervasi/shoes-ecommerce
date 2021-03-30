@@ -46,7 +46,9 @@ const OrderTable = () => {
 
   const orders = data.viewOrders;
 
-  const states = ["reserved", "payed", "finish", "rejected"];
+  let states = ["reserved", "payed", "finish", "rejected"];
+  const currentIndex = states.findIndex((state) => state === currentState);
+  let possibleStates = states.slice(currentIndex - states.length);
 
   return (
     <StyledOrderTable>
@@ -76,29 +78,39 @@ const OrderTable = () => {
                 history.push("/product/" + order.finalproducts.product.id)
               }
             >
-              {" "}
+              <p className="product">Product</p>{" "}
               {order.finalproducts.product.name}{" "}
             </span>
             <span className="model">
-              {" "}
+              <p className="model">Model</p>{" "}
               {order.finalproducts.model.size +
                 " - " +
                 order.finalproducts.model.color}{" "}
             </span>
-            <span className="quantity">{order.quantity}</span>
-            <span className="price"> {order.price} </span>
+            <span className="quantity">
+              <p className="quantity">Quantity</p>
+              {order.quantity}
+            </span>
+            <span className="price">
+              <p className="price">Price</p>
+              {order.price}{" "}
+            </span>
             <select
               className="state"
               value={order.state}
               onChange={(e) => handleChange(e, order.id)}
+              disabled={order.state === "finish" || order.state === "rejected"}
             >
-              {states.map((state, i) => (
+              {possibleStates.map((state, i) => (
                 <option value={state} id={i.toString()}>
                   {state}
                 </option>
               ))}
             </select>
-            <span className="username"> {order.cart.user.userName} </span>
+            <span className="username">
+              <p className="username">Username</p>
+              {order.cart.user.userName}{" "}
+            </span>
           </li>
         ))}
       </ul>

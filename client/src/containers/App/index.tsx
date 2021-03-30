@@ -12,7 +12,6 @@ import AddCategory from "../../components/AddCategory";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
-// import EditCategory from "../../components/EditCategory";
 import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
@@ -29,6 +28,7 @@ import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
 import AboutUs from "../../components/AboutUs";
 
+import EditCategory from "../../components/EditCategory";
 
 require("dotenv").config();
 
@@ -75,6 +75,10 @@ function App() {
       <Route
         path="/admin/editProduct/:productId"
         component={isAdmin ? EditProduct : Login}
+      />
+      <Route
+        path="/admin/editCategory/:categoryId"
+        component={isAdmin ? EditCategory : Login}
       />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
