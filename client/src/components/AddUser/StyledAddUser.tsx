@@ -3,8 +3,8 @@ import { blanco, violeta, formWidth } from '../../containers/App/GlobalStyles'
 
 
 export const StyledAddUser = styled.div`
-  width: ${formWidth+15}vw;
-  height: 65vh;
+  width: ${formWidth}vw;
+  height: 72vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
@@ -17,7 +17,7 @@ export const StyledAddUser = styled.div`
   color: ${violeta};
 
   form {
-    height: 95%;
+    height: 92%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -25,20 +25,27 @@ export const StyledAddUser = styled.div`
     justify-content: space-around;
 
     div {
-      width: 80%;
+      width: 100%;
       height: min-content;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-
-    .line{
+    .div_nlsuscribe{
       display: flex;
       flex-direction: row;
-      jutify-content: flex-start
-      align-items: flex-start
+      justify-content: flex-start;
+      width: 60%;
+      margin-top:0.4rem;
+      margin-bottom:1rem;
+      input{
+        height: 20px;
+      }
+      label{
+        margin-left:-5em;
+        font-size: 19.5px;
+      }
     }
-
     input,
     textarea,
     select {
@@ -48,7 +55,8 @@ export const StyledAddUser = styled.div`
     input {
       border: none;
       border-bottom: 1px solid ${violeta};
-      width: 50%;
+      width: 60%;
+      font-size: 17px;
     }
     input::placeholder {
       color: ${violeta};
@@ -58,6 +66,18 @@ export const StyledAddUser = styled.div`
     .register{
       height: 3em
       background-color:${blanco};
+    }
+    .google_login{
+      height: 4rem;
+      width: 40%;
+      margin-top: 0.8rem;
+      background-color: black;
+      span{
+        margin-right: 1.2rem;
+        margin-left: -2rem;
+        font-size: large;
+        color:${violeta};
+      }
     }
   }
   @media (max-width: 858px) {

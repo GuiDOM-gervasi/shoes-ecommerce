@@ -156,7 +156,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 					<span className="span_password"></span>
 				</div>
 				<div className="div_nlsuscribe">
-					<input type="checkbox" name="nlsuscribe" onChange={handleChange} />
+					<input type="checkbox"  name="nlsuscribe" onChange={handleChange} />
 					<label htmlFor="nlsuscribe">Recibir newsletter</label>
 					<span className="span_nlsuscribe"></span>
 				</div>
@@ -172,7 +172,8 @@ export default function AddUser({ className }: AddUserAttributes) {
 					onSuccess={responseGoogle}
 					onFailure={responseGoogle}
 					buttonText="Register with Gmail"
-				/>
+					className='google_login'
+					/>
 			</form>
 		</StyledAddUser>
 	);
