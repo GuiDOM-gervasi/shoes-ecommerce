@@ -1,5 +1,6 @@
 import updatePaymentId from '#root/helpers/updatePaymentId';
 import accessEnv from '#root/helpers/accessEnv';
+import discountStock from '#root/helpers/discountStock'
 const client = accessEnv("CLIENT_ADDRESS")
 
 export default async function stripeCheckout(count:number, price:number, userId:any, stripe:any) {
@@ -26,6 +27,9 @@ export default async function stripeCheckout(count:number, price:number, userId:
     });
 
     let isPaymentSaved = await updatePaymentId(userId, session.payment_intent)
+
+    let stockStatus = await discountStock(session.payment_intent)
+    console.log(`stockStatus: `, stockStatus)
 
     return session;
 
