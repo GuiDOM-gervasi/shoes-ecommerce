@@ -3,8 +3,8 @@ import { blanco, violeta, formWidth } from '../../containers/App/GlobalStyles'
 
 
 export const StyledAddUser = styled.div`
-  width: ${formWidth}vw;
-  height: 60vh;
+  width: ${formWidth+15}vw;
+  height: 65vh;
   margin: 2rem auto;
   border: 2px solid black;
   border-radius: 15px;
@@ -17,7 +17,7 @@ export const StyledAddUser = styled.div`
   color: ${violeta};
 
   form {
-    height: 80%;
+    height: 95%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -32,6 +32,13 @@ export const StyledAddUser = styled.div`
       align-items: center;
     }
 
+    .line{
+      display: flex;
+      flex-direction: row;
+      jutify-content: flex-start
+      align-items: flex-start
+    }
+
     input,
     textarea,
     select {
@@ -41,13 +48,15 @@ export const StyledAddUser = styled.div`
     input {
       border: none;
       border-bottom: 1px solid ${violeta};
-      width: 80%;
+      width: 50%;
     }
     input::placeholder {
       color: ${violeta};
       opacity: 0.5;
+      font-size: 17px
     }
     .register{
+      height: 3em
       background-color:${blanco};
     }
   }
