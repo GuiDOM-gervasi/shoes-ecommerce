@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-import {GoogleLogin} from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
 import { validateChange, check, form, countries } from "../../helpers/validationUser";
 import { useHistory } from "react-router-dom"
-import { parse } from "graphql";
 interface AddUserAttributes {
-  className: String;
+	className: String;
 }
 
 export default function AddUser({ className }: AddUserAttributes) {
-  const history = useHistory();
-  const [
-    createUser,
-    { error: errorMutationUser },
-  ] = useMutation(ADD_USER);
-
+	const history = useHistory();
+	const [createUser, { error: errorMutationUser }] = useMutation(ADD_USER);
 
   const [form, setForm] = useState<form>({
     firstName: "",
@@ -41,9 +36,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-		console.log(form)
     let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe, isGmail, country, city, street, addressnumber, postcode} = form;
-		console.log(isGmail)
     try {
       await createUser({
         variables: {
@@ -87,35 +80,33 @@ export default function AddUser({ className }: AddUserAttributes) {
     });
   };
 
-  const handleChange = async (e: any) => {
+	const handleChange = async (e: any) => {
+		const error = check(e, form);
+		setForm(validateChange(e, form, error));
+	};
 
-  const error = check(e, form);
-    setForm(validateChange(e, form, error));
-  };
-	
-	const responseGoogle = async (response)=> {
-		console.log(response)
-		try{
-		setForm({
-			firstName: response.profileObj.givenName,
-			lastName: response.profileObj.familyName,
-			userName: response.profileObj.name,
-			isAdmin: false,
-			email: response.profileObj.email,
-			password: "",
-      city: "",
-      country: "",
-      street:"",
-      addressnumber:"",
-      postcode:"",
-			nlsuscribe: false,
-			isGmail:true,
-			error: false,
-		})
-		}catch(e){
-			alert("Su cuenta de Google no es Valida")
+	const responseGoogle = async (response) => {
+		try {
+			setForm({
+				firstName: response.profileObj.givenName,
+				lastName: response.profileObj.familyName,
+				userName: response.profileObj.name,
+				isAdmin: false,
+				email: response.profileObj.email,
+        password: "",
+        city: "",
+        country: "",
+        street:"",
+        addressnumber:"",
+        postcode:"",
+				nlsuscribe: false,
+				isGmail: true,
+				error: false,
+			});
+		} catch (e) {
+			alert("Su cuenta de Google no es Valida");
 		}
-	}
+	};
 
   return (
     <StyledAddUser>
@@ -231,9 +222,20 @@ export default function AddUser({ className }: AddUserAttributes) {
           <span className="span_nlsuscribe"></span>
         </div>
 
-        <input className="boton" type="submit" value="Registrarse" disabled={form.error} />
-				<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Register with Gmail"/>
-      </form>
-    </StyledAddUser>
-  );
+				<input
+					className="boton"
+					type="submit"
+					value="Register"
+					disabled={form.error}
+				/>
+				<GoogleLogin
+					clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com"
+					onSuccess={responseGoogle}
+					onFailure={responseGoogle}
+					buttonText="Register with Gmail"
+					className='google_login'
+					/>
+			</form>
+		</StyledAddUser>
+	);
 }

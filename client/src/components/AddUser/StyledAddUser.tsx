@@ -24,11 +24,26 @@ export const StyledAddUser = styled.div`
     justify-content: space-around;
 
     div {
-      width: 80%;
+      width: 100%;
       height: min-content;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+    .div_nlsuscribe{
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 60%;
+      margin-top:0.4rem;
+      margin-bottom:1rem;
+      input{
+        height: 20px;
+      }
+      label{
+        margin-left:-5em;
+        font-size: 19.5px;
+      }
     }
     .div_postcode,
     .div_addressnumber {
@@ -50,14 +65,29 @@ export const StyledAddUser = styled.div`
     input {
       border: none;
       border-bottom: 1px solid ${violeta};
-      width: 80%;
+      width: 60%;
+      font-size: 17px;
     }
     input::placeholder {
       color: ${violeta};
       opacity: 0.5;
+      font-size: 17px
     }
-    .register {
-      background-color: ${blanco};
+    .register{
+      /*height: 3em*/
+      background-color:${blanco};
+    }
+    .google_login{
+      height: 4rem;
+      width: 40%;
+      margin-top: 0.8rem;
+      background-color: black;
+      span{
+        margin-right: 1.2rem;
+        margin-left: -2rem;
+        font-size: large;
+        color:${violeta};
+      }
     }
   }
   @media (max-width: 858px) {
