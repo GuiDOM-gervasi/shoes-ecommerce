@@ -10,6 +10,7 @@ const addToCartResolver = async (
 		where: {
 			finalproductId,
 			cartId,
+      state: 'reserved'
 		},
 		defaults: {
 			finalproductId,

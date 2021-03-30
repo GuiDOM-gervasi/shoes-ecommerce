@@ -51,6 +51,8 @@ const startServer = async () => {
   app.use(cookieParser());
   
   app.get('/status', async (req, res) => {
+    let stockStatus = await discountStock('pi_1IahZLKvrKT0hMD34qDkFlA3')
+    console.log(`stockStatus: `, stockStatus)
     res.json({status:'ok'})
   })
   

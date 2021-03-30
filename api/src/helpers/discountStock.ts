@@ -8,7 +8,7 @@ const discountStock = async (paymentId: any) => {
       where: {
         paymentId: paymentId,
       },
-      include: [CartProduct as any, FinalProduct as any],
+      include:[{model: CartProduct as any , include: FinalProduct as any}],
     });
 
     let newStock = 0;
@@ -20,8 +20,9 @@ const discountStock = async (paymentId: any) => {
     };
 
     for (let i = 0; i < cart.cartproducts.length; i++) {
-      newStock = cart.finalproducts[i].stock - cart.cartproducts[i].quantity;
-      id = cart.finalproducts[i].id;
+      console.log(`cart.cartproducts`, cart.cartproducts)
+      newStock = cart.cartproducts[i].finalproducts.stock - cart.cartproducts[i].quantity;
+      id = cart.cartproducts[i].finalproducts.id;
       status.ids.push(id);
       newStock < 1 ? status.stock.push(false) : status.stock.push(true);
       await FinalProduct.update({ stock: newStock }, { where: { id: id } });
