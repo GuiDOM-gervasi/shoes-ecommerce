@@ -11,7 +11,7 @@ export const StyledCatalogue = styled.div`
     height: ${productWidth}vw;
     object-position: 20% 90%;
     object-fit: cover;
-    transition: all 300ms ease;
+    transition: all 500ms ease;
 
     &:hover {
       /* transform: scale(1.05); */
