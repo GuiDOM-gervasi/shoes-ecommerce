@@ -94,9 +94,9 @@ export default function ProductDetail({ match }: any) {
             },
           });
         }
-        alert("Producto añadido al carrito");
+        alert("Product successfully added to your cart");
       } else {
-        alert("No queda stock de ese modelo");
+        alert("This model is out of stock");
       }
     },
   });
@@ -175,7 +175,7 @@ export default function ProductDetail({ match }: any) {
             (document.getElementById(
               "addToCart"
             ) as HTMLInputElement).disabled = true;
-            noStock.innerHTML = "No tenemos stock en ese color y talle";
+            noStock.innerHTML = "No stock left with this size and color";
           }
         }
       }
@@ -296,7 +296,7 @@ export default function ProductDetail({ match }: any) {
               id="addToCart"
               onClick={() => handleClick()}
             >
-              Agregar al carrito
+              Add to cart
             </button>
             <div id="noStock"></div>
           </div>
@@ -307,7 +307,7 @@ export default function ProductDetail({ match }: any) {
           )}
         </div>
         <div className="related">
-          <h3>Relacionados</h3>
+          <h3>Related products</h3>
           <div className="photo">
             <ul>
               {similProducts?.productForCategory?.map((item, i) =>

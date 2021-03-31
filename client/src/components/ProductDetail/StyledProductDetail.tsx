@@ -38,17 +38,17 @@ export const StyledProductDetail = styled.div`
       cursor: pointer;
     }
   }
-
+  .botonInvertido{
+    text-transform:capitalize;
+  }
   .photoMain {
-    width: 45vw;
+    width: 35vw;
+    height: 35vw;
     object-position: 20% 90%;
     object-fit: cover;
     margin: 0 2rem 2rem 0;
     position: relative;
     top: 2.5rem;
-  }
-  .photoMain {
-    height: 45vw;
   }
   .photoDetail {
     width: 10vw;
