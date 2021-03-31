@@ -19,7 +19,6 @@ export default function EditStock({ match }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			console.log("HOLAAA")
 			await editStock({
 				variables: {
 					productId,
