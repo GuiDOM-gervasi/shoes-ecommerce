@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART } from "../graphql/mutations";
+import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART, CREATE_CART } from "../graphql/mutations";
 import { LocalPersistence, METHODS } from "../helpers/localPersistence";
-import { GET_CART_SIMPLE} from "../graphql/queries";
+import { GET_CART_SIMPLE } from "../graphql/queries";
 
 const AuthContext = React.createContext(null);
 
@@ -26,8 +26,8 @@ export function AuthProvider(props) {
         console.log("Se cargo el item")
       }
     },
-    onError: () => {
-
+    onError: (err) => {
+      console.log(err)
     }
   })
 
@@ -57,6 +57,10 @@ export function AuthProvider(props) {
       }
       })
 
+    const [createCart] = useMutation(
+        CREATE_CART
+    );
+
   /********************** Logica para cart sync *******************************/
 
   const [getLogin] = useMutation(LOGIN_USER, {
@@ -68,11 +72,18 @@ export function AuthProvider(props) {
         setUser(data.loginUser);
         setUserId(data.loginUser.id);
         data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
-        getCart({variables: {
-          userId: data.loginUser.id,
-          status: "reserved"
-        }
-        });
+        createCart({
+          variables :{
+            userId: data.loginUser.id,
+            state:'reserved'
+          }
+        }).then(()=>{
+          getCart({variables: {
+            userId: data.loginUser.id,
+            status: "reserved"
+          }
+          });
+        })
       }
     },
     onError:(error) => {
@@ -86,6 +97,7 @@ export function AuthProvider(props) {
         LocalPersistence("access-token", METHODS.remove);
         LocalPersistence("refresh-token", METHODS.remove);
         LocalPersistence("user", METHODS.remove);
+        LocalPersistence("cart", METHODS.remove);
         setUser(false);
         setUserId("0");
         setIsAdmin(false);
