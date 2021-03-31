@@ -26,14 +26,17 @@ export const StyledProductDetail = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr auto;
   }
-  .reviewsSection{
+  .reviewsSection {
     grid-column: 1 / 3;
   }
   .imagenes {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     width: min-content;
-    padding-left:10vw;
+    padding-left: 10vw;
+    ul li{
+      cursor: pointer;
+    }
   }
 
   .photoMain {
@@ -72,7 +75,7 @@ export const StyledProductDetail = styled.div`
     grid-template-columns: 1rem 1fr 1fr;
     /* grid-rows-desc : void  back desc price button*/
     grid-template-rows: 2rem 17rem 4rem 10rem 1fr;
-    padding-right:10vw;
+    padding-right: 10vw;
 
     h1 {
       grid-row: 2 / 3;
