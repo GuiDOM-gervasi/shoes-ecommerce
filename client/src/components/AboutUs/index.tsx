@@ -12,8 +12,11 @@ import Nico from "./Us/Nico.jpg"
 export default function AboutUs () {
     return (
         <StyledAboutUs>
-        <h2>About Us</h2>
-				<p>Hi, we are a group of developers finishing the Henry BootCamp. We hope you enjoy this project, that we make to show ower skills.</p>
+        <div className='mainText'>
+          <h2>About Us</h2>
+          <p>Hi!👋, we are a group of developers👨‍💻 finishing the Henry BootCamp. <br/>This is our final project.
+            We hope you enjoy it as much as we enjoyed making it. 😉</p>
+        </div>
 				<div className='about_coders_container'>
 					<div className='about_coder'>
 						<h3>Cristian Rojas</h3>
@@ -99,6 +102,10 @@ export default function AboutUs () {
 						</div>
 					</div>
 				</div>
+        <footer>
+            <span>Henry FT09 Grupo 01</span>
+            <span> <a href='mailto:ft09ec@gmail.com'> ft09ec@gmail.com </a></span>
+          </footer>
 			</StyledAboutUs>
     )
 }

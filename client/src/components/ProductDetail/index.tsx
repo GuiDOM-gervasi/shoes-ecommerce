@@ -206,7 +206,6 @@ export default function ProductDetail({ match }: any) {
   };
 
   const imageSwap = (e) => {
-    console.log(e.target.src)
     let photoMain = document.getElementById("photoMain") as HTMLImageElement;
     let oldMain = photoMain.src;
     let newMain = e.target.src;
