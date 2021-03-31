@@ -165,11 +165,11 @@ const typeDefs = gql`
       password: String!
       isGmail: Boolean
       nlsuscribe: Boolean
-      city: String!
-      country: String!
-      addressnumber: Int!
-      street: String!
-      postcode: Int!
+      city: String
+      country: String
+      addressnumber: Int
+      street: String
+      postcode: Int
     ): User!
 
     deleteCategory(id: String!): Category

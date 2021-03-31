@@ -74,31 +74,31 @@ export class User extends Model<UserAttributes> {
   password!: string;
 
   @Column({
-    allowNull: false,
+    allowNull: true,
     type: DataType.STRING,
   })
   country: string;
 
   @Column({
-    allowNull: false,
+    allowNull: true,
     type: DataType.STRING,
   })
   city: string;
 
   @Column({
-    allowNull: false,
+    allowNull: true,
     type: DataType.STRING,
   })
   street: string;
 
   @Column({
-    allowNull: false,
+    allowNull: true,
     type: DataType.INTEGER,
   })
   addressnumber: number;
 
   @Column({
-    allowNull: false,
+    allowNull: true,
     type: DataType.INTEGER,
   })
   postcode: number;
