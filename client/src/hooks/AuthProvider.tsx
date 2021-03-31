@@ -148,6 +148,8 @@ export function AuthProvider(props) {
           icon: "success",
           title: firstName? "Welcome " + firstName + "!":"Welcome!" ,
           text: "Good to see you again.",
+          showConfirmButton: false,
+          timer: 1500,
         })
       }
     });
