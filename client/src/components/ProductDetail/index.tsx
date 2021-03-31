@@ -16,6 +16,7 @@ import Loader from "../Loader";
 import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
 import Reviews from "../../containers/Reviews";
+import Swal from "sweetalert2";
 
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
@@ -94,9 +95,19 @@ export default function ProductDetail({ match }: any) {
             },
           });
         }
-        alert("Product successfully added to your cart");
+        Swal.fire({
+          icon: "success",
+          title: "Great choice!",
+          text: "Product successfully added to your cart",
+          showConfirmButton: false,
+          timer: 2000,
+        });
       } else {
-        alert("This model is out of stock");
+        Swal.fire({
+          icon: "error",
+          title: "Sorry!",
+          text: "This model is out of stock"
+        });
       }
     },
   });
@@ -115,21 +126,21 @@ export default function ProductDetail({ match }: any) {
       if (categories[0]) {
         getSimils({ variables: { name: categories[0].name } });
       }
-      if(modelsState.colors.length > 1){
-        findStock()}
+      if (modelsState.colors.length > 1) {
+        findStock();
+      }
     }
   }, [mainProduct]);
 
-  
   // const [stock, setStock] = React.useState(false);
   const [modelsState, setModelsState] = React.useState({
     colors: [],
     sizes: [],
   });
-  
+
   let colors = [];
   let sizes = [];
-  
+
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
     return <div>`Error! ${error?.message}`</div>;
@@ -211,14 +222,19 @@ export default function ProductDetail({ match }: any) {
     let newMain = e.target.src;
     photoMain.src = newMain;
     e.target.src = oldMain;
-  }
+  };
 
   return (
     <StyledProductDetail>
       <div className="container">
         <div className="fondoVioleta"></div>
         <div className="imagenes">
-          <img id="photoMain" className="photoMain" src={muestraimg || photo} alt={name} />
+          <img
+            id="photoMain"
+            className="photoMain"
+            src={muestraimg || photo}
+            alt={name}
+          />
           <ul>
             <li onClick={(e) => imageSwap(e)}>
               <img
