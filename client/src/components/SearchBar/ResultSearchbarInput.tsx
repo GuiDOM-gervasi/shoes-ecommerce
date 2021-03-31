@@ -18,5 +18,6 @@ export function ResultSearchBarInput({ data, handleClick }) {
           })
         : null}
     </div>
+   
   );
 }
