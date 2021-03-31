@@ -59,6 +59,7 @@ export default function ProductDetail({ match }: any) {
       productId,
     },
   });
+
   const {
     data: reviewData,
     loading: reviewLoading,
@@ -73,6 +74,7 @@ export default function ProductDetail({ match }: any) {
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
+
   const [
     finalproducts,
     { data: finalData, loading: finalLoading, error: finalError },
@@ -132,7 +134,8 @@ export default function ProductDetail({ match }: any) {
   
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
-    return <div>`Error! ${error?.message}`</div>;
+  return <div>`Error! ${error?.message}`</div>;
+  
   const {
     name,
     brand,
