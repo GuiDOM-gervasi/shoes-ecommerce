@@ -3,7 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
-import { validateChange, check, form, countries } from "../../helpers/validationUser";
+import { validateChange, check, form } from "../../helpers/validationUser";
 import { useHistory } from "react-router-dom"
 interface AddUserAttributes {
 	className: String;
@@ -20,11 +20,6 @@ export default function AddUser({ className }: AddUserAttributes) {
     isAdmin: false,
     email: "",
     password: "",
-    city: "",
-    country: "",
-    street:"",
-    addressnumber:"",
-    postcode:"",
     nlsuscribe: false,
 		isGmail:false,
     error: true,
@@ -36,7 +31,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe, isGmail, country, city, street, addressnumber, postcode} = form;
+    let { firstName, lastName, userName, isAdmin, email, password, nlsuscribe, isGmail} = form;
     try {
       await createUser({
         variables: {
@@ -46,11 +41,6 @@ export default function AddUser({ className }: AddUserAttributes) {
           isAdmin,
           email,
           password,
-          country,
-          city, 
-          street, 
-          addressnumber: parseInt(addressnumber), 
-          postcode: parseInt(postcode),
 					nlsuscribe: nlsuscribe && true,
 					isGmail:isGmail,
         },
@@ -69,11 +59,11 @@ export default function AddUser({ className }: AddUserAttributes) {
       isAdmin: false,
       email: "",
       password: "",
-      city: "",
-      country: "",
-      street:"",
-      addressnumber:"",
-      postcode:"",
+      // city: "",
+      // country: "",
+      // street:"",
+      // addressnumber:"",
+      // postcode:"",
       nlsuscribe: false,
 			isGmail:false,
       error: true,
@@ -94,11 +84,11 @@ export default function AddUser({ className }: AddUserAttributes) {
 				isAdmin: false,
 				email: response.profileObj.email,
         password: "",
-        city: "",
-        country: "",
-        street:"",
-        addressnumber:"",
-        postcode:"",
+        // city: "",
+        // country: "",
+        // street:"",
+        // addressnumber:"",
+        // postcode:"",
 				nlsuscribe: false,
 				isGmail: true,
 				error: false,
@@ -161,7 +151,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           />
           <span className="span_password"></span>
         </div>
-        <div className="div_country">
+        {/* <div className="div_country">
           <select name="country" onChange={handleChange}>
             <option>CHOOSE YOUR COUNTRY</option>
             {countries.map(country => (
@@ -211,7 +201,7 @@ export default function AddUser({ className }: AddUserAttributes) {
           />
           <label htmlFor="postcode">Postcode</label>
           <span className="span_postcode"></span>
-        </div>
+        </div> */}
         <div className="div_nlsuscribe">
           <input
             type="checkbox"

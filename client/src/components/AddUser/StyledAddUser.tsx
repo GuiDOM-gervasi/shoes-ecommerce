@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { blanco, violeta, formWidth } from "../../containers/App/GlobalStyles";
 
 export const StyledAddUser = styled.div`
-  width: ${formWidth}vw;
+  width: ${formWidth+10}vw;
   height: 75vh;
   margin: 2rem auto;
   border: 2px solid black;
@@ -33,16 +33,18 @@ export const StyledAddUser = styled.div`
     .div_nlsuscribe{
       display: flex;
       flex-direction: row;
-      justify-content: flex-start;
+      justify-content: center;
       width: 60%;
       margin-top:0.4rem;
       margin-bottom:1rem;
       input{
         height: 20px;
+        max-width: 2rem;
+        
       }
       label{
-        margin-left:-5em;
         font-size: 19.5px;
+        text-align: center;
       }
     }
     .div_postcode,
@@ -85,12 +87,20 @@ export const StyledAddUser = styled.div`
       span{
         margin-right: 1.2rem;
         margin-left: -2rem;
-        font-size: large;
+        font-size: 100%;
         color:${violeta};
       }
     }
+
+    span{
+      color: red;
+      max-width: 70%;
+      text-align: center
+    }
   }
-  @media (max-width: 858px) {
+
+
+  @media (max-width: 600px) {
     width: 90vw;
     height: 80vh;
     form {
@@ -100,6 +110,13 @@ export const StyledAddUser = styled.div`
       .boton {
         width: 80%;
       }
+      span{
+        font-size: 12px
+      }
+      .google_login{
+        width: 70%;
+      }
     }
+
   }
 `;

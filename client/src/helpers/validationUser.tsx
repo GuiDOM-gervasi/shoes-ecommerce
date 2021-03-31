@@ -7,11 +7,11 @@ export interface form {
   password: string;
   nlsuscribe: boolean;
 	isGmail: boolean;
-  city: string;
-  country: string;
-  street: string;
-  addressnumber: string;
-  postcode: string;
+  // city: string;
+  // country: string;
+  // street: string;
+  // addressnumber: string;
+  // postcode: string;
   error: boolean;
 }
 
