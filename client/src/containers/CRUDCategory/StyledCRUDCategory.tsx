@@ -25,10 +25,18 @@ export const StyledCRUDCategory = styled.div`
     margin: 1rem 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     span,
+    h5,
     div {
       width: 20%;
       display: flex;
       justify-content: center;
+    }
+  }
+  .deleted {
+    margin-top: 3rem;
+    text-align: center;
+    h4 {
+      margin-bottom: 1rem;
     }
   }
   .addButton {

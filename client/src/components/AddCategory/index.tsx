@@ -3,15 +3,19 @@ import { useMutation } from "@apollo/client";
 import { StyledAddCategory } from "./StyledAddCategory";
 import { ADD_CATEGORY } from "../../graphql/mutations";
 import { validateChange, check, formCategory } from "../../helpers/validation";
+import { GET_CATEGORIES } from "../../graphql/queries";
+import { useHistory } from "react-router";
 
 interface AddCategoryAttributes {
   className: String;
 }
 
 export default function AddCategory({ className }: AddCategoryAttributes) {
-  const [createCateogry, { error: errorMutationModel }] = useMutation(
-    ADD_CATEGORY
-  );
+  const history = useHistory();
+  const [createCategory, { error: errorMutationModel }] = useMutation(
+    ADD_CATEGORY, {
+      refetchQueries: [{ query: GET_CATEGORIES }]
+    });
   const [form, setForm] = useState<formCategory>({
     name: "",
   });
@@ -19,12 +23,13 @@ export default function AddCategory({ className }: AddCategoryAttributes) {
     e.preventDefault();
     let { name } = form;
     try {
-      await createCateogry({
+      await createCategory({
         variables: {
           name,
         },
       });
       alert("Categoría agregada");
+      history.push("/admin/category");
     } catch (err) {
       console.log(err);
     } finally {

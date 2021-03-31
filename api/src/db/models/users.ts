@@ -65,12 +65,43 @@ export class User extends Model<UserAttributes> {
     }
   })
   email!: string;
+  
 
   @Column({
     allowNull: false,
     type: DataType.STRING,
   })
   password!: string;
+
+  @Column({
+    allowNull: true,
+    type: DataType.STRING,
+  })
+  country: string;
+
+  @Column({
+    allowNull: true,
+    type: DataType.STRING,
+  })
+  city: string;
+
+  @Column({
+    allowNull: true,
+    type: DataType.STRING,
+  })
+  street: string;
+
+  @Column({
+    allowNull: true,
+    type: DataType.INTEGER,
+  })
+  addressnumber: number;
+
+  @Column({
+    allowNull: true,
+    type: DataType.INTEGER,
+  })
+  postcode: number;
 
   @Column({
     allowNull: false,

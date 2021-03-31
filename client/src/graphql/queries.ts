@@ -89,6 +89,15 @@ export const GET_CATEGORIES = gql`
   }
 `;
 
+export const GET_DELETED_CATEGORIES = gql`
+  query deletedCategories{
+    deletedCategories{
+      id
+      name
+    }
+  }
+`;
+
 export const GET_BRANDS = gql`
   query Brands {
     brand {
