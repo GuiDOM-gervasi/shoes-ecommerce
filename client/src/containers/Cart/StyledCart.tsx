@@ -43,7 +43,7 @@ export const StyledCart = styled.div`
       }
 
       .number-input {
-        border: 2px solid #ddd;
+        // border: 1px solid #ddd;
         display: flex;
         flex-direction: row;
       }
@@ -61,7 +61,7 @@ export const StyledCart = styled.div`
         align-items: center;
         justify-content: center;
         width: 3rem;
-        height: 3rem;
+        // height: 3rem;
         cursor: pointer;
         margin: 0;
         position: relative;
@@ -100,11 +100,12 @@ export const StyledCart = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
+    max-height: 6rem;
     flex-direction: column;
     background-color: #c2c0c0;
     align-items: center;
     font-weight: 500;
-    padding: 2rem;
+    padding: 1rem;
     height: 9rem;
     justify-content: space-between;
     button {

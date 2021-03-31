@@ -137,7 +137,12 @@ const Cart = () => {
                 alt={`photoDetail 3 - ${product.name}`}
               />
               <h4>{product.name}</h4>
-              <p>Price: ${product.price}</p>
+              <p>
+                size: <strong>{' ' + cartProductItem.finalproducts.model.size}</strong>
+                {'     '}
+                color:<strong>{' ' + cartProductItem.finalproducts.model.color} </strong> 
+                </p>
+              <p>Price: <strong>${product.price}</strong></p>
               <button
                 className="buttonDelete"
                 onClick={() => {console.log(cartProductItem.finalproducts);handleDelete(cartProductItem.finalproducts.id.toString())}}
@@ -171,7 +176,7 @@ const Cart = () => {
                 alt={`photoDetail 3 - ${product.name}`}
               />
               <h4>{product.name}</h4>
-              <p>Price: {product.price}</p>
+              <p>Price: <strong>${product.price}</strong></p>
               <button
                 className="buttonDelete"
                 onClick={() => {console.log(cartProductItem);handleDelete(cartProductItem.id.toString())}}
