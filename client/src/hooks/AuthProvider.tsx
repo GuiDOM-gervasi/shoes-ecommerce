@@ -1,8 +1,9 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER, LOGOUT_USER } from "../graphql/mutations";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART, CREATE_CART } from "../graphql/mutations";
 import { LocalPersistence, METHODS } from "../helpers/localPersistence";
 import Swal from "sweetalert2";
+import { GET_CART_SIMPLE } from "../graphql/queries";
 
 const AuthContext = React.createContext(null);
 
@@ -11,10 +12,57 @@ export function AuthProvider(props) {
   if (!existeLocal) {
     localStorage.setItem("cart", JSON.stringify({ guess: true, items: [] }));
   }
+
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);
   const [firstName, setfirstName] = useState("");
+
+  
+  /********************** Logica para cart sync *******************************/
+
+  const [addToCart] = useMutation(ADD_TO_CART,{
+    onCompleted: (data) => {
+      if(data){
+        console.log("Se cargo el item")
+      }
+    },
+    onError: (err) => {
+      console.log(err)
+    }
+  })
+
+  const [getCart] = useLazyQuery(GET_CART_SIMPLE,{
+    onCompleted: (data) => {
+      const cartLocal = JSON.parse(localStorage.getItem("cart"))
+      if(cartLocal.items.length > 0){
+        return Promise.all([...cartLocal.items.map((item) => addToCart({
+          variables: {
+            finalproductId: item.id,
+            cartId: data.cartSimple.id,
+            price: parseFloat(item.product.price),
+            quantity: parseInt(item.quantity),
+          },
+        }))]).then(()=> {
+          console.log("Sync with cart");
+        }).catch((err)=>{
+          console.log(err)
+        })
+      }else{
+        console.log("No habia nada en el carrito")
+      }
+      
+      },
+      onError: (err) => {
+        console.log(err)
+      }
+      })
+
+    const [createCart] = useMutation(
+        CREATE_CART
+    );
+
+  /********************** Logica para cart sync *******************************/
 
   const [getLogin] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
@@ -34,6 +82,18 @@ export function AuthProvider(props) {
         setUserId(data.loginUser.id);
         setfirstName(data.loginUser.firstName);
         data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
+        createCart({
+          variables :{
+            userId: data.loginUser.id,
+            state:'reserved'
+          }
+        }).then(()=>{
+          getCart({variables: {
+            userId: data.loginUser.id,
+            status: "reserved"
+          }
+          });
+        })
       }
     },
     onError: (error) => {
@@ -52,6 +112,7 @@ export function AuthProvider(props) {
         LocalPersistence("access-token", METHODS.remove);
         LocalPersistence("refresh-token", METHODS.remove);
         LocalPersistence("user", METHODS.remove);
+        LocalPersistence("cart", METHODS.remove);
         setUser(false);
         setUserId("0");
         setIsAdmin(false);
@@ -74,6 +135,7 @@ export function AuthProvider(props) {
   }, []);
 
   function login(email: string, password: string, cb) {
+
     getLogin({
       variables: {
         email,
@@ -92,6 +154,7 @@ export function AuthProvider(props) {
   }
 
   function logout(cb) {
+
     logoutUser({
       variables: {
         id: userId,
