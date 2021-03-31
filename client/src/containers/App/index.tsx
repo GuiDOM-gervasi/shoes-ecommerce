@@ -19,7 +19,6 @@ import OrderTable from "../OrderTable";
 import Checkout from "../../components/Checkout";
 // import Loader from "../../components/Loader";
 import AddReview from "../../components/AddReview";
-import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
 import Success from "../../components/Success";
 import Cancel from "../../components/Cancel";
@@ -89,11 +88,6 @@ function App() {
       />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />
-      <Route
-        exact
-        path="/admin/editStock/:productId/:modelId"
-        component={EditStock}
-      />
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
     </div>
