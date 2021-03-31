@@ -34,6 +34,7 @@ export const StyledCatalogue = styled.div`
 
     li {
       position: relative;
+      overflow:hidden;
     }
     a {
       text-decoration: none;
@@ -41,9 +42,9 @@ export const StyledCatalogue = styled.div`
       text-align: center;
       img {
         &:hover {
-          -webkit-filter: blur(2px);
-          filter: blur(2px);
+          transform: scale(1.3);
           transition: all 300ms ease;
+          
         }
       }
     }
