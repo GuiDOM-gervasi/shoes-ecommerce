@@ -14,6 +14,7 @@ export function AuthProvider(props) {
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [firstName, setfirstName] = useState("");
 
   const [getLogin] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
@@ -31,6 +32,7 @@ export function AuthProvider(props) {
         LocalPersistence("user", METHODS.write, data.loginUser);
         setUser(data.loginUser);
         setUserId(data.loginUser.id);
+        setfirstName(data.loginUser.firstName);
         data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
       }
     },
@@ -82,8 +84,8 @@ export function AuthProvider(props) {
         cb();
         Swal.fire({
           icon: "success",
-          text: "Good to see you again!",
-          title: "Welcome Toni",
+          title: firstName? "Welcome " + firstName + "!":"Welcome!" ,
+          text: "Good to see you again.",
         })
       }
     });

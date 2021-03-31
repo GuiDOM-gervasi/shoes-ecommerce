@@ -111,6 +111,7 @@ export const LOGIN_USER = gql`
       isAdmin
       accessToken
       refreshToken
+      firstName
     }
   }
 `;

@@ -36,7 +36,7 @@ const loginUser = async (parent: any, args: any , context: any , info: any ) =>{
     return null
   }
 
-  return { id: aux.id, isAdmin: aux.isAdmin, accessToken, refreshToken };
+  return { id: aux.id, isAdmin: aux.isAdmin, accessToken, refreshToken, firstName:aux.firstName };
 }
 
 export default loginUser
