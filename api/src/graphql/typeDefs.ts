@@ -24,6 +24,7 @@ const typeDefs = gql`
     name: String!
     description: String
     price: Float
+    discount: Float
     muestraimg: String
     detalleimg1: String
     detalleimg2: String
@@ -206,6 +207,8 @@ const typeDefs = gql`
       addressnumber: Float,
       postcode: Float,
       ): String
+
+    setOffers(categoryId: String!, discount: Float!):String
   }
 
   type Query {
