@@ -86,6 +86,7 @@ export default function ProductDetail({ match }: any) {
           const itemLocal = { ...finalData.finalproducts[0], quantity: 1 };
           cartLocal.items.push(itemLocal);
           localStorage.setItem("cart", JSON.stringify(cartLocal));
+
         } else {
           addToCart({
             variables: {
