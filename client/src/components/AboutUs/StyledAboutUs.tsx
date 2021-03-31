@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {  violeta, negro } from "../../containers/App/GlobalStyles";
+import {  violeta, negro, blanco } from "../../containers/App/GlobalStyles";
 export const StyledAboutUs = styled.div`
    
 	h2 {
@@ -20,7 +20,16 @@ export const StyledAboutUs = styled.div`
 		text-transform: uppercase;
 		text-align: center;
 	}
-	
+	.mainText{
+    background-color: ${violeta};
+    color:${blanco};
+    padding: 2rem;
+
+    p{
+      margin: auto;
+      max-width: 40rem;
+    }
+  }
 	.about_coders_container {
 		display: flex;
 		justify-content: space-around;
@@ -63,6 +72,21 @@ export const StyledAboutUs = styled.div`
 			}
 		}
 	}
+
+  footer{
+    background-color: ${violeta};
+    width: 100%;
+    height: 4rem;
+    margin: 0;
+    color:${blanco};
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    a{
+      text-decoration: none;
+      color:${blanco};
+    }
+  }
 	@media (max-width: 900px) {
 		.about_coders_container {
 			flex-direction: column;
