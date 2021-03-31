@@ -35,15 +35,14 @@ export function AuthProvider(props) {
     onCompleted: (data) => {
       const cartLocal = JSON.parse(localStorage.getItem("cart"))
       if(cartLocal.items.length > 0){
-        Promise.all([...cartLocal.items.map(item => addToCart({
+        return Promise.all([...cartLocal.items.map((item) => addToCart({
           variables: {
             finalproductId: item.id,
             cartId: data.cartSimple.id,
-            price: item.product.price,
-            quantity: `${item.product.quantity}`,
+            price: parseFloat(item.product.price),
+            quantity: parseInt(item.quantity),
           },
         }))]).then(()=> {
-          localStorage.removeItem("cart");
           console.log("Sync with cart");
         }).catch((err)=>{
           console.log(err)
