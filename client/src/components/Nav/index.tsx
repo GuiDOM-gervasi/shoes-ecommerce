@@ -66,8 +66,8 @@ export default function Nav() {
             <li onClick={() => handleCheck("/")} className="offers">
               <NavLink to="">Offers</NavLink>
             </li>
-            <li onClick={() => handleCheck("/")} className="aboutus">
-              <NavLink to="">About us</NavLink>
+            <li className="aboutus">
+              <NavLink to="/about">About us</NavLink>
             </li>
             {userId && userId !== "0" ? (
               <li onClick={handleClick} className="login">

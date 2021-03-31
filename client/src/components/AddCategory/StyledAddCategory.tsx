@@ -64,4 +64,12 @@ export const StyledAddCategory = styled.div`
       }
     }
   }
+  @media (max-width: 858px) {
+    width: 90vw;
+    form {
+      .addButton {
+        width: 40%;
+      }
+    }
+  }
 `;
