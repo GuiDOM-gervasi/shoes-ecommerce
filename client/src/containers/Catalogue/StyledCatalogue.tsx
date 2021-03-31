@@ -11,7 +11,7 @@ export const StyledCatalogue = styled.div`
     height: ${productWidth}vw;
     object-position: 20% 90%;
     object-fit: cover;
-    transition: all 300ms ease;
+    transition: all 500ms ease;
 
     &:hover {
       /* transform: scale(1.05); */
@@ -34,6 +34,7 @@ export const StyledCatalogue = styled.div`
 
     li {
       position: relative;
+      overflow:hidden;
     }
     a {
       text-decoration: none;
@@ -41,9 +42,9 @@ export const StyledCatalogue = styled.div`
       text-align: center;
       img {
         &:hover {
-          -webkit-filter: blur(2px);
-          filter: blur(2px);
+          transform: scale(1.3);
           transition: all 300ms ease;
+          
         }
       }
     }

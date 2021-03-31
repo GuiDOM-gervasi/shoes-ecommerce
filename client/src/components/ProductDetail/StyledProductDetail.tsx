@@ -21,25 +21,29 @@ export const StyledProductDetail = styled.div`
 
   .container {
     background-color: ${blanco};
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr auto;
   }
-  .reviewsSection{
+  .reviewsSection {
     grid-column: 1 / 3;
   }
   .imagenes {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     width: min-content;
+    padding-left: 10vw;
+    ul li{
+      cursor: pointer;
+    }
   }
 
   .photoMain {
     width: 45vw;
     object-position: 20% 90%;
     object-fit: cover;
-    margin: 0 2rem 2rem 2rem;
+    margin: 0 2rem 2rem 0;
     position: relative;
     top: 2.5rem;
   }
@@ -71,6 +75,7 @@ export const StyledProductDetail = styled.div`
     grid-template-columns: 1rem 1fr 1fr;
     /* grid-rows-desc : void  back desc price button*/
     grid-template-rows: 2rem 17rem 4rem 10rem 1fr;
+    padding-right: 10vw;
 
     h1 {
       grid-row: 2 / 3;

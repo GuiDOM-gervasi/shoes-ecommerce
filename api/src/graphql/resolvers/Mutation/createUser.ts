@@ -9,7 +9,12 @@ const createUserResolver = async (parent: any,{
   email,
   password,
   nlsuscribe,
-	isGmail
+	isGmail,
+  country,
+  city,
+  addressnumber,
+  street,
+  postcode
 }: UserAttributes, context: any , info: any) =>{
 
     const hashPassword = await bcrypt.hash(password,5)
@@ -22,7 +27,12 @@ const createUserResolver = async (parent: any,{
       password: hashPassword,
       nlsuscribe,
 			isGmail,
-      count: 1
+      count: 1,
+      country,
+      city,
+      addressnumber,
+      street,
+      postcode,
      });
 
     return aux
