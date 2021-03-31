@@ -27,6 +27,7 @@ import Cancel from "../../components/Checkout/Cancel";
 import CRUDStock from "../CRUDStock";
 import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
+import Profile from "../../containers/Profile";
 
 require("dotenv").config();
 
@@ -89,6 +90,7 @@ function App() {
       />
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
+      <Route path="/profile" component={Profile} />
     </div>
   );
 }
