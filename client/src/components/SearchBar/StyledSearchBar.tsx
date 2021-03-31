@@ -13,44 +13,49 @@ export const StyledSearchBar = styled.div`
     background-color: #64dfdf;
     color: #f2f2f2;
   }
-  .contentResult{
-    margin: 1.4rem 0 0 0 ;
+  .contentResult {
+    margin: 1.4rem 0 0 0;
     position: absolute;
     display: flex;
     flex-direction: column;
     height: min-content;
     top: 2.5rem;
-    width:50vw;
+    width: 50vw;
   }
-  .contentResultItem{
+  .contentResult-inactive {
+    display: none;
+  }
+  .contentResultItem {
     position: relative;
     border: 1px solid #c4c4c4;
     z-index: 99;
     top: 100%;
     left: 0;
     right: 0;
-    img{
-      width:5vw;
-      height:5vw;
+    img {
+      width: 5vw;
+      height: 5vw;
       object-fit: cover;
-      margin:auto;
+      margin: auto;
     }
     div {
-    padding: 0.3rem 0.5rem;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    display: flex;
-      a, a:active, a:focus, a:link {
+      padding: 0.3rem 0.5rem;
+      cursor: pointer;
+      background-color: #f0f0f0;
+      display: flex;
+      a,
+      a:active,
+      a:focus,
+      a:link {
         text-decoration: none;
       }
-      &:hover{
-        color: #6930C3;
+      &:hover {
+        color: #6930c3;
       }
-      .name{
+      .name {
         width: 100%;
         color: #000;
       }
     }
   }
-
 `;

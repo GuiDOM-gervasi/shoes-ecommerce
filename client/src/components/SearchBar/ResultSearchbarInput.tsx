@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 export function ResultSearchBarInput({ data, handleClick }) {
   return (
@@ -8,7 +8,7 @@ export function ResultSearchBarInput({ data, handleClick }) {
             return (
               <div key={i} className="contentResultItem">
                 <div>
-                  <img src={item.muestraimg} alt="muestras"/>
+                  <img src={item.muestraimg} alt="muestras" />
                   <div className="name" id={item.id} onClick={handleClick}>
                     {item.name}
                   </div>
