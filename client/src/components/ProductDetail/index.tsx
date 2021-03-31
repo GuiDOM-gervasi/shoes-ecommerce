@@ -119,7 +119,7 @@ export default function ProductDetail({ match }: any) {
         getSimils({ variables: { name: categories[0].name } });
       }
       if(modelsState.colors.length > 1){
-        findStock()}
+        findStock(models)}
     }
   }, [mainProduct]);
 
@@ -156,7 +156,7 @@ export default function ProductDetail({ match }: any) {
     setModelsState({ ...modelsState, sizes });
   }
 
-  function findStock() {
+  function findStock(models) {
     const sizeSelect: any = document.querySelector("#size-select");
     const colorSelect: any = document.querySelector("#color-select");
     const noStock = document.querySelector("#noStock");
@@ -274,7 +274,7 @@ export default function ProductDetail({ match }: any) {
               className="botonInvertido"
               onChange={(e: any) => {
                 filterModels(e.target.value);
-                findStock();
+                findStock(models);
               }}
               id="color-select"
             >
@@ -285,7 +285,7 @@ export default function ProductDetail({ match }: any) {
               ))}
             </select>
             <select
-              onChange={() => findStock()}
+              onChange={() => findStock(models)}
               className="botonInvertido"
               id="size-select"
             >
