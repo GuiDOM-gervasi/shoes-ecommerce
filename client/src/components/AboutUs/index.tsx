@@ -24,7 +24,7 @@ export default function AboutUs () {
 							<img alt='profile' src={Cristian} />
 						</div>
 						<div className='about_social'>
-							<a href='https://www.linkedin.com/school/soyhenry/mycompany/' target='_blank' rel='noopener noreferrer'><i className="fab fa-linkedin-in"></i></a>
+							<a href='https://www.linkedin.com/in/cristian-rojas-1675a41b5/' target='_blank' rel='noopener noreferrer'><i className="fab fa-linkedin-in"></i></a>
 						</div>
 					</div>
 					<div className='about_coder'>
