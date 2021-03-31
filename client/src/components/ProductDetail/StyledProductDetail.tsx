@@ -211,6 +211,7 @@ export const StyledProductDetail = styled.div`
     }
 
     .imagenes {
+      padding-left: 0;
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       padding: 0.5rem;
@@ -262,7 +263,7 @@ export const StyledProductDetail = styled.div`
     .info {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
-
+      padding-right: 0;
       grid-template-columns: 10% 1fr 10%;
       grid-template-rows: 1rem 8rem 4rem 6rem 1fr;
       h1 {
