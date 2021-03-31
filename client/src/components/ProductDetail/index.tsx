@@ -100,7 +100,7 @@ export default function ProductDetail({ match }: any) {
           title: "Great choice!",
           text: "Product successfully added to your cart",
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1500,
         });
       } else {
         Swal.fire({
