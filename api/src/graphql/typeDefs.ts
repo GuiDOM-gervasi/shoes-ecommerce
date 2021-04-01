@@ -209,7 +209,7 @@ const typeDefs = gql`
       postcode: Float,
       ): String
 
-    setOffers(categoryId: String!, discount: Float!):String
+    setOffers(target: String!, targetId: String!, discount: Float!, duration: Float!):String
   }
 
   type Query {
