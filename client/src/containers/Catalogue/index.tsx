@@ -59,7 +59,11 @@ export default function Catalogue () {
                 alt="name"
                 className="productImg"
               />
-
+              {!!item.discount 
+              ? <div className='discount'>
+                {item.discount * 100}% OFF!
+              </div> 
+              : <></>}
               <div className="productData">
                 <h5>
                   {item.brand.name} {item.name}

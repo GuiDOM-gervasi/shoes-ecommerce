@@ -24,6 +24,7 @@ const typeDefs = gql`
     name: String!
     description: String
     price: Float
+    discount: Float
     muestraimg: String
     detalleimg1: String
     detalleimg2: String
@@ -200,13 +201,15 @@ const typeDefs = gql`
     updateStock(productId: String!, modelId: String!, input: Int): String
     updateUser(id: String!, atr: String!, input: String): String
     updateUserAddress(
-      id: String!
-      country: String
-      city: String
-      street: String
-      addressnumber: Float
-      postcode: Float
-    ): String
+      id: String!, 
+      country: String, 
+      city: String,
+      street: String,
+      addressnumber: Float,
+      postcode: Float,
+      ): String
+
+    setOffers(categoryId: String!, discount: Float!):String
   }
 
   type Query {
