@@ -4,8 +4,9 @@ import { StyledCRUDCategory } from "./StyledCRUDCategory";
 import { CategoryAttributes } from "../../types";
 import { GET_CATEGORIES, GET_DELETED_CATEGORIES } from "../../graphql/queries";
 import { useHistory } from "react-router-dom";
-import { DELETE_CATEGORY, UNDELETE_CATEGORY } from "../../graphql/mutations";
+import { DELETE_CATEGORY, UNDELETE_CATEGORY, EDIT_CATEGORY } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
+import Swal from "sweetalert2";
 
 export default function CRUDCategory() {
   const history = useHistory();
@@ -23,6 +24,9 @@ export default function CRUDCategory() {
   const [restoreCategory, { loading: loadingRestore }] = useMutation(UNDELETE_CATEGORY, {
     refetchQueries: [{ query: GET_CATEGORIES }, { query: GET_DELETED_CATEGORIES }],
   });
+  const [updateCategory] = useMutation(EDIT_CATEGORY, {
+		refetchQueries: [{ query: GET_CATEGORIES }],
+	});
 
   if (loading) return <Loader />;
   if (error) return <span> error {error.message} </span>;
@@ -33,7 +37,50 @@ export default function CRUDCategory() {
     deleteCategory({ variables: { id } });
   };
   const handleEdit = (id) => {
-    history.push(`/admin/editCategory/${id}`);
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Change category',
+      showCancelButton: true,
+      inputAttributes: {
+        min:'0',
+      },
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to write a name!'
+        }
+      },
+      progressSteps: ['1']
+    }).queue([
+      {
+        title: 'Change the name of:',
+        text: 'Category ' + id,
+      }
+    ]).then(async (result:any) => {
+      if (result.value) {
+        console.log(result.value[0], typeof result.value[0])
+        // const answers = JSON.stringify(result.value)
+        try {
+          await updateCategory({
+            variables: {
+              id,
+              input: result.value[0],
+            },
+          });
+          history.push("/admin/category");
+        } catch (e) {
+          console.log(e);
+        } finally {
+          // console.log(productId);
+          // console.log(modelId);
+          // console.log(modify);
+        }
+
+        Swal.fire({
+          title: 'Category modified',
+        })
+      }
+    })
+    // history.push(`/admin/editCategory/${id}`);
   };
 
   const handleRestore = (id) => {
