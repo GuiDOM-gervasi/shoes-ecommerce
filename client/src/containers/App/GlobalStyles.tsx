@@ -20,6 +20,9 @@ export const GlobalStyles = createGlobalStyle`
         font-family: 'Montserrat', sans-serif;
         transition: all 300ms ease;
     }
+    body{
+        padding: 0 !important;
+    }
     .App{
         min-height:100vh;
     }
