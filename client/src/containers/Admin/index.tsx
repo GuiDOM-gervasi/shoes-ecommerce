@@ -6,6 +6,7 @@ export default function Admin() {
   return (
     <StyledAdmin>
       <div>
+      
         <Link to="/admin/products">Products </Link>
       </div>
       <div>
