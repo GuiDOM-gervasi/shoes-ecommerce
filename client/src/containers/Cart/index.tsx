@@ -121,7 +121,7 @@ const Cart = () => {
         {userId !== "0"
           ? cartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;
-              count += product.price * cartProductItem.quantity;
+              count += Math.floor(product.price*(1-product.discount)) * cartProductItem.quantity;
               return (
                 <div key={cartProductItem.finalproducts.id}>
                   <img
