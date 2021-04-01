@@ -11,6 +11,7 @@ import {
   DELETE_PRODUCT,
   UNDELETE_PRODUCT,
   ADD_PRODUCT,
+  EDIT_STOCK,
 } from "../../graphql/mutations";
 import { StyledCRUDProducts } from "./StyledCRUDProducts";
 import { ProductAttributes } from "../../types";
@@ -28,7 +29,7 @@ export default function CRUDProducts() {
   } = useQuery(GET_DELETED);
   const allProducts = data ? data.products : null;
   const deletedProducts = deletedQuery ? deletedQuery.deleted : null;
-
+  const [editStock] = useMutation(EDIT_STOCK);
   const [createProduct, { error: errorMutationProduct }] = useMutation(
     ADD_PRODUCT, {
       refetchQueries: [{ query: GET_PRODUCTS }]
@@ -187,11 +188,21 @@ export default function CRUDProducts() {
                 CategoriesId:result.value[4],
                 ModelsId:result.value[5],
               },
+            }).then((res)=>{
+              const productId = res.data.createProduct.id
+              editStock({
+                variables:{
+                  productId,
+                  modelId: "all",
+                  input: 0,
+                }
+              })
+              
             });
             Swal.fire({
               icon: 'success',
               title: 'Product added',
-              text: 'Product ' + result.value[0] + ' added successfully.',
+              text: 'Product ' + result.value[0] + ' added successfully. Please check stock and images for this product.',
             })
           } catch (err) {
             console.log(err);
