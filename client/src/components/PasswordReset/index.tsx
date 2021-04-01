@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyledPasswordReset } from "./StyledPasswordReset";
 import { PASSWORD_RESET } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
+import Swal from "sweetalert2";
 
 
 export default function PasswordReset() {
@@ -17,7 +18,13 @@ export default function PasswordReset() {
     let { email } = form;
     try{
       await resetPassword({variables:{email}});
-      alert('Check your email to change the password')
+      Swal.fire({
+        icon: "success",
+        title: "Check your email",
+        text: "We sent you an email to your registered address to change your password",
+        showConfirmButton: false,
+        timer: 5000,
+      });
     }
     catch (err) {
       console.log(err);
