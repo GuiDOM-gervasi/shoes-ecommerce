@@ -31,8 +31,7 @@ export default function CRUDStock() {
         if (!value) {
           return 'You need to write a number!'
         }
-      },
-      progressSteps: ['1']
+      }
     }).queue([
       {
         title: 'Change the stock of:',

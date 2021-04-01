@@ -48,8 +48,7 @@ export default function CRUDCategory() {
         if (!value) {
           return 'You need to write a name!'
         }
-      },
-      progressSteps: ['1']
+      }
     }).queue([
       {
         title: 'Change the name of:',
