@@ -29,6 +29,7 @@ import Profile from "../../containers/Profile";
 import AboutUs from "../../components/AboutUs";
 import EditCategory from "../../components/EditCategory";
 import OrderHistory from "../../components/OrderHistory";
+import Offert from "../../components/Offert";
 
 require("dotenv").config();
 
@@ -79,6 +80,10 @@ function App() {
       <Route
         path="/admin/editCategory/:categoryId"
         component={isAdmin ? EditCategory : Login}
+      />
+      <Route
+        path="/admin/offerts"
+        component={isAdmin ? Offert : Login}
       />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
