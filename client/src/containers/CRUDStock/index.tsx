@@ -19,7 +19,7 @@ export default function CRUDStock() {
   if (loading) return <Loader />;
   if (stockError) return <span> error {stockError.message} </span>;
 
-  const handleEdit = (productId, modelId) => {
+  const handleEdit = (productId, modelId, productName, modelSize, modelColor) => {
     Swal.mixin({
       input: 'number',
       confirmButtonText: 'Change stock',
@@ -35,7 +35,7 @@ export default function CRUDStock() {
     }).queue([
       {
         title: 'Change the stock of:',
-        text: 'Product ' + productId +', Model ' + modelId,
+        text: productName +', Size ' + modelSize +', Color ' + modelColor,
       }
     ]).then(async (result:any) => {
       if (result.value) {
@@ -59,7 +59,9 @@ export default function CRUDStock() {
         }
 
         Swal.fire({
-          title: 'Your stock was changed',
+          icon: 'success',
+          title: 'Stock was changed',
+          text: 'Stock of ' + productName +', Size ' + modelSize +', Color ' + modelColor + 'was changed',
         })
       }
     })
@@ -104,7 +106,7 @@ export default function CRUDStock() {
             <div className="buttons">
               <button
                 type="submit"
-                onClick={() => handleEdit(item.product.id, item.model.id)}
+                onClick={() => handleEdit(item.product.id, item.model.id, item.product.name, item.model.size, item.model.color)}
               >
                 Modificar stock
               </button>

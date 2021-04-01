@@ -88,7 +88,8 @@ export default function CRUDCategory() {
           }
 
           Swal.fire({
-            title: "Category added",
+            icon:'success',
+            title: "Category " + result.value[0] + " added",
           });
         }
       });
@@ -137,6 +138,7 @@ export default function CRUDCategory() {
           }
 
           Swal.fire({
+            icon:'success',
             title: "Category modified",
           });
         }
