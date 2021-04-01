@@ -82,19 +82,19 @@ export default function CRUDProducts() {
     );
 
     const templateSelectCategory = (catName, catId) => {
-      return `<input type="checkbox" id=${catName} name=${catName} value=${catId} >
-      <label>${catName}</label>
-      </input><br/>`;
+      return `<div>
+      <input style="height:1.5rem;width:1.5rem;" type="checkbox" id=${catName} name=${catName} value=${catId} >
+      <label style="line-height:1.5;font-size:1.2rem;font-weight:bold;">${catName}</label>
+      </input><br/></div>`;
     };
     let categoryInputOptions = dataCat?.categories?.map((category) => {
       return templateSelectCategory(category.name, category.id);
     });
 
-
     const templateSelectModel = (modelSize, modelColor, modelId) => {
-      return `<input type="checkbox" id=${modelId} name=${modelId} value=${modelId} >
-      <label>${modelSize} - ${modelColor}</label>
-      </input><br/>`;
+      return `<div><input style="height:1.5rem;width:1.5rem;" type="checkbox" id=${modelId} name=${modelId} value=${modelId} >
+      <label style="line-height:1.5;font-size:1.2rem;font-weight:bold;">${modelSize} - ${modelColor}</label>
+      </input><br/></div>`;
     };
     let modelInputOptions = dataMod?.models?.map((model) => {
       return templateSelectModel(model.size, model.color, model.id);
@@ -147,7 +147,10 @@ export default function CRUDProducts() {
         },
         {
           title: "Select product categories",
-          html: categoryInputOptions.join(''),
+          html:
+            '<div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto;justify-items:start; justify-content: space-around;">' +
+            categoryInputOptions.join("") +
+            "</div>",
           preConfirm: () => {
             var checked = [];
             var checkboxes = document.querySelectorAll(
@@ -161,7 +164,9 @@ export default function CRUDProducts() {
         },
         {
           title: "Select product models",
-          html: modelInputOptions.join(""),
+          html:  '<div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto;justify-items:start; justify-content: space-around;">' +
+          modelInputOptions.join("") +
+          "</div>",
           preConfirm: () => {
             var checked = [];
             var checkboxes = document.querySelectorAll(

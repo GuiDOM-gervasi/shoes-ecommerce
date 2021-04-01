@@ -48,7 +48,6 @@ export const StyledCRUDProducts = styled.div`
       margin-bottom: 1rem;
     }
   }
-
   .fas {
     color: ${negro};
     margin-left: 1vw;
