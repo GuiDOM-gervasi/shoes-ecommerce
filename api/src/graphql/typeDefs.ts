@@ -200,13 +200,13 @@ const typeDefs = gql`
     updateStock(productId: String!, modelId: String!, input: Int): String
     updateUser(id: String!, atr: String!, input: String): String
     updateUserAddress(
-      id: String!, 
-      country: String, 
-      city: String,
-      street: String,
-      addressnumber: Float,
-      postcode: Float,
-      ): String
+      id: String!
+      country: String
+      city: String
+      street: String
+      addressnumber: Float
+      postcode: Float
+    ): String
   }
 
   type Query {
@@ -229,6 +229,7 @@ const typeDefs = gql`
 
     searchProducts(name: String!): [Product!]!
     users: [User!]!
+    user(id: String!): User!
     viewOrders(orderId: String!, state: String): [Orders]!
 
     stockProduct(productId: String!, modelId: String!): FinalProduct!

@@ -25,9 +25,10 @@ import Cancel from "../../components/Cancel";
 import CRUDStock from "../CRUDStock";
 import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
+import Profile from "../../containers/Profile";
 import AboutUs from "../../components/AboutUs";
-
 import EditCategory from "../../components/EditCategory";
+import OrderHistory from "../../components/OrderHistory";
 
 require("dotenv").config();
 
@@ -45,7 +46,7 @@ function App() {
     <div className="App fondoDegradado">
       <Nav />
       <GlobalStyles />
-      <Route path="/about" component={AboutUs}/>
+      <Route path="/about" component={AboutUs} />
       <Route exact path="/" component={Catalogue} />
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/register" component={AddUser} />
@@ -90,6 +91,8 @@ function App() {
       <Route exact path="/addReview/:id/:user" component={AddReview} />
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
+      <Route path="/profile" component={Profile} />
+      <Route path="/history" component={OrderHistory} />
     </div>
   );
 }
