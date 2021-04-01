@@ -27,7 +27,6 @@ import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
 import Profile from "../../containers/Profile";
 import AboutUs from "../../components/AboutUs";
-import EditCategory from "../../components/EditCategory";
 import OrderHistory from "../../components/OrderHistory";
 
 require("dotenv").config();
@@ -75,10 +74,6 @@ function App() {
       <Route
         path="/admin/editProduct/:productId"
         component={isAdmin ? EditProduct : Login}
-      />
-      <Route
-        path="/admin/editCategory/:categoryId"
-        component={isAdmin ? EditCategory : Login}
       />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
