@@ -11,7 +11,7 @@ export const StyledCRUDCategory = styled.div`
   flex-direction: column;
   width: ${formWidth * 2}vw;
   min-height: 30vh;
-  margin: 2rem auto;
+  margin: 2rem auto 0 auto;
   border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);

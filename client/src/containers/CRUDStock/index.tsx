@@ -39,8 +39,6 @@ export default function CRUDStock() {
       }
     ]).then(async (result:any) => {
       if (result.value) {
-        console.log(result.value[0], typeof result.value[0])
-        // const answers = JSON.stringify(result.value)
         try {
           await editStock({
             variables: {
