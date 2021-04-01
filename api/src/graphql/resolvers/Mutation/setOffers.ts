@@ -35,7 +35,7 @@ const setOffers = async ( parent:any, args: any )  => {
       
     }
 
-    let update = defineOffert(discount, productsToUpdate);
+    let update = defineOffert(discount, productsToUpdate, 0);
 
     //Save offer on DB
     let offert = await Offer.create(
@@ -50,13 +50,13 @@ const setOffers = async ( parent:any, args: any )  => {
 
     console.log(`offert`, offert.id)
 
-    let restore = setTimeout( defineOffert, duration, 0, productsToUpdate);  // DO NOT USE AWAIT HERE!
+    let restore = setTimeout( defineOffert, duration, 0, productsToUpdate, offert.id);  // DO NOT USE AWAIT HERE!
     // console.log(`prod`, prod)
     // console.log(`update`, update)
     return "todo Ok"
 }
 
-async function defineOffert(discount: number, productsToUpdate: string[]){
+async function defineOffert(discount: number, productsToUpdate: string[], offertId:number){
   let update = await Product.update(
     {discount},
     {where: 
@@ -64,9 +64,17 @@ async function defineOffert(discount: number, productsToUpdate: string[]){
     }
   ) 
   
-  if (discount === 0){
-    console.log('offert has finished')
+  if (offertId !== 0){
+    await Offer.update(
+        { active: false },
+        {where:{
+          id: offertId,
+        }}
+      );
+    console.log(`offert #${offertId} has finished`)
   }
+
+
   return update
 }
 
