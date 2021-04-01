@@ -8,7 +8,6 @@ import SearchResult from "../SearchResult";
 import CRUDProducts from "../CRUDProducts";
 import AddProduct from "../../components/AddProduct";
 import CRUDCategory from "../CRUDCategory";
-import AddCategory from "../../components/AddCategory";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
@@ -66,10 +65,6 @@ function App() {
       <Route
         path="/admin/category"
         component={isAdmin ? CRUDCategory : Login}
-      />
-      <Route
-        path="/admin/addCategory"
-        component={isAdmin ? AddCategory : Login}
       />
       <Route
         path="/admin/editProduct/:productId"
