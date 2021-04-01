@@ -111,11 +111,12 @@ export default function Checkout() {
       </ul>
       <form className="location" onSubmit={handleSubmit}>
         <label>Dirección de envio</label>
-        <input type="text" name="Ciudad" placeholder="Ciudad" />
+        <input type="text" name="Country" placeholder="Country" />
+        <input type="text" name="City" placeholder="City" />
 
-        <input type="text" name="Calle" placeholder="Calle" />
-
-        <input type="text" name="CP" placeholder="Código Postal" />
+        <input type="text" name="Street" placeholder="Street" />
+        <input type="text" name="adressNumber" placeholder="Adress Number" />
+        <input type="text" name="postCode" placeholder="Post Code" />
         <input className="boton" type="submit" value="Comprar" />
       </form>
     </StyledChaeckout>

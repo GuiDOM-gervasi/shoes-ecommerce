@@ -3,8 +3,8 @@ import { blanco, formWidth } from '../../containers/App/GlobalStyles'
 
 export const StyledChaeckout = styled.div`
   width: ${formWidth}vw;
-  min-height: 60vh;
-  margin: 2rem auto;
+  height:43rem;
+  margin: 1rem auto;
   padding: 1rem 0 1rem 0;
   border: 2px solid black;
   border-radius: 15px;
@@ -28,7 +28,7 @@ export const StyledChaeckout = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 2rem 0 2rem 0;
+    margin: 0 0 2rem 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     span{
       width: 100%;
@@ -45,7 +45,7 @@ export const StyledChaeckout = styled.div`
       margin: 1.5rem;
       align-items: center;
       input{
-        margin: 0.5rem 0 0.5rem 0;
+        margin: 0.5rem 0 1rem 0;
       }
   }  
 
