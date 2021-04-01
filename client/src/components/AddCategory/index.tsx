@@ -5,6 +5,7 @@ import { ADD_CATEGORY } from "../../graphql/mutations";
 import { validateChange, check, formCategory } from "../../helpers/validation";
 import { GET_CATEGORIES } from "../../graphql/queries";
 import { useHistory } from "react-router";
+import Swal from "sweetalert2";
 
 interface AddCategoryAttributes {
   className: String;
@@ -28,7 +29,11 @@ export default function AddCategory({ className }: AddCategoryAttributes) {
           name,
         },
       });
-      alert("Categoría agregada");
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Category added",
+      });
       history.push("/admin/category");
     } catch (err) {
       console.log(err);

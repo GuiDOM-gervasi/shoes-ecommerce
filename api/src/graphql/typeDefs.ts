@@ -60,6 +60,7 @@ const typeDefs = gql`
     id: String
     accessToken: String!
     refreshToken: String!
+    firstName: String!
   }
 
   type FinalProduct {
