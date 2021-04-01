@@ -96,7 +96,7 @@ export default function CRUDCategory() {
   const handleDelete = (id) => {
     deleteCategory({ variables: { id } });
   };
-  const handleEdit = (id) => {
+  const handleEdit = (id, name) => {
     Swal.mixin({
       input: "text",
       confirmButtonText: "Change category",
@@ -113,7 +113,7 @@ export default function CRUDCategory() {
       .queue([
         {
           title: "Change the name of:",
-          text: "Category " + id,
+          text: "Category: " + name,
         },
       ])
       .then(async (result: any) => {
@@ -164,7 +164,7 @@ export default function CRUDCategory() {
             <span className="id"> {item.id} </span>
             <span className="name"> {item.name} </span>
             <div className="buttons">
-              <i onClick={() => handleEdit(item.id)} className="fas fa-edit" />
+              <i onClick={() => handleEdit(item.id, item.name)} className="fas fa-edit" />
               <i
                 onClick={() => handleDelete(item.id)}
                 className="fas fa-trash-alt"
