@@ -93,8 +93,8 @@ export const GET_CATEGORIES = gql`
 `;
 
 export const GET_DELETED_CATEGORIES = gql`
-  query deletedCategories{
-    deletedCategories{
+  query deletedCategories {
+    deletedCategories {
       id
       name
     }
@@ -282,6 +282,40 @@ export const GET_ORDERS = gql`
         user {
           id
           userName
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USER_DETAIL = gql`
+  query GetUser($id: String!) {
+    user(id: $id) {
+      firstName
+      lastName
+      userName
+      email
+    }
+  }
+`;
+
+export const GET_HISTORY = gql`
+  query OrderHistory($userId: String!) {
+    cart(userId: $userId, state: "finish") {
+      cartproducts {
+        id
+        quantity
+        price
+        finalproducts {
+          product {
+            id
+            name
+            muestraimg
+          }
+          model {
+            color
+            size
+          }
         }
       }
     }

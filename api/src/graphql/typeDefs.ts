@@ -61,6 +61,7 @@ const typeDefs = gql`
     id: String
     accessToken: String!
     refreshToken: String!
+    firstName: String!
   }
 
   type FinalProduct {
@@ -231,6 +232,7 @@ const typeDefs = gql`
 
     searchProducts(name: String!): [Product!]!
     users: [User!]!
+    user(id: String!): User!
     viewOrders(orderId: String!, state: String): [Orders]!
 
     stockProduct(productId: String!, modelId: String!): FinalProduct!

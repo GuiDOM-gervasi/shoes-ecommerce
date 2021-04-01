@@ -4,20 +4,43 @@ import { useAuth } from "../../hooks/AuthProvider";
 import SearchBar from "../SearchBar";
 import { StyledNav } from "./StyledNav";
 import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
-  const handleClick = () => {
+  const handleLogout = () => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
-    logout(() => history.push("/"));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "We are sad to see you go",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, log out.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          timer:1000,
+          title:'Goodbye',
+          text:'We hope to see you soon!',
+          showConfirmButton: false,
+        })
+        logout(() => history.push("/"));
+      }
+    })
+
+
   };
   const handleCheck = (url) => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
     history.push(url);
   };
+
+
 
   return (
     <StyledNav>
@@ -37,6 +60,11 @@ export default function Nav() {
                 <i className="fas fa-shopping-cart"></i>
               </NavLink>
             </li>
+            <li className="user">
+              <NavLink to="/profile" className="hover">
+                <i className="fas fa-user-circle"></i>
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className="navMobile">
@@ -48,6 +76,11 @@ export default function Nav() {
           <li onClick={() => handleCheck("/cart")}>
             <NavLink to="/cart" className="hover">
               <i className="fas fa-shopping-cart fasMobile"></i>
+            </NavLink>
+          </li>
+          <li onClick={() => handleCheck("/profile")}>
+            <NavLink to="/profile" className="hover">
+              <i className="fas fa-user-circle fasMobile"></i>
             </NavLink>
           </li>
           <input type="checkbox" id="check" />
@@ -70,7 +103,7 @@ export default function Nav() {
               <NavLink to="/about">About us</NavLink>
             </li>
             {userId && userId !== "0" ? (
-              <li onClick={handleClick} className="login">
+              <li onClick={handleLogout} className="login">
                 <p className="hover">Logout</p>
               </li>
             ) : (
@@ -80,7 +113,10 @@ export default function Nav() {
                     Login
                   </NavLink>
                 </li>
-                <li onClick={() => handleCheck("/register")} className="register">
+                <li
+                  onClick={() => handleCheck("/register")}
+                  className="register"
+                >
                   <NavLink to="/register" className="hover">
                     Register
                   </NavLink>

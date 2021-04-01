@@ -46,7 +46,7 @@ export default function Reviews({ className, allReviews }: ReviewsAttributes) {
         <div className="reviewsAverage">{averageDecimal}</div>
         <div className="reviewsCount">
           <div className="ratingAverage" id="ratingAverage"></div>
-          <h4>Promedio sobre {allReviews.count} opiniones</h4>
+          <h4>Average score based on {allReviews.count} reviews</h4>
         </div>
       </div>
       <ul>

@@ -54,4 +54,12 @@ export const StyledNewPassword = styled.div`
       width:15vw;
     }
   }
+  @media (max-width: 858px) {
+    width: 90vw;
+    form {
+      .boton {
+        width: 80%;
+      }
+    }
+  }
 `;

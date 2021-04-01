@@ -84,12 +84,12 @@ export default function AboutUs () {
 						</div>
 					</div>
                     <div className='about_coder'>
-						<h3>Lindolfo Aguirre</h3>
+						<h3>Lindolfo Ayala</h3>
 						<div>
 							<img alt='profile' src={Maxi} />
 						</div>
 						<div className='about_social'>
-							<a href='https://www.linkedin.com/in/joaquin-tissera-7577831b9/' target='_blank' rel='noopener noreferrer'><i className="fab fa-linkedin-in"></i></a>
+							<a href='https://www.linkedin.com/in/otromaximiliano/' target='_blank' rel='noopener noreferrer'><i className="fab fa-linkedin-in"></i></a>
 						</div>
 					</div>
                     <div className='about_coder'>

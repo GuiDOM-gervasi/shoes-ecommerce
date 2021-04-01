@@ -44,6 +44,8 @@ const startServer = async () => {
   app.use(cookieParser());
   
   app.get('/status', async (req, res) => {
+    let cart = await getCartForPayment(7);
+    console.log(`cart`, cart)
     res.json({status:'ok'})
   })
   

@@ -5,6 +5,7 @@ import { StyledOrderTable } from "./StyledOrderTable";
 import { GET_ORDERS } from "../../graphql/queries";
 import { UPDATE_STATE } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
+import Swal from "sweetalert2";
 
 const OrderTable = () => {
   // reserved, payed, finish, rejected
@@ -37,10 +38,22 @@ const OrderTable = () => {
 
   const handleChange = (e, orderId) => {
     const state = e.target.value;
-    const response = prompt("Are you sure? (y/n)");
-    if (response === "y") {
-      return updateState({ variables: { orderId, state } });
-    }
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Please confirm if you want to change the status of this order.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, change.",
+      showConfirmButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return updateState({ variables: { orderId, state } });
+      }
+    });
+
     e.target.value = currentState;
   };
 
@@ -52,6 +65,7 @@ const OrderTable = () => {
 
   return (
     <StyledOrderTable>
+      <h3>{currentState}</h3>
       <div className="sectionBar">
         {states.map((state) =>
           state === currentState ? null : (
@@ -61,14 +75,15 @@ const OrderTable = () => {
           )
         )}
       </div>
+      
       <ul>
         <li className="titles">
-          <span className="product"> product </span>
-          <span className="model"> model </span>
-          <span className="quantity"> quantity </span>
-          <span className="price"> price </span>
-          <span className="state"> state </span>
-          <span className="username"> username </span>
+          <span className="product">Product </span>
+          <span className="model">Model </span>
+          <span className="quantity">Quantity </span>
+          <span className="price">Price </span>
+          <span className="state">Status </span>
+          <span className="username">Username </span>
         </li>
         {orders?.map((order) => (
           <li>
