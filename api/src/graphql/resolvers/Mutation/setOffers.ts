@@ -1,11 +1,6 @@
-import ProductCategory from "#root/db/models/productcategory";
 import Category from "#root/db/models/category";
-import { handlerUpdate } from "#root/helpers/updateProduct";
 import Product from "../../../db/models/products";
-import FinalProduct from "#root/db/models/finalproduct";
-import {UpdateProductAttributes} from '../../../db/models/types';
-import { any } from "sequelize/types/lib/operators";
-import { BeforeBulkCreate } from "sequelize-typescript";
+import Offer from "../../../db/models/offers";
 
 
 const setOffers = async ( parent:any, args: any )  => {
@@ -41,6 +36,19 @@ const setOffers = async ( parent:any, args: any )  => {
     }
 
     let update = defineOffert(discount, productsToUpdate);
+
+    //Save offer on DB
+    let offert = await Offer.create(
+      {
+      target,
+      targetId,
+      discount,
+      duration,
+      active: true
+      }
+      );
+
+    console.log(`offert`, offert.id)
 
     let restore = setTimeout( defineOffert, duration, 0, productsToUpdate);  // DO NOT USE AWAIT HERE!
     // console.log(`prod`, prod)

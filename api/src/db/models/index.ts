@@ -10,6 +10,7 @@ import { WishList } from "./wishlist"
 import Cart from './carts'
 import CartProduct from './cartproduct'
 import Review from './review'
+import Offer from './offers'
 
 
-export default [User, Product, Category, Brand, Image, ProductCategory, Models, FinalProduct, WishList, Cart, CartProduct,Review];
+export default [User, Product, Category, Brand, Image, ProductCategory, Models, FinalProduct, WishList, Cart, CartProduct,Review, Offer];
