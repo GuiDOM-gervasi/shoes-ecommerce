@@ -9,9 +9,8 @@ import { NavLink, useHistory } from "react-router-dom";
 
 
 export default function Login() {
-  const { login } = useAuth();
+  const { login, userId } = useAuth();
   const history = useHistory();
-
   const [form, setForm] = useState({
     email: "",
 		password: "",

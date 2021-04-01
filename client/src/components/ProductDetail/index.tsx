@@ -16,6 +16,7 @@ import Loader from "../Loader";
 import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
 import Reviews from "../../containers/Reviews";
+import Swal from "sweetalert2";
 
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
@@ -97,9 +98,19 @@ export default function ProductDetail({ match }: any) {
             },
           });
         }
-        alert("Product successfully added to your cart");
+        Swal.fire({
+          icon: "success",
+          title: "Great choice!",
+          text: "Product successfully added to your cart",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
-        alert("This model is out of stock");
+        Swal.fire({
+          icon: "error",
+          title: "Sorry!",
+          text: "This model is out of stock"
+        });
       }
     },
   });
@@ -123,16 +134,15 @@ export default function ProductDetail({ match }: any) {
     }
   }, [mainProduct]);
 
-  
   // const [stock, setStock] = React.useState(false);
   const [modelsState, setModelsState] = React.useState({
     colors: [],
     sizes: [],
   });
-  
+
   let colors = [];
   let sizes = [];
-  
+
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
   return <div>`Error! ${error?.message}`</div>;
@@ -141,6 +151,7 @@ export default function ProductDetail({ match }: any) {
     name,
     brand,
     price,
+    discount,
     muestraimg,
     detalleimg1,
     detalleimg2,
@@ -191,7 +202,6 @@ export default function ProductDetail({ match }: any) {
     photoDetail1,
     photoDetail2,
     photoDetail3,
-    priceBefore,
   } = fotosZapa;
 
   const handleClick = () => {
@@ -215,14 +225,19 @@ export default function ProductDetail({ match }: any) {
     let newMain = e.target.src;
     photoMain.src = newMain;
     e.target.src = oldMain;
-  }
+  };
 
   return (
     <StyledProductDetail>
       <div className="container">
         <div className="fondoVioleta"></div>
         <div className="imagenes">
-          <img id="photoMain" className="photoMain" src={muestraimg || photo} alt={name} />
+          <img
+            id="photoMain"
+            className="photoMain"
+            src={muestraimg || photo}
+            alt={name}
+          />
           <ul>
             <li onClick={(e) => imageSwap(e)}>
               <img
@@ -266,8 +281,12 @@ export default function ProductDetail({ match }: any) {
             <span>{brand.name}</span>
           </div>
           <div className="precios">
-            <h4 className="priceBefore">${priceBefore}</h4>
-            <h2 className="price">${price}</h2>
+            {!!discount && discount > 0 ? <h4 className="priceBefore">Before: ${price}</h4>: <h4>List Price:</h4>} 
+            {!!discount && discount > 0 
+            ? <h2 className="price">${Math.floor(price * (1-discount))}</h2>
+            :<h2 className="price">${price}</h2>
+            } 
+            {!!discount && discount > 0 ? <h3 className="sale"> {discount * 100}% OFF!!!</h3>: <></>} 
           </div>
           <div className="botones">
             <select

@@ -2,20 +2,21 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART, CREATE_CART } from "../graphql/mutations";
 import { LocalPersistence, METHODS } from "../helpers/localPersistence";
+import Swal from "sweetalert2";
 import { GET_CART_SIMPLE } from "../graphql/queries";
 
 const AuthContext = React.createContext(null);
 
 export function AuthProvider(props) {
-  const existeLocal = JSON.parse(localStorage.getItem("cart"))
-
-  if(!existeLocal){
-    localStorage.setItem("cart", JSON.stringify({ guess: true, items: []}));
+  const existeLocal = JSON.parse(localStorage.getItem("cart"));
+  if (!existeLocal) {
+    localStorage.setItem("cart", JSON.stringify({ guess: true, items: [] }));
   }
 
   const [user, setUser] = useState(false);
   const [userId, setUserId] = useState("0");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [firstName, setfirstName] = useState("");
 
   
   /********************** Logica para cart sync *******************************/
@@ -66,11 +67,20 @@ export function AuthProvider(props) {
   const [getLogin] = useMutation(LOGIN_USER, {
     onCompleted: (data) => {
       if (data) {
-        LocalPersistence("access-token", METHODS.write, data.loginUser.accessToken);
-        LocalPersistence("refresh-token", METHODS.write, data.loginUser.refreshToken);
+        LocalPersistence(
+          "access-token",
+          METHODS.write,
+          data.loginUser.accessToken
+        );
+        LocalPersistence(
+          "refresh-token",
+          METHODS.write,
+          data.loginUser.refreshToken
+        );
         LocalPersistence("user", METHODS.write, data.loginUser);
         setUser(data.loginUser);
         setUserId(data.loginUser.id);
+        setfirstName(data.loginUser.firstName);
         data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
         createCart({
           variables :{
@@ -86,11 +96,16 @@ export function AuthProvider(props) {
         })
       }
     },
-    onError:(error) => {
-      console.log(error)
-    }
+    onError: (error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Bad login",
+        text: "Check your email and password combination.",
+      });
+      return error;
+    },
   });
-  
+
   const [logoutUser] = useMutation(LOGOUT_USER, {
     onCompleted: (data) => {
       if (data) {
@@ -103,24 +118,20 @@ export function AuthProvider(props) {
         setIsAdmin(false);
       }
     },
-    onError:(error)=>{
-        console.log(error)
-    }
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   useEffect(() => {
-
-    LocalPersistence("user",METHODS.get).then(
-      (completeUser) => {
-        completeUser && completeUser.isAdmin
+    LocalPersistence("user", METHODS.get).then((completeUser) => {
+      completeUser && completeUser.isAdmin
         ? setIsAdmin(completeUser.isAdmin)
         : setIsAdmin(false);
       completeUser && completeUser.id
         ? setUserId(completeUser.id)
         : setUserId("0");
-      }
-    )
-
+    });
   }, []);
 
   function login(email: string, password: string, cb) {
@@ -130,22 +141,29 @@ export function AuthProvider(props) {
         email,
         password,
       },
-    }).then(()=>{
-      cb();
-    })
-
+    }).then((e) => {
+      if (e) {
+        cb();
+        Swal.fire({
+          icon: "success",
+          title: firstName? "Welcome " + firstName + "!":"Welcome!" ,
+          text: "Good to see you again.",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      }
+    });
   }
 
   function logout(cb) {
 
     logoutUser({
-      variables:{
-        id: userId
-      }
-    })
-    .then(()=>{
+      variables: {
+        id: userId,
+      },
+    }).then(() => {
       cb();
-      })
+    });
   }
 
   const value = useMemo(() => {

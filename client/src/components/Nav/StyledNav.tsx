@@ -48,13 +48,14 @@ export const StyledNav = styled.div`
     }
   }
   .fa-shopping-cart,
+  .fa-user-circle,
   .fa-home {
     color: ${verdeMain};
   }
   .lineup {
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 10fr 1fr 1fr 1fr;
-    grid-template-areas: ". logo . searchbar . cart .";
+    grid-template-columns: 1fr 1fr 2fr 10fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: ". logo . searchbar . cart user .";
   }
   .linedown {
     display: grid;
@@ -75,6 +76,9 @@ export const StyledNav = styled.div`
   }
   .register {
     grid-area: register;
+  }
+  .user {
+    grid-area: user;
   }
 
   nav ul li {
@@ -113,7 +117,8 @@ export const StyledNav = styled.div`
     display: none;
   }
 
-  #check, .fasMobile {
+  #check,
+  .fasMobile {
     display: none;
   }
 
@@ -137,18 +142,18 @@ export const StyledNav = styled.div`
     .fasMobile {
       display: block;
     }
-    .lineup{
-      display:none;
+    .lineup {
+      display: none;
     }
     nav {
       min-height: 10vh;
     }
-    .fasMobile{
+    .fasMobile {
       font-size: 22px;
     }
-    .navMobile{
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
+    .navMobile {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
       align-items: center;
       justify-items: center;
     }

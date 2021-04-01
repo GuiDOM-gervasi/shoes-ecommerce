@@ -1,21 +1,71 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
 import { StyledCRUDStock } from "./StyledCRUDStock";
 import { StockAttributes } from "../../types";
-
+import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 import Loader from "../../components/Loader";
 import { GET_ALL_STOCK } from "../../graphql/queries";
+import { EDIT_STOCK } from "../../graphql/mutations";
+
 
 export default function CRUDStock() {
   const history = useHistory();
   const { data, loading, error: stockError } = useQuery(GET_ALL_STOCK);
+  const [editStock] = useMutation(EDIT_STOCK, {
+		refetchQueries: [{ query: GET_ALL_STOCK }]
+	});
 
   if (loading) return <Loader />;
   if (stockError) return <span> error {stockError.message} </span>;
 
   const handleEdit = (productId, modelId) => {
-    history.push(`/admin/editStock/${productId}/${modelId}`);
+    Swal.mixin({
+      input: 'number',
+      confirmButtonText: 'Change stock',
+      showCancelButton: true,
+      inputAttributes: {
+        min:'0',
+      },
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to write a number!'
+        }
+      },
+      progressSteps: ['1']
+    }).queue([
+      {
+        title: 'Change the stock of:',
+        text: 'Product ' + productId +', Model ' + modelId,
+      }
+    ]).then(async (result:any) => {
+      if (result.value) {
+        console.log(result.value[0], typeof result.value[0])
+        // const answers = JSON.stringify(result.value)
+        try {
+          await editStock({
+            variables: {
+              productId,
+              modelId,
+              input: parseInt(result.value[0]),
+            },
+          });
+          history.push("/admin/stock");
+        } catch (e) {
+          console.log(e);
+        } finally {
+          // console.log(productId);
+          // console.log(modelId);
+          // console.log(modify);
+        }
+
+        Swal.fire({
+          title: 'Your stock was changed',
+        })
+      }
+    })
+
+    // history.push(`/admin/editStock/${productId}/${modelId}`);
   };
 
   return (

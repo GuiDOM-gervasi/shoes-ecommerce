@@ -24,6 +24,16 @@ export const StyledCatalogue = styled.div`
     outline: none;
   }
 
+  .discount{
+    background-color: red;   
+    position: absolute;
+    top: 0;
+    right:0;
+    color: white; 
+    font-weight: bold;
+    padding: 0.2rem 0.1rem 0.2rem 0.1rem
+  }
+
   ul {
     padding: 5vh 0 0 0;
     display: flex;

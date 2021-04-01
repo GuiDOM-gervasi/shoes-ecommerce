@@ -61,6 +61,12 @@ export class Product extends Model {
 
   @Column({
     allowNull: true,
+    type: DataType.FLOAT,
+  })
+  discount!: number;
+
+  @Column({
+    allowNull: true,
 				type: DataType.STRING(1000),
   })
   detalleimg1?: string;

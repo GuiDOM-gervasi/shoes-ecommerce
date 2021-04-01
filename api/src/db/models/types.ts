@@ -22,6 +22,7 @@ export interface ProductAttributes {
   name: string;
   description: string;
   price: number;
+  discount: number;
   muestraimg: string;
   brandId: string;
   CategoriesId: [string];

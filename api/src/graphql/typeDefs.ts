@@ -24,6 +24,7 @@ const typeDefs = gql`
     name: String!
     description: String
     price: Float
+    discount: Float
     muestraimg: String
     detalleimg1: String
     detalleimg2: String
@@ -60,6 +61,7 @@ const typeDefs = gql`
     id: String
     accessToken: String!
     refreshToken: String!
+    firstName: String!
   }
 
   type FinalProduct {
@@ -206,6 +208,8 @@ const typeDefs = gql`
       addressnumber: Float,
       postcode: Float,
       ): String
+
+    setOffers(categoryId: String!, discount: Float!):String
   }
 
   type Query {
@@ -228,6 +232,7 @@ const typeDefs = gql`
 
     searchProducts(name: String!): [Product!]!
     users: [User!]!
+    user(id: String!): User!
     viewOrders(orderId: String!, state: String): [Orders]!
 
     stockProduct(productId: String!, modelId: String!): FinalProduct!
