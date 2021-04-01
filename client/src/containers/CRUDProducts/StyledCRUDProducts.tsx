@@ -41,7 +41,6 @@ export const StyledCRUDProducts = styled.div`
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     align-self: center;
   }
-
   .deleted {
     margin-top: 3rem;
     text-align: center;
@@ -56,6 +55,9 @@ export const StyledCRUDProducts = styled.div`
     &:hover {
       color: ${violeta};
     }
+  }
+  .swal2-html-container{
+    list-style-type:none;
   }
 
   @media (max-width: 858px) {

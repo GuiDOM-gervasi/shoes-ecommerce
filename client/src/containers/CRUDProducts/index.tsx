@@ -31,8 +31,9 @@ export default function CRUDProducts() {
   const deletedProducts = deletedQuery ? deletedQuery.deleted : null;
   const [editStock] = useMutation(EDIT_STOCK);
   const [createProduct, { error: errorMutationProduct }] = useMutation(
-    ADD_PRODUCT, {
-      refetchQueries: [{ query: GET_PRODUCTS }]
+    ADD_PRODUCT,
+    {
+      refetchQueries: [{ query: GET_PRODUCTS }],
     }
   );
   const { data: dataCat, loading: loadingCat, error: errorCat } = useQuery(
@@ -88,6 +89,7 @@ export default function CRUDProducts() {
     let categoryInputOptions = dataCat?.categories?.map((category) => {
       return templateSelectCategory(category.name, category.id);
     });
+
 
     const templateSelectModel = (modelSize, modelColor, modelId) => {
       return `<input type="checkbox" id=${modelId} name=${modelId} value=${modelId} >
@@ -145,9 +147,7 @@ export default function CRUDProducts() {
         },
         {
           title: "Select product categories",
-          html: categoryInputOptions.map((catInput) => {
-            return catInput;
-          }),
+          html: categoryInputOptions.join(''),
           preConfirm: () => {
             var checked = [];
             var checkboxes = document.querySelectorAll(
@@ -161,9 +161,7 @@ export default function CRUDProducts() {
         },
         {
           title: "Select product models",
-          html: modelInputOptions.map((modInput) => {
-            return modInput;
-          }),
+          html: modelInputOptions.join(""),
           preConfirm: () => {
             var checked = [];
             var checkboxes = document.querySelectorAll(
@@ -181,29 +179,31 @@ export default function CRUDProducts() {
           try {
             await createProduct({
               variables: {
-                name:result.value[0],
-                description:result.value[1],
-                price:parseInt(result.value[2]),
-                brandId:result.value[3],
-                CategoriesId:result.value[4],
-                ModelsId:result.value[5],
+                name: result.value[0],
+                description: result.value[1],
+                price: parseInt(result.value[2]),
+                brandId: result.value[3],
+                CategoriesId: result.value[4],
+                ModelsId: result.value[5],
               },
-            }).then((res)=>{
-              const productId = res.data.createProduct.id
+            }).then((res) => {
+              const productId = res.data.createProduct.id;
               editStock({
-                variables:{
+                variables: {
                   productId,
                   modelId: "all",
                   input: 0,
-                }
-              })
-              
+                },
+              });
             });
             Swal.fire({
-              icon: 'success',
-              title: 'Product added',
-              text: 'Product ' + result.value[0] + ' added successfully. Please check stock and images for this product.',
-            })
+              icon: "success",
+              title: "Product added",
+              text:
+                "Product " +
+                result.value[0] +
+                " added successfully. Please check stock and images for this product.",
+            });
           } catch (err) {
             console.log(err);
             return;

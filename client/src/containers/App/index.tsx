@@ -6,7 +6,6 @@ import { Route } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail";
 import SearchResult from "../SearchResult";
 import CRUDProducts from "../CRUDProducts";
-import AddProduct from "../../components/AddProduct";
 import CRUDCategory from "../CRUDCategory";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
@@ -57,10 +56,6 @@ function App() {
       <Route
         path="/admin/products"
         component={isAdmin ? CRUDProducts : Login}
-      />
-      <Route
-        path="/admin/addProduct"
-        component={isAdmin ? AddProduct : Login}
       />
       <Route
         path="/admin/category"
