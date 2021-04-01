@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { violeta, verdeDetalleTrans, blanco } from "../App/GlobalStyles";
+import { violeta, verdeDetalleTrans, blanco, verdeMain } from "../App/GlobalStyles";
 
 export const StyledAdmin = styled.div`
   display: flex;
@@ -11,7 +11,7 @@ export const StyledAdmin = styled.div`
     width: 20%;
     height: 10rem;
     border-radius: 10px;
-    border: solid ${blanco};
+    border: solid ${verdeMain};
     background-color:${verdeDetalleTrans};
     margin: 5rem;
     display: flex;

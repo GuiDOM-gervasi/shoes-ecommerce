@@ -91,6 +91,9 @@ export default function Checkout() {
               ) : (
                 <span className="name">{i.finalproducts.product.name}</span>
               )}
+              <span className="model">
+                {i.finalproducts.model.size} / {i.finalproducts.model.color}
+              </span>
               <span className="price">
                 ${i.finalproducts.product.price * i.quantity}
               </span>

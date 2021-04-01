@@ -21,7 +21,7 @@ export const StyledChaeckout = styled.div`
       font-size: 1.5rem;
   }
   ul{
-    width: 70%;
+    width: 80%;
   }
   ul li {
     width: 100%;
