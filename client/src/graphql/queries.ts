@@ -7,6 +7,7 @@ export const GET_PRODUCTS = gql`
       name
       muestraimg
       price
+      discount
       brand {
         name
       }
@@ -39,6 +40,7 @@ export const GET_PRODUCT_DETAIL = gql`
       id
       description
       price
+      discount
       name
       muestraimg
       detalleimg1
@@ -66,6 +68,7 @@ export const SEARCH_PRODUCTS = gql`
       name
       description
       price
+      discount
       muestraimg
       brand {
         name
@@ -114,6 +117,7 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
       name
       muestraimg
       price
+      discount
       brand {
         name
       }
@@ -148,6 +152,7 @@ export const GET_CART = gql`
             id
             name
             price
+            discount
             muestraimg
           }
           model {

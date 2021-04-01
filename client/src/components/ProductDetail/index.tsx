@@ -137,6 +137,7 @@ export default function ProductDetail({ match }: any) {
     name,
     brand,
     price,
+    discount,
     muestraimg,
     detalleimg1,
     detalleimg2,
@@ -187,7 +188,6 @@ export default function ProductDetail({ match }: any) {
     photoDetail1,
     photoDetail2,
     photoDetail3,
-    priceBefore,
   } = fotosZapa;
 
   const handleClick = () => {
@@ -212,7 +212,7 @@ export default function ProductDetail({ match }: any) {
     photoMain.src = newMain;
     e.target.src = oldMain;
   }
-
+  console.log(`discount`, discount)
   return (
     <StyledProductDetail>
       <div className="container">
@@ -262,8 +262,12 @@ export default function ProductDetail({ match }: any) {
             <span>{brand.name}</span>
           </div>
           <div className="precios">
-            <h4 className="priceBefore">${priceBefore}</h4>
-            <h2 className="price">${price}</h2>
+            {!!discount && discount > 0 ? <h4 className="priceBefore">Before: ${price}</h4>: <h4>List Price:</h4>} 
+            {!!discount && discount > 0 
+            ? <h2 className="price">${Math.floor(price * (1-discount))}</h2>
+            :<h2 className="price">${price}</h2>
+            } 
+            {!!discount && discount > 0 ? <h3 className="sale"> {discount * 100}% OFF!!!</h3>: <></>} 
           </div>
           <div className="botones">
             <select

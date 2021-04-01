@@ -129,7 +129,7 @@ const Cart = () => {
         {
         userId !== "0" ? cartProductsArray?.map((cartProductItem) => {
           const product = cartProductItem.finalproducts.product
-          count += product.price * cartProductItem.quantity;
+          count += Math.floor(product.price*(1-product.discount)) * cartProductItem.quantity;
           return (
             <div key={cartProductItem.finalproducts.id}>
               <img
@@ -142,7 +142,7 @@ const Cart = () => {
                 {'     '}
                 color:<strong>{' ' + cartProductItem.finalproducts.model.color} </strong> 
                 </p>
-              <p>Price: <strong>${product.price}</strong></p>
+              <p>Price: <strong>${Math.floor(product.price*(1-product.discount))}</strong></p>
               <button
                 className="buttonDelete"
                 onClick={() => {console.log(cartProductItem.finalproducts);handleDelete(cartProductItem.finalproducts.id.toString())}}

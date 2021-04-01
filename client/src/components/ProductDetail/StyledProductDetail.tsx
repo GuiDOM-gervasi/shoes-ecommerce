@@ -84,10 +84,10 @@ export const StyledProductDetail = styled.div`
       align-items: center;
     }
     .tituloLargo {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
     .tituloCorto {
-      font-size: 4.5rem;
+      font-size: 3.5rem;
     }
 
     .description {
@@ -199,6 +199,11 @@ export const StyledProductDetail = styled.div`
         }
       }
     }
+  }
+  .sale{
+    background-color: red;
+    color: white;
+    text-align : center
   }
 
   @media screen and (max-width: 870px) {
