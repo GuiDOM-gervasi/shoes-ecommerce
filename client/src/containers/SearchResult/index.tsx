@@ -5,6 +5,8 @@ import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { Link } from "react-router-dom";
 import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { StyledSearchResult } from "./StyledSearchResult";
+import NoSearchResults from "../../components/NoSearchResults";
+
 
 function useQueryParams() {
   return new URLSearchParams(useLocation().search);
@@ -25,11 +27,11 @@ export default function SearchResult() {
   return (
     <StyledSearchResult className="fondoDegradado">
       <div className="filterBar">
+          {products.length >= 1 ?
         <ul>
-          {products &&
-            products.map((item, i) => (
+            {products.map((item, i) => (
               <Link to={`/product/${item.id}`}>
-                <li>
+                <li key={item.id}>
                   <img
                     src={item.muestraimg || fotosZapa.photo}
                     alt={item.name}
@@ -42,8 +44,12 @@ export default function SearchResult() {
                   </div>
                 </li>
               </Link>
-            ))}
+            ))
+            }
         </ul>
+          :
+          <NoSearchResults/>
+          }
       </div>
     </StyledSearchResult>
   );
