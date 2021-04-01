@@ -37,6 +37,11 @@ export default function Nav() {
                 <i className="fas fa-shopping-cart"></i>
               </NavLink>
             </li>
+            <li className="user">
+              <NavLink to="/profile" className="hover">
+                <i className="fas fa-user-circle"></i>
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className="navMobile">
@@ -48,6 +53,11 @@ export default function Nav() {
           <li onClick={() => handleCheck("/cart")}>
             <NavLink to="/cart" className="hover">
               <i className="fas fa-shopping-cart fasMobile"></i>
+            </NavLink>
+          </li>
+          <li onClick={() => handleCheck("/profile")}>
+            <NavLink to="/profile" className="hover">
+              <i className="fas fa-user-circle fasMobile"></i>
             </NavLink>
           </li>
           <input type="checkbox" id="check" />
@@ -66,8 +76,8 @@ export default function Nav() {
             <li onClick={() => handleCheck("/")} className="offers">
               <NavLink to="">Offers</NavLink>
             </li>
-            <li onClick={() => handleCheck("/")} className="aboutus">
-              <NavLink to="">About us</NavLink>
+            <li className="aboutus">
+              <NavLink to="/about">About us</NavLink>
             </li>
             {userId && userId !== "0" ? (
               <li onClick={handleClick} className="login">
@@ -80,7 +90,10 @@ export default function Nav() {
                     Login
                   </NavLink>
                 </li>
-                <li onClick={() => handleCheck("/register")} className="register">
+                <li
+                  onClick={() => handleCheck("/register")}
+                  className="register"
+                >
                   <NavLink to="/register" className="hover">
                     Register
                   </NavLink>

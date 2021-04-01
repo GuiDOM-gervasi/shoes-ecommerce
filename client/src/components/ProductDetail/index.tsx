@@ -115,22 +115,21 @@ export default function ProductDetail({ match }: any) {
       if (categories[0]) {
         getSimils({ variables: { name: categories[0].name } });
       }
+      if(modelsState.colors.length > 1){
+        findStock()}
     }
   }, [mainProduct]);
 
-  // useEffect(() => {
-
-  // }, [dataStock]);
-
+  
   // const [stock, setStock] = React.useState(false);
   const [modelsState, setModelsState] = React.useState({
     colors: [],
     sizes: [],
   });
-
+  
   let colors = [];
   let sizes = [];
-
+  
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
     return <div>`Error! ${error?.message}`</div>;
@@ -205,28 +204,37 @@ export default function ProductDetail({ match }: any) {
       },
     });
   };
+
+  const imageSwap = (e) => {
+    let photoMain = document.getElementById("photoMain") as HTMLImageElement;
+    let oldMain = photoMain.src;
+    let newMain = e.target.src;
+    photoMain.src = newMain;
+    e.target.src = oldMain;
+  }
+
   return (
     <StyledProductDetail>
       <div className="container">
         <div className="fondoVioleta"></div>
         <div className="imagenes">
-          <img className="photoMain" src={muestraimg || photo} alt={name} />
+          <img id="photoMain" className="photoMain" src={muestraimg || photo} alt={name} />
           <ul>
-            <li>
+            <li onClick={(e) => imageSwap(e)}>
               <img
                 className="photoDetail"
                 src={detalleimg1 || photoDetail1}
                 alt={`photoDetail 1 - ${name}`}
               />
             </li>
-            <li>
+            <li onClick={(e) => imageSwap(e)}>
               <img
                 className="photoDetail"
                 src={detalleimg2 || photoDetail2}
                 alt={`photoDetail 2 - ${name}`}
               />
             </li>
-            <li>
+            <li onClick={(e) => imageSwap(e)}>
               <img
                 className="photoDetail"
                 src={detalleimg3 || photoDetail3}

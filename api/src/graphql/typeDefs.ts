@@ -9,6 +9,11 @@ const typeDefs = gql`
     isAdmin: Boolean!
     email: String!
     password: String!
+    city: String
+    country: String
+    addressnumber: Float
+    street: String
+    postecode: Float
     nlsuscribe: Boolean
     isGmail: Boolean
     products: [Product]
@@ -160,6 +165,11 @@ const typeDefs = gql`
       password: String!
       isGmail: Boolean
       nlsuscribe: Boolean
+      city: String
+      country: String
+      addressnumber: Int
+      street: String
+      postcode: Int
     ): User!
 
     deleteCategory(id: String!): Category
@@ -188,6 +198,14 @@ const typeDefs = gql`
     updateState(orderId: String!, state: String!): CartProduct!
     updateStock(productId: String!, modelId: String!, input: Int): String
     updateUser(id: String!, atr: String!, input: String): String
+    updateUserAddress(
+      id: String!
+      country: String
+      city: String
+      street: String
+      addressnumber: Float
+      postcode: Float
+    ): String
   }
 
   type Query {
@@ -197,6 +215,7 @@ const typeDefs = gql`
     categories(atr: String, ord: String): [Category!]!
     deleted: [Product!]!
     deletedUsers: [User!]!
+    deletedCategories: [Category!]!
 
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     getReviews(productId: String!): Reviews
@@ -209,6 +228,7 @@ const typeDefs = gql`
 
     searchProducts(name: String!): [Product!]!
     users: [User!]!
+    user(id: String!): User!
     viewOrders(orderId: String!, state: String): [Orders]!
 
     stockProduct(productId: String!, modelId: String!): FinalProduct!

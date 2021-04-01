@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const StyledProfile = styled.div`
   padding: 2em 0;
+position: relative;
   .profile_container {
     display: flex;
     height: 40vh;
@@ -35,7 +36,10 @@ export const StyledProfile = styled.div`
 
   .boton {
     width: 15%;
+    min-width: max-content;
     font-size: .8em;
     padding: 1.5em 1em;
+    text-align: center;
+    margin: 1em;
   }
 `;

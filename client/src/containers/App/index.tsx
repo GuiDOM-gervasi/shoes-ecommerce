@@ -12,7 +12,6 @@ import AddCategory from "../../components/AddCategory";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
-// import EditCategory from "../../components/EditCategory";
 import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
@@ -22,12 +21,15 @@ import Checkout from "../../components/Checkout";
 import AddReview from "../../components/AddReview";
 import EditStock from "../../components/EditStock";
 import CRUDUsers from "../CRUDUsers";
-import Success from "../../components/Checkout/Success";
-import Cancel from "../../components/Checkout/Cancel";
+import Success from "../../components/Success";
+import Cancel from "../../components/Cancel";
 import CRUDStock from "../CRUDStock";
 import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
 import Profile from "../../containers/Profile";
+import AboutUs from "../../components/AboutUs";
+import EditCategory from "../../components/EditCategory";
+import OrderHistory from "../../components/OrderHistory";
 
 require("dotenv").config();
 
@@ -45,6 +47,7 @@ function App() {
     <div className="App fondoDegradado">
       <Nav />
       <GlobalStyles />
+      <Route path="/about" component={AboutUs} />
       <Route exact path="/" component={Catalogue} />
       <Route path="/product/:id" component={ProductDetail} />
       <Route path="/register" component={AddUser} />
@@ -74,6 +77,10 @@ function App() {
         path="/admin/editProduct/:productId"
         component={isAdmin ? EditProduct : Login}
       />
+      <Route
+        path="/admin/editCategory/:categoryId"
+        component={isAdmin ? EditCategory : Login}
+      />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
       <Route
@@ -91,6 +98,7 @@ function App() {
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
       <Route path="/profile" component={Profile} />
+      <Route path="/history" component={OrderHistory} />
     </div>
   );
 }

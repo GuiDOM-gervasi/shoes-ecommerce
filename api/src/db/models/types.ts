@@ -6,6 +6,11 @@ export interface UserAttributes {
   isAdmin: Boolean;
   email: string;
   password: string;
+  country?: string; 
+  city?: string;
+  street?: string;
+  addressnumber?: string;
+  postcode?: string;
   nlsuscribe: Boolean;
 	isGmail:Boolean;
   count: number;
