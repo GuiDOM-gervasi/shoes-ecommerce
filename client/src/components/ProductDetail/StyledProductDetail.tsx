@@ -38,17 +38,17 @@ export const StyledProductDetail = styled.div`
       cursor: pointer;
     }
   }
-
+  .botonInvertido{
+    text-transform:capitalize;
+  }
   .photoMain {
-    width: 45vw;
+    width: 35vw;
+    height: 35vw;
     object-position: 20% 90%;
     object-fit: cover;
     margin: 0 2rem 2rem 0;
     position: relative;
     top: 2.5rem;
-  }
-  .photoMain {
-    height: 45vw;
   }
   .photoDetail {
     width: 10vw;
@@ -211,6 +211,7 @@ export const StyledProductDetail = styled.div`
     }
 
     .imagenes {
+      padding-left: 0;
       grid-column: 1 / 2;
       grid-row: 1 / 2;
       padding: 0.5rem;
@@ -262,7 +263,7 @@ export const StyledProductDetail = styled.div`
     .info {
       grid-column: 1 / 2;
       grid-row: 2 / 3;
-
+      padding-right: 0;
       grid-template-columns: 10% 1fr 10%;
       grid-template-rows: 1rem 8rem 4rem 6rem 1fr;
       h1 {

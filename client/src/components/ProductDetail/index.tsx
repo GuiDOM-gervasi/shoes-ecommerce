@@ -59,6 +59,7 @@ export default function ProductDetail({ match }: any) {
       productId,
     },
   });
+
   const {
     data: reviewData,
     loading: reviewLoading,
@@ -73,6 +74,7 @@ export default function ProductDetail({ match }: any) {
     getSimils,
     { data: similProducts, loading: loadingSimil, error: errorSimil },
   ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
+
   const [
     finalproducts,
     { data: finalData, loading: finalLoading, error: finalError },
@@ -84,6 +86,7 @@ export default function ProductDetail({ match }: any) {
           const itemLocal = { ...finalData.finalproducts[0], quantity: 1 };
           cartLocal.items.push(itemLocal);
           localStorage.setItem("cart", JSON.stringify(cartLocal));
+
         } else {
           addToCart({
             variables: {
@@ -94,9 +97,9 @@ export default function ProductDetail({ match }: any) {
             },
           });
         }
-        alert("Producto añadido al carrito");
+        alert("Product successfully added to your cart");
       } else {
-        alert("No queda stock de ese modelo");
+        alert("This model is out of stock");
       }
     },
   });
@@ -116,7 +119,7 @@ export default function ProductDetail({ match }: any) {
         getSimils({ variables: { name: categories[0].name } });
       }
       if(modelsState.colors.length > 1){
-        findStock()}
+        findStock(models)}
     }
   }, [mainProduct]);
 
@@ -132,7 +135,8 @@ export default function ProductDetail({ match }: any) {
   
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
-    return <div>`Error! ${error?.message}`</div>;
+  return <div>`Error! ${error?.message}`</div>;
+  
   const {
     name,
     brand,
@@ -152,7 +156,7 @@ export default function ProductDetail({ match }: any) {
     setModelsState({ ...modelsState, sizes });
   }
 
-  function findStock() {
+  function findStock(models) {
     const sizeSelect: any = document.querySelector("#size-select");
     const colorSelect: any = document.querySelector("#color-select");
     const noStock = document.querySelector("#noStock");
@@ -175,7 +179,7 @@ export default function ProductDetail({ match }: any) {
             (document.getElementById(
               "addToCart"
             ) as HTMLInputElement).disabled = true;
-            noStock.innerHTML = "No tenemos stock en ese color y talle";
+            noStock.innerHTML = "No stock left with this size and color";
           }
         }
       }
@@ -270,7 +274,7 @@ export default function ProductDetail({ match }: any) {
               className="botonInvertido"
               onChange={(e: any) => {
                 filterModels(e.target.value);
-                findStock();
+                findStock(models);
               }}
               id="color-select"
             >
@@ -281,7 +285,7 @@ export default function ProductDetail({ match }: any) {
               ))}
             </select>
             <select
-              onChange={() => findStock()}
+              onChange={() => findStock(models)}
               className="botonInvertido"
               id="size-select"
             >
@@ -296,7 +300,7 @@ export default function ProductDetail({ match }: any) {
               id="addToCart"
               onClick={() => handleClick()}
             >
-              Agregar al carrito
+              Add to cart
             </button>
             <div id="noStock"></div>
           </div>
@@ -307,7 +311,7 @@ export default function ProductDetail({ match }: any) {
           )}
         </div>
         <div className="related">
-          <h3>Relacionados</h3>
+          <h3>Related products</h3>
           <div className="photo">
             <ul>
               {similProducts?.productForCategory?.map((item, i) =>

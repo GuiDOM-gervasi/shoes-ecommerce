@@ -24,7 +24,7 @@ export default function Catalogue () {
       variables :{
         userId: userId,
         state:'reserved'
-      },
+      }
     })
   }
   // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
