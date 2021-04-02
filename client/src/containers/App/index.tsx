@@ -6,9 +6,7 @@ import { Route } from "react-router-dom";
 import ProductDetail from "../../components/ProductDetail";
 import SearchResult from "../SearchResult";
 import CRUDProducts from "../CRUDProducts";
-import AddProduct from "../../components/AddProduct";
 import CRUDCategory from "../CRUDCategory";
-import AddCategory from "../../components/AddCategory";
 import EditProduct from "../../components/EditProduct";
 import AddUser from "../../components/AddUser";
 import Login from "../../components/Login";
@@ -27,7 +25,6 @@ import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
 import Profile from "../../containers/Profile";
 import AboutUs from "../../components/AboutUs";
-import EditCategory from "../../components/EditCategory";
 import OrderHistory from "../../components/OrderHistory";
 import Offert from "../../components/Offert";
 
@@ -62,24 +59,12 @@ function App() {
         component={isAdmin ? CRUDProducts : Login}
       />
       <Route
-        path="/admin/addProduct"
-        component={isAdmin ? AddProduct : Login}
-      />
-      <Route
         path="/admin/category"
         component={isAdmin ? CRUDCategory : Login}
       />
       <Route
-        path="/admin/addCategory"
-        component={isAdmin ? AddCategory : Login}
-      />
-      <Route
         path="/admin/editProduct/:productId"
         component={isAdmin ? EditProduct : Login}
-      />
-      <Route
-        path="/admin/editCategory/:categoryId"
-        component={isAdmin ? EditCategory : Login}
       />
       <Route
         path="/admin/offerts"

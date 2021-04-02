@@ -6,6 +6,7 @@ import { PASSWORD_RESET } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
 import Loader from "../../components/Loader";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function Profile() {
   const { userId } = useAuth();
@@ -23,14 +24,16 @@ export default function Profile() {
     setInProfile(!inProfile);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     try {
-      resetPassword({ variables: { email: user.email } });
-      const modal: { style: { display: string } } = document.getElementById(
-        "success"
-      );
-      modal.style.display = "flex";
-      setTimeout(() => (modal.style.display = "none"), 5000);
+      await resetPassword({ variables: { email: user.email } });
+      Swal.fire({
+          icon: "success",
+          title: "Check your email",
+          text: "We sent you an email to your registered address to change your password",
+          showConfirmButton: false,
+          timer: 5000,
+        });
     } catch (e) {
       console.log(e);
     }

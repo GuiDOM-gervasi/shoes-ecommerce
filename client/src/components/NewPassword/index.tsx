@@ -3,6 +3,8 @@ import { StyledNewPassword } from "./StyledNewPassword";
 import { useHistory } from "react-router-dom";
 import { UPDATE_PASSWORD } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
+import Swal from "sweetalert2";
+import { check, validateChange } from "../../helpers/validationResetPwd";
 
 
 export default function NewPassword({match}) {
@@ -14,6 +16,7 @@ export default function NewPassword({match}) {
 
   const [form, setForm] = useState({
     password: "",
+    error: true,
   });
 
   async function handleSubmit(e) {
@@ -21,7 +24,15 @@ export default function NewPassword({match}) {
     let { password } = form;
     try{
       await updatePassword({variables:{password, token}})
-      .then(() => history.push("/login"))
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Password modified",
+          text: "Your password has been changed successfully.",
+          showConfirmButton: false,
+          timer: 4000,
+        });
+        history.push("/login")})
     }
     catch (err) {
       console.log(err);
@@ -30,10 +41,8 @@ export default function NewPassword({match}) {
   }
 
   const handleChange = (e: any) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
+    const error = check(e, form);
+    setForm(validateChange(e, form, error));
   };
 
   return (
@@ -45,8 +54,10 @@ export default function NewPassword({match}) {
           name="password"
           onChange={handleChange}
           placeholder="Enter your new password..."
+          value={form.password}
         />
-        <input className="boton" type="submit" value="Modify Password" />
+        <span className="span_password"></span>
+        <input className="boton" type="submit" value="Modify Password" disabled={form.error}/>
       </form>
     </StyledNewPassword>
   );

@@ -6,8 +6,8 @@ export default function Admin() {
   return (
     <StyledAdmin>
       <div>
+      
         <Link to="/admin/products">Products </Link>
-        <Link to="/admin/addProduct"> Add product </Link>
       </div>
       <div>
         <Link to="/admin/category"> Categories </Link>
@@ -21,6 +21,9 @@ export default function Admin() {
       </div>
       <div>
         <Link to="/admin/stock"> Stock </Link>
+      </div>
+      <div>
+        <Link to="/admin/offers"> Offers </Link>
       </div>
     </StyledAdmin>
   )

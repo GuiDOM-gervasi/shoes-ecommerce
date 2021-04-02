@@ -4,6 +4,7 @@ import { SEARCH_PRODUCTS } from "../../graphql/queries";
 import { useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { ResultSearchBarInput } from "./ResultSearchbarInput";
+import OutsideClickHandler from 'react-outside-click-handler';
 
 export default function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
@@ -12,6 +13,7 @@ export default function SearchBar() {
   const [searchProduct, { data }] = useLazyQuery(
     SEARCH_PRODUCTS
   );
+  const [select, setSelect] = useState(false)
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -50,6 +52,7 @@ export default function SearchBar() {
     });
   };
 
+
   return (
     <StyledSearchBar>
       <form autoComplete="off" onSubmit={handleSubmit} className="formSearch">
@@ -65,8 +68,14 @@ export default function SearchBar() {
           <i className="fas fa-search"></i>
         </button>
       {activeAutoComplete && data ? (
-        <ResultSearchBarInput data={data} handleClick={handleClick} />
-      ) : null}
+          <OutsideClickHandler
+          onOutsideClick={() => {
+            setActiveAutoComplete(false)
+          }}
+          >
+        <ResultSearchBarInput data={data} handleClick={handleClick}/>
+         </OutsideClickHandler>
+         ) : null}
       </form>
     </StyledSearchBar>
   );
