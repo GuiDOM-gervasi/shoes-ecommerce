@@ -7,6 +7,7 @@ import {
 } from "../../containers/App/GlobalStyles";
 
 export const StyledCRUDProducts = styled.div`
+.productContainer{
   display: flex;
   flex-direction: column;
   width: ${formWidth * 2}vw;
@@ -58,7 +59,7 @@ export const StyledCRUDProducts = styled.div`
   .swal2-html-container{
     list-style-type:none;
   }
-
+}
   @media (max-width: 858px) {
     .fas{
       font-size:1.5rem;

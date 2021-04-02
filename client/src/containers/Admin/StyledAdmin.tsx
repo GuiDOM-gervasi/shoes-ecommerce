@@ -6,7 +6,7 @@ export const StyledAdmin = styled.div`
   flex-wrap: wrap;
   justify-content:center;
   background-color: ${violeta};
-  height:100%;
+  min-height:82vh;
   div {
     width: 20%;
     height: 10rem;
@@ -33,7 +33,8 @@ export const StyledAdmin = styled.div`
 
   @media (max-width: 902px){
     div{
-      width:35%;
+      min-width:45%;
+      margin:2rem;
     }
   }
 `;
