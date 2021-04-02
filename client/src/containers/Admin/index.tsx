@@ -11,7 +11,6 @@ export default function Admin() {
       </div>
       <div>
         <Link to="/admin/category"> Categories </Link>
-        <Link to="/admin/addCategory"> Add category </Link>
       </div>
       <div>
         <Link to="/admin/orders"> Orders </Link>

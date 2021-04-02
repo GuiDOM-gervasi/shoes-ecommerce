@@ -1,7 +1,7 @@
 import React from "react";
 // import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { StyledChaeckout } from "./StyledCheckout";
+import { StyledCheckout } from "./StyledCheckout";
 import { useAuth } from "../../hooks/AuthProvider";
 import { GET_CART } from "../../graphql/queries";
 import { useQuery } from "@apollo/client";
@@ -66,9 +66,6 @@ export default function Checkout() {
         });
       }
     });
-
-
-
   };
 
   if (loading) return <Loader />;
@@ -77,48 +74,51 @@ export default function Checkout() {
   let count = 0;
 
   return (
-    <StyledChaeckout>
-      <h2>Datos de la compra</h2>
-      <ul>
-        {cartProductsArray.map((i: any) => {
-          count += i.finalproducts.product.price * i.quantity;
-          return (
-            <li key={i.finalproducts.id}>
-              {i.quantity > 1 ? (
-                <span className="name">
-                  {i.finalproducts.product.name} x {i.quantity}
+    <StyledCheckout>
+      <div className="checkoutContainer">
+        <h2>Datos de la compra</h2>
+        <ul>
+          {cartProductsArray.map((i: any) => {
+            count += i.finalproducts.product.price * i.quantity;
+            return (
+              <li key={i.finalproducts.id}>
+                {i.quantity > 1 ? (
+                  <span className="name">
+                    {i.finalproducts.product.name} x {i.quantity}
+                  </span>
+                ) : (
+                  <span className="name">{i.finalproducts.product.name}</span>
+                )}
+                <span className="model">
+                  {i.finalproducts.model.size} / {i.finalproducts.model.color}
                 </span>
-              ) : (
-                <span className="name">{i.finalproducts.product.name}</span>
-              )}
-              <span className="model">
-                {i.finalproducts.model.size} / {i.finalproducts.model.color}
-              </span>
-              <span className="price">
-                ${i.finalproducts.product.price * i.quantity}
-              </span>
-            </li>
-          );
-        })}
-        <li>
-          <span className="name">
-            <strong>Total:</strong>
-          </span>
-          <span className="price">
-            <strong>${count}</strong>
-          </span>
-        </li>
-      </ul>
-      <form className="location" onSubmit={handleSubmit}>
-        <label>Dirección de envio</label>
-        <input type="text" name="Country" placeholder="Country" />
-        <input type="text" name="City" placeholder="City" />
+                <span className="price">
+                  ${i.finalproducts.product.price * i.quantity}
+                </span>
+              </li>
+            );
+          })}
+          <li>
+            <span className="name">
+              <strong>Total:</strong>
+            </span>
+            <span className="price">
+              <strong>${count}</strong>
+            </span>
+          </li>
+        </ul>
+        <form className="location" onSubmit={handleSubmit}>
+          <label>Dirección de envio</label>
+          <input type="text" name="Country" placeholder="Country" />
+          <input type="text" name="City" placeholder="City" />
 
-        <input type="text" name="Street" placeholder="Street" />
-        <input type="text" name="adressNumber" placeholder="Adress Number" />
-        <input type="text" name="postCode" placeholder="Post Code" />
-        <input className="boton" type="submit" value="Comprar" />
-      </form>
-    </StyledChaeckout>
+          <input type="text" name="Street" placeholder="Street" />
+          <input type="text" name="adressNumber" placeholder="Adress Number" />
+          <input type="text" name="postCode" placeholder="Post Code" />
+          <input className="boton" type="submit" value="Comprar" />
+        </form>
+      </div>
+      <div className="footerFake"></div>
+    </StyledCheckout>
   );
 }
