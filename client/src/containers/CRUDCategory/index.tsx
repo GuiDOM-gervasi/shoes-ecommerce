@@ -152,6 +152,7 @@ export default function CRUDCategory() {
 
   return (
     <StyledCRUDCategory>
+      <div className="categoryContainer">
       <button className="addButton" onClick={handleAdd}>
         Add new Category
       </button>
@@ -198,6 +199,8 @@ export default function CRUDCategory() {
           )}
         </ul>
       </div>
+      </div>
+      <div className="footerFake"></div>
     </StyledCRUDCategory>
   );
 }

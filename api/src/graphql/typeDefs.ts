@@ -127,6 +127,14 @@ const typeDefs = gql`
   type CartSimple {
     id: String
   }
+  type Offert{
+    id: String
+    target: String, 
+    targetId: String!
+    discount: Float!
+    duration: Float!
+    active: Boolean
+  }
 
   type WishList {
     id: ID,
@@ -219,7 +227,7 @@ const typeDefs = gql`
       postcode: Float,
       ): String
 
-    setOffers(categoryId: String!, discount: Float!):String
+    setOffers(target: String!, targetId: String!, discount: Float!, duration: Float!):String
   }
 
   type Query {
@@ -250,6 +258,7 @@ const typeDefs = gql`
     allStock: [FinalProduct!]!
     userEmail(email: String!): [User!]!
     wishList(userId:String!): [WishList]!
+    getOffers(active: Boolean): [Offert]!
   }
 `;
 export default typeDefs;
