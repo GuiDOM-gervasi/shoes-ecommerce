@@ -46,7 +46,7 @@ export default function Login() {
           type="email"
           name="email"
           onChange={handleChange}
-          placeholder="email@direccion.com"
+          placeholder="email@address.com"
         />
 
         <input className="login"
@@ -55,8 +55,8 @@ export default function Login() {
           onChange={handleChange}
           placeholder="password"
         />
-        <input className="boton" type="submit" value="Iniciar sesión" />
-      <NavLink to="/forgotpassword">¿Olvidaste tu contraseña?</NavLink>
+        <input className="boton" type="submit" value="Sign in" />
+      <NavLink to="/forgotpassword">Forgot your password?</NavLink>
       </form>
 			<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>
     </StyledLogin>

@@ -37,7 +37,7 @@ export default function AboutUs () {
 						</div>
 					</div>
 					<div className='about_coder'>
-						<h3>Ivan Contreras</h3>
+						<h3>Iván Contreras</h3>
 						<div>
 							<img alt='profile' src={Ivan} />
 						</div>
@@ -46,7 +46,7 @@ export default function AboutUs () {
 						</div>
 					</div>
 					<div className='about_coder'>
-						<h3>Joaquin Tissera</h3>
+						<h3>Joaquín Tissera</h3>
 						<div>
 							<img alt='profile' src={Joaquin} />
 						</div>
@@ -66,7 +66,7 @@ export default function AboutUs () {
 						</div>
 					</div>
                     <div className='about_coder'>
-						<h3>Martin Tozer</h3>
+						<h3>Martín Tozer</h3>
 						<div>
 							<img alt='profile' src={Martin} />
 						</div>
@@ -103,8 +103,8 @@ export default function AboutUs () {
 					</div>
 				</div>
         <footer>
-            <span>Henry FT09 Grupo 01</span>
-            <span> <a href='mailto:ft09ec@gmail.com'> ft09ec@gmail.com </a></span>
+            <span><a href="https://www.soyhenry.com/" target='_blank'>🚀 Henry FT09 Grupo 01</a></span>
+            <span> <a href='mailto:ft09ec@gmail.com' target='_blank'> ft09ec@gmail.com </a></span>
           </footer>
 			</StyledAboutUs>
     )

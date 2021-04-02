@@ -146,7 +146,7 @@ export function AuthProvider(props) {
         cb();
         Swal.fire({
           icon: "success",
-          title: firstName? "Welcome " + firstName + "!":"Welcome!" ,
+          title: "Welcome!" ,
           text: "Good to see you again.",
           showConfirmButton: false,
           timer: 1500,

@@ -3,6 +3,7 @@ import { StyledNewPassword } from "./StyledNewPassword";
 import { useHistory } from "react-router-dom";
 import { UPDATE_PASSWORD } from "../../graphql/mutations";
 import { useMutation } from "@apollo/client";
+import Swal from "sweetalert2";
 
 
 export default function NewPassword({match}) {
@@ -21,7 +22,15 @@ export default function NewPassword({match}) {
     let { password } = form;
     try{
       await updatePassword({variables:{password, token}})
-      .then(() => history.push("/login"))
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Password modified",
+          text: "Your password has been changed successfully.",
+          showConfirmButton: false,
+          timer: 4000,
+        });
+        history.push("/login")})
     }
     catch (err) {
       console.log(err);
