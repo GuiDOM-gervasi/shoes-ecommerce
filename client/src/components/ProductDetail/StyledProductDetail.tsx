@@ -202,8 +202,9 @@ export const StyledProductDetail = styled.div`
   }
   .sale{
     background-color: red;
-    color: white;
-    text-align : center
+    color: ${blanco};
+    text-align : center;
+    padding: 0rem 0.5rem 0rem 0.5rem;
   }
 
   @media screen and (max-width: 870px) {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useMutation, useLazyQuery, useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
+import Swal from "sweetalert2";
 import { StyledOffert } from "./StyledOffert";
 import { SET_OFFER } from "../../graphql/mutations";
 import { GET_CATEGORIES, GET_PRODUCTS } from "../../graphql/queries";
@@ -12,7 +13,8 @@ interface Offert {
 export default function Offert() {
 
   const [setOffert, { error: errorMutationReview }] = useMutation(
-    SET_OFFER
+    SET_OFFER,
+    {refetchQueries: [{query: GET_PRODUCTS}]}
   );
 
   if (errorMutationReview) {
@@ -71,17 +73,29 @@ export default function Offert() {
   const handleSubmit = async function(ev: React.ChangeEvent<HTMLFormElement>){
     ev.preventDefault();
 
-    try {
-      await setOffert({
-        variables: {
-          target: form.target,
-          targetId: form.targetId,
-          discount: parseFloat(form.discount),
-          duration: parseFloat(form.duration),
-        },
-      });
-    } catch (err) {
-      console.error(err);
+    let result = await Swal.fire({
+      title: "Are you sure?",
+      text: "this action will send email and notifications to clients",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes'
+    })
+
+    if (result.isConfirmed){
+      try {
+        await setOffert({
+          variables: {
+            target: form.target,
+            targetId: form.targetId,
+            discount: parseFloat(form.discount),
+            duration: parseFloat(form.duration),
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
 
   }
@@ -92,50 +106,65 @@ export default function Offert() {
 
   return (
     <StyledOffert>
+
+        <h2>Create New Offert</h2>
+
       <form
         onSubmit={(ev: React.ChangeEvent<HTMLFormElement>): any =>
         handleSubmit(ev)}
       >
-        <select name="target" id="target"
-          onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
-          handleTargetSelector(ev.target.value)
-        }>
-          <option value='notSelected' key='notSelected'>Choose an option</option>
-          <option value='product' key='product'>Product</option>
-          <option value='category' key='category'>Category</option>
-        </select>
-        {
-          options.length < 1?
-          <select name="targetId" id="targetId" >
-            <option value='0' key='notSelected'>Choose an option</option>
-            <option>...</option>
-          </select>
-          :
-          <select  name="targetId" id="targetId"          
+        <div className='inputGroup'>
+          <select name="target" id="target"
             onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
-            handleTargetIdSelector(ev.target.value)}
-          >
+              handleTargetSelector(ev.target.value)
+            }>
             <option value='notSelected' key='notSelected'>Choose an option</option>
-            {options.map( e => 
-              <option value={e.id} key = {e.id}>{e.name}</option>
-              )
-            }
+            <option value='product' key='product'>Product</option>
+            <option value='category' key='category'>Category</option>
           </select>
-        }
-        <input type='number' min='0' max='1' step='0.05' name='discount'
-          onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-          handleInputChange(event)}>
-        </input> 
-        <input type='number' min='0' step='0.01'name='duration'
-          onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
-          handleInputChange(event)}>
-        </input>
+          {
+            options.length < 1?
+            <select name="targetId" id="targetId" >
+              <option value='0' key='notSelected'>Choose an option</option>
+              <option>...</option>
+            </select>
+            :
+            <select  name="targetId" id="targetId"          
+            onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+              handleTargetIdSelector(ev.target.value)}
+              >
+              <option value='notSelected' key='notSelected'>Choose an option</option>
+              {options.map( e => 
+                <option value={e.id} key = {e.id}>{e.name}</option>
+                )
+              }
+            </select>
+          }
+        </div>
+        <div className='inputGroup'>
+          <div className='inputField'>
+          <label> Discount: </label>
+            <input type='number' min='0' max='100' step='1' name='discount'
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                handleInputChange(event)}>
+          </input> 
+            <label>%</label>
+          </div>
+          <div className='inputField'>
+          <label> Duration: </label>
+            <input type='number' min='0' step='0.01'name='duration'
+              onChange={(event: React.ChangeEvent<HTMLInputElement>): void =>
+                handleInputChange(event)}>
+            </input>
+            <label> hr. </label>
+          </div>
+        </div>
         <input
           className="addButton"
           type="submit"
-          value="Create New Offert"
+          value="Create Offert"
           // disabled={form.error}
-        />
+          />
       </form>
     </StyledOffert>
   );

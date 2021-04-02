@@ -2,7 +2,6 @@ import styled from "styled-components";
 import {
   blanco,
   violeta,
-  formWidth,
   violetaHover,
 } from "../../containers/App/GlobalStyles";
 
@@ -10,51 +9,68 @@ export const StyledOffert = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 50vh;
-  width: ${formWidth}vw;
+  max-width: 55rem;
   margin: 2rem auto;
-  border: 2px solid black;
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: ${blanco};
 
+  h2{
+      text-align:center;
+    }
   form {
-    height: 80%;
+    min-height: 15rem;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
 
-    div {
-      width: 80%;
-      margin: 1vh;
-      height: min-content;
+
+    .inputGroup{
+      width: 18rem;
+      margin: 0.5rem;
+      min-height: 10rem;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: space-around;
+      align-items:center;
     }
 
-    input,
-    textarea,
-    select {
-      text-align: center;
-    }
+    .inputField{
+        display:flex;
+        height: 1.5rem;
+        flex-direction: row;
+        text-align: center;
+        font-size:large;
+        
+      }
 
+    select{
+      width: 15rem;
+      font-size: large;
+
+    }
     input {
       border: none;
       border-bottom: 1px solid black;
-      width: 80%;
+      font-size: large;
+      max-width: 5rem;
+      height: 1.5rem;
+      text-align: center;
       background-color: ${blanco};
+      border-radius: 0.1rem;
     }
 
-    textarea {
-      height: 10rem;
-      width: 100%;
-      resize: none;
+    input:focus{
+        outline-color: #bebcc0;
     }
+  
+
     .addButton {
-      width: 10vw;
+      min-width: 10rem;
+      max-width: 20rem;
+      min-height: 3rem
       padding: 1vh 0 1vh 0;
       border-radius: 3px;
       border: 2px solid ${violeta};
@@ -68,38 +84,6 @@ export const StyledOffert = styled.div`
         background-color: ${violetaHover};
       }
     }
-    .clip-star {
-      background: ${violeta};
-    }
-    .empty-star {
-      background: ${violetaHover};
-    }
-    .clip-star,
-    .empty-star {
-      clip-path: polygon(
-        50% 0%,
-        61% 35%,
-        98% 35%,
-        68% 57%,
-        79% 91%,
-        50% 70%,
-        21% 91%,
-        32% 57%,
-        2% 35%,
-        39% 35%
-      );
-      display: inline-block;
-      height: 1.5vw;
-      width: 1.5vw;
-    }
   }
-  @media screen and (max-width: 870px) {
-    width: 90vw;
-    height: 80vh;
-    form {
-      .addButton {
-        width: 50%;
-      }
-    }
-  }
-`;
+
+`; 
