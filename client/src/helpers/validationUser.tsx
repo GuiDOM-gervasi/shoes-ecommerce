@@ -7,11 +7,6 @@ export interface form {
   password: string;
   nlsuscribe: boolean;
 	isGmail: boolean;
-  // city: string;
-  // country: string;
-  // street: string;
-  // addressnumber: string;
-  // postcode: string;
   error: boolean;
 }
 
@@ -44,18 +39,18 @@ export const check = (e: any, form: form) => {
 
     if(!validateEmail(e.target.value)){
       span.innerHTML = "It must be a valid email address";
+      return true;
     }else{
       span.innerHTML = "";
     }
-
   } else if (span.className === 'span_password') {
     
     if(!validatePassword(e.target.value)){
-      span.innerHTML = "Should be contain at least one number and one uppercase";
+      span.innerHTML = "Should be contain 6 characters including at least one number and one uppercase";
+      return true;
     }else{
       span.innerHTML = "";
     }
-
   } else {
     if (span) span.innerHTML = "";
     for (const prop in form) {
