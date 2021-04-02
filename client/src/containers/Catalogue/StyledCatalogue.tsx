@@ -14,7 +14,6 @@ export const StyledCatalogue = styled.div`
     transition: all 500ms ease;
 
     &:hover {
-      /* transform: scale(1.05); */
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
   }
@@ -45,18 +44,6 @@ export const StyledCatalogue = styled.div`
     li {
       position: relative;
       overflow:hidden;
-    }
-    a {
-      text-decoration: none;
-      color: ${blanco};
-      text-align: center;
-      img {
-        &:hover {
-          transform: scale(1.3);
-          transition: all 300ms ease;
-          
-        }
-      }
     }
   }
   .productData {
