@@ -164,9 +164,10 @@ export default function CRUDProducts() {
         },
         {
           title: "Select product models",
-          html:  '<div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto;justify-items:start; justify-content: space-around;">' +
-          modelInputOptions.join("") +
-          "</div>",
+          html:
+            '<div style="display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto;justify-items:start; justify-content: space-around;">' +
+            modelInputOptions.join("") +
+            "</div>",
           preConfirm: () => {
             var checked = [];
             var checkboxes = document.querySelectorAll(
@@ -231,46 +232,52 @@ export default function CRUDProducts() {
 
   return (
     <StyledCRUDProducts>
-      <button className="addButton" onClick={handleAddProduct}>
-        Add new product
-      </button>
-      <ul className="activeProducts">
-        {allProducts?.map((item: ProductAttributes) => (
-          <li key={item.id}>
-            <span className="id"> {item.id} </span>
-            <span className="name"> {item.name} </span>
-            <span className="price"> {item.price} </span>
-
-            <div className="buttons">
-              <i onClick={() => handleEdit(item.id)} className="fas fa-edit" />
-              <i
-                onClick={() => handleDelete(item.id)}
-                className="fas fa-trash-alt"
-              />
-              {/* <button onClick={() => handleEdit(item.id)}> edit </button>
-              <button onClick={() => handleDelete(item.id)}> delete </button> */}
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div className="deleted">
-        <h4> Deleted products </h4>
-        <ul className="deletedProducts">
-          {deletedProducts?.map((item: ProductAttributes) => (
+      <div className="productContainer">
+        <button className="addButton" onClick={handleAddProduct}>
+          Add new product
+        </button>
+        <ul className="activeProducts">
+          {allProducts?.map((item: ProductAttributes) => (
             <li key={item.id}>
               <span className="id"> {item.id} </span>
               <span className="name"> {item.name} </span>
               <span className="price"> {item.price} </span>
+
               <div className="buttons">
                 <i
-                  onClick={() => handleRestore(item.id)}
-                  className="fas fa-trash-restore"
+                  onClick={() => handleEdit(item.id)}
+                  className="fas fa-edit"
                 />
+                <i
+                  onClick={() => handleDelete(item.id)}
+                  className="fas fa-trash-alt"
+                />
+                {/* <button onClick={() => handleEdit(item.id)}> edit </button>
+              <button onClick={() => handleDelete(item.id)}> delete </button> */}
               </div>
             </li>
           ))}
         </ul>
+        <div className="deleted">
+          <h4> Deleted products </h4>
+          <ul className="deletedProducts">
+            {deletedProducts?.map((item: ProductAttributes) => (
+              <li key={item.id}>
+                <span className="id"> {item.id} </span>
+                <span className="name"> {item.name} </span>
+                <span className="price"> {item.price} </span>
+                <div className="buttons">
+                  <i
+                    onClick={() => handleRestore(item.id)}
+                    className="fas fa-trash-restore"
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
+      <div className="footerFake"></div>
     </StyledCRUDProducts>
   );
 }

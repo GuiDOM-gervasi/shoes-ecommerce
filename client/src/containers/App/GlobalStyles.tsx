@@ -13,6 +13,7 @@ export var formWidth = 40;
 
 export const GlobalStyles = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+    
     body, * {
         margin: 0;
         padding: 0;
@@ -25,6 +26,10 @@ export const GlobalStyles = createGlobalStyle`
     }
     .App{
         min-height:100vh;
+    }
+    .footerFake{
+        min-height:2vh;
+        width:100%
     }
     a{
         text-decoration: none;
