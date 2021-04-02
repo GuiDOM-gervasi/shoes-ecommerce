@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { StyledSearchResult } from "./StyledSearchResult";
 import NoSearchResults from "../../components/NoSearchResults";
-
+import ProductCard from "../../components/ProductCard";
 
 function useQueryParams() {
   return new URLSearchParams(useLocation().search);
@@ -30,20 +30,9 @@ export default function SearchResult() {
           {products.length >= 1 ?
         <ul>
             {products.map((item, i) => (
-              <Link to={`/product/${item.id}`}>
                 <li key={item.id}>
-                  <img
-                    src={item.muestraimg || fotosZapa.photo}
-                    alt={item.name}
-                    className="productImg"
-                    key={item.id}
-                  />
-                  <div className="productData">
-                    <h5>{item.brand.name} {item.name}</h5>
-                    <p>${item.price}</p>
-                  </div>
+                  <ProductCard item={item} />
                 </li>
-              </Link>
             ))
             }
         </ul>
