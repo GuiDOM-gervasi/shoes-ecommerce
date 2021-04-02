@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import Swal from "sweetalert2";
 import { StyledOffert } from "./StyledOffert";
 import { SET_OFFER } from "../../graphql/mutations";
-import { GET_CATEGORIES, GET_PRODUCTS } from "../../graphql/queries";
+import { GET_CATEGORIES, GET_PRODUCTS, GET_OFFERTS } from "../../graphql/queries";
 
 
 interface Offert {
@@ -14,7 +14,11 @@ export default function Offert() {
 
   const [setOffert, { error: errorMutationReview }] = useMutation(
     SET_OFFER,
-    {refetchQueries: [{query: GET_PRODUCTS}]}
+    {refetchQueries: 
+      [
+        {query: GET_PRODUCTS},
+        {query:GET_OFFERTS, variables: {active: true} }
+      ]}
   );
 
   if (errorMutationReview) {
@@ -23,6 +27,16 @@ export default function Offert() {
 
   const { data:catData, loading:catLoading, error: catError } = useQuery(GET_CATEGORIES, {});
   const { data:prodData, loading:prodLoading, error:prodError } = useQuery(GET_PRODUCTS, {});
+  const { data:offerData, loading:offerLoading } = useQuery(GET_OFFERTS,{ variables: { active: true}});
+
+  let productsNames = [];
+  let categoriesNames= [];
+
+  if(!prodLoading && !catLoading ){
+
+    productsNames =  prodData.products.map(e => e.name)
+    categoriesNames =  catData.categories.map(e => e.name)
+  }
 
   const [form, setForm] = useState({
     target: "",
@@ -44,14 +58,13 @@ export default function Offert() {
     })
 
     if (value === 'category'){
-      console.log('elegi categoria')
-      console.log(`catData.categories`, catData.categories)
+
       catData.categories && setOptions(catData.categories);
       setOptions(catData.categories)
     }
 
     if (value === 'product'){
-      console.log(`prodData`, prodData.products)
+
       setOptions(prodData.products)
     }
   };
@@ -166,6 +179,52 @@ export default function Offert() {
           // disabled={form.error}
           />
       </form>
+      <h3>Active offerts</h3>
+      <div>
+      <ul className="activeUsers">
+          <li className="titles">
+            <h5>ID</h5>
+            <h5>Target</h5>
+            <h5>TagetId</h5>
+            <h5>Discount</h5>
+            <h5>Active</h5>
+            {/* <div></div> */}
+          </li>
+        {
+          !offerLoading  && offerData.getOffers.map( offert => 
+            <li key={offert.id}>
+            <span>
+              <p className="info">ID</p>
+              {offert.id}{" "}
+            </span>
+            <span>
+              <p className="info">Target</p>
+              {offert.target}{" "}
+            </span>
+            <span >
+              <p className="info">Target Name</p>
+              {
+                offert.target === 'product' 
+                ? productsNames[offert.targetId]
+                : categoriesNames[offert.targetId]
+              }
+              {" "}
+            </span>
+            <span>
+              <p className="info">Discount</p>
+              {offert.discount * 100}{" % "}
+            </span>
+            <span>
+              <div className="info">
+                <span className={offert.targetId ? "active" : "finish"} />
+              </div>
+            </span>
+            </li>
+          )
+        }
+      </ul>
+      </div>
+
     </StyledOffert>
   );
 }

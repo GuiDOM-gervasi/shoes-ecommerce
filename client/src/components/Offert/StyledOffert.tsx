@@ -86,4 +86,64 @@ export const StyledOffert = styled.div`
     }
   }
 
+  ul li {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 1rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    span,
+    h5,
+    div {
+      width: 20%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  p.info {
+    display: none;
+  }
+
+  .active,
+  .finish {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 100%;
+  }
+
+  .active {
+    background-color: rgba(0, 128, 0, 0.8);
+  }
+
+  .finish {
+    background-color: rgba(255, 0, 0, 0.6);
+  }
+
+
+  @media (max-width: 858px) {
+    ul li { 
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 5vw;
+      grid-template-rows: auto;
+        padding:5vw;
+      span{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    .titles {
+      display: none;
+    }
+
+    p.info {
+      display: inline;
+      font-weight: bold;
+    }
+  }
+
 `; 
