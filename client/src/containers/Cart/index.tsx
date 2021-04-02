@@ -141,7 +141,7 @@ const Cart = () => {
                     </strong>
                   </p>
                   <p>
-                    Price: <strong>${product.price}</strong>
+                    Price: <strong>$ {Math.floor(product.price*(1-product.discount))}</strong>
                   </p>
                   <button
                     className="buttonDelete"

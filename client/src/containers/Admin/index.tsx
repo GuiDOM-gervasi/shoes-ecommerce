@@ -21,6 +21,9 @@ export default function Admin() {
       <div>
         <Link to="/admin/stock"> Stock </Link>
       </div>
+      <div>
+        <Link to="/admin/offers"> Offers </Link>
+      </div>
     </StyledAdmin>
   )
 }

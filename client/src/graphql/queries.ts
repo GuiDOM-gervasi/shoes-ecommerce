@@ -321,3 +321,16 @@ export const GET_HISTORY = gql`
     }
   }
 `;
+
+
+export const GET_OFFERTS = gql`
+  query getOffers($active: Boolean!) {
+    getOffers(active: $active) {
+      id
+      target
+      targetId
+      discount
+      duration
+    }
+  }
+`;
