@@ -53,6 +53,9 @@ export const StyledNewPassword = styled.div`
     .boton{
       width:15vw;
     }
+    span{
+      color:red;
+    }
   }
   @media (max-width: 858px) {
     width: 90vw;

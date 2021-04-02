@@ -54,6 +54,9 @@ export const StyledLogin = styled.div`
     .boton {
       width: 15vw;
     }
+    span{
+      color: red;
+    }
   }
 
   @media (max-width: 858px) {
