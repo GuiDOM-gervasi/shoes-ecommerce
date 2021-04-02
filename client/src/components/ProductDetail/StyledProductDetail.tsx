@@ -34,12 +34,12 @@ export const StyledProductDetail = styled.div`
     grid-row: 1 / 2;
     width: min-content;
     padding-left: 10vw;
-    ul li{
+    ul li {
       cursor: pointer;
     }
   }
-  .botonInvertido{
-    text-transform:capitalize;
+  .botonInvertido {
+    text-transform: capitalize;
   }
   .photoMain {
     width: 35vw;
@@ -200,10 +200,10 @@ export const StyledProductDetail = styled.div`
       }
     }
   }
-  .sale{
+  .sale {
     background-color: red;
     color: white;
-    text-align : center
+    text-align: center;
   }
 
   @media screen and (max-width: 870px) {

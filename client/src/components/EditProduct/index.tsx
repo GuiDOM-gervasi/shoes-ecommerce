@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_PRODUCT } from "../../graphql/mutations";
 import {
   GET_PRODUCT_DETAIL,
   GET_BRANDS,
-  // GET_CATEGORIES,
-  // GET_MODELS,
+  GET_CATEGORIES,
 } from "../../graphql/queries";
 import { fotosZapa } from "../ProductDetail/mockup";
 import { StyledEditProduct } from "./StyledEditProduct";
-import Loader from '../Loader';
+import Loader from "../Loader";
 
 export default function EditProduct({ match }) {
   const productId = match.params.productId;
   const [modify, setModify] = useState("");
 
-  const { loading, error, data } = useQuery(GET_PRODUCT_DETAIL, {
+  const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
       id: productId,
     },
@@ -23,16 +22,39 @@ export default function EditProduct({ match }) {
 
   const { data: dataBrands } = useQuery(GET_BRANDS);
 
+  const { data: dataCategories } = useQuery(GET_CATEGORIES);
+
   const [editProduct] = useMutation(EDIT_PRODUCT, {
     refetchQueries: [
       { query: GET_PRODUCT_DETAIL, variables: { id: productId } },
     ],
   });
 
+  const [modelsState, setModelsState] = useState({
+    colors: [],
+    sizes: [],
+  });
+
+  let colors = [];
+  let sizes = [];
+
+  useEffect(() => {
+    if (mainProduct) {
+      const {
+        productDetail: { models, categories },
+      } = mainProduct;
+      colors = models.map((model) => model.color);
+      colors = Array.from(new Set(colors));
+      sizes = models.filter((model) => model.color === colors[0]);
+      sizes = sizes.map((model) => model.size);
+      sizes = Array.from(new Set(sizes));
+      setModelsState({ sizes, colors });
+    }
+  }, [mainProduct]);
+
   if (loading) return <Loader />;
   if (error) return <div>`Error! ${error.message}`</div>;
 
-  const { name, brand, description, price, categories } = data.productDetail;
   const {
     photo,
     photoDetail1,
@@ -44,7 +66,9 @@ export default function EditProduct({ match }) {
   const handleClick = async (e) => {
     const modal: any = document.querySelector(".modal");
     modal.style.display = "flex";
-    setModify(e.target.className.split("_")[1]);
+    let modifyProp = e.target.id.split("_")[1];
+    if (modifyProp === "size" || modifyProp === "color") modifyProp = "models";
+    setModify(modifyProp);
   };
 
   const handleKeyDown = async (e: any) => {
@@ -68,86 +92,183 @@ export default function EditProduct({ match }) {
 
   document.body.onkeydown = handleKeyDown;
 
+  const imageSwap = (e) => {
+    let photoMain = document.getElementById("photoMain") as HTMLImageElement;
+    let oldMain = photoMain.src;
+    let newMain = e.target.src;
+    photoMain.src = newMain;
+    e.target.src = oldMain;
+  };
+
+  function filterModels(value) {
+    sizes = models.filter((prop) => prop.color === value);
+    sizes = sizes.map((model) => model.size);
+    setModelsState({ ...modelsState, sizes });
+  }
+
+  const {
+    name,
+    brand,
+    price,
+    discount,
+    muestraimg,
+    detalleimg1,
+    detalleimg2,
+    detalleimg3,
+    categories,
+    models,
+    id,
+  } = mainProduct.productDetail;
+
   return (
     <StyledEditProduct>
-      {loading ? (
-        "Loading"
-      ) : (
-        <div className="container">
-          <div className="modal">
-            <button onClick={() => handleKeyDown({ key: "Escape" })}>x</button>
-            <h2 className="headingModal">
-              {modify && modify[0].toUpperCase() + modify.slice(1)}
-            </h2>
-            {modify === "brand" ? (
-              <select multiple>
-                {dataBrands.brand.map((brand) => (
-                  <option value={brand.id}>{brand.name}</option>
-                ))}
-              </select>
+      <div className="container">
+        <div className="modal">
+          <button
+            className="close"
+            onClick={() => handleKeyDown({ key: "Escape" })}
+          >
+            x
+          </button>
+          <h2 className="headingModal">{"New " + modify}</h2>
+          {modify === "brand" ? (
+            <select multiple>
+              {dataBrands.brand.map((brand) => (
+                <option value={brand.id}>{brand.name}</option>
+              ))}
+            </select>
+          ) : modify === "categories" ? (
+            <select multiple>
+              {dataCategories.categories.map((category) => (
+                <option value={category.id}>{category.name}</option>
+              ))}
+            </select>
+          ) : (
+            <input type="text" name="inputModal" onKeyDown={handleKeyDown} />
+          )}
+        </div>
+        <div className="fondoVioleta"></div>
+        <div className="imagenes">
+          <img
+            id="photoMain"
+            className="photoMain"
+            src={muestraimg || photo}
+            alt={name}
+          />
+          <ul>
+            <li onClick={(e) => imageSwap(e)}>
+              <img
+                className="photoDetail"
+                src={detalleimg1 || photoDetail1}
+                alt={`photoDetail 1 - ${name}`}
+              />
+            </li>
+            <li onClick={(e) => imageSwap(e)}>
+              <img
+                className="photoDetail"
+                src={detalleimg2 || photoDetail2}
+                alt={`photoDetail 2 - ${name}`}
+              />
+            </li>
+            <li onClick={(e) => imageSwap(e)}>
+              <img
+                className="photoDetail"
+                src={detalleimg3 || photoDetail3}
+                alt={`photoDetail 3 - ${name}`}
+              />
+            </li>
+          </ul>
+        </div>
+        <div className="info">
+          <h1 className={name.length > 20 ? "tituloLargo" : "tituloCorto"}>
+            {name}
+            <i
+              className="fas fa-edit icon icon_name"
+              id="edit_name"
+              onClick={handleClick}
+            ></i>
+          </h1>
+          <div className="description">
+            {categories?.map((category, i) => (
+              <span key={`${category} ${i}`} className="category">
+                {category.name},{" "}
+              </span>
+            ))}
+            <i
+              className="fas fa-edit icon icon_categories"
+              id="edit_categories"
+              onClick={handleClick}
+            ></i>
+            <span>{brand.name}</span>
+            <i
+              className="fas fa-edit icon icon_brand"
+              id="edit_brand"
+              onClick={handleClick}
+            ></i>
+          </div>
+          <div className="precios">
+            {!!discount && discount > 0 ? (
+              <div style={{ display: "flex" }}>
+                <h4 className="priceBefore">Before: ${price}</h4>
+                <i
+                  className="fas fa-edit icon icon_discount"
+                  id="edit_discount"
+                  onClick={handleClick}
+                ></i>
+              </div>
             ) : (
-              <input type="text" name="inputModal" onKeyDown={handleKeyDown} />
+              <h4>List Price:</h4>
+            )}
+            {!!discount && discount > 0 ? (
+              <h2 className="price">${Math.floor(price * (1 - discount))}</h2>
+            ) : (
+              <div style={{ display: "flex" }}>
+                <h2 className="price">${price}</h2>
+                <i
+                  className="fas fa-edit icon icon_price"
+                  id="edit_price"
+                  onClick={handleClick}
+                ></i>
+              </div>
+            )}
+            {!!discount && discount > 0 ? (
+              <h3 className="sale"> {discount * 100}% OFF!!!</h3>
+            ) : (
+              <></>
             )}
           </div>
-          <div>
-            <img className="photo" src={photo} alt="main" />
-            <ul>
-              <li>
-                <img className="photoDetail" src={photoDetail1} alt="detail" />
-              </li>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail2}
-                  alt="detail 2"
-                />
-              </li>
-              <li>
-                <img
-                  className="photoDetail"
-                  src={photoDetail3}
-                  alt="detail 3"
-                />
-              </li>
-            </ul>
-          </div>
-          <div className="info">
-            <div>
-              <h1 className="name">
-                {name}
-                <label className="label_name" onClick={handleClick}>
-                  edit
-                </label>
-              </h1>
+          <div className="botones">
+            <div style={{ display: "flex" }}>
+              <select
+                className="botonInvertido"
+                onChange={(e: any) => {
+                  filterModels(e.target.value);
+                }}
+                id="color-select"
+              >
+                {modelsState.colors?.map((color, i) => (
+                  <option value={color} key={`${color} ${i}`}>
+                    {color}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div>
-              <h2 className="brand">
-                {brand.name}
-                <label className="label_brand" onClick={handleClick}>
-                  edit
-                </label>
-              </h2>
+            <div style={{ display: "flex" }}>
+              <select className="botonInvertido" id="size-select">
+                {modelsState.sizes?.map((size, i) => (
+                  <option value={size} key={`${size} ${i}`}>
+                    {size}
+                  </option>
+                ))}
+              </select>
             </div>
-            <div>
-              <p className="description">
-                {description}{" "}
-                <label className="label_description" onClick={handleClick}>
-                  edit
-                </label>
-              </p>
-            </div>
-            <h4 className="priceBefore">{priceBefore}</h4>
-            <h3 className="price">
-              {price}{" "}
-              <label className="label_price" onClick={handleClick}>
-                edit
-              </label>
-            </h3>
-            <h4>{categories[0].name}</h4>
-            <h4>{categories[1].name}</h4>
+            <button className="boton" id="addToCart" onClick={handleClick}>
+              Add to cart
+            </button>
+            <div id="noStock"></div>
           </div>
         </div>
-      )}
+      </div>
     </StyledEditProduct>
   );
 }
