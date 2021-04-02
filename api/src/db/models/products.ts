@@ -114,6 +114,9 @@ export class Product extends Model {
   @BelongsToMany(() => User, { through: () => WishList })
   users?: Array<User & { WishList: WishList }>;
 
+  @BelongsTo(()=> WishList)
+  wishList: WishList
+
 	@HasMany(() => Review)
   reviews: ReviewAttributes[]
 

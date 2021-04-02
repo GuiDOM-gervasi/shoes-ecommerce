@@ -2,6 +2,7 @@ import {
     Column,
     DataType,
     ForeignKey,
+    HasMany,
     Model,
     Table
   } from "sequelize-typescript";
@@ -32,6 +33,9 @@ import {
     })
     @ForeignKey(() => Product)
     productId!: string;
+
+    @HasMany(()=> Product)
+    products: Product[]
   
     @Column({
       allowNull: false,

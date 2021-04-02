@@ -33,6 +33,7 @@ const typeDefs = gql`
     categories: [Category!]
     models: [Model!]
     img: String
+    wishList: WishList
   }
 
   type Category {
@@ -127,6 +128,13 @@ const typeDefs = gql`
     id: String
   }
 
+  type WishList {
+    id: ID,
+    productId: Strin!
+    userId: String!,
+    products: [Product]
+  }
+
   type Mutation {
     addImage(productId: String!, image: String!): Image!
     addReview(
@@ -142,6 +150,8 @@ const typeDefs = gql`
       quantity: Int
       price: Float
     ): CartProduct!
+    addToWishList(productId:String!, userId: String!): String! 
+
     checkStock(cartId: String!): String
     controlQuantity(id: String!, quantity: Int!): String!
 
@@ -239,6 +249,7 @@ const typeDefs = gql`
     allModelsProduct(productId: String!): [FinalProduct!]!
     allStock: [FinalProduct!]!
     userEmail(email: String!): [User!]!
+    wishList(userId:String!): [WishList]!
   }
 `;
 export default typeDefs;

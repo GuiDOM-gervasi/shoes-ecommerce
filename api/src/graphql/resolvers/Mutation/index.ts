@@ -37,3 +37,4 @@ export { default as updateUser } from "./updateUser";
 export { default as updateUserAddress } from "./updateUserAddress";
 
 export { default as setOffers } from "./setOffers";
+export { default as addToWishList } from "./addToWishList";
