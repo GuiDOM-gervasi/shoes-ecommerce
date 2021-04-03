@@ -11,12 +11,14 @@ const cartResolver = async (parent, { userId, state = 'reserved' }) => {
 		where: {
 			userId
 		},
+		
 		include: [
 			{
 				model: CartProduct,
 				where: {
 					state
 				},
+				order: [["id","DESC"],],
 				include: [
 					{
 						model: FinalProduct as any,
