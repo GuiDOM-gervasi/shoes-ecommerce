@@ -47,11 +47,11 @@ const WishListTable = () => {
     <StyledWishListTable>      
       <ul>
         <li className="titles">
+          <span className="model">Imagen </span>
           <span className="product">Product name </span>
-          <span className="model">Model </span>
-          <span className="quantity">Quantity </span>
-          <span className="price">Price </span>
-          <span className="username">Username </span>
+          <span className="quantity">Categoria </span>
+          <span className="price">Marca </span>
+          <span className="username">Remover </span>
         </li>
         {orders?.map((order) => (
           <li>
