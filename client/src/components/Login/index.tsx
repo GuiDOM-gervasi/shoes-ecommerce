@@ -28,7 +28,6 @@ export default function Login() {
 	
 	const responseGoogle = async(response) => {
 		try{
-      console.log(response)
 				login(response.profileObj.email,"google",() => history.push("/"))
 
 		}catch(e){
