@@ -138,7 +138,7 @@ const typeDefs = gql`
   type wishList {
     id: ID
     userId: String
-    productId: String
+    product: Product
   }
 
   type Mutation {

@@ -8,7 +8,7 @@ const addToWishListResolver = async (parent:any, {userId, productId}) => {
             productId
         }
     })
-    return "Success"
+    return `id: ${wishList.id.toString()} productId: ${productId} userId: ${userId}`
 };
 
 export default addToWishListResolver
