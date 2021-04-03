@@ -81,7 +81,9 @@ export const StyledOffert = styled.div`
         color: ${blanco};
       }
       &:disabled {
-        background-color: ${violetaHover};
+        background-color: #c5c5c5;
+        color: #818181;
+        border-color: #818181;
       }
     }
   }

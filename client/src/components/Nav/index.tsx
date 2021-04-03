@@ -1,6 +1,6 @@
 import React from "react";
-import { useLazyQuery } from "@apollo/client";
-import { GET_USER_DETAIL } from "../../graphql/queries";
+// import { useLazyQuery } from "@apollo/client";
+// import { GET_USER_DETAIL } from "../../graphql/queries";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
 import SearchBar from "../SearchBar";
@@ -11,11 +11,11 @@ import Swal from "sweetalert2";
 export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
-  const [getUser, { data }] = useLazyQuery(GET_USER_DETAIL);
-  if (userId && userId !== "0") {
-    getUser({ variables: { id: userId } });
-  }
-  const { user } = data || false;
+  // const [getUser, { data }] = useLazyQuery(GET_USER_DETAIL);
+  // if (userId && userId !== "0") {
+  //   getUser({ variables: { id: userId } });
+  // }
+  // const { user } = data || false;
   const handleLogout = () => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
@@ -111,7 +111,7 @@ export default function Nav() {
                   <p className="hover">Logout</p>
                 </li>
                 <li className="register">
-                  <p className="hover">Welcome {user?.firstName}</p>
+                  <p className="hover">Welcome {/*user?.firstName*/}</p>
                 </li>
               </>
             ) : (
