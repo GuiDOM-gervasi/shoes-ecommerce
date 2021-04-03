@@ -31,7 +31,8 @@ export default function Login() {
 	
 	const responseGoogle = async(response) => {
 		try{
-				login(response.profileObj.email,"hola",() => history.push("/"))
+      console.log(response)
+				login(response.profileObj.email,"google",() => history.push("/"))
 
 		}catch(e){
 			console.log(e)
@@ -58,7 +59,7 @@ export default function Login() {
         <input className="boton" type="submit" value="Sign in" />
       <NavLink to="/forgotpassword">Forgot your password?</NavLink>
       </form>
-			<GoogleLogin clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>
+			<GoogleLogin clientId="884127490955-bdfbijmkt1eu684ggiosat775ktug3qn.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>
     </StyledLogin>
   );
 }

@@ -179,7 +179,7 @@ const typeDefs = gql`
     deleteReview(id: String!): String
     deleteUser(id: String!): String!
 
-    loginUser(email: String!, password: String!): Access
+    loginUser(email: String!, password: String): Access
     logoutUser(id: String!): Logout
     passwordReset(email: String!): String!
     removeFromCart(cartId: String!, finalproductId: String!): String!
