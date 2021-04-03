@@ -1,9 +1,9 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART, CREATE_CART } from "../graphql/mutations";
+import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART, CREATE_CART} from "../graphql/mutations";
 import { LocalPersistence, METHODS } from "../helpers/localPersistence";
 import Swal from "sweetalert2";
-import { GET_CART_SIMPLE } from "../graphql/queries";
+import { GET_CART_SIMPLE, GET_USER_DETAIL } from "../graphql/queries";
 
 const AuthContext = React.createContext(null);
 
@@ -18,7 +18,6 @@ export function AuthProvider(props) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [firstName, setfirstName] = useState("");
 
-  
   /********************** Logica para cart sync *******************************/
 
   const [addToCart] = useMutation(ADD_TO_CART,{
@@ -106,6 +105,48 @@ export function AuthProvider(props) {
     },
   });
 
+  const [getLoginGoogle] = useMutation(LOGIN_USER, {
+    onCompleted: (data) => {
+      if (data) {
+        LocalPersistence(
+          "access-token",
+          METHODS.write,
+          data.loginUser.accessToken
+        );
+        LocalPersistence(
+          "refresh-token",
+          METHODS.write,
+          data.loginUser.refreshToken
+        );
+        LocalPersistence("user", METHODS.write, data.loginUser);
+        setUser(data.loginUser);
+        setUserId(data.loginUser.id);
+        setfirstName(data.loginUser.firstName);
+        data.loginUser.isAdmin && setIsAdmin(data.loginUser.isAdmin);
+        createCart({
+          variables :{
+            userId: data.loginUser.id,
+            state:'reserved'
+          }
+        }).then(()=>{
+          getCart({variables: {
+            userId: data.loginUser.id,
+            status: "reserved"
+          }
+          });
+        })
+      }
+    },
+    onError: (error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Bad login",
+        text: "Check your email and password combination.",
+      });
+      return error;
+    },
+  });
+
   const [logoutUser] = useMutation(LOGOUT_USER, {
     onCompleted: (data) => {
       if (data) {
@@ -135,24 +176,42 @@ export function AuthProvider(props) {
   }, []);
 
   function login(email: string, password: string, cb) {
-
-    getLogin({
-      variables: {
-        email,
-        password,
-      },
-    }).then((e) => {
-      if (e) {
-        cb();
-        Swal.fire({
-          icon: "success",
-          title: "Welcome!" ,
-          text: "Good to see you again.",
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      }
-    });
+    if(password === "google"){
+      getLoginGoogle({
+        variables: {
+          email
+        }
+      }).then((e) => {
+        if (e) {
+          cb();
+          Swal.fire({
+            icon: "success",
+            title: "Welcome!" ,
+            text: "Good to see you again.",
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        }
+      });
+    }else{
+      getLogin({
+        variables: {
+          email,
+          password,
+        },
+      }).then((e) => {
+        if (e) {
+          cb();
+          Swal.fire({
+            icon: "success",
+            title: "Welcome!" ,
+            text: "Good to see you again.",
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        }
+      });
+    }
   }
 
   function logout(cb) {
