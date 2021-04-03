@@ -66,6 +66,7 @@ const Cart = () => {
   };
 
   const handleQuantity = (e, cartProductItem) => {
+    if(e.target.value){
     if (userId !== "0") {
       if (cartProductItem.id) {
         cartProductItem = cartProductItem.id;
@@ -84,7 +85,7 @@ const Cart = () => {
       items.quantity = parseInt(e.target.value);
       localStorage.setItem("cart", JSON.stringify(recuperarCartLocal));
       setCartLocalState(recuperarCartLocal);
-    }
+    }}
   };
 
   const handleClick = (e, cartProductItem) => {
@@ -135,7 +136,7 @@ const Cart = () => {
   }
   return (
     <StyledCart className="fondoDegradado">
-      <div className="container ">
+      <div className="cartContainer">
         {userId !== "0"
           ? sortedCartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;

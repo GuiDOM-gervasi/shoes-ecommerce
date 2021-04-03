@@ -12,7 +12,7 @@ export default function CartItem({
   return (
     <StyledCartItem>
       <div className="itemContainer" key={cartProductItem.finalproducts?.id}>
-        <div>
+        <div className="itemImage">
           <img
             src={product.muestraimg}
             alt={`photoDetail 3 - ${product.name}`}
@@ -43,51 +43,50 @@ export default function CartItem({
           >
             <i className="fas fa-window-close"></i>
           </button>
+          <div className="number-input">
+            <button id="-" onClick={(e) => handleClick(e, cartProductItem)}>
+              <i className="fas fa-minus-square"></i>
+            </button>
+            <input
+              id="quantity"
+              className="quantity"
+              type="number"
+              onChange={(e) => handleQuantity(e, cartProductItem)}
+              value={cartProductItem.quantity}
+            />
+            <button
+              id="mas"
+              onClick={(e) => {
+                handleClick(e, cartProductItem);
+              }}
+              className="plus"
+            >
+              <i id="mas" className="fas fa-plus-square"></i>
+            </button>
+          </div>
         </div>
         <div className="itemData">
-        <h4>{product.name}</h4>
-        {cartProductItem.finalproducts?.model ? (
+          <h4>{product.name}</h4>
+          {cartProductItem.finalproducts?.model ? (
+            <p>
+              Size:{" "}
+              <strong>{cartProductItem.finalproducts?.model?.size}</strong>
+              <br />
+              Color:{" "}
+              <strong>{cartProductItem.finalproducts?.model?.color} </strong>
+            </p>
+          ) : (
+            ""
+          )}
           <p>
-            size:
-            <strong>{" " + cartProductItem.finalproducts?.model?.size}</strong>
-            {"     "}
-            color:
+            Price:{" "}
             <strong>
-              {" " + cartProductItem.finalproducts?.model?.color}{" "}
+              $
+              {product.discount
+                ? Math.floor(product.price * (1 - product.discount))
+                : product.price}
             </strong>
           </p>
-        ) : (
-          ""
-        )}
-        <p>
-          Price:{" "}
-          <strong>
-            ${" "}
-            {product.discount
-              ? Math.floor(product.price * (1 - product.discount))
-              : product.price}
-          </strong>
-        </p>
-        </div>
-        <div className="number-input">
-          <button
-            id="-"
-            onClick={(e) => handleClick(e, cartProductItem)}
-          >
-            <i className="fas fa-minus-square"></i>
-          </button>
-          <input
-            id="quantity"
-            className="quantity"
-            type="number"
-            onChange={(e) => handleQuantity(e, cartProductItem)}
-            value={cartProductItem.quantity}
-          />
-          <button
-            id="mas"
-            onClick={(e) => {handleClick(e, cartProductItem)}}
-            className="plus"
-          ><i id="mas" className="fas fa-plus-square"></i></button>
         </div>
       </div>
     </StyledCartItem>

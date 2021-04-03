@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { blanco } from "../../containers/App/GlobalStyles";
+import { blanco, negro, violeta } from "../../containers/App/GlobalStyles";
 
 export const StyledCartItem = styled.div`
 .itemContainer {
-      margin: 3rem 5rem;
+      margin: 2rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -35,11 +35,23 @@ export const StyledCartItem = styled.div`
           color: #b41919;
         }
       }
-
+      .itemImage{
+        position: relative;
+      }
       .number-input {
         // border: 1px solid #ddd;
+        position:absolute;
+        bottom:0;
+        left:50%;
+        transform: translate(-50%, -10%);
         display: flex;
         flex-direction: row;
+        button{
+          font-size:1.2rem;
+          &:hover{
+            color: ${violeta}
+          }
+        }
       }
 
       .number-input,
@@ -63,12 +75,9 @@ export const StyledCartItem = styled.div`
 
       .number-input input[type="number"] {
         font-family: sans-serif;
-        max-width: 3rem;
-        padding: 0.5rem;
-        border: solid #ddd;
-        border-width: 0 2px;
-        font-size: 1.5rem;
-        height: 2rem;
+        width: 2rem;
+        border: 1px solid ${negro};
+        font-size: 1.2rem;
         font-weight: bold;
         text-align: center;
       }

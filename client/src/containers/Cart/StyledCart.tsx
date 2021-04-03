@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const StyledCart = styled.div`
-  .container {
+  .cartContainer {
+    min-height:75vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-bottom: 9rem;
+    margin-bottom: 9vh;
   }
 
   footer {
