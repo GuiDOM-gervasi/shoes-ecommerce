@@ -59,8 +59,11 @@ export const StyledNav = styled.div`
   }
   .linedown {
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 3fr 5fr 3fr 3fr;
-    grid-template-areas: ". catalogue offers aboutus . login register";
+    grid-template-columns: 3fr 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
+    grid-template-areas: "admin catalogue offers aboutus . login register .";
+  }
+  .admin {
+    grid-area: admin;
   }
   .catalogue {
     grid-area: catalogue;
@@ -86,6 +89,7 @@ export const StyledNav = styled.div`
     line-height: 80px;
     margin: 0 5px;
     white-space: nowrap;
+    text-align: center;
   }
   nav ul li p {
     display: inline-block;
