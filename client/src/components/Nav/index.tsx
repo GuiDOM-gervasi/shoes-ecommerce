@@ -12,14 +12,9 @@ export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
 
-  const { data, loading, error } = useQuery(GET_USER_DETAIL, { variables: { id: '1'} });
-
-  if (loading) {
-    return <div>Loading ...</div>;
-  }
-  if (error) {
-    return <div>Something go wrong loading the filter bar</div>;
-  }
+  const { data, loading, error } = useQuery(GET_USER_DETAIL, {
+    variables: { id: userId },
+  });
 
   const handleLogout = () => {
     const ele = document.getElementById("check") as HTMLInputElement;
@@ -44,6 +39,7 @@ export default function Nav() {
       }
     });
   };
+
   const handleCheck = (url) => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
@@ -69,9 +65,15 @@ export default function Nav() {
               </NavLink>
             </li>
             <li className="user">
-              <NavLink to="/profile" className="hover">
-                <i className="fas fa-user-circle"></i>
-              </NavLink>
+              {userId !== "0" ? (
+                <NavLink to="/profile" className="hover">
+                  <i className="fas fa-user-circle"></i>
+                </NavLink>
+              ) : (
+                <NavLink to="/login" className="hover">
+                  <i className="fas fa-user-circle"></i>
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>
@@ -116,9 +118,7 @@ export default function Nav() {
                   <p className="hover">Logout</p>
                 </li>
                 <li className="register">
-                  <NavLink to="/profile" >
-                    Hi {" "} {data?.user?.firstName} !
-                  </NavLink>
+                  <NavLink to="/profile">Hi {data?.user?.firstName} !</NavLink>
                 </li>
               </>
             ) : (
