@@ -3,7 +3,7 @@ import { useLazyQuery, useMutation } from "@apollo/client";
 import { LOGIN_USER, LOGOUT_USER, ADD_TO_CART, CREATE_CART} from "../graphql/mutations";
 import { LocalPersistence, METHODS } from "../helpers/localPersistence";
 import Swal from "sweetalert2";
-import { GET_CART_SIMPLE } from "../graphql/queries";
+import { GET_CART_SIMPLE, GET_USER_DETAIL } from "../graphql/queries";
 
 const AuthContext = React.createContext(null);
 
@@ -18,7 +18,6 @@ export function AuthProvider(props) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [firstName, setfirstName] = useState("");
 
-  
   /********************** Logica para cart sync *******************************/
 
   const [addToCart] = useMutation(ADD_TO_CART,{
