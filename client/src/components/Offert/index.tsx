@@ -50,6 +50,12 @@ export default function Offert() {
     
     if (value === 'notSelected'){
       setOptions([])
+
+      setForm({ ...form,
+        target: '',
+        targetId: '',
+      })
+
       return
     }
 
@@ -65,7 +71,7 @@ export default function Offert() {
 
     if (value === 'product'){
 
-      setOptions(prodData.products)
+      prodData.products && setOptions(prodData.products)
     }
   };
 
@@ -176,7 +182,7 @@ export default function Offert() {
           className="addButton"
           type="submit"
           value="Create Offert"
-          // disabled={form.error}
+          disabled = {!(!!form.target && !!form.targetId) }
           />
       </form>
       <h3>Active offerts</h3>
