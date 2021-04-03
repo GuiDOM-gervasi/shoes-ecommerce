@@ -15,20 +15,8 @@ export const StyledSearchResult = styled.div`
       flex-flow: row wrap;
       list-style:none;
       li{
-        padding:0 1vw 0 1vw;
         position: relative;
-      }
-      a{
-        text-decoration:none;
-        color:${blanco};
-        text-align:center;
-        img {
-          &:hover{
-            -webkit-filter: blur(2px);
-            filter: blur(2px);
-            transition: all 300ms ease;
-          }
-        }
+        overflow:hidden;
       }
     }
   }

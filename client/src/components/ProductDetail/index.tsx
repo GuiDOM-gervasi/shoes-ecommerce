@@ -87,7 +87,6 @@ export default function ProductDetail({ match }: any) {
           const itemLocal = { ...finalData.finalproducts[0], quantity: 1 };
           cartLocal.items.push(itemLocal);
           localStorage.setItem("cart", JSON.stringify(cartLocal));
-
         } else {
           addToCart({
             variables: {
@@ -109,7 +108,7 @@ export default function ProductDetail({ match }: any) {
         Swal.fire({
           icon: "error",
           title: "Sorry!",
-          text: "This model is out of stock"
+          text: "This model is out of stock",
         });
       }
     },
@@ -129,8 +128,9 @@ export default function ProductDetail({ match }: any) {
       if (categories[0]) {
         getSimils({ variables: { name: categories[0].name } });
       }
-      if(modelsState.colors.length > 1){
-        findStock(models)}
+      if (modelsState.colors.length > 1) {
+        findStock(models);
+      }
     }
   }, [mainProduct]);
 
@@ -145,8 +145,8 @@ export default function ProductDetail({ match }: any) {
 
   if (loading || loadingSimil || loadingStock) return <Loader />;
   if (error || errorSimil || errorStock)
-  return <div>`Error! ${error?.message}`</div>;
-  
+    return <div>`Error! ${error?.message}`</div>;
+
   const {
     name,
     brand,
@@ -197,12 +197,7 @@ export default function ProductDetail({ match }: any) {
     }
   }
 
-  const {
-    photo,
-    photoDetail1,
-    photoDetail2,
-    photoDetail3,
-  } = fotosZapa;
+  const { photo, photoDetail1, photoDetail2, photoDetail3 } = fotosZapa;
 
   const handleClick = () => {
     const sizeSelect: any = document.querySelector("#size-select");
@@ -281,12 +276,21 @@ export default function ProductDetail({ match }: any) {
             <span>{brand.name}</span>
           </div>
           <div className="precios">
-            {!!discount && discount > 0 ? <h4 className="priceBefore">Before: ${price}</h4>: <h4>List Price:</h4>} 
-            {!!discount && discount > 0 
-            ? <h2 className="price">${Math.floor(price * (1-discount))}</h2>
-            :<h2 className="price">${price}</h2>
-            } 
-            {!!discount && discount > 0 ? <h3 className="sale"> {discount * 100}% OFF!!!</h3>: <></>} 
+            {!!discount && discount > 0 ? (
+              <h4 className="priceBefore">Before: ${price}</h4>
+            ) : (
+              <h4>List Price:</h4>
+            )}
+            {!!discount && discount > 0 ? (
+              <h2 className="price">${Math.floor(price * (1 - discount))}</h2>
+            ) : (
+              <h2 className="price">${price}</h2>
+            )}
+            {!!discount && discount > 0 ? (
+              <h3 className="sale"> {discount * 100}% OFF!!!</h3>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="botones">
             <select

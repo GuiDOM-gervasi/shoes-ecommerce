@@ -233,3 +233,21 @@ export const UPDATE_STATE = gql`
     }
   }
 `;
+
+
+export const SET_OFFER = gql`
+  mutation
+    setOffers( 
+      $target: String!, 
+      $targetId: String!, 
+      $discount: Float!, 
+      $duration: Float! )
+    {
+      setOffers(
+        target: $target, 
+        targetId: $targetId, 
+        discount: $discount, 
+        duration: $duration )
+    }
+`;
+

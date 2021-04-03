@@ -3,9 +3,7 @@ import {GoogleLogin } from "react-google-login"
 import { useAuth } from "../../hooks/AuthProvider";
 import { StyledLogin } from "./StyledLogin";
 import { NavLink, useHistory } from "react-router-dom";
-
-
-// import { validateChange, check, form } from "../../helpers/validationLogin";
+import { validateChange, check, form } from "../../helpers/validationLogin";
 
 
 export default function Login() {
@@ -13,7 +11,8 @@ export default function Login() {
   const history = useHistory();
   const [form, setForm] = useState({
     email: "",
-		password: "",
+    password: "",
+    error: true,
   });
 
   async function handleSubmit(e) {
@@ -23,10 +22,8 @@ export default function Login() {
   }
 
   const handleChange = (e: any) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    })
+    const error = check(e, form);
+    setForm(validateChange(e, form, error));
   };
 	
 	const responseGoogle = async(response) => {
@@ -49,14 +46,15 @@ export default function Login() {
           onChange={handleChange}
           placeholder="email@address.com"
         />
-
+        <span className="span_email"></span>
         <input className="login"
           type="password"
           name="password"
           onChange={handleChange}
           placeholder="password"
         />
-        <input className="boton" type="submit" value="Sign in" />
+        <span className="span_password"></span>
+        <input className="boton" type="submit" value="Sign in" disabled={form.error}/>
       <NavLink to="/forgotpassword">Forgot your password?</NavLink>
       </form>
 			<GoogleLogin clientId="884127490955-bdfbijmkt1eu684ggiosat775ktug3qn.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>

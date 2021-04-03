@@ -126,6 +126,14 @@ const typeDefs = gql`
   type CartSimple {
     id: String
   }
+  type Offert{
+    id: String
+    target: String, 
+    targetId: String!
+    discount: Float!
+    duration: Float!
+    active: Boolean
+  }
 
   type Mutation {
     addImage(productId: String!, image: String!): Image!
@@ -209,7 +217,7 @@ const typeDefs = gql`
       postcode: Float,
       ): String
 
-    setOffers(categoryId: String!, discount: Float!):String
+    setOffers(target: String!, targetId: String!, discount: Float!, duration: Float!):String
   }
 
   type Query {
@@ -239,6 +247,7 @@ const typeDefs = gql`
     allModelsProduct(productId: String!): [FinalProduct!]!
     allStock: [FinalProduct!]!
     userEmail(email: String!): [User!]!
+    getOffers(active: Boolean): [Offert]
   }
 `;
 export default typeDefs;

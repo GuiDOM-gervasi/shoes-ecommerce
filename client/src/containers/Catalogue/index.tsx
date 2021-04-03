@@ -1,31 +1,26 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { Link } from "react-router-dom";
 import React from "react";
 import { StyledCatalogue } from "./StyledCatalogue";
-import { fotosZapa } from "../../components/ProductDetail/mockup";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Slider from "../../components/Slider";
 import Filter from "../../components/Filter";
 import Loader from "../../components/Loader";
-import {useAuth} from "../../hooks/AuthProvider";
-import { CREATE_CART,} from "../../graphql/mutations";
+import ProductCard from "../../components/ProductCard";
+import { useAuth } from "../../hooks/AuthProvider";
+import { CREATE_CART } from "../../graphql/mutations";
 
-
-
-export default function Catalogue () {
+export default function Catalogue() {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
-  const [createCart] = useMutation(
-    CREATE_CART
-  );
+  const [createCart] = useMutation(CREATE_CART);
   const [loadedProducts, setLoadedProduct] = React.useState([]);
-  const {userId} = useAuth()
-  if(parseInt(userId) > 0){
+  const { userId } = useAuth();
+  if (parseInt(userId) > 0) {
     createCart({
-      variables :{
+      variables: {
         userId: userId,
-        state:'reserved'
-      }
-    })
+        state: "reserved",
+      },
+    });
   }
   // Esto es mejor hacerlo con un useEffect para que no explote si no hay ningun producto
   // if (loadedProducts.length < 1) {
@@ -53,24 +48,7 @@ export default function Catalogue () {
       <ul>
         {loadedProducts.map((item, i) => (
           <li key={item.id}>
-            <Link to={`/product/${item.id || 1}`}>
-              <img
-                src={item.muestraimg || fotosZapa.photo}
-                alt="name"
-                className="productImg"
-              />
-              {!!item.discount 
-              ? <div className='discount'>
-                {item.discount * 100}% OFF!
-              </div> 
-              : <></>}
-              <div className="productData">
-                <h5>
-                  {item.brand.name} {item.name}
-                </h5>
-                <p>${item.price}</p>
-              </div>
-            </Link>
+            <ProductCard item={item} />
           </li>
         ))}
       </ul>

@@ -3,6 +3,7 @@ import { GoogleLogin } from "react-google-login";
 import { useMutation } from "@apollo/client";
 import { StyledAddUser } from "./StyledAddUser";
 import { ADD_USER } from "../../graphql/mutations";
+import Swal from "sweetalert2";
 import { validateChange, check, form } from "../../helpers/validationUser";
 import { useHistory } from "react-router-dom"
 interface AddUserAttributes {
@@ -46,7 +47,13 @@ export default function AddUser({ className }: AddUserAttributes) {
         },
       }).then(
         () => {
-          alert("Te registraste correctamente")
+          Swal.fire({
+            icon: "success",
+            title: "User created!",
+            text: "Your user has been added successfully.",
+            showConfirmButton: false,
+            timer: 2000,
+          });
           history.push("/login")})
     } catch (err) {
       console.log(err);
@@ -59,11 +66,6 @@ export default function AddUser({ className }: AddUserAttributes) {
       isAdmin: false,
       email: "",
       password: "",
-      // city: "",
-      // country: "",
-      // street:"",
-      // addressnumber:"",
-      // postcode:"",
       nlsuscribe: false,
 			isGmail:false,
       error: true,
@@ -84,11 +86,6 @@ export default function AddUser({ className }: AddUserAttributes) {
 				isAdmin: false,
 				email: response.profileObj.email,
         password: "",
-        // city: "",
-        // country: "",
-        // street:"",
-        // addressnumber:"",
-        // postcode:"",
 				nlsuscribe: false,
 				isGmail: true,
 				error: false,
@@ -151,57 +148,6 @@ export default function AddUser({ className }: AddUserAttributes) {
           />
           <span className="span_password"></span>
         </div>
-        {/* <div className="div_country">
-          <select name="country" onChange={handleChange}>
-            <option>CHOOSE YOUR COUNTRY</option>
-            {countries.map(country => (
-              <option key={country.value} value={country.text}>{country.text}</option>
-            ))}
-          </select>
-          <span className="span_country"></span>
-        </div>
-        <div className="div_city">
-          <input className="register"
-            type="text"
-            name="city"
-            onChange={handleChange}
-            placeholder="City"
-            value={form.city}
-          />
-          <span className="span_city"></span>
-        </div>
-        <div className="div_street">
-          <input className="register"
-            type="text"
-            name="street"
-            onChange={handleChange}
-            placeholder="Street name"
-            value={form.street}
-          />
-          <span className="span_street"></span>
-        </div>
-        <div className="div_addressnumber">
-          <input className="register"
-            type="number"
-            min="0"
-            name="addressnumber"
-            onChange={handleChange}
-            value={form.addressnumber}
-          />
-          <label htmlFor="addressnumber">Street Number</label>
-          <span className="span_addressnumber"></span>
-        </div>
-        <div className="div_postcode">
-          <input className="register"
-            type="number"
-            min="0"
-            name="postcode"
-            onChange={handleChange}
-            value={form.postcode}
-          />
-          <label htmlFor="postcode">Postcode</label>
-          <span className="span_postcode"></span>
-        </div> */}
         <div className="div_nlsuscribe">
           <input
             type="checkbox"
