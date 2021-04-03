@@ -144,6 +144,7 @@ const Cart = () => {
                 Math.floor(product.price * (1 - product.discount)) *
                 cartProductItem.quantity;
               return (
+                <div className="cartItem">
                 <CartItem
                   cartProductItem={cartProductItem}
                   product={product}
@@ -151,6 +152,7 @@ const Cart = () => {
                   handleQuantity={handleQuantity}
                   handleDelete={handleDelete}
                 />
+                </div>
               );
             })
           : cartProductsArray?.map((cartProductItem) => {

@@ -8,7 +8,9 @@ export const StyledCart = styled.div`
     justify-content: space-around;
     margin-bottom: 9vh;
   }
-
+  .cartItem:last-of-type{
+    margin-bottom:5vh;
+  }
   footer {
     display: flex;
     position: fixed;

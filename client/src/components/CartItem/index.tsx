@@ -78,15 +78,18 @@ export default function CartItem({
           ) : (
             ""
           )}
-          <p>
-            Price:{" "}
-            <strong>
-              $
-              {product.discount
-                ? Math.floor(product.price * (1 - product.discount))
-                : product.price}
-            </strong>
-          </p>
+          {product.discount ? (
+            <div>
+              <div className="oldPrice">
+                Old price: <span>${product.price}</span>
+              </div>
+              <div className="newPrice">
+                Discount Price : <span>${Math.floor(product.price * (1 - product.discount))}</span>
+              </div>
+            </div>
+          ) : (
+            <div className="newPrice">Price: <span>${product.price}</span></div>
+          )}
         </div>
       </div>
     </StyledCartItem>
