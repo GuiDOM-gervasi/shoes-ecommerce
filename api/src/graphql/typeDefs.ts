@@ -191,6 +191,7 @@ const typeDefs = gql`
     ): User!
 
     deleteCategory(id: String!): Category
+    deleteFromWishList(productId:String! userId:String!): String
     deleteProduct(id: String!): Product
     deleteReview(id: String!): String
     deleteUser(id: String!): String!

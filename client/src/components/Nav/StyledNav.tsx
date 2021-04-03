@@ -59,8 +59,8 @@ export const StyledNav = styled.div`
   }
   .linedown {
     display: grid;
-    grid-template-columns: 3fr 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
-    grid-template-areas: "admin catalogue offers aboutus . login register .";
+    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
+    grid-template-areas: "admin catalogue offers wishlist aboutus . login register .";
   }
   .admin {
     grid-area: admin;
@@ -70,6 +70,9 @@ export const StyledNav = styled.div`
   }
   .offers {
     grid-area: offers;
+  }
+  .wishlist{
+    grid-area: wishlist;
   }
   .aboutus {
     grid-area: aboutus;

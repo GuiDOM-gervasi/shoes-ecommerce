@@ -11,11 +11,11 @@ import Swal from "sweetalert2";
 export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
-  const [getUser, { data }] = useLazyQuery(GET_USER_DETAIL);
-  if (userId && userId !== "0") {
-    getUser({ variables: { id: userId } });
-  }
-  const { user } = data || false;
+  // const [getUser, { data }] = useLazyQuery(GET_USER_DETAIL);
+  // if (userId && userId !== "0") {
+  //   getUser({ variables: { id: userId } });
+  // }
+  // const { user } = data || false;
   const handleLogout = () => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
@@ -102,16 +102,27 @@ export default function Nav() {
             <li onClick={() => handleCheck("/")} className="offers">
               <NavLink to="">Offers</NavLink>
             </li>
-            <li className="aboutus">
+            {userId && userId !== "0"? ( 
+            <>
+              <li onClick={() => handleCheck("/wishlist")} className="wishlist">
+                <NavLink to="">WishList</NavLink>
+              </li>
+              <li className="aboutus">
+              <NavLink to="/about">About us</NavLink>
+              </li>
+            </>
+            ) :
+            <li className="wishlist">
               <NavLink to="/about">About us</NavLink>
             </li>
+            }
             {userId && userId !== "0" ? (
               <>
                 <li onClick={handleLogout} className="login">
                   <p className="hover">Logout</p>
                 </li>
                 <li className="register">
-                  <p className="hover">Welcome {user?.firstName}</p>
+                  <p className="hover">Welcome {/* {user?.firstName} */}</p>
                 </li>
               </>
             ) : (

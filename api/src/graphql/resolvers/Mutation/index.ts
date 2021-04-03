@@ -12,6 +12,7 @@ export { default as createProduct } from "./createProduct";
 export { default as createUser } from "./createUser";
 
 export { default as deleteCategory } from "./deleteCategory";
+export { default as deleteFromWishList } from "./deleteFromWishlist";
 export { default as deleteProduct } from "./deleteProduct";
 export { default as deleteReview } from "./deleteReview";
 export { default as deleteUser } from "./deleteUser";

@@ -2,7 +2,7 @@ import CartProduct from '../../../db/models/cartproduct';
 
 const removeformcartresolver = async (parent, {cartId, finalproductId} ) => {
     
-    console.log(cartId, finalproductId);
+    // console.log(cartId, finalproductId);
 
     if (finalproductId === 'empty'){
         
@@ -24,7 +24,7 @@ const removeformcartresolver = async (parent, {cartId, finalproductId} ) => {
             },
             force: true
         })
-        console.log(result);
+        // console.log(result);
         return 'The final product was successfully removed';
 
     }
