@@ -1,4 +1,6 @@
 import React from "react";
+import { useLazyQuery } from "@apollo/client";
+import { GET_USER_DETAIL } from "../../graphql/queries";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
 import SearchBar from "../SearchBar";
@@ -9,38 +11,39 @@ import Swal from "sweetalert2";
 export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
+  const [getUser, { data }] = useLazyQuery(GET_USER_DETAIL);
+  if (userId && userId !== "0") {
+    getUser({ variables: { id: userId } });
+  }
+  const { user } = data || false;
   const handleLogout = () => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
     Swal.fire({
       title: "Are you sure?",
       text: "We are sad to see you go",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, log out.'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, log out.",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
-          timer:1000,
-          title:'Goodbye',
-          text:'We hope to see you soon!',
+          timer: 1000,
+          title: "Goodbye",
+          text: "We hope to see you soon!",
           showConfirmButton: false,
-        })
+        });
         logout(() => history.push("/"));
       }
-    })
-
-
+    });
   };
   const handleCheck = (url) => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
     history.push(url);
   };
-
-
 
   return (
     <StyledNav>
@@ -89,7 +92,7 @@ export default function Nav() {
           </label>
           <ul className="linedown">
             {isAdmin ? (
-              <li onClick={() => handleCheck("/admin")}>
+              <li className="admin" onClick={() => handleCheck("/admin")}>
                 <NavLink to="/admin">Admin</NavLink>
               </li>
             ) : null}
@@ -103,9 +106,14 @@ export default function Nav() {
               <NavLink to="/about">About us</NavLink>
             </li>
             {userId && userId !== "0" ? (
-              <li onClick={handleLogout} className="login">
-                <p className="hover">Logout</p>
-              </li>
+              <>
+                <li onClick={handleLogout} className="login">
+                  <p className="hover">Logout</p>
+                </li>
+                <li className="register">
+                  <p className="hover">Welcome {user?.firstName}</p>
+                </li>
+              </>
             ) : (
               <>
                 <li onClick={() => handleCheck("/login")} className="login">
