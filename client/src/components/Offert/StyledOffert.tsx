@@ -2,7 +2,6 @@ import styled from "styled-components";
 import {
   blanco,
   violeta,
-  violetaHover,
 } from "../../containers/App/GlobalStyles";
 
 export const StyledOffert = styled.div`

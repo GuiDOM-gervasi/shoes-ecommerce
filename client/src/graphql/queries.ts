@@ -289,7 +289,7 @@ export const GET_ORDERS = gql`
 `;
 
 export const GET_USER_DETAIL = gql`
-  query GetUser($id: String!) {
+  query user($id: String!) {
     user(id: $id) {
       firstName
       lastName
