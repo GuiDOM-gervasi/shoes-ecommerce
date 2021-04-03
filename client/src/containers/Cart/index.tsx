@@ -65,17 +65,22 @@ const Cart = () => {
     }
   };
 
-  const handleQuantity = (e, id) => {
+  const handleQuantity = (e, cartProductItem) => {
     if (userId !== "0") {
+      if (cartProductItem.id) {
+        cartProductItem = cartProductItem.id;
+      }
       controlQuantity({
         variables: {
-          id,
+          id: cartProductItem,
           quantity: parseInt(e.target.value),
         },
       });
     } else {
       let recuperarCartLocal = JSON.parse(localStorage.getItem("cart"));
-      let items = recuperarCartLocal.items.find((item) => item.id === id.id);
+      let items = recuperarCartLocal.items.find(
+        (item) => item.id === cartProductItem.id
+      );
       items.quantity = parseInt(e.target.value);
       localStorage.setItem("cart", JSON.stringify(recuperarCartLocal));
       setCartLocalState(recuperarCartLocal);
@@ -83,7 +88,9 @@ const Cart = () => {
   };
 
   const handleClick = (e, cartProductItem) => {
-    const input: any = e.target.parentNode.parentNode.querySelector("#quantity");
+    const input: any = e.target.parentNode.parentNode.querySelector(
+      "#quantity"
+    );
 
     if (userId !== "0") {
       if (e.target.id === "mas") {
@@ -113,12 +120,24 @@ const Cart = () => {
       }
     }
   };
+  let sortedCartProductsArray;
 
+  if (userId !== "0" && cartProductsArray) {
+    let cartArray = [...cartProductsArray];
+    sortedCartProductsArray = cartArray.sort((a, b) => {
+      if (a.finalproducts.id > b.finalproducts.id) {
+        return 1;
+      }
+      if (a.finalproducts.id <= b.finalproducts.id) {
+        return -1;
+      }
+    });
+  }
   return (
     <StyledCart className="fondoDegradado">
       <div className="container ">
         {userId !== "0"
-          ? cartProductsArray?.map((cartProductItem) => {
+          ? sortedCartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;
               count +=
                 Math.floor(product.price * (1 - product.discount)) *

@@ -80,7 +80,7 @@ export default function CartItem({
             id="quantity"
             className="quantity"
             type="number"
-            onChange={(e) => handleQuantity(e, cartProductItem.id)}
+            onChange={(e) => handleQuantity(e, cartProductItem)}
             value={cartProductItem.quantity}
           />
           <button
