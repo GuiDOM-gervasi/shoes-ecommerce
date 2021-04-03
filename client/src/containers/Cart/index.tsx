@@ -75,7 +75,7 @@ const Cart = () => {
       });
     } else {
       let recuperarCartLocal = JSON.parse(localStorage.getItem("cart"));
-      let items = recuperarCartLocal.items.find((item) => item.id === id);
+      let items = recuperarCartLocal.items.find((item) => item.id === id.id);
       items.quantity = parseInt(e.target.value);
       localStorage.setItem("cart", JSON.stringify(recuperarCartLocal));
       setCartLocalState(recuperarCartLocal);
@@ -83,7 +83,7 @@ const Cart = () => {
   };
 
   const handleClick = (e, cartProductItem) => {
-    const input: any = e.target.parentNode.querySelector("#quantity");
+    const input: any = e.target.parentNode.parentNode.querySelector("#quantity");
 
     if (userId !== "0") {
       if (e.target.id === "mas") {
@@ -106,7 +106,6 @@ const Cart = () => {
         );
       }
       if (input.value > 1) {
-        console.log("Ingreso ------", cartProductItem);
         return handleQuantity(
           { target: { value: Number(input.value) - 1 } },
           cartProductItem
