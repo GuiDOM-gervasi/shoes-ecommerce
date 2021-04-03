@@ -1,4 +1,4 @@
-import WishList from "#root/db/models/wishlist";
+import WishList from "#root/db/models/wishList";
 
 const addToWishListResolver = async (parent:any, {userId, productId}) => {
     

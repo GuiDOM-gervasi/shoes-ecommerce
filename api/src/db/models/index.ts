@@ -6,7 +6,7 @@ import Product from "./products";
 import ProductCategory from "./productcategory";
 import Models from "./models";
 import FinalProduct from "./finalproduct";
-import { WishList } from "./wishlist";
+import wishList  from "./wishList";
 import Cart from "./carts";
 import CartProduct from "./cartproduct";
 import Review from "./review";
@@ -21,7 +21,7 @@ export default [
   ProductCategory,
   Models,
   FinalProduct,
-  WishList,
+  wishList,
   Cart,
   CartProduct,
   Review,

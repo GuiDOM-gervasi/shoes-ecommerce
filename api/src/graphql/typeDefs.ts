@@ -33,7 +33,6 @@ const typeDefs = gql`
     categories: [Category!]
     models: [Model!]
     img: String
-    wishList: WishList
   }
 
   type Category {
@@ -129,18 +128,17 @@ const typeDefs = gql`
   }
   type Offert{
     id: String
-    target: String, 
+    target: String
     targetId: String!
     discount: Float!
     duration: Float!
     active: Boolean
   }
 
-  type WishList {
-    id: ID,
-    productId: Strin!
-    userId: String!,
-    products: [Product]
+  type wishList {
+    id: ID
+    userId: String
+    productId: String
   }
 
   type Mutation {
@@ -257,7 +255,7 @@ const typeDefs = gql`
     allModelsProduct(productId: String!): [FinalProduct!]!
     allStock: [FinalProduct!]!
     userEmail(email: String!): [User!]!
-    wishList(userId:String!): [WishList]!
+    wishList(userId:String!): [wishList]!
     getOffers(active: Boolean): [Offert]!
   }
 `;

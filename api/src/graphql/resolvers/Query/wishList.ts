@@ -1,15 +1,15 @@
 import Product from "#root/db/models/products";
-import WishList from "#root/db/models/wishlist";
+import wishList from "#root/db/models/wishList";
 
-const wishListResolver = async(parent:any,{userId}) => {
-    const wishList = await WishList.findAll({
-        where:{
-            userId
-        },
-        include:[Product as any]
-    })
+// type arg = {
+//     userId: string
+// }
 
-    return wishList
+const wishListResolver = async( parent:any, {userId} ) => {
+
+    return await wishList.findAll()
+    // console.log('wish :', wish);
+    // return wish
 }
 
-export default wishListResolver
+export default wishListResolver;
