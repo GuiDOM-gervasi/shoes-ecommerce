@@ -5,8 +5,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useAuth } from "../../hooks/AuthProvider";
 import { DELETE_TO_CART, QUANTITY } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
+import CartItem from "../../components/CartItem";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const Cart = () => {
   const cartLocal = JSON.parse(localStorage.getItem("cart"));
@@ -121,113 +121,30 @@ const Cart = () => {
         {userId !== "0"
           ? cartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;
-              count += Math.floor(product.price*(1-product.discount)) * cartProductItem.quantity;
+              count +=
+                Math.floor(product.price * (1 - product.discount)) *
+                cartProductItem.quantity;
               return (
-                <div key={cartProductItem.finalproducts.id}>
-                  <img
-                    src={product.muestraimg}
-                    alt={`photoDetail 3 - ${product.name}`}
-                  />
-                  <h4>{product.name}</h4>
-                  <p>
-                    size:{" "}
-                    <strong>
-                      {" " + cartProductItem.finalproducts.model.size}
-                    </strong>
-                    {"     "}
-                    color:
-                    <strong>
-                      {" " + cartProductItem.finalproducts.model.color}{" "}
-                    </strong>
-                  </p>
-                  <p>
-                    Price: <strong>$ {Math.floor(product.price*(1-product.discount))}</strong>
-                  </p>
-                  <button
-                    className="buttonDelete"
-                    onClick={() => {
-                      Swal.fire({
-                        title: "Sure?",
-                        text: "Please confirm if you want to remove this item from your cart.",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete.",
-                        showConfirmButton: true,
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          handleDelete(
-                            cartProductItem.finalproducts.id.toString()
-                          );
-                        }
-                      });
-                    }}
-                  >
-                    X
-                  </button>
-                  <div className="number-input">
-                    <button
-                      id="-"
-                      onClick={(e) => handleClick(e, cartProductItem)}
-                    ></button>
-                    <input
-                      id="quantity"
-                      className="quantity"
-                      type="number"
-                      onChange={(e) => handleQuantity(e, cartProductItem.id)}
-                      value={cartProductItem.quantity}
-                    />
-                    <button
-                      id="mas"
-                      onClick={(e) => handleClick(e, cartProductItem)}
-                      className="plus"
-                    ></button>
-                  </div>
-                </div>
+                <CartItem
+                  cartProductItem={cartProductItem}
+                  product={product}
+                  handleClick={handleClick}
+                  handleQuantity={handleQuantity}
+                  handleDelete={handleDelete}
+                />
               );
             })
           : cartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.product;
               count += product.price * cartProductItem.quantity;
               return (
-                <div>
-                  <img
-                    src={product.muestraimg}
-                    alt={`photoDetail 3 - ${product.name}`}
-                  />
-                  <h4>{product.name}</h4>
-                  <p>
-                    Price: <strong>${product.price}</strong>
-                  </p>
-                  <button
-                    className="buttonDelete"
-                    onClick={() => {
-                      console.log(cartProductItem);
-                      handleDelete(cartProductItem.id.toString());
-                    }}
-                  >
-                    X
-                  </button>
-                  <div className="number-input">
-                    <button
-                      id="-"
-                      onClick={(e) => handleClick(e, cartProductItem.id)}
-                    ></button>
-                    <input
-                      id="quantity"
-                      className="quantity"
-                      type="number"
-                      onChange={(e) => handleQuantity(e, cartProductItem.id)}
-                      value={cartProductItem.quantity}
-                    />
-                    <button
-                      id="mas"
-                      onClick={(e) => handleClick(e, cartProductItem.id)}
-                      className="plus"
-                    ></button>
-                  </div>
-                </div>
+                <CartItem
+                  cartProductItem={cartProductItem}
+                  product={product}
+                  handleClick={handleClick}
+                  handleQuantity={handleQuantity}
+                  handleDelete={handleDelete}
+                />
               );
             })}
       </div>
