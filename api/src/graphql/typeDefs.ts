@@ -240,6 +240,7 @@ const typeDefs = gql`
 
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     getReviews(productId: String!): Reviews
+    getReviewsFromUser(userId: String!): Reviews
     image(productId: String!): [Image]!
     models: [Model!]!
 

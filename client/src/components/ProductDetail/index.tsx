@@ -9,22 +9,18 @@ import {
   GET_CART_SIMPLE,
   GET_STOCK,
   GET_REVIEWS,
-  GET_WISHLIST,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
-import { ADD_TO_CART, ADD_TO_WISHLIST, DELETE_FROM_WISHLIST } from "../../graphql/mutations";
+import { ADD_TO_CART } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
 import Reviews from "../../containers/Reviews";
 import Swal from "sweetalert2";
-// import fav from "./heart/fav.png"
-
 
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
-  const [isFavorite, setFavorite] = React.useState(false);
 
   const [addToCart] = useMutation(ADD_TO_CART, {
     refetchQueries: [
@@ -43,49 +39,11 @@ export default function ProductDetail({ match }: any) {
     ],
   });
 
-  const [addToWishlist] = useMutation(ADD_TO_WISHLIST,{
-    refetchQueries:[
-      {
-        query: GET_WISHLIST,
-        variables:{
-          userId: userId && userId
-        }
-      }
-    ]
-  })
-
-  const [removeFromWishlist] = useMutation(DELETE_FROM_WISHLIST,{
-    refetchQueries:[
-      {
-        query: GET_WISHLIST,
-        variables:{
-          userId: userId && userId
-        }
-      }
-    ]
-  })
-
-  useQuery(GET_WISHLIST, {
-    variables: {
-      userId: userId && userId,
-    },
-    onCompleted: wishData =>{
-      wishData?.wishList.forEach(product => {
-        if (product.product.id === productId){
-          setFavorite(true);
-          return true
-        }
-        return false
-      })
-    }
-  });
-
   const { data } = useQuery(GET_CART_SIMPLE, {
     variables: {
       userId: userId && userId,
     },
   });
-
 
   const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
@@ -105,6 +63,8 @@ export default function ProductDetail({ match }: any) {
 
   const {
     data: reviewData,
+    loading: reviewLoading,
+    error: reviewError,
   } = useQuery(GET_REVIEWS, {
     variables: {
       productId,
@@ -262,35 +222,6 @@ export default function ProductDetail({ match }: any) {
     e.target.src = oldMain;
   };
 
-  const addToFav = (productId) =>{
-    // Swal.fire({
-    //       icon: "success",
-    //       title: "Great choice!",
-    //       text: "Product successfully added to your wishlist",
-    //       showConfirmButton: false,
-    //       timer: 1500,
-    //     });
-    
-    addToWishlist({
-      variables:{
-        productId,
-        userId
-      }
-    })
-    setFavorite(true)
-    console.log('agregar')
-  }
-
-  const removeFromFav = (productId) =>{
-    removeFromWishlist({
-      variables:{
-        productId,
-        userId
-      }
-    })
-    setFavorite(false)
-  }
-
   return (
     <StyledProductDetail>
       <div className="container">
@@ -360,11 +291,6 @@ export default function ProductDetail({ match }: any) {
             ) : (
               <></>
             )}
-          </div>
-          <div className="favoritos">
-              { isFavorite
-                ? <i className="fas fa-heart fas-on" onClick={()=>removeFromFav(id)}></i> 
-                : <i className="fas fa-heart fas-off" onClick={()=>addToFav(id)}></i>}
           </div>
           <div className="botones">
             <select
