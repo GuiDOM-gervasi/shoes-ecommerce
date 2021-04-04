@@ -1,12 +1,18 @@
-import React from 'react'
-import { StyledSuccess } from './StyledSuccess'
-import Check from "../../icons/check.png"
+import React from "react";
+import { StyledSuccess } from "./StyledSuccess";
+import Check from "../../icons/check.png";
 export default function Success() {
   return (
     <StyledSuccess>
-        <h2>Felicitaciones!</h2>
-        <p>Su compra ha sido realizada con éxito</p>
-        <img src={Check} alt="succes"/>
-    </StyledSuccess>  
-  )
+      <div>
+        <h2>Congratulations!</h2>
+        <p>
+          Your payment was successful.
+          <br />
+          Please check your email to see your invoice.
+        </p>
+      </div>
+      <img src={Check} alt="succes" />
+    </StyledSuccess>
+  );
 }
