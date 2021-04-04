@@ -134,6 +134,8 @@ export const StyledProductDetail = styled.div`
     .favoritos{
       grid-row: 4 ;
       grid-column: 3;
+      align-self: center;
+      padding-top: 1rem;
       .fas{
         font-size: 3rem;
       }
