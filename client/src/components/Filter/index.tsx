@@ -22,7 +22,12 @@ interface Brands {
 }
 
 export default function Filter({ setLoadedProduct }) {
-  // get form apollo/graphQL the categories to be show as options to filter
+  
+  const [filters, setFilter] = React.useState({
+    categories: [''],
+    brands: ['']
+    })
+
   const { data: catData, loading: catLoading, error: catError } = useQuery(GET_CATEGORIES, {});
   const { data: brandsData, loading: brandsLoading, error: brandsError } = useQuery(GET_BRANDS, {});
   const [
@@ -32,12 +37,32 @@ export default function Filter({ setLoadedProduct }) {
 
   const handleCategoryFilter = (value) => {
     console.log([value])
+
     getProducts({
       variables: {
         categoryId : [value],
-        brandId: ['']
+        brandId: filters.brands
       },
     });
+
+    setFilter({ ...filters,
+      categories:[value],
+    })
+  };
+
+  const handleBrandFilter = (value) => {
+    console.log([value])
+    getProducts({
+      variables: {
+        categoryId : filters.categories,
+        brandId: [value]
+      },
+    });
+
+    setFilter({ ...filters,
+      brands:[value],
+    })
+
   };
 
   if (catLoading || brandsLoading ) {
@@ -76,7 +101,7 @@ export default function Filter({ setLoadedProduct }) {
       <div className="filter">
         <select 
           onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
-            handleCategoryFilter(ev.target.value)
+            handleBrandFilter(ev.target.value)
           }
         >
           <option className="option" id="zzz" value="">
