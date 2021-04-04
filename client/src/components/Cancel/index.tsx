@@ -4,9 +4,9 @@ import X from "../../icons/cancel.png"
 export default function Cancel() {
   return (
     <StyledCancel>
-      Parece que algo a salido mal. Por favor intentalo de nuevo. 
-      si tiene alguna duda por favor contactarse con:
-      <a href="mailto:orders@example.com">orders@example.com</a>.
+      Something seems to be wrong. Please try again.
+      If you experience further issues, please contact:
+      <a href="mailto:ft09ec@gmail.com">ft09ec@gmail.com</a>.
       <img src={X} alt="F"/>
     </StyledCancel>
   )

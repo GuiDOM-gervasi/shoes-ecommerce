@@ -165,7 +165,7 @@ export default function AddUser({ className }: AddUserAttributes) {
 					disabled={form.error}
 				/>
 				<GoogleLogin
-					clientId="917872323404-58l60bosf4l28poog0r9bht4mm3683dl.apps.googleusercontent.com"
+					clientId="884127490955-bdfbijmkt1eu684ggiosat775ktug3qn.apps.googleusercontent.com"
 					onSuccess={responseGoogle}
 					onFailure={responseGoogle}
 					buttonText="Register with Gmail"

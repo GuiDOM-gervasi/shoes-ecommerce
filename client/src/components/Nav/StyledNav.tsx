@@ -60,7 +60,7 @@ export const StyledNav = styled.div`
   .linedown {
     display: grid;
     grid-template-columns: 3fr 3fr 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
-    grid-template-areas: "admin catalogue offers wishlist aboutus . login register .";
+    grid-template-areas: "admin catalogue  wishlist aboutus offers . login register .";
   }
   .admin {
     grid-area: admin;

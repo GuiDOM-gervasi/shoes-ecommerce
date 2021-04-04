@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { blanco, violeta, productWidth } from "../App/GlobalStyles";
+import { blanco, violeta, negro, productWidth } from "../App/GlobalStyles";
 
 export const StyledCatalogue = styled.div`
+  
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -45,14 +46,12 @@ export const StyledCatalogue = styled.div`
   }
 
   @media (max-width: 858px){
-    .filter{
-      width:100vw;
-    }
+
     .productImg{
       width: 100vw;
       height:100vw;
     }
-    .create, .trend, .sale{
+    .create, .trend{
       display:none;
     }
     .productData{

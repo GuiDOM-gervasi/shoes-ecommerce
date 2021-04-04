@@ -5,8 +5,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useAuth } from "../../hooks/AuthProvider";
 import { DELETE_TO_CART, QUANTITY } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
+import CartItem from "../../components/CartItem";
 import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const Cart = () => {
   const cartLocal = JSON.parse(localStorage.getItem("cart"));
@@ -65,25 +65,33 @@ const Cart = () => {
     }
   };
 
-  const handleQuantity = (e, id) => {
+  const handleQuantity = (e, cartProductItem) => {
+    if(e.target.value){
     if (userId !== "0") {
+      if (cartProductItem.id) {
+        cartProductItem = cartProductItem.id;
+      }
       controlQuantity({
         variables: {
-          id,
+          id: cartProductItem,
           quantity: parseInt(e.target.value),
         },
       });
     } else {
       let recuperarCartLocal = JSON.parse(localStorage.getItem("cart"));
-      let items = recuperarCartLocal.items.find((item) => item.id === id);
+      let items = recuperarCartLocal.items.find(
+        (item) => item.id === cartProductItem.id
+      );
       items.quantity = parseInt(e.target.value);
       localStorage.setItem("cart", JSON.stringify(recuperarCartLocal));
       setCartLocalState(recuperarCartLocal);
-    }
+    }}
   };
 
   const handleClick = (e, cartProductItem) => {
-    const input: any = e.target.parentNode.querySelector("#quantity");
+    const input: any = e.target.parentNode.parentNode.querySelector(
+      "#quantity"
+    );
 
     if (userId !== "0") {
       if (e.target.id === "mas") {
@@ -106,7 +114,6 @@ const Cart = () => {
         );
       }
       if (input.value > 1) {
-        console.log("Ingreso ------", cartProductItem);
         return handleQuantity(
           { target: { value: Number(input.value) - 1 } },
           cartProductItem
@@ -114,76 +121,37 @@ const Cart = () => {
       }
     }
   };
+  let sortedCartProductsArray;
 
+  if (userId !== "0" && cartProductsArray) {
+    let cartArray = [...cartProductsArray];
+    sortedCartProductsArray = cartArray.sort((a, b) => {
+      if (a.finalproducts.id > b.finalproducts.id) {
+        return 1;
+      }
+      if (a.finalproducts.id <= b.finalproducts.id) {
+        return -1;
+      }
+    });
+  }
   return (
     <StyledCart className="fondoDegradado">
-      <div className="container ">
+      <div className="cartContainer">
         {userId !== "0"
-          ? cartProductsArray?.map((cartProductItem) => {
+          ? sortedCartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;
-              count += Math.floor(product.price*(1-product.discount)) * cartProductItem.quantity;
+              count +=
+                Math.floor(product.price * (1 - product.discount)) *
+                cartProductItem.quantity;
               return (
-                <div key={cartProductItem.finalproducts.id}>
-                  <img
-                    src={product.muestraimg}
-                    alt={`photoDetail 3 - ${product.name}`}
-                  />
-                  <h4>{product.name}</h4>
-                  <p>
-                    size:{" "}
-                    <strong>
-                      {" " + cartProductItem.finalproducts.model.size}
-                    </strong>
-                    {"     "}
-                    color:
-                    <strong>
-                      {" " + cartProductItem.finalproducts.model.color}{" "}
-                    </strong>
-                  </p>
-                  <p>
-                    Price: <strong>$ {Math.floor(product.price*(1-product.discount))}</strong>
-                  </p>
-                  <button
-                    className="buttonDelete"
-                    onClick={() => {
-                      Swal.fire({
-                        title: "Sure?",
-                        text: "Please confirm if you want to remove this item from your cart.",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete.",
-                        showConfirmButton: true,
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          handleDelete(
-                            cartProductItem.finalproducts.id.toString()
-                          );
-                        }
-                      });
-                    }}
-                  >
-                    X
-                  </button>
-                  <div className="number-input">
-                    <button
-                      id="-"
-                      onClick={(e) => handleClick(e, cartProductItem)}
-                    ></button>
-                    <input
-                      id="quantity"
-                      className="quantity"
-                      type="number"
-                      onChange={(e) => handleQuantity(e, cartProductItem.id)}
-                      value={cartProductItem.quantity}
-                    />
-                    <button
-                      id="mas"
-                      onClick={(e) => handleClick(e, cartProductItem)}
-                      className="plus"
-                    ></button>
-                  </div>
+                <div className="cartItem">
+                <CartItem
+                  cartProductItem={cartProductItem}
+                  product={product}
+                  handleClick={handleClick}
+                  handleQuantity={handleQuantity}
+                  handleDelete={handleDelete}
+                />
                 </div>
               );
             })
@@ -191,43 +159,13 @@ const Cart = () => {
               const product = cartProductItem.product;
               count += product.price * cartProductItem.quantity;
               return (
-                <div>
-                  <img
-                    src={product.muestraimg}
-                    alt={`photoDetail 3 - ${product.name}`}
-                  />
-                  <h4>{product.name}</h4>
-                  <p>
-                    Price: <strong>${product.price}</strong>
-                  </p>
-                  <button
-                    className="buttonDelete"
-                    onClick={() => {
-                      console.log(cartProductItem);
-                      handleDelete(cartProductItem.id.toString());
-                    }}
-                  >
-                    X
-                  </button>
-                  <div className="number-input">
-                    <button
-                      id="-"
-                      onClick={(e) => handleClick(e, cartProductItem.id)}
-                    ></button>
-                    <input
-                      id="quantity"
-                      className="quantity"
-                      type="number"
-                      onChange={(e) => handleQuantity(e, cartProductItem.id)}
-                      value={cartProductItem.quantity}
-                    />
-                    <button
-                      id="mas"
-                      onClick={(e) => handleClick(e, cartProductItem.id)}
-                      className="plus"
-                    ></button>
-                  </div>
-                </div>
+                <CartItem
+                  cartProductItem={cartProductItem}
+                  product={product}
+                  handleClick={handleClick}
+                  handleQuantity={handleQuantity}
+                  handleDelete={handleDelete}
+                />
               );
             })}
       </div>

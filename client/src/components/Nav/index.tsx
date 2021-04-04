@@ -1,5 +1,5 @@
 import React from "react";
-import { useLazyQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { GET_USER_DETAIL } from "../../graphql/queries";
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../hooks/AuthProvider";
@@ -11,11 +11,11 @@ import Swal from "sweetalert2";
 export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
-  // const [getUser, { data }] = useLazyQuery(GET_USER_DETAIL);
-  // if (userId && userId !== "0") {
-  //   getUser({ variables: { id: userId } });
-  // }
-  // const { user } = data || false;
+
+  const { data } = useQuery(GET_USER_DETAIL, {
+    variables: { id: userId },
+  });
+
   const handleLogout = () => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
@@ -39,6 +39,7 @@ export default function Nav() {
       }
     });
   };
+
   const handleCheck = (url) => {
     const ele = document.getElementById("check") as HTMLInputElement;
     ele.checked = false;
@@ -64,9 +65,15 @@ export default function Nav() {
               </NavLink>
             </li>
             <li className="user">
-              <NavLink to="/profile" className="hover">
-                <i className="fas fa-user-circle"></i>
-              </NavLink>
+              {userId !== "0" ? (
+                <NavLink to="/profile" className="hover">
+                  <i className="fas fa-user-circle"></i>
+                </NavLink>
+              ) : (
+                <NavLink to="/login" className="hover">
+                  <i className="fas fa-user-circle"></i>
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>
@@ -99,9 +106,9 @@ export default function Nav() {
             <li onClick={() => handleCheck("/")} className="catalogue">
               <NavLink to="/">Catalogue</NavLink>
             </li>
-            <li onClick={() => handleCheck("/")} className="offers">
+            {/* <li onClick={() => handleCheck("/")} className="offers">
               <NavLink to="">Offers</NavLink>
-            </li>
+            </li> */}
             {userId && userId !== "0"? ( 
             <>
               <li onClick={() => handleCheck("/wishlist")} className="wishlist">
@@ -122,7 +129,7 @@ export default function Nav() {
                   <p className="hover">Logout</p>
                 </li>
                 <li className="register">
-                  <p className="hover">Welcome {/* {user?.firstName} */}</p>
+                  <NavLink to="/profile">Hi {data?.user?.firstName} !</NavLink>
                 </li>
               </>
             ) : (

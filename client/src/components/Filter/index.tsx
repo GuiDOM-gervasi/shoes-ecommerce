@@ -3,49 +3,83 @@ import { StyledFilter } from "./StyledFilter";
 import { useQuery, useLazyQuery } from "@apollo/client";
 import {
   GET_CATEGORIES,
-  GET_PRODUCTS_BY_CATEGORIES,
+  GET_FILTERED_PRODUCTS,
+  GET_BRANDS
 } from "../../graphql/queries";
 
 // typescript interface
-interface Category {
+interface filterAtribute {
   id: string;
   name: string;
   __typename: string;
 }
 
-export default function Filter({ setLoadedProduct }) {
-  // get form apollo/graphQL the categories to be show as options to filter
-  const { data, loading, error } = useQuery(GET_CATEGORIES, {});
+export default function Filter({ setLoadedProduct, setFilterOfferts, filterOfferts }) {
+  
+  const [filters, setFilter] = React.useState({
+    categories: [''],
+    brands: ['']
+    })
+
+  const { data: catData, loading: catLoading, error: catError } = useQuery(GET_CATEGORIES, {});
+  const { data: brandsData, loading: brandsLoading, error: brandsError } = useQuery(GET_BRANDS, {});
   const [
     getProducts,
     { data: productsData, loading: productsLoading },
-  ] = useLazyQuery(GET_PRODUCTS_BY_CATEGORIES);
+  ] = useLazyQuery(GET_FILTERED_PRODUCTS);
 
   const handleCategoryFilter = (value) => {
+    console.log([value])
+
     getProducts({
       variables: {
-        name: value,
+        categoryId : [value],
+        brandId: filters.brands
       },
     });
+
+    setFilter({ ...filters,
+      categories:[value],
+    })
   };
 
-  if (loading) {
+  const handleBrandFilter = (value) => {
+    console.log([value])
+    getProducts({
+      variables: {
+        categoryId : filters.categories,
+        brandId: [value]
+      },
+    });
+
+    setFilter({ ...filters,
+      brands:[value],
+    })
+
+  };
+
+  if (catLoading || brandsLoading ) {
     return <div>Loading ...</div>;
   }
-  if (error) {
+  if (catError || brandsError ) {
     return <div>Something go wrong loading the filter bar</div>;
   }
 
   if(!productsLoading && !!productsData) {
-    setLoadedProduct(productsData.productForCategory)
+    setLoadedProduct(productsData.filteredProducts)
   }
 
-  const categories: Category[] = data.categories;
+  const categories: filterAtribute[] = catData.categories;
+  const brands: filterAtribute[] = brandsData.brand;
 
   return (
     <StyledFilter>
+      
+      <div className="filter" onClick={() => setFilterOfferts(!filterOfferts)}>
+          {filterOfferts? <p className="sale"> All Products</p>:<p className="sale"> For sale!</p>}
+      </div>
       <div className="filter">
-        <select
+        <select 
           onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
             handleCategoryFilter(ev.target.value)
           }
@@ -54,12 +88,27 @@ export default function Filter({ setLoadedProduct }) {
             All categories
           </option>
           {categories.map((e) => (
-            <option className="option" id={e.id} value={e.name} key={e.id}>
+            <option className="option" id={e.name} value={e.id} key={e.id}>
               {e.name}{" "}
             </option>
           ))}
         </select>
-        <span className="focus"></span>
+      </div>
+      <div className="filter">
+        <select 
+          onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            handleBrandFilter(ev.target.value)
+          }
+        >
+          <option className="option" id="zzz" value="">
+            All brands
+          </option>
+          {brands.map((e) => (
+            <option className="option" id={e.name} value={e.id} key={e.id}>
+              {e.name}{" "}
+            </option>
+          ))}
+        </select>
       </div>
     </StyledFilter>
   );

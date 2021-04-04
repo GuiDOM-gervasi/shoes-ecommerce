@@ -40,9 +40,7 @@ export const StyledCheckout = styled.div`
     .location {
       display: flex;
       flex-direction: column;
-      height: 20vh;
       justify-content: space-around;
-      margin: 1.5rem;
       align-items: center;
       input {
         margin: 0.5rem 0 1rem 0;
@@ -50,11 +48,18 @@ export const StyledCheckout = styled.div`
     }
   }
   @media (max-width: 858px) {
-    width: 90vw;
-    form {
-      .boton {
-        width: 80%;
+    .checkoutContainer {
+      width: 90vw;
+      .location {
+        width:90%;
+        input{ 
+          width:90%;
+          line-height:1.5rem;}
+        .boton {
+          width: 80%;
+        }
       }
+
     }
   }
 `;

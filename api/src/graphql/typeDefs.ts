@@ -196,7 +196,7 @@ const typeDefs = gql`
     deleteReview(id: String!): String
     deleteUser(id: String!): String!
 
-    loginUser(email: String!, password: String!): Access
+    loginUser(email: String!, password: String): Access
     logoutUser(id: String!): Logout
     passwordReset(email: String!): String!
     removeFromCart(cartId: String!, finalproductId: String!): String!
@@ -245,6 +245,7 @@ const typeDefs = gql`
 
     productDetail(id: String!): Product!
     productForCategory(name: String!): [Product!]!
+    filteredProducts(categoryId: [String!]!, brandId: [String!]!): [Product!]!
     products(atr: String, ord: String): [Product!]!
 
     searchProducts(name: String!): [Product!]!

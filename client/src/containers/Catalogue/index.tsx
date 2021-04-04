@@ -13,6 +13,7 @@ export default function Catalogue() {
   let { data, loading, error } = useQuery(GET_PRODUCTS);
   const [createCart] = useMutation(CREATE_CART);
   const [loadedProducts, setLoadedProduct] = React.useState([]);
+  const [filterOfferts, setFilterOfferts] = React.useState(false);
   const { userId } = useAuth();
   if (parseInt(userId) > 0) {
     createCart({
@@ -34,20 +35,27 @@ export default function Catalogue() {
 
   if (loading || !data) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
-
+  // let filterOfferts = true;
   return (
     <StyledCatalogue className="fondoDegradado">
       <Slider />
       <div className="sectionBar">
-        <Filter setLoadedProduct={setLoadedProduct} />
+        <Filter setLoadedProduct={setLoadedProduct} setFilterOfferts={setFilterOfferts} filterOfferts= {filterOfferts}/>
       </div>
-
+      
       <ul>
-        {loadedProducts.map((item, i) => (
-          <li key={item.id}>
-            <ProductCard item={item} />
-          </li>
-        ))}
+        {loadedProducts.map((item, i) => {
+          
+            if(!filterOfferts || item.discount > 0 ){
+              return (            
+              <li key={item.id}>
+                <ProductCard item={item} />
+              </li>
+            )}
+              else{
+                return <></>
+              }
+            })}
       </ul>
     </StyledCatalogue>
   );
