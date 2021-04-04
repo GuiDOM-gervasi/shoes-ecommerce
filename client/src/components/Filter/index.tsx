@@ -9,19 +9,13 @@ import {
 } from "../../graphql/queries";
 
 // typescript interface
-interface Category {
+interface filterAtribute {
   id: string;
   name: string;
   __typename: string;
 }
 
-interface Brands {
-  id: string;
-  name: string;
-  __typename: string;
-}
-
-export default function Filter({ setLoadedProduct }) {
+export default function Filter({ setLoadedProduct, setFilterOfferts, filterOfferts }) {
   
   const [filters, setFilter] = React.useState({
     categories: [''],
@@ -76,11 +70,14 @@ export default function Filter({ setLoadedProduct }) {
     setLoadedProduct(productsData.filteredProducts)
   }
 
-  const categories: Category[] = catData.categories;
-  const brands: Category[] = brandsData.brand;
+  const categories: filterAtribute[] = catData.categories;
+  const brands: filterAtribute[] = brandsData.brand;
 
   return (
     <StyledFilter>
+      <div className="filter">
+        <section className="sale" onClick={() => setFilterOfferts(!filterOfferts)}>For sale!</section>
+      </div>
       <div className="filter">
         <select 
           onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
@@ -96,7 +93,6 @@ export default function Filter({ setLoadedProduct }) {
             </option>
           ))}
         </select>
-        <span className="focus"></span>
       </div>
       <div className="filter">
         <select 
@@ -113,8 +109,6 @@ export default function Filter({ setLoadedProduct }) {
             </option>
           ))}
         </select>
-
-        <span className="focus"></span>
       </div>
     </StyledFilter>
   );

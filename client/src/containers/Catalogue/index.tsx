@@ -40,10 +40,7 @@ export default function Catalogue() {
     <StyledCatalogue className="fondoDegradado">
       <Slider />
       <div className="sectionBar">
-        {/* <section className="create">Crear</section>
-        <section className="trend">Tendencias</section> */}
-        <section className="sale" onClick={() => setFilterOfferts(!filterOfferts)}>For sale!</section>
-        <Filter setLoadedProduct={setLoadedProduct} />
+        <Filter setLoadedProduct={setLoadedProduct} setFilterOfferts={setFilterOfferts} filterOfferts= {filterOfferts}/>
       </div>
       
       <ul>
