@@ -100,11 +100,11 @@ export default function Nav() {
           <ul className="linedown">
             {isAdmin ? (
               <li className="admin" onClick={() => handleCheck("/admin")}>
-                <NavLink to="/admin">Admin</NavLink>
+                <NavLink to="/admin"activeClassName="selected">Admin</NavLink>
               </li>
             ) : null}
             <li onClick={() => handleCheck("/")} className="catalogue">
-              <NavLink to="/">Catalogue</NavLink>
+              <NavLink exact to="/" activeClassName="selected">Catalogue</NavLink>
             </li>
             {/* <li onClick={() => handleCheck("/")} className="offers">
               <NavLink to="">Offers</NavLink>
@@ -112,15 +112,15 @@ export default function Nav() {
             {userId && userId !== "0"? ( 
             <>
               <li onClick={() => handleCheck("/wishlist")} className="wishlist">
-                <NavLink to="">WishList</NavLink>
+                <NavLink to="/wishlist" activeClassName="selected" >WishList</NavLink>
               </li>
               <li className="aboutus">
-              <NavLink to="/about">About us</NavLink>
+              <NavLink to="/about"activeClassName="selected" >About us</NavLink>
               </li>
             </>
             ) :
             <li className="wishlist">
-              <NavLink to="/about">About us</NavLink>
+              <NavLink to="/about" activeClassName="selected" >About us</NavLink>
             </li>
             }
             {userId && userId !== "0" ? (
@@ -129,13 +129,13 @@ export default function Nav() {
                   <p className="hover">Logout</p>
                 </li>
                 <li className="register">
-                  <NavLink to="/profile">Hi {data?.user?.firstName} !</NavLink>
+                  <NavLink to="/profile" activeClassName="selected">Hi {data?.user?.firstName} !</NavLink>
                 </li>
               </>
             ) : (
               <>
                 <li onClick={() => handleCheck("/login")} className="login">
-                  <NavLink to="/login" className="hover">
+                  <NavLink to="/login" className="hover"activeClassName="selected" >
                     Login
                   </NavLink>
                 </li>
@@ -143,7 +143,7 @@ export default function Nav() {
                   onClick={() => handleCheck("/register")}
                   className="register"
                 >
-                  <NavLink to="/register" className="hover">
+                  <NavLink to="/register" className="hover" activeClassName="selected">
                     Register
                   </NavLink>
                 </li>

@@ -62,6 +62,9 @@ export const StyledNav = styled.div`
     grid-template-columns: 3fr 3fr 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
     grid-template-areas: "admin catalogue  wishlist aboutus offers . login register .";
   }
+  .selected{
+    border-bottom: solid ${verdeMain};
+  }
   .admin {
     grid-area: admin;
   }

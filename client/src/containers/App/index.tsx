@@ -79,7 +79,7 @@ function App() {
       />
       <Route
         exact path="/wishlist"
-        component={isAdmin ? wishListTable : Login}
+        component={wishListTable}
       />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route path="/forgotpassword" component={PasswordReset} />
