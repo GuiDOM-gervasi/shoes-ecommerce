@@ -3,7 +3,6 @@ import { StyledFilter } from "./StyledFilter";
 import { useQuery, useLazyQuery } from "@apollo/client";
 import {
   GET_CATEGORIES,
-  GET_PRODUCTS_BY_CATEGORIES,
   GET_FILTERED_PRODUCTS,
   GET_BRANDS
 } from "../../graphql/queries";
@@ -75,8 +74,9 @@ export default function Filter({ setLoadedProduct, setFilterOfferts, filterOffer
 
   return (
     <StyledFilter>
-      <div className="filter">
-        <section className="sale" onClick={() => setFilterOfferts(!filterOfferts)}>For sale!</section>
+      
+      <div className="filter" onClick={() => setFilterOfferts(!filterOfferts)}>
+          {filterOfferts? <p className="sale"> All Products</p>:<p className="sale"> For sale!</p>}
       </div>
       <div className="filter">
         <select 
