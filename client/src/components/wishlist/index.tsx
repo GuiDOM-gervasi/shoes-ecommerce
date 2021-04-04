@@ -2,88 +2,88 @@ import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useQuery, useMutation } from "@apollo/client";
 import { StyledWishListTable } from "./StyledWishList";
-import { GET_ORDERS } from "../../graphql/queries";
-import { UPDATE_STATE } from "../../graphql/mutations";
+import { GET_WISHLIST } from "../../graphql/queries";
+import { DELETE_FROM_WISHLIST, UPDATE_STATE } from "../../graphql/mutations";
 import Loader from "../Loader";
 import Swal from "sweetalert2";
+import { useAuth } from "../../hooks/AuthProvider";
+import { Link } from "react-router-dom";
 
 const WishListTable = () => {
-  // reserved, payed, finish, rejected
-  const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
-    variables: { orderId: "all", state: "reserved" },
+  const {userId} = useAuth()
+  const { data, loading, error, refetch } = useQuery(GET_WISHLIST, {
+    variables: { 
+      userId:  userId && userId
+    }
   });
-
-  const [currentState, setCurrentState] = useState("reserved");
-
-  const [
-    updateState,
-    { loading: loadingMutation, error: errorMutation },
-  ] = useMutation(UPDATE_STATE, {
+  
+  const [deletefromWishList] = useMutation(DELETE_FROM_WISHLIST, {
     refetchQueries: [
-      { query: GET_ORDERS, variables: { orderId: "all", state: currentState } },
+      {
+        query: GET_WISHLIST,
+        variables: {
+          userId: userId && userId,
+        },
+      },
     ],
   });
+  
+  
+  if (loading) return <Loader />;
+  if (error)return <span> Error! {error?.message} </span>;
+  
+const wishList = data.wishList
 
-  const history = useHistory();
-
-  if (loading || loadingMutation) return <Loader />;
-  if (error || errorMutation)
-    return <span> Error! {error?.message || errorMutation?.message} </span>;
-
-  const handleClick = (e) => {
-    const state = e.target.id;
-    setCurrentState(state);
-    refetch({ orderId: "all", state });
-  };
-
-  const handleChange = (e, orderId) => {
-    const state = e.target.value;
-    e.target.value = currentState;
-  };
-
+const handleDelete = (productId) => {
+    deletefromWishList({
+      variables: {
+        productId,
+        userId,
+      },
+    });
+}
   const orders = data.viewOrders;
 
   return (
-    <StyledWishListTable>      
+    <StyledWishListTable>
+      <h1>Your WishList</h1>     
       <ul>
-        <li className="titles">
-          <span className="model">Imagen </span>
-          <span className="product">Product name </span>
-          <span className="quantity">Categoria </span>
-          <span className="price">Marca </span>
-          <span className="username">Remover </span>
-        </li>
-        {orders?.map((order) => (
+        { wishList?.map((w) => (
           <li>
-            <span
-              className="product"
-              onClick={() =>
-                history.push("/product/" + order.finalproducts.product.id)
-              }
-            >
-              <p className="product">Product</p>{" "}
-              {order.finalproducts.product.name}{" "}
+            {console.log(w)}
+            <span>
+             <img src={w.product.muestraimg} alt="muestraImg"/>
             </span>
-            <span className="model">
-              <p className="model">Model</p>{" "}
-              {order.finalproducts.model.size +
-                " - " +
-                order.finalproducts.model.color}{" "}
+            <span>
+              <Link to={`/product/${w.product.id}`} className="white">
+              {w.product.name}
+              </Link>
             </span>
-            <span className="quantity">
-              <p className="quantity">Quantity</p>
-              {order.quantity}
+            <span className="white">
+              {w.product.brand.name}
             </span>
-            <span className="price">
-              <p className="price">Price</p>
-              {order.price}{" "}
-            </span>
-            <span className="username">
-              <p className="username">Username</p>
-              {order.cart.user.userName}{" "}
+            <span>
+            <i className="fas fa-trash-alt" onClick={() => {
+                      Swal.fire({
+                        title: "Sure?",
+                        text: "Please confirm if you want to remove this item from your wish list.",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, delete.",
+                        showConfirmButton: true,
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          handleDelete(
+                            w.product.id
+                          );
+                        }
+                      });
+                    }}/>
             </span>
           </li>
-        ))}
+        )) }
       </ul>
     </StyledWishListTable>
   );

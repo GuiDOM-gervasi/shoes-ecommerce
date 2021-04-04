@@ -1,92 +1,44 @@
 import styled from "styled-components";
-import { blanco, violeta } from "../../containers/App/GlobalStyles";
+import { blanco, negro, verdeDetalle, verdeDetalleTrans, verdeMain, violeta, violetaHover } from "../../containers/App/GlobalStyles";
 
 export const StyledWishListTable = styled.div`
   display: flex;
   flex-direction: column;
-  h3{
-    text-align:center;
-    text-transform:capitalize;
-    padding:1rem;
-    color:${blanco};
-    background-color:${violeta};
-  }
-  .sectionBar section{
-    text-transform:capitalize;
+  justify-content: center;
+  h1{
+    margin: auto;
+    color:#594D9E;
   }
   ul li {
-    width: 100%;
-    height: 5rem;
+    width: 50%;
+    height: 8rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 1rem 0;
+    margin: 1rem auto ;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
+    background-color:#A951FC;
+    font-weight: 400;
+    border-radius: 5px;
     span {
-      width: 15%;
+      width: 100%;
       display: flex;
       justify-content: center;
       text-align: center;
-    }
-
-    button {
-      margin: 1rem 0;
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
-      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-      align-self: center;
-    }
-  }
-
-  .titles * {
-    font-weight: 1000;
-    font-size: 1.2em;
-  }
-
-  ul li + li {
-    .product {
-      cursor: pointer;
-
-      &:hover {
-        transform: scale(1.1);
+      color: ${blanco};
+      .white{
+      color: ${blanco};
+      }
+      img{
+        width:50%;
+        border: solid ${violeta};
+        border-radius: 10px; 
+      }
+      i{
+        width: 100%;
+        color: ${verdeMain}
       }
     }
-  }
-  p.product,
-  p.model,
-  p.quantity,
-  p.price,
-  p.state,
-  p.username {
-    display: none;
-  }
-  @media (max-width: 858px) {
-    ul li {
-      width:90vw;
-      margin:3vh auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap:5vw;
-      grid-template-rows:1fr 1fr 1fr;
-      span, select{
-        width:100%;
-        flex-direction:column;
-        align-items:flex-start;
-      }
-    }
-    .titles {
-      display: none;
-    }
-    p.product,
-    p.model,
-    p.quantity,
-    p.price,
-    p.state,
-    p.username {
-      display: inline;
-      font-weight:bold;
-    }
+
   }
 `;

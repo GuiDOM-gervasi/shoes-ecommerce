@@ -9,15 +9,16 @@ import {
   GET_CART_SIMPLE,
   GET_STOCK,
   GET_REVIEWS,
+  GET_WISHLIST,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
 import { Link } from "react-router-dom";
 import Loader from "../Loader";
-import { ADD_TO_CART } from "../../graphql/mutations";
+import { ADD_TO_CART, ADD_TO_WISHLIST } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
 import Reviews from "../../containers/Reviews";
 import Swal from "sweetalert2";
-
+import fav from "./heart/fav.png"
 export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
@@ -38,6 +39,17 @@ export default function ProductDetail({ match }: any) {
       },
     ],
   });
+
+  const [addToWishlist] = useMutation(ADD_TO_WISHLIST,{
+    refetchQueries:[
+      {
+        query: GET_WISHLIST,
+        variables:{
+          userId: userId && userId
+        }
+      }
+    ]
+  })
 
   const { data } = useQuery(GET_CART_SIMPLE, {
     variables: {
@@ -222,6 +234,22 @@ export default function ProductDetail({ match }: any) {
     e.target.src = oldMain;
   };
 
+  const addToFav = (productId) =>{
+     Swal.fire({
+          icon: "success",
+          title: "Great choice!",
+          text: "Product successfully added to your wishlist",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+    addToWishlist({
+      variables:{
+        productId,
+        userId
+      }
+    })
+  }
+
   return (
     <StyledProductDetail>
       <div className="container">
@@ -293,6 +321,7 @@ export default function ProductDetail({ match }: any) {
             )}
           </div>
           <div className="botones">
+          <i className="fas fa-heart" onClick={()=>addToFav(id)}></i>
             <select
               className="botonInvertido"
               onChange={(e: any) => {

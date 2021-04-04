@@ -39,9 +39,6 @@ export default function Catalogue() {
     <StyledCatalogue className="fondoDegradado">
       <Slider />
       <div className="sectionBar">
-        <section className="create">Crear</section>
-        <section className="trend">Tendencias</section>
-        <section className="sale">Ofertas</section>
         <Filter setLoadedProduct={setLoadedProduct} />
       </div>
 

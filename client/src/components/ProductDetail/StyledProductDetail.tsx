@@ -126,6 +126,10 @@ export const StyledProductDetail = styled.div`
         width: 90%;
         height: 4rem;
       }
+      i{
+        color:${violeta};
+        cursor: pointer;
+      }
     }
   }
   .related {
