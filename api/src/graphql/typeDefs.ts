@@ -236,6 +236,7 @@ const typeDefs = gql`
 
     productDetail(id: String!): Product!
     productForCategory(name: String!): [Product!]!
+    filteredProducts(categoryId: [String!]!, brandId: [String!]!): [Product!]!
     products(atr: String, ord: String): [Product!]!
 
     searchProducts(name: String!): [Product!]!

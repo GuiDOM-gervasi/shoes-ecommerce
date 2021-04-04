@@ -127,6 +127,23 @@ export const GET_PRODUCTS_BY_CATEGORIES = gql`
     }
   }
 `;
+export const GET_FILTERED_PRODUCTS = gql`
+  query filteredProducts($categoryId: [String!]!, $brandId: [String!]!) {
+    filteredProducts(categoryId: $categoryId , brandId: $brandId){
+      id
+      name
+      muestraimg
+      price
+      discount
+      brand {
+        name
+      }
+      categories {
+        name
+      }
+    }
+  }
+`;
 
 export const GET_MODELS = gql`
   query Models {
