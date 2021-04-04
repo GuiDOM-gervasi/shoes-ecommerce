@@ -8,7 +8,7 @@ module.exports = {
         isAdmin: true,
         email: "soyadmin@admin.com",
         password:
-          "$2a$05$mVsGEgYlAuEjUdhFwvWN2.Y.3zkThJEY8jctFQi.es8.stK0tJH8C",
+          "$2a$05$bL1E5YTZ7xZbKdczSCIA5ejlNm1NJnSrSPF77vvr18PBGHl.cQ1p6",
         country: "Argentina",
         city: "Buenos Aires",
         street: "avenida de Mayo",
@@ -27,7 +27,7 @@ module.exports = {
         isAdmin: false,
         email: "ernestoramirez@gmail.com",
         password:
-          "$2a$05$mVsGEgYlAuEjUdhFwvWN2.Y.3zkThJEY8jctFQi.es8.stK0tJH8C",
+          "$2a$05$bL1E5YTZ7xZbKdczSCIA5ejlNm1NJnSrSPF77vvr18PBGHl.cQ1p6",
         country: "Argentina",
         city: "Buenos Aires",
         street: "avenida de Mayo",
@@ -46,7 +46,7 @@ module.exports = {
         isAdmin: false,
         email: "lautoraherrera@gmail.com",
         password:
-          "$2a$05$mVsGEgYlAuEjUdhFwvWN2.Y.3zkThJEY8jctFQi.es8.stK0tJH8C",
+          "$2a$05$bL1E5YTZ7xZbKdczSCIA5ejlNm1NJnSrSPF77vvr18PBGHl.cQ1p6",
         country: "Argentina",
         city: "Buenos Aires",
         street: "avenida de Mayo",
@@ -63,9 +63,9 @@ module.exports = {
         lastName: "Stefanutti",
         userName: "mstefa",
         isAdmin: true,
-        email: "matias@gmail.com",
+        email: "matiastefanutti@gmail.com",
         password:
-          "$2a$05$mVsGEgYlAuEjUdhFwvWN2.Y.3zkThJEY8jctFQi.es8.stK0tJH8C",
+          "$2a$05$bL1E5YTZ7xZbKdczSCIA5ejlNm1NJnSrSPF77vvr18PBGHl.cQ1p6",
         country: "Argentina",
         city: "Buenos Aires",
         street: "avenida de Mayo",
@@ -84,7 +84,7 @@ module.exports = {
         isAdmin: false,
         email: "rleal@gmail.com",
         password:
-          "$2a$05$mVsGEgYlAuEjUdhFwvWN2.Y.3zkThJEY8jctFQi.es8.stK0tJH8C",
+          "$2a$05$bL1E5YTZ7xZbKdczSCIA5ejlNm1NJnSrSPF77vvr18PBGHl.cQ1p6",
         country: "Argentina",
         city: "Buenos Aires",
         street: "avenida de Mayo",

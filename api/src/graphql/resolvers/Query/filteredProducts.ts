@@ -5,10 +5,9 @@ import Models from "../../../db/models/models";
 
 const filteredProducts = async (parent, args, context, info) => {
   const { categoryId, brandId } = args;
-  console.log(`args`, args)
+  
   if (categoryId > 0 && brandId > 0) {
-    // if the parameter to filter was passed, query DB filtering the results.
-    console.log('las 2')
+
     const productsCategory = await Product.findAll({
       include: [
         {
@@ -33,8 +32,7 @@ const filteredProducts = async (parent, args, context, info) => {
   }
 
   if (categoryId > 0) {
-    // if the parameter to filter was passed, query DB filtering the results.
-    console.log('categorias')
+
     const productsCategory = await Product.findAll({
       include: [
         {
@@ -56,7 +54,7 @@ const filteredProducts = async (parent, args, context, info) => {
   }
 
   if ( brandId > 0) {
-    console.log('marca')
+    
     const productsCategory = await Product.findAll({
       include: [
         {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blanco, violeta, negro, productWidth } from "../App/GlobalStyles";
+import { violeta } from "../App/GlobalStyles";
 
 export const StyledCatalogue = styled.div`
   
@@ -8,8 +8,8 @@ export const StyledCatalogue = styled.div`
   justify-content: space-around;
 
   .productImg {
-    width: ${productWidth}vw;
-    height: ${productWidth}vw;
+
+    width: 20rem;
     object-position: 20% 90%;
     object-fit: cover;
     transition: all 500ms ease;
@@ -40,23 +40,23 @@ export const StyledCatalogue = styled.div`
   .productData {
     position: absolute;
     bottom: 0;
-    width: ${productWidth}vw;
+    width: 20rem;
     background-color: ${violeta};
     padding: 0.5vh 0 0.5vh 0;
   }
 
   @media (max-width: 858px){
 
-    .productImg{
+    /* .productImg{
       width: 100vw;
       height:100vw;
-    }
-    .create, .trend{
+    } */
+    /* .create, .trend{
       display:none;
-    }
-    .productData{
+    } */
+    /* .productData{
       width:100vw;
-    }
+    } */
     ul{
       flex-direction: column;
       padding: 2vh 0;
