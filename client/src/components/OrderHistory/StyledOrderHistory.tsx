@@ -8,7 +8,7 @@ export const StyledOrderHistory = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-
+    
     li {
       display: flex;
       flex-direction: column;
