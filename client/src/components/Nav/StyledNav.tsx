@@ -59,17 +59,14 @@ export const StyledNav = styled.div`
   }
   .linedown {
     display: grid;
-    grid-template-columns: 3fr 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
-    grid-template-areas: "admin catalogue offers aboutus . login register .";
+    grid-template-columns: 3fr 3fr 3fr 5fr 3fr 3fr 1fr;
+    grid-template-areas: "admin catalogue aboutus . login register .";
   }
   .admin {
     grid-area: admin;
   }
   .catalogue {
     grid-area: catalogue;
-  }
-  .offers {
-    grid-area: offers;
   }
   .aboutus {
     grid-area: aboutus;

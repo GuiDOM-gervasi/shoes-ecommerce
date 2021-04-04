@@ -17,6 +17,7 @@ export { default as models } from "./models";
 
 export { default as productDetail } from "./productDetail";
 export { default as productForCategory } from "./productForCategory";
+export { default as filteredProducts } from "./filteredProducts";
 export { default as products } from "./products";
 
 export { default as searchProducts } from "./searchProducts";

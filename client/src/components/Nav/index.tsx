@@ -106,9 +106,6 @@ export default function Nav() {
             <li onClick={() => handleCheck("/")} className="catalogue">
               <NavLink to="/">Catalogue</NavLink>
             </li>
-            <li onClick={() => handleCheck("/")} className="offers">
-              <NavLink to="">Offers</NavLink>
-            </li>
             <li className="aboutus">
               <NavLink to="/about">About us</NavLink>
             </li>
