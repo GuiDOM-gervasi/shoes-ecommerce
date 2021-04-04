@@ -186,3 +186,42 @@ Este proyecto tiene muchas tareas para realizar, asi que es fácil sentirse abru
     + Los usuarios pueden hacer el checkout.
     + Los admins pueden ver las ordenes pendientes.
     + Los usuarios reciben mails de notificaciones.
+
+## Stripe configuration.
+
+In order to get fulll funtionality of the payment system of the app, it is necesary to install Stripe Cli. Information about the instalation could be found here: https://stripe.com/docs/stripe-cli.
+
+### For windowds users:
+
+
+1- Download the latest windows tar.gz file from https://github.com/stripe/stripe-cli/releases/latest
+
+2- Unzip the stripe_X.X.X_windows_x86_64.zip file
+
+3- Run the unzipped .exe file
+
+### for unix based with apt:
+
+`sudo apt-key adv --keyserver hkp://pool.sks-keyservers.net:80 --recv-keys 379CE192D401AB61`
+
+`echo "deb https://dl.bintray.com/stripe/stripe-cli-deb stable main" | sudo tee -a /etc/apt/sources.list`
+
+`sudo apt-get update`
+
+`sudo apt-get install stripe`
+
+### Login 
+
+After installing the Stripe CLI, you must pair it with your Stripe account. To do so, run stripe login in the terminal. You’ll be prompted to launch your browser and login to the Stripe Dashboard to grant the Stripe CLI access to your account.
+
+`stripe login`
+
+### Redirecting to our app
+
+To be able to listen the events, it is necesary to forward received events to our server wirten on console:
+
+`stripe listen --forward-to localhost:3001/webhook`
+
+If all works fine, it will response a message like:
+
+`Ready! Your webhook signing secret is '{{WEBHOOK_SIGNING_SECRET}}' (^C to quit)`
