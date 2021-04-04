@@ -12,7 +12,7 @@ import {
   GET_WISHLIST,
 } from "../../graphql/queries";
 import { fotosZapa } from "./mockup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Loader from "../Loader";
 import { ADD_TO_CART, ADD_TO_WISHLIST, DELETE_FROM_WISHLIST } from "../../graphql/mutations";
 import { useAuth } from "../../hooks/AuthProvider";
@@ -25,6 +25,7 @@ export default function ProductDetail({ match }: any) {
   const productId = match.params.id;
   const { userId } = useAuth();
   const [isFavorite, setFavorite] = React.useState(false);
+  const history = useHistory();
 
   const [addToCart] = useMutation(ADD_TO_CART, {
     refetchQueries: [
@@ -270,15 +271,25 @@ export default function ProductDetail({ match }: any) {
     //       showConfirmButton: false,
     //       timer: 1500,
     //     });
-    
-    addToWishlist({
-      variables:{
-        productId,
-        userId
-      }
-    })
-    setFavorite(true)
-    console.log('agregar')
+    console.log('userId', userId);
+    if(userId && userId === "0"){
+      Swal.fire({
+        icon: 'error',
+        title:'You must be Login for add a Favorite product',
+        showConfirmButton: false,
+        timer: 2000,
+      })
+      history.push('/login')
+    }else{
+      addToWishlist({
+        variables:{
+          productId,
+          userId
+        }
+      })
+      setFavorite(true)
+    }
+    // console.log('agregar')
   }
 
   const removeFromFav = (productId) =>{
