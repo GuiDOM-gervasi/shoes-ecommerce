@@ -46,45 +46,53 @@ const handleDelete = (productId) => {
 
   return (
     <StyledWishListTable>
-      <h1>Your WishList</h1>     
-      <ul>
-        { wishList?.map((w) => (
-          <li>
-            {console.log(w)}
-            <span>
-             <img src={w.product.muestraimg} alt="muestraImg"/>
-            </span>
-            <span>
-              <Link to={`/product/${w.product.id}`} className="white">
-              {w.product.name}
-              </Link>
-            </span>
-            <span className="white">
-              {w.product.brand.name}
-            </span>
-            <span>
-            <i className="fas fa-trash-alt" onClick={() => {
-                      Swal.fire({
-                        title: "Sure?",
-                        text: "Please confirm if you want to remove this item from your wish list.",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete.",
-                        showConfirmButton: true,
-                      }).then((result) => {
-                        if (result.isConfirmed) {
-                          handleDelete(
-                            w.product.id
-                          );
-                        }
-                      });
-                    }}/>
-            </span>
-          </li>
-        )) }
-      </ul>
+      
+      <div className='productContainer'>
+        <h2>Your WishList</h2>
+        <ul>
+          { wishList?.map((w) => (
+            <li>
+              <div className='divImg'>
+                <span>
+                  <Link to={`/product/${w.product.id}`} className="white">
+                    <img src={w.product.muestraimg} alt="muestraImg"/>
+                  </Link>
+                </span>
+                <span>
+                  <Link to={`/product/${w.product.id}`} className="white">
+                    <strong>{w.product.name}</strong>
+                  </Link>
+                </span>
+              </div>
+              <div className='divText'>
+              <span className="white">
+                <strong>{w.product.brand.name}</strong>
+              </span>
+              <span>
+              <i className="fas fa-trash-alt" onClick={() => {
+                Swal.fire({
+                  title: "Sure?",
+                  text: "Please confirm if you want to remove this item from your wish list.",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                          cancelButtonColor: "#d33",
+                          confirmButtonText: "Yes, delete.",
+                          showConfirmButton: true,
+                        }).then((result) => {
+                          if (result.isConfirmed) {
+                            handleDelete(
+                              w.product.id
+                              );
+                            }
+                          });
+                        }}/>
+              </span>
+              </div>
+            </li>
+          )) }
+        </ul>
+      </div>     
     </StyledWishListTable>
   );
 };
