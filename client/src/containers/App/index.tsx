@@ -16,7 +16,6 @@ import Cart from "../Cart";
 import OrderTable from "../OrderTable";
 import Checkout from "../../components/Checkout";
 // import Loader from "../../components/Loader";
-import AddReview from "../../components/AddReview";
 import CRUDUsers from "../CRUDUsers";
 import Success from "../../components/Success";
 import Cancel from "../../components/Cancel";
@@ -83,7 +82,6 @@ function App() {
         component={isAdmin ? wishListTable : Login}
       />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
-      <Route exact path="/addReview/:id/:user" component={AddReview} />
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
       <Route path="/profile" component={Profile} />
