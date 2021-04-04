@@ -34,6 +34,10 @@ export const StyledEditProduct = styled.div`
     grid-row: 1 / 2;
     width: min-content;
     padding-left: 10vw;
+    .img1{
+      display:flex;
+      align-items:flex-end;
+    }
     ul li {
       cursor: pointer;
     }

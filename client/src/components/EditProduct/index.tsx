@@ -78,6 +78,7 @@ export default function EditProduct({ match }) {
     }
 
     if (e.key === "Enter") {
+      console.log("modify", modify, e.target.value)
       await editProduct({
         variables: {
           id: productId,
@@ -91,14 +92,6 @@ export default function EditProduct({ match }) {
   };
 
   document.body.onkeydown = handleKeyDown;
-
-  const imageSwap = (e) => {
-    let photoMain = document.getElementById("photoMain") as HTMLImageElement;
-    let oldMain = photoMain.src;
-    let newMain = e.target.src;
-    photoMain.src = newMain;
-    e.target.src = oldMain;
-  };
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -149,33 +142,55 @@ export default function EditProduct({ match }) {
         </div>
         <div className="fondoVioleta"></div>
         <div className="imagenes">
-          <img
-            id="photoMain"
-            className="photoMain"
-            src={muestraimg || photo}
-            alt={name}
-          />
+          <div className="img1">
+            <i
+              className="fas fa-edit icon icon_name"
+              id="edit_muestraimg"
+              onClick={handleClick}
+            ></i>
+            <img
+              id="photoMain"
+              className="photoMain"
+              src={muestraimg || photo}
+              alt={name}
+            />
+          </div>
           <ul>
-            <li onClick={(e) => imageSwap(e)}>
+            <li>
               <img
                 className="photoDetail"
                 src={detalleimg1 || photoDetail1}
                 alt={`photoDetail 1 - ${name}`}
               />
+              <i
+                className="fas fa-edit icon icon_name"
+                id="edit_detalleimg1"
+                onClick={handleClick}
+              ></i>
             </li>
-            <li onClick={(e) => imageSwap(e)}>
+            <li>
               <img
                 className="photoDetail"
                 src={detalleimg2 || photoDetail2}
                 alt={`photoDetail 2 - ${name}`}
               />
+              <i
+                className="fas fa-edit icon icon_name"
+                id="edit_detalleimg2"
+                onClick={handleClick}
+              ></i>
             </li>
-            <li onClick={(e) => imageSwap(e)}>
+            <li>
               <img
                 className="photoDetail"
                 src={detalleimg3 || photoDetail3}
                 alt={`photoDetail 3 - ${name}`}
               />
+              <i
+                className="fas fa-edit icon icon_name"
+                id="edit_detalleimg3"
+                onClick={handleClick}
+              ></i>
             </li>
           </ul>
         </div>
