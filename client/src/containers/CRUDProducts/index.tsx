@@ -241,7 +241,7 @@ export default function CRUDProducts() {
             <li key={item.id}>
               <span className="id"> {item.id} </span>
               <span className="name"> {item.name} </span>
-              <span className="price"> {item.price} </span>
+              <span className="price"> $ {item.price} </span>
 
               <div className="buttons">
                 <i

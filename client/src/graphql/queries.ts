@@ -351,3 +351,21 @@ export const GET_OFFERTS = gql`
     }
   }
 `;
+
+export const GET_WISHLIST = gql`
+query wishList($userId:String!){
+  wishList(userId:$userId){
+    product{
+      id
+      name
+      muestraimg
+      categories{
+        name
+      }
+      brand{
+        name
+      }
+    }  
+  }
+}
+`

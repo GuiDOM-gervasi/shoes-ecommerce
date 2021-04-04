@@ -1,10 +1,11 @@
 import {
+  BelongsTo,
     Column,
     DataType,
     ForeignKey,
     Model,
     Table
-  } from "sequelize-typescript";
+} from "sequelize-typescript";
   
   import Product from './products';
   import User from './users';
@@ -17,7 +18,7 @@ import {
     paranoid: true,
     tableName: "wishlist",
   })
-  export class WishList extends Model {
+  export class wishList extends Model {
     @Column({
       allowNull: false,
       autoIncrement: true,
@@ -32,7 +33,9 @@ import {
     })
     @ForeignKey(() => Product)
     productId!: string;
-  
+    @BelongsTo(()=> Product)
+    product: Product
+
     @Column({
       allowNull: false,
       type: DataType.INTEGER,
@@ -42,4 +45,4 @@ import {
 
   }
 
-  export default WishList;
+  export default wishList;

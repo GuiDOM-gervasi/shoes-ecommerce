@@ -250,4 +250,18 @@ export const SET_OFFER = gql`
         duration: $duration )
     }
 `;
+export const DELETE_FROM_WISHLIST = gql`
+mutation deleteFromWishList(
+  $productId: String!
+  $userId: String!
+  ){
+    deleteFromWishList(productId:$productId, userId:$userId)
+  }
 
+`
+export const ADD_TO_WISHLIST = gql`
+mutation addToWishList($productId:String!,$userId:String!) {
+  addToWishList(productId:$productId,userId:$userId)
+}
+
+`

@@ -3,7 +3,6 @@ import {
 	DataType,
 	ForeignKey,
 	BelongsTo,
-	BelongsToMany,
 	HasMany,
 	Model,
 	Table,
@@ -11,7 +10,6 @@ import {
 
 import Product from "./products";
 import Models from "./models";
-import Cart from "./carts";
 import CartProduct from "./cartproduct";
 
 // Definitions of tables and sequelize models
@@ -56,10 +54,8 @@ export class FinalProduct extends Model {
 	model: Models;
 	
 	@HasMany(() => CartProduct)
-  cartproducts!: CartProduct[]
+  	cartproducts!: CartProduct[]
 
-	// @BelongsToMany(() => Cart, { through: () => CartProduct })
-  // carts?: Array<Cart & { CartProduct: CartProduct }>;
 }
 
 export default FinalProduct;

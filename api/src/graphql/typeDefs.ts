@@ -128,11 +128,17 @@ const typeDefs = gql`
   }
   type Offert{
     id: String
-    target: String, 
+    target: String
     targetId: String!
     discount: Float!
     duration: Float!
     active: Boolean
+  }
+
+  type wishList {
+    id: ID
+    userId: String
+    product: Product
   }
 
   type Mutation {
@@ -150,6 +156,8 @@ const typeDefs = gql`
       quantity: Int
       price: Float
     ): CartProduct!
+    addToWishList(productId:String!, userId: String!): String! 
+
     checkStock(cartId: String!): String
     controlQuantity(id: String!, quantity: Int!): String!
 
@@ -183,6 +191,7 @@ const typeDefs = gql`
     ): User!
 
     deleteCategory(id: String!): Category
+    deleteFromWishList(productId:String! userId:String!): String
     deleteProduct(id: String!): Product
     deleteReview(id: String!): String
     deleteUser(id: String!): String!
@@ -248,7 +257,8 @@ const typeDefs = gql`
     allModelsProduct(productId: String!): [FinalProduct!]!
     allStock: [FinalProduct!]!
     userEmail(email: String!): [User!]!
-    getOffers(active: Boolean): [Offert]
+    wishList(userId:String!): [wishList]!
+    getOffers(active: Boolean): [Offert]!
   }
 `;
 export default typeDefs;

@@ -26,4 +26,5 @@ export { default as user } from "./user";
 export { default as viewOrders } from "./viewOrders";
 export { default as userEmail } from "./userEmail";
 
+export {default as wishList} from "./wishList"
 export { default as getOffers } from "./getOffers";

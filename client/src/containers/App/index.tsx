@@ -27,6 +27,7 @@ import Profile from "../../containers/Profile";
 import AboutUs from "../../components/AboutUs";
 import OrderHistory from "../../components/OrderHistory";
 import Offert from "../../components/Offert";
+import wishListTable from "../../components/wishlist";
 
 require("dotenv").config();
 
@@ -76,6 +77,10 @@ function App() {
         exact
         path="/admin/orders"
         component={isAdmin ? OrderTable : Login}
+      />
+      <Route
+        exact path="/wishlist"
+        component={isAdmin ? wishListTable : Login}
       />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route exact path="/addReview/:id/:user" component={AddReview} />

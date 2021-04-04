@@ -12,7 +12,7 @@ export default function Nav() {
   const history = useHistory();
   const { logout, isAdmin, userId } = useAuth();
 
-  const { data, loading, error } = useQuery(GET_USER_DETAIL, {
+  const { data } = useQuery(GET_USER_DETAIL, {
     variables: { id: userId },
   });
 
@@ -106,9 +106,23 @@ export default function Nav() {
             <li onClick={() => handleCheck("/")} className="catalogue">
               <NavLink to="/">Catalogue</NavLink>
             </li>
-            <li className="aboutus">
+            {/* <li onClick={() => handleCheck("/")} className="offers">
+              <NavLink to="">Offers</NavLink>
+            </li> */}
+            {userId && userId !== "0"? ( 
+            <>
+              <li onClick={() => handleCheck("/wishlist")} className="wishlist">
+                <NavLink to="">WishList</NavLink>
+              </li>
+              <li className="aboutus">
+              <NavLink to="/about">About us</NavLink>
+              </li>
+            </>
+            ) :
+            <li className="wishlist">
               <NavLink to="/about">About us</NavLink>
             </li>
+            }
             {userId && userId !== "0" ? (
               <>
                 <li onClick={handleLogout} className="login">

@@ -3,7 +3,6 @@ import {
   blanco,
   verdeMain,
   violeta,
-  productWidth,
   verdeDetalle,
 } from "../../containers/App/GlobalStyles";
 
@@ -126,6 +125,27 @@ export const StyledProductDetail = styled.div`
         width: 90%;
         height: 4rem;
       }
+      i{
+        color:${violeta};
+        cursor: pointer;
+      }
+    }
+
+    .favoritos{
+      grid-row: 4 ;
+      grid-column: 3;
+      .fas{
+        font-size: 3rem;
+      }
+      .fa-heart.fas-on{
+        color: ${violeta};
+      }
+
+      .fa-heart.fas-off{
+        color: ${blanco};
+        text-shadow: -1px 0 #2b2b2b, 0 1px black, 1px 0 black, 0 -1px black;
+        
+      }
     }
   }
   .related {
@@ -207,6 +227,8 @@ export const StyledProductDetail = styled.div`
     padding: 0rem 0.5rem 0rem 0.5rem;
   }
 
+  
+
   @media screen and (max-width: 870px) {
     .container {
       grid-template-columns: 1fr;
@@ -215,6 +237,8 @@ export const StyledProductDetail = styled.div`
     .fondoVioleta {
       display: none;
     }
+
+
 
     .imagenes {
       padding-left: 0;
@@ -281,6 +305,12 @@ export const StyledProductDetail = styled.div`
         background-color: ${violeta};
         width: 100%;
       }
+      .favoritos{
+        grid-row:6;
+        grid-column: 2/3;
+        justify-self:center;
+      }
+
       h1,
       .tituloLargo,
       .tituloCorto {
