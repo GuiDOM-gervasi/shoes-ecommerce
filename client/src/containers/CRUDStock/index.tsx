@@ -101,7 +101,7 @@ export default function CRUDStock() {
               </span>
               <span className="itemName">
                 <p className="itemName">Nombre</p>
-                {item.product.name}{" "}
+                {item.product?.name}{" "}
               </span>
               <span className="itemColor">
                 <p className="itemColor">Color</p>
