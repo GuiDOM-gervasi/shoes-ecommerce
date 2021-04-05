@@ -111,6 +111,7 @@ export default function Checkout() {
   if (loading) return <Loader />;
   if (error) return <span>Error {error.message}</span>;
   const cartProductsArray = data.cart?.cartproducts;
+
   let count = 0;
 
   return (
@@ -119,7 +120,12 @@ export default function Checkout() {
         <h2>Datos de la compra</h2>
         <ul>
           {cartProductsArray.map((i: any) => {
-            count += i.finalproducts.product.price * i.quantity;
+            i.finalproducts.product.discount
+              ? (count +=
+                  i.finalproducts.product.price *
+                  i.finalproducts.product.discount *
+                  i.quantity)
+              : (count += i.finalproducts.product.price * i.quantity);
             return (
               <li key={i.finalproducts.id}>
                 {i.quantity > 1 ? (
@@ -133,7 +139,12 @@ export default function Checkout() {
                   {i.finalproducts.model.size} / {i.finalproducts.model.color}
                 </span>
                 <span className="price">
-                  ${i.finalproducts.product.price * i.quantity}
+                  $
+                  {i.finalproducts.product.discount
+                    ? i.finalproducts.product.discount *
+                      i.finalproducts.product.price *
+                      i.quantity
+                    : i.finalproducts.product.price * i.quantity}
                 </span>
               </li>
             );
