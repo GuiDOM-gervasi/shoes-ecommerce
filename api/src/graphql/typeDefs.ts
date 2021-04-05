@@ -185,7 +185,7 @@ const typeDefs = gql`
       nlsuscribe: Boolean
       city: String
       country: String
-      addressnumber: Int
+      addressnumber: String
       street: String
       postcode: Int
     ): User!
@@ -222,7 +222,7 @@ const typeDefs = gql`
       country: String, 
       city: String,
       street: String,
-      addressnumber: Float,
+      addressnumber: String,
       postcode: Float,
       ): String
 

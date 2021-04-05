@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 // import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { StyledCheckout } from "./StyledCheckout";
 import { useAuth } from "../../hooks/AuthProvider";
 import { GET_CART } from "../../graphql/queries";
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import Loader from "../Loader";
 import Swal from "sweetalert2";
+import { UPDATE_ADDRESS } from "../../graphql/mutations";
+import {
+  checkLocation,
+  form,
+  validateChange,
+} from "../../helpers/validateLocation";
 
 const stripePromise = loadStripe(
   "pk_test_51IYWrFKvrKT0hMD3gSFxlJd8ljQvDJBYWVaI0Xtr1JxWYpliVfyIyQG4Um32fUMZS5JOj8JEyDchF5TcHmWlO4qk00TxDSLbDv"
@@ -19,11 +25,45 @@ export default function Checkout() {
       userId: userId && userId,
     },
   });
-  // const {userId} = useAuth()
+
+  const [updateAddress, { error: errorUpdate }] = useMutation(UPDATE_ADDRESS);
+  const [form, setForm] = useState<form>({
+    country: "",
+    city: "",
+    street: "",
+    addressnumber: 0,
+    error: true,
+  });
+
+  const handleUpdate = async () => {
+    let { country, city, street, addressnumber, error } = form;
+
+    try {
+      await updateAddress({
+        variables: {
+          id: userId,
+          country,
+          city,
+          street,
+          addressnumber,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+  };
+  const handleChange = async (e: any) => {
+    const error = checkLocation(e, form);
+    setForm(validateChange(e, form, error));
+  };
 
   const handleSubmit = async (event) => {
     // Get Stripe.js instance
     event.preventDefault();
+
+    handleUpdate();
+
     const stripe = await stripePromise;
     // Call your backend to create the Checkout Session
     const response = await fetch("http://localhost:3001/checkout", {
@@ -109,13 +149,46 @@ export default function Checkout() {
         </ul>
         <form className="location" onSubmit={handleSubmit}>
           <label>Dirección de envio</label>
-          <input type="text" name="Country" placeholder="Country" />
-          <input type="text" name="City" placeholder="City" />
+          <input
+            type="text"
+            name="country"
+            placeholder="Country"
+            onChange={handleChange}
+          />
+          <span className="span_country"></span>
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            onChange={handleChange}
+          />
+          <span className="span_city"></span>
+          <input
+            type="text"
+            name="street"
+            placeholder="Street"
+            onChange={handleChange}
+          />
+          <span className="span_street"></span>
+          <input
+            type="number"
+            name="addressnumber"
+            placeholder="Addressnumber"
+            onChange={handleChange}
+          />
+          <span className="span_addressnumber"></span>
 
-          <input type="text" name="Street" placeholder="Street" />
-          <input type="text" name="adressNumber" placeholder="Adress Number" />
-          <input type="text" name="postCode" placeholder="Post Code" />
-          <input className="boton" type="submit" value="Comprar" />
+          <input
+            className="boton"
+            type="text"
+            value="Comprar"
+            disabled={
+              !form.country ||
+              !form.city ||
+              !form.street ||
+              form.addressnumber < 1
+            }
+          />
         </form>
       </div>
       <div className="footerFake"></div>

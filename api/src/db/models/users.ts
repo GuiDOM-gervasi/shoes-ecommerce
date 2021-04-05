@@ -112,7 +112,7 @@ export class User extends Model<UserAttributes> {
     allowNull: true,
     type: DataType.BOOLEAN,
   })
-  nlsuscribe?: Boolean;
+  nlsuscribe?: String;
 	
 	@Column({
 		allowNull: true,
