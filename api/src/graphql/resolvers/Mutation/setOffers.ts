@@ -1,7 +1,7 @@
 import Category from "#root/db/models/category";
 import Product from "../../../db/models/products";
-import Offer from "../../../db/models/offers";
-
+import Offer from "../../../db/models/offers"; 
+import sendOffersNotification from '#root/helpers/sendOffersNotification'
 
 const setOffers = async ( parent:any, args: any )  => {
     let {target, targetId, discount, duration} = args
@@ -54,6 +54,8 @@ const setOffers = async ( parent:any, args: any )  => {
     let restore = setTimeout( defineOffert, duration, 0, productsToUpdate, offert.id);  // DO NOT USE AWAIT HERE!
     // console.log(`prod`, prod)
     // console.log(`update`, update)
+
+    sendOffersNotification()
     return "todo Ok"
 }
 
