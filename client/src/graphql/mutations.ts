@@ -265,3 +265,23 @@ mutation addToWishList($productId:String!,$userId:String!) {
 }
 
 `
+
+export const UPDATE_ADDRESS = gql`
+  mutation updateUserAddress(
+    $id: String!
+    $country: String!
+    $city: String!
+    $street: String!
+    $addressnumber: String!
+    
+  ) {
+    updateUserAddress(
+      id: $id
+      country: $country
+      city: $city
+      street: $street
+      addressnumber: $addressnumber
+      
+    )
+  }
+`;
