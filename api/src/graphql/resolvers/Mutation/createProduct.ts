@@ -11,17 +11,30 @@ const createProductResolver = async (
     brandId,
     CategoriesId,
     ModelsId,
+    detalleimg1,
+    detalleimg2,
+    detalleimg3,
   }: ProductAttributes
 ) => {
+  console.log("en la db ",name,
+    description,
+    price,
+    muestraimg,
+    brandId,
+    CategoriesId,
+    ModelsId,
+    detalleimg1,
+    detalleimg2,
+    detalleimg3)
   const product = await Product.create({
     name,
     description,
     price,
-    muestraimg: "https://asahimotors.com/images/nodisponible.png",
+    muestraimg: muestraimg || "https://asahimotors.com/images/nodisponible.png",
     brandId,
-    detalleimg1: "https://asahimotors.com/images/nodisponible.png",
-    detalleimg2: "https://asahimotors.com/images/nodisponible.png",
-    detalleimg3: "https://asahimotors.com/images/nodisponible.png",
+    detalleimg1: detalleimg1 || "https://asahimotors.com/images/nodisponible.png",
+    detalleimg2: detalleimg2 || "https://asahimotors.com/images/nodisponible.png",
+    detalleimg3: detalleimg3 || "https://asahimotors.com/images/nodisponible.png",
   });
 
   await product.$add("category", CategoriesId); // 3er arg , throw:{}
