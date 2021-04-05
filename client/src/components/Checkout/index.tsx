@@ -122,7 +122,7 @@ export default function Checkout() {
           {cartProductsArray.map((i: any) => {
             i.finalproducts.product.discount
               ? (count +=
-                Math.floor((1- i.finalproducts.product.discount)*
+                Math.round((1- i.finalproducts.product.discount)*
                   i.finalproducts.product.price *
                   i.quantity))
               : (count += i.finalproducts.product.price * i.quantity);
@@ -141,7 +141,7 @@ export default function Checkout() {
                 <span className="price">
                   $
                   {i.finalproducts.product.discount
-                    ? Math.floor((1- i.finalproducts.product.discount) *
+                    ? Math.round((1- i.finalproducts.product.discount) *
                       i.finalproducts.product.price *
                       i.quantity)
                     : i.finalproducts.product.price * i.quantity}
