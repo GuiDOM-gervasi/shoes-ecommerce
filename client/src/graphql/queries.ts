@@ -250,6 +250,22 @@ export const GET_REVIEWS = gql`
     }
   }
 `;
+export const GET_REVIEWS_FROM_USER = gql`
+  query GetReviewsFromUser($userId: String!) {
+    getReviewsFromUser(userId: $userId) {
+      count
+      average
+      reviews {
+        title
+        score
+        description
+        id
+        productId
+      }
+    }
+  }
+`;
+
 export const GET_USERS = gql`
   query GetUsers {
     users {

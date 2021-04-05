@@ -12,6 +12,7 @@ export { default as allStock } from "./allStock";
 
 export { default as finalproducts } from "./finalproduct";
 export { default as getReviews } from "./getReviews";
+export { default as getReviewsFromUser } from "./getReviewsFromUser";
 export { default as image } from "./image";
 export { default as models } from "./models";
 
