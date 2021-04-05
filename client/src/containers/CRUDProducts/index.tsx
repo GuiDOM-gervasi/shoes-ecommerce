@@ -103,7 +103,7 @@ export default function CRUDProducts() {
     Swal.mixin({
       confirmButtonText: "Next &rarr;",
       showCancelButton: true,
-      progressSteps: ["1", "2", "3", "4", "5", "6"],
+      progressSteps: ["1", "2", "3", "4", "5", "6", "7"],
     })
       .queue([
         {
@@ -179,6 +179,46 @@ export default function CRUDProducts() {
             return checked;
           },
         },
+        {
+          title: "Upload image",
+          html: `<div style="display:grid; grid-template-columns:1fr; grid-template-rows:auto;justify-items:center; justify-content: space-around;">
+          <input type="file" accept="image/*" id="imageCloud" aria-label='Upload your profile picture' multiple>
+          </div>`,
+          preConfirm: async ()=>{
+            const imagesInCloud = [];
+            const image: any = document.querySelector("#imageCloud");
+            async function uploadFile(file) {
+              const url = `https://api.cloudinary.com/v1_1/ecommerceft09/upload`;
+              const xhr = new XMLHttpRequest();
+              const fd = new FormData();
+              xhr.open("POST", url, true);
+              xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+              xhr.onreadystatechange = (e) => {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                  const response = JSON.parse(xhr.responseText);
+                  imagesInCloud.push(response.secure_url)
+                  return
+                }
+              };
+            
+              fd.append(
+                "upload_preset",
+                "kvo7ryen"
+              );
+              fd.append("tags", "browser_upload");
+              fd.append("file", file);
+              xhr.send(fd);
+            }
+            if(image){
+              for (let i = 0; i < image.files.length; i++) {
+                await uploadFile(image.files[i])
+              }
+            }
+
+            return imagesInCloud
+          }
+
+        }
       ])
       .then(async (result: any) => {
         if (result.value) {
@@ -191,6 +231,10 @@ export default function CRUDProducts() {
                 brandId: result.value[3],
                 CategoriesId: result.value[4],
                 ModelsId: result.value[5],
+                muestraimg: result.value[6][0],
+                detalleimg1: result.value[6][1],
+                detalleimg2: result.value[6][2],
+                detalleimg3: result.value[6][3]
               },
             }).then((res) => {
               const productId = res.data.createProduct.id;

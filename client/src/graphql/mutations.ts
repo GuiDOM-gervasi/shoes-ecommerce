@@ -8,6 +8,10 @@ export const ADD_PRODUCT = gql`
     $brandId: ID!
     $CategoriesId: [String]!
     $ModelsId: [String]!
+    $muestraimg: String
+    $detalleimg1: String
+    $detalleimg2: String
+    $detalleimg3: String
   ) {
     createProduct(
       name: $name
@@ -16,6 +20,10 @@ export const ADD_PRODUCT = gql`
       brandId: $brandId
       CategoriesId: $CategoriesId
       ModelsId: $ModelsId
+      muestraimg: $muestraimg
+      detalleimg1: $detalleimg1
+      detalleimg2: $detalleimg2
+      detalleimg3: $detalleimg3
     ) {
       name
       id
