@@ -191,7 +191,7 @@ export default function Checkout() {
 
           <input
             className="boton"
-            type="text"
+            type="submit"
             value="Comprar"
             disabled={
               !form.country ||
