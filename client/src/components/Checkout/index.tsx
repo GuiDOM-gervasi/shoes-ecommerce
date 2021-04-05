@@ -122,9 +122,9 @@ export default function Checkout() {
           {cartProductsArray.map((i: any) => {
             i.finalproducts.product.discount
               ? (count +=
+                Math.floor((1- i.finalproducts.product.discount)*
                   i.finalproducts.product.price *
-                  i.finalproducts.product.discount *
-                  i.quantity)
+                  i.quantity))
               : (count += i.finalproducts.product.price * i.quantity);
             return (
               <li key={i.finalproducts.id}>
@@ -141,9 +141,9 @@ export default function Checkout() {
                 <span className="price">
                   $
                   {i.finalproducts.product.discount
-                    ? i.finalproducts.product.discount *
+                    ? Math.floor((1- i.finalproducts.product.discount) *
                       i.finalproducts.product.price *
-                      i.quantity
+                      i.quantity)
                     : i.finalproducts.product.price * i.quantity}
                 </span>
               </li>
