@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export var verdeMain = "#64DFDF";
 export var verdeDetalle = "#80FFDB";
 export var verdeDetalleTrans = "#80FFDB50";
-export var violeta = "#6930C3";
+export var violeta = "#7d56bd";
 export var violetaHover = "#6930C350";
 export var blanco = "#F0F0F0";
 export var negro = "#151515";
