@@ -16,16 +16,6 @@ const createProductResolver = async (
     detalleimg3,
   }: ProductAttributes
 ) => {
-  console.log("en la db ",name,
-    description,
-    price,
-    muestraimg,
-    brandId,
-    CategoriesId,
-    ModelsId,
-    detalleimg1,
-    detalleimg2,
-    detalleimg3)
   const product = await Product.create({
     name,
     description,

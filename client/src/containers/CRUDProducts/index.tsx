@@ -184,41 +184,38 @@ export default function CRUDProducts() {
           html: `<div style="display:grid; grid-template-columns:1fr; grid-template-rows:auto;justify-items:center; justify-content: space-around;">
           <input type="file" accept="image/*" id="imageCloud" aria-label='Upload your profile picture' multiple>
           </div>`,
-          preConfirm: async ()=>{
-            const imagesInCloud = [];
+          preConfirm: async () => {
+            let imagesInCloud = [];
             const image: any = document.querySelector("#imageCloud");
-            async function uploadFile(file) {
-              const url = `https://api.cloudinary.com/v1_1/ecommerceft09/upload`;
-              const xhr = new XMLHttpRequest();
-              const fd = new FormData();
-              xhr.open("POST", url, true);
-              xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-              xhr.onreadystatechange = (e) => {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                  const response = JSON.parse(xhr.responseText);
-                  imagesInCloud.push(response.secure_url)
-                  return
-                }
-              };
             
-              fd.append(
-                "upload_preset",
-                "kvo7ryen"
-              );
+            async function uploadFile(file) {
+              const fd = new FormData();
+              fd.append("upload_preset", "kvo7ryen");
               fd.append("tags", "browser_upload");
               fd.append("file", file);
-              xhr.send(fd);
+
+              const url = `https://api.cloudinary.com/v1_1/ecommerceft09/upload`;
+              await fetch(url, {
+                method: "POST",
+                body: fd,
+              }).then((response) => response.json())
+                .then((result) => {
+                  imagesInCloud.push(result.secure_url)
+                  return 
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
             }
-            if(image){
+
+            if (image) {
               for (let i = 0; i < image.files.length; i++) {
-                await uploadFile(image.files[i])
+                await uploadFile(image.files[i]);
               }
             }
-
-            return imagesInCloud
-          }
-
-        }
+            return imagesInCloud;
+          },
+        },
       ])
       .then(async (result: any) => {
         if (result.value) {
@@ -234,7 +231,7 @@ export default function CRUDProducts() {
                 muestraimg: result.value[6][0],
                 detalleimg1: result.value[6][1],
                 detalleimg2: result.value[6][2],
-                detalleimg3: result.value[6][3]
+                detalleimg3: result.value[6][3],
               },
             }).then((res) => {
               const productId = res.data.createProduct.id;
