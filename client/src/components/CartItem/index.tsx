@@ -1,5 +1,6 @@
 import React from "react";
 import { StyledCartItem } from "./StyledCartItem";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export default function CartItem({
@@ -13,11 +14,12 @@ export default function CartItem({
     <StyledCartItem>
       <div className="itemContainer" key={cartProductItem.finalproducts?.id}>
         <div className="itemImage">
+        <Link to={`/product/${product.id}`}>
           <img
             src={product.muestraimg}
             alt={`photoDetail 3 - ${product.name}`}
           />
-
+        </Link>
         </div>
         <div className="itemData">
           <h4>{product.name}</h4>

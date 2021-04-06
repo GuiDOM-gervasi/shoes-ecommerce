@@ -6,6 +6,8 @@ export const StyledWishListTable = styled.div`
   h2{
     text-align: center;
     color:${violeta};
+    margin: 0.5rem 2rem 2rem 2rem;
+    border-bottom: 2px solid ${violeta};
   }
 
   .productContainer{
@@ -69,11 +71,16 @@ export const StyledWishListTable = styled.div`
     color: ${negro}
   }
 
-  @media (max-width: 850px) {
+  @media (max-width: 750px) {
     
       border: 0;
       border-radius: 0;
       box-shadow: 0;
+
+      h2{
+        font-size: 2rem;
+        border: none;
+      }
 
     ul li {
       img{

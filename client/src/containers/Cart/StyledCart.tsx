@@ -17,7 +17,8 @@ export const StyledCart = styled.div`
   h2{
     text-align: center;
     color:${violeta};
-    margin: 0.5rem 0 2rem 0;
+    margin: 0.5rem 2rem 2rem 2rem;
+    border-bottom: 2px solid ${violeta};
   }
 
   ul li {
@@ -61,7 +62,12 @@ export const StyledCart = styled.div`
     }
   }
 
-    @media (max-width: 850px) {
+    @media (max-width: 750px) {
+
+      h2{
+        font-size: 2rem;
+        border: none;
+      }
     
       .cartContainer {
         border: 0;
