@@ -7,6 +7,8 @@ const setOffers = async ( parent:any, args: any )  => {
     let {target, targetId, discount, duration} = args
     duration = duration * 60 * 60 * 1000; // change from hours to miliseconds
     discount = (discount / 100);
+    let productsToUpdate = [];
+    
     switch (target){
       case "category":
         
