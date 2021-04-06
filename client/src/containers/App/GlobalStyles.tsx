@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
         transition: all 300ms ease;
+        
     }
     body{
         padding: 0 !important;

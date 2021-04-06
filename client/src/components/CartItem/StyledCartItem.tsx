@@ -128,7 +128,7 @@ export const StyledCartItem = styled.div`
     }
   }
 
-  @media (max-width: 550px) {
+  @media (max-width: 650px) {
     .itemData{
       text-align: center;
     }
