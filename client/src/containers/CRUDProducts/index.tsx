@@ -103,6 +103,7 @@ export default function CRUDProducts() {
     Swal.mixin({
       confirmButtonText: "Next &rarr;",
       showCancelButton: true,
+      width:"36rem",
       progressSteps: ["1", "2", "3", "4", "5", "6", "7"],
     })
       .queue([
