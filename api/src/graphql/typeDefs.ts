@@ -173,6 +173,9 @@ const typeDefs = gql`
       brandId: ID!
       CategoriesId: [String]
       ModelsId: [String]
+      detalleimg1: String
+      detalleimg2: String
+      detalleimg3: String
     ): Product!
     createUser(
       firstName: String!
