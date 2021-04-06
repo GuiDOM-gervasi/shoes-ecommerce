@@ -5,12 +5,12 @@ export const StyledSlider = styled.div`
   width: 100%;
   overflow: hidden;
 
-  img {
-        width: 100vw;
-        height: 100%;
-        object-position: 0 70%;
-        object-fit: cover;
-  }
-  @media (max-width: 858px){
+  /* .div {
+    width: 10vw;
+    height: 100%;
+    object-position: 0 70%;
+    object-fit: cover;
+  } */
+  @media (max-width: 858px) {
   }
 `;
