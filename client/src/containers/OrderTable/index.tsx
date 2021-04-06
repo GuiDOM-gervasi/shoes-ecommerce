@@ -115,7 +115,7 @@ const OrderTable = () => {
                 value={order.state}
                 onChange={(e) => handleChange(e, order.id)}
                 disabled={
-                  order.state === "finish" || order.state === "rejected"
+                  order.state === "finished" || order.state === "rejected"
                 }
               >
                 {possibleStates.map((state, i) => (
