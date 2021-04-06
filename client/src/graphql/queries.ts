@@ -334,7 +334,7 @@ export const GET_USER_DETAIL = gql`
 
 export const GET_HISTORY = gql`
   query OrderHistory($userId: String!) {
-    cart(userId: $userId, state: "finish") {
+    cart(userId: $userId, state: "finished") {
       cartproducts {
         id
         quantity
