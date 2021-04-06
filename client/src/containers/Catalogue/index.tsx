@@ -40,23 +40,27 @@ export default function Catalogue() {
     <StyledCatalogue className="fondoDegradado">
       <Slider />
       <div className="sectionBar">
-        <Filter setLoadedProduct={setLoadedProduct} setFilterOfferts={setFilterOfferts} filterOfferts= {filterOfferts}/>
+        <Filter
+          setLoadedProduct={setLoadedProduct}
+          setFilterOfferts={setFilterOfferts}
+          filterOfferts={filterOfferts}
+        />
       </div>
-      
-      <ul>
-        {loadedProducts.map((item, i) => {
-          
-            if(!filterOfferts || item.discount > 0 ){
-              return (            
-              <li key={item.id}>
-                <ProductCard item={item} />
-              </li>
-            )}
-              else{
-                return <></>
-              }
-            })}
-      </ul>
+      <div className="productsUl">
+        <ul>
+          {loadedProducts.map((item, i) => {
+            if (!filterOfferts || item.discount > 0) {
+              return (
+                <li key={item.id}>
+                  <ProductCard item={item} />
+                </li>
+              );
+            } else {
+              return <></>;
+            }
+          })}
+        </ul>
+      </div>
     </StyledCatalogue>
   );
 }

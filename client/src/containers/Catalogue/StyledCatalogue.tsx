@@ -2,13 +2,11 @@ import styled from "styled-components";
 import { violeta } from "../App/GlobalStyles";
 
 export const StyledCatalogue = styled.div`
-  
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
 
   .productImg {
-
     width: 20rem;
     object-position: 20% 90%;
     object-fit: cover;
@@ -23,18 +21,19 @@ export const StyledCatalogue = styled.div`
   a:focus {
     outline: none;
   }
+  .productsUl {
+    ul {
+      padding: 5vh 0 0 0;
+      display: flex;
+      flex-flow: row wrap;
+      list-style: none;
+      gap: 12px;
+      justify-content: center;
 
-  ul {
-    padding: 5vh 0 0 0;
-    display: flex;
-    flex-flow: row wrap;
-    list-style: none;
-    gap: 12px;
-    justify-content:center;
-
-    li {
-      position: relative;
-      overflow:hidden;
+      li {
+        position: relative;
+        overflow: hidden;
+      }
     }
   }
   .productData {
@@ -45,8 +44,7 @@ export const StyledCatalogue = styled.div`
     padding: 0.5vh 0 0.5vh 0;
   }
 
-  @media (max-width: 858px){
-
+  @media (max-width: 858px) {
     /* .productImg{
       width: 100vw;
       height:100vw;
@@ -57,9 +55,11 @@ export const StyledCatalogue = styled.div`
     /* .productData{
       width:100vw;
     } */
-    ul{
-      flex-direction: column;
-      padding: 2vh 0;
+    .productsUl {
+      ul {
+        flex-direction: column;
+        padding: 2vh 0;
+      }
     }
   }
 `;
