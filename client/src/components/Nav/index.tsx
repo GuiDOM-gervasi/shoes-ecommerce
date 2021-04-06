@@ -114,12 +114,12 @@ export default function Nav() {
               <li onClick={() => handleCheck("/wishlist")} className="wishlist">
                 <NavLink to="/wishlist" activeClassName="selected" >WishList</NavLink>
               </li>
-              <li className="aboutus">
+              <li onClick={() => handleCheck("/about")} className="aboutus">
               <NavLink to="/about"activeClassName="selected" >About us</NavLink>
               </li>
             </>
             ) :
-            <li className="wishlist">
+            <li onClick={() => handleCheck("/about")} className="wishlist">
               <NavLink to="/about" activeClassName="selected" >About us</NavLink>
             </li>
             }
@@ -128,7 +128,7 @@ export default function Nav() {
                 <li onClick={handleLogout} className="login">
                   <p className="hover">Logout</p>
                 </li>
-                <li className="register">
+                <li onClick={() => handleCheck("/profile")} className="register">
                   <NavLink to="/profile" activeClassName="selected">Hi {data?.user?.firstName} !</NavLink>
                 </li>
               </>
