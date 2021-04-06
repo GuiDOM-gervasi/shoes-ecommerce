@@ -1,7 +1,7 @@
 import CartProduct from "#root/db/models/cartproduct";
 import Cart from "#root/db/models/carts";
 
-const setCartPayed = async (paymentId: any) => {
+const setCartPaid = async (paymentId: any) => {
   try {
     let cart = await Cart.findOne({
       where: {
@@ -10,7 +10,7 @@ const setCartPayed = async (paymentId: any) => {
     });
 
     let numberUpdates = await CartProduct.update(
-      { state: "payed"},
+      { state: "paid"},
       { where: 
           { cartId: cart.id,
             state: 'reserved'
@@ -31,4 +31,4 @@ const setCartPayed = async (paymentId: any) => {
   }
 };
 
-export default setCartPayed;
+export default setCartPaid;

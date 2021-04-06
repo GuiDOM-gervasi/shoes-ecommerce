@@ -8,7 +8,6 @@ import Loader from "../../components/Loader";
 import Swal from "sweetalert2";
 
 const OrderTable = () => {
-  // reserved, payed, finish, rejected
   const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
     variables: { orderId: "all", state: "reserved" },
   });
@@ -59,7 +58,7 @@ const OrderTable = () => {
 
   const orders = data.viewOrders;
 
-  let states = ["reserved", "payed", "finish", "rejected"];
+  let states = ["reserved", "paid", "finished", "rejected"];
   const currentIndex = states.findIndex((state) => state === currentState);
   let possibleStates = states.slice(currentIndex - states.length);
 
