@@ -104,7 +104,8 @@ export const GlobalStyles = createGlobalStyle`
         background-color: ${verdeDetalleTrans};
     }
     .fondoDegradado{
-        background: linear-gradient(180deg, ${verdeDetalle} 0%, rgba(255, 255, 255, 0) 100%), ${violetaHover};
+        /* background: linear-gradient(180deg, ${verdeDetalle} 0%, rgba(255, 255, 255, 0) 100%), ${violetaHover}; */
+        background: ${blanco}
     }
 
     .sectionBar {
