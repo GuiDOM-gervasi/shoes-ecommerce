@@ -8,7 +8,7 @@ const sendOffersNotification = async () => {
   // users.forEach(user => {
     let email = 'ft09ec@gmail.com'//user.email;
     let name = 'ecommerce' // user.firstName;
-    let subject = `New oferts are waing for you ${name}!!!`;
+    let subject = `New oferts are wating for you ${name}!!!`;
     let textToSend = `<!DOCTYPE html>
     <html lang="en">
     <head>

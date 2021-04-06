@@ -84,7 +84,7 @@ export default function CartItem({
                 Old price: <span>${product.price}</span>
               </div>
               <div className="newPrice">
-                Discount Price : <span>${Math.floor(product.price * (1 - product.discount))}</span>
+                Discount Price : <span>${Math.round(product.price * (1 - product.discount))}</span>
               </div>
             </div>
           ) : (

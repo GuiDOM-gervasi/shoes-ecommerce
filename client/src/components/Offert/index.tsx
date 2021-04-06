@@ -218,7 +218,7 @@ export default function Offert() {
             </span>
             <span>
               <p className="info">Discount</p>
-              {offert.discount * 100}{" % "}
+              {Math.round(offert.discount * 100)}{" % "}
             </span>
             <span>
               <div className="info">

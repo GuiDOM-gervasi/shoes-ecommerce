@@ -235,7 +235,7 @@ export default function EditProduct({ match }) {
               <h4>List Price:</h4>
             )}
             {!!discount && discount > 0 ? (
-              <h2 className="price">${Math.floor(price * (1 - discount))}</h2>
+              <h2 className="price">${Math.round(price * (1 - discount))}</h2>
             ) : (
               <div style={{ display: "flex" }}>
                 <h2 className="price">${price}</h2>

@@ -13,7 +13,7 @@ export default function ProductCard({ item }) {
           className="productImg"
         />
         {!!item.discount ? (
-          <div className="discount">{item.discount * 100}% OFF!</div>
+          <div className="discount">{Math.round(item.discount * 100)}% OFF!</div>
         ) : (
           <></>
         )}

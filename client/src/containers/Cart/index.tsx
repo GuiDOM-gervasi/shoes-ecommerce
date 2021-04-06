@@ -141,7 +141,7 @@ const Cart = () => {
           ? sortedCartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;
               count +=
-                Math.floor(product.price * (1 - product.discount)) *
+                Math.round(product.price * (1 - product.discount)) *
                 cartProductItem.quantity;
               return (
                 <div className="cartItem">
