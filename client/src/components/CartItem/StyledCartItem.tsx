@@ -5,13 +5,89 @@ export const StyledCartItem = styled.div`
   .itemContainer {
     margin: 2rem 2rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+    /* position: relative; */
+    /* background-color:green; */
 
-    img,
-    .itemData {
+    .itemImage{
+
+      width: 10rem;
+      text-align: center;
+
+      img{
+        width: 8rem;
+        border: solid ${violeta} 0.05rem;
+        border-radius: 10px; 
+      }
+
+      img:hover {
+        border: red;
+        transform: scale(1.15);
+        transition: all 300ms ease;
+      }
+    }
+
+    .itemData{
       width: 15rem;
+
+      .oldPrice {
+        text-decoration: line-through;
+      }
+      .oldPrice,
+      .newPrice {
+        span {
+          font-weight: bold;
+        }
+      }
+      .number-input,
+      .number-input * {
+        box-sizing: border-box;
+      }
+
+    }
+
+    .itemButtons{
+      width: 10rem;
+      min-height: 6rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      .buttonDelete {
+      /* position: absolute; */
+        top: 0;
+        right: 0;
+        font-size: 1.8rem;
+        border: none;
+        color: ${negro};
+        cursor: pointer;
+        line-height: 0;
+        &:hover {
+          color: #920909;
+          font-size: 1.9rem;
+        }
+      }
+
+      .number-input {
+      // border: 1px solid #ddd;
+      /* position: absolute; */
+      bottom: 0;
+      left: 50%;
+      /* transform: translate(-50%, -10%); */
+      display: flex;
+      /* flex-direction: row; */
+      .fas{
+        font-size: 1.7rem;
+        &:hover {
+          color: ${violeta};
+        }
+      }
+      }
+    }
+
     }
 
     input[type="number"] {
@@ -23,50 +99,11 @@ export const StyledCartItem = styled.div`
       -webkit-appearance: none;
     }
 
-    .buttonDelete {
-      position: absolute;
-      top: 0;
-      right: 0;
-      font-size: 1.5rem;
-      border: none;
-      color: #f11717;
-      cursor: pointer;
-      line-height: 0;
-      &:hover {
-        color: #b41919;
-      }
-    }
-    .itemImage {
+    /* .itemImage {
       position: relative;
-    }
-    .number-input {
-      // border: 1px solid #ddd;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translate(-50%, -10%);
-      display: flex;
-      flex-direction: row;
-      button {
-        font-size: 1.2rem;
-        &:hover {
-          color: ${violeta};
-        }
-      }
-    }
-    .oldPrice {
-      text-decoration: line-through;
-    }
-    .oldPrice,
-    .newPrice {
-      span {
-        font-weight: bold;
-      }
-    }
-    .number-input,
-    .number-input * {
-      box-sizing: border-box;
-    }
+    } */
+
+
 
     .number-input button {
       outline: none;
@@ -87,6 +124,12 @@ export const StyledCartItem = styled.div`
       border: 1px solid ${negro};
       font-size: 1.2rem;
       font-weight: bold;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 650px) {
+    .itemData{
       text-align: center;
     }
   }

@@ -159,7 +159,7 @@ export default function Checkout() {
           </li>
         </ul>
         <form className="location" onSubmit={handleSubmit}>
-          <label>Dirección de envio</label>
+          <label><h3>Delivery address</h3></label>
           <input
             type="text"
             name="country"
@@ -184,7 +184,7 @@ export default function Checkout() {
           <input
             type="number"
             name="addressnumber"
-            placeholder="Addressnumber"
+            placeholder="Address number"
             onChange={handleChange}
           />
           <span className="span_addressnumber"></span>

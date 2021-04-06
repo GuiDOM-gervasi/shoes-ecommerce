@@ -92,7 +92,8 @@ const handleDelete = (productId) => {
             </li>
           )) }
         </ul>
-      </div>     
+      </div>
+      <div className= 'footerFake'> </div>      
     </StyledWishListTable>
   );
 };
