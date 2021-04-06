@@ -191,7 +191,7 @@ const Cart = () => {
             </footer>
           }
       </div>
-
+      <div className= 'footerFake'> </div> 
     </StyledCart>
   );
 };

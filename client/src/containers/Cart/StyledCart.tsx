@@ -73,7 +73,15 @@ export const StyledCart = styled.div`
         border: 0;
         border-radius: 0;
         box-shadow: 0;
+        margin-bottom:0;
 
+      }
+      footer{
+        border-radius: 0;
+      }
+
+      .footerFake{
+        display: none
       }
   }
 `;

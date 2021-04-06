@@ -142,7 +142,7 @@ export default function OrderHistory() {
                       <br />
                       quantity: <strong>{" " + order.quantity}</strong>
                       <br />
-                      price: <strong>{" " + order.price}</strong>
+                      price: <strong>${" " + order.price}</strong>
                   </p>
                 </div>
                 <div className="itemButtons">
@@ -170,6 +170,7 @@ export default function OrderHistory() {
           })
         )}
       </ul>
+      <div className="footerFake"></div>
     </StyledOrderHistory>
   );
 }
