@@ -16,12 +16,14 @@ export const StyledSuccess = styled.div`
   position: relative;
   flex-direction: column;
   font-weight: 500;
+  text-align: center;
 
   h2 {
     font-size: 1.5rem;
+    margin: 1em;
   }
-  div{
-    width:90%;
+  div {
+    width: 90%;
   }
   img {
     width: 40%;

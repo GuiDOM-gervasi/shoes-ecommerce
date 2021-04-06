@@ -9,7 +9,7 @@ import Stripe from 'stripe';
 import getCartForPayment from '#root/helpers/getCartForPayment';
 import restoreStock from '#root/helpers/restoreStock'
 import stripeCheckout from '#root/helpers/stripeCheckout';
-import setCartPayed from '#root/helpers/setCartPayed';
+import setCartPaid from '#root/helpers/setCartPaid';
 import bilingPurchase from '#root/helpers/billingPurchase';
 import resolvers from '#root/graphql/resolvers';
 import typeDefs from '#root/graphql/typeDefs';
@@ -65,9 +65,9 @@ const startServer = async () => {
       
       case 'payment_intent.succeeded':
         // console.log(`PaymentIntent for ${paymentIntent.amount} was successful!, ID: ${paymentIntent.id}`);
-        let setPayed = await setCartPayed(paymentIntent.id)
-        console.log('is cart set to payed:', setPayed)
-        let mailSended = bilingPurchase(`${setPayed.userId}`, paymentIntent.id);
+        let setPaid = await setCartPaid(paymentIntent.id)
+        console.log('is cart set to paid:', setPaid)
+        let mailSended = bilingPurchase(`${setPaid.userId}`, paymentIntent.id);
         break;
 
       case 'payment_intent.canceled':
