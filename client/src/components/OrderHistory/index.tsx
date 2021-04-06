@@ -30,7 +30,8 @@ export default function OrderHistory() {
   const [createReview, { error: errorMutationReview }] = useMutation(
     ADD_REVIEW,
     {
-      refetchQueries: [{ query: GET_REVIEWS, variables: { prodId } }],
+      refetchQueries: [{ query: GET_REVIEWS, variables: {  productId: prodId } },
+        { query: GET_REVIEWS_FROM_USER, variables: {  userId  } }],
     }
   );
   const handleReview = (productId, userId) => {
@@ -94,7 +95,7 @@ export default function OrderHistory() {
               text: "Review added successfully.",
             });
           } catch (err) {
-            console.log(err);
+            console.error(err);
             return;
           }
         }
