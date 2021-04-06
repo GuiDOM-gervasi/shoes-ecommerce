@@ -29,6 +29,7 @@ export { default as updateStock } from "./updateStock";
 export { default as checkStock } from "./checkStock";
 export { default as undeleteCategory } from "./undeleteCategory";
 export { default as undeleteProduct } from "./undeleteProduct";
+export { default as undeleteReview } from "./undeleteReview";
 
 export { default as updateCategory } from "./updateCategory";
 export { default as updateProduct } from "./updateProduct";

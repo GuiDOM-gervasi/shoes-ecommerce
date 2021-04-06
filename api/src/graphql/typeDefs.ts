@@ -203,7 +203,8 @@ const typeDefs = gql`
     logoutUser(id: String!): Logout
     passwordReset(email: String!): String!
     removeFromCart(cartId: String!, finalproductId: String!): String!
-
+    
+    undeleteReview(id: String!): Review
     undeleteCategory(id: String!): Category
     undeleteProduct(id: String!): Product
     undeleteUser(id: String!): String!
@@ -240,6 +241,7 @@ const typeDefs = gql`
     deleted: [Product!]!
     deletedUsers: [User!]!
     deletedCategories: [Category!]!
+    deletedReviews(productId: String!): [Review!]!
 
     finalproducts(productId: String!, modelId: String!): [FinalProduct!]!
     getReviews(productId: String!): Reviews
