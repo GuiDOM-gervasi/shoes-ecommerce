@@ -356,7 +356,7 @@ export const GET_HISTORY = gql`
 `;
 
 
-export const GET_OFFERTS = gql`
+export const GET_OFFERS = gql`
   query getOffers($active: Boolean!) {
     getOffers(active: $active) {
       id

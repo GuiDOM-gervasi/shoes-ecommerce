@@ -1,19 +1,18 @@
 import styled from "styled-components";
-import { blanco, violeta } from "../App/GlobalStyles";
+import { blanco, verdeDetalle, verdeMain, violeta } from "../App/GlobalStyles";
 
 export const StyledOrderTable = styled.div`
   display: flex;
   flex-direction: column;
-  h3{
-    text-align:center;
-    text-transform:capitalize;
-    padding:1rem;
-    color:${blanco};
-    background-color:${violeta};
-  }
+
   .sectionBar section{
+    font-weight:500;
     text-transform:capitalize;
   }
+
+  .sectionBar .currentState{
+     background-color:${verdeDetalle}
+  } 
   ul li {
     width: 100%;
     display: flex;

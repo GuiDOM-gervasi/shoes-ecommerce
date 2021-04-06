@@ -45,7 +45,7 @@ export default function Admin() {
         </Link>
 
 
-        <Link to="/admin/offerts"> 
+        <Link to="/admin/offers"> 
           <div>
           <i className="fas fa-tags"></i>
             Offers

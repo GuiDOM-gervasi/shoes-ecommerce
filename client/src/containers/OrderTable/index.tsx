@@ -65,10 +65,9 @@ const OrderTable = () => {
 
   return (
     <StyledOrderTable>
-      <h3>{currentState}</h3>
       <div className="sectionBar">
         {states.map((state) =>
-          state === currentState ? null : (
+          state === currentState ? <section className="currentState">{currentState}</section> : (
             <section onClick={handleClick} id={state}>
               {state}
             </section>

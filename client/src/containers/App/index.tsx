@@ -25,8 +25,9 @@ import NewPassword from "../../components/NewPassword";
 import Profile from "../../containers/Profile";
 import AboutUs from "../../components/AboutUs";
 import OrderHistory from "../../components/OrderHistory";
-import Offert from "../../components/Offert";
+import Offer from "../../components/Offer";
 import wishListTable from "../../components/wishlist";
+import AdminNav from "../../components/AdminNav";
 
 require("dotenv").config();
 
@@ -54,6 +55,7 @@ function App() {
       <Route exact path="/success" component={Success} />
       <Route exact path="/cancel" component={Cancel} />
       <Route exact path="/admin" component={isAdmin ? Admin : Login} />
+      <Route path="/admin/:navs" component={AdminNav}/>
       <Route
         path="/admin/products"
         component={isAdmin ? CRUDProducts : Login}
@@ -67,8 +69,8 @@ function App() {
         component={isAdmin ? EditProduct : Login}
       />
       <Route
-        path="/admin/offerts"
-        component={isAdmin ? Offert : Login}
+        path="/admin/offers"
+        component={isAdmin ? Offer : Login}
       />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
