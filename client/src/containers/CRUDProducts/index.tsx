@@ -267,6 +267,9 @@ export default function CRUDProducts() {
   const handleRestore = (id) => {
     undeleteProduct({ variables: { id } });
   };
+  const handleReviews = (id) => {
+    history.push(`/admin/productReviews/${id}`);
+  };
 
   const handleEdit = (id) => {
     history.push(`/admin/editProduct/${id}`);
@@ -292,6 +295,10 @@ export default function CRUDProducts() {
               <span className="price"> $ {item.price} </span>
 
               <div className="buttons">
+                <i
+                  onClick={() => handleReviews(item.id)}
+                  className="far fa-star"
+                />
                 <i
                   onClick={() => handleEdit(item.id)}
                   className="fas fa-edit"

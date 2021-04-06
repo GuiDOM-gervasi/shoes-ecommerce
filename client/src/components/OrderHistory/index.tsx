@@ -30,7 +30,10 @@ export default function OrderHistory() {
   const [createReview, { error: errorMutationReview }] = useMutation(
     ADD_REVIEW,
     {
-      refetchQueries: [{ query: GET_REVIEWS, variables: { prodId } }],
+      refetchQueries: [
+        { query: GET_REVIEWS, variables: { productId: prodId } },
+        { query: GET_REVIEWS_FROM_USER, variables: { userId} },
+      ],
     }
   );
   const handleReview = (productId, userId) => {
@@ -78,6 +81,7 @@ export default function OrderHistory() {
       ])
       .then(async (result: any) => {
         if (result.value) {
+          console.log("productId", productId, typeof productId);
           try {
             await createReview({
               variables: {
@@ -143,7 +147,7 @@ export default function OrderHistory() {
                     price: <strong>{" " + order.price}</strong>
                   </span>
                 </p>
-                {userReviews.find(review => review === product.id) ? (
+                {userReviews.find((review) => review === product.id) ? (
                   <button
                     id="reviewButton"
                     className="boton"

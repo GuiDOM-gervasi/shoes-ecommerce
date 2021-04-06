@@ -4,20 +4,20 @@ import {
   violeta,
   negro,
   formWidth,
-} from "../../containers/App/GlobalStyles";
+} from "../App/GlobalStyles";
 
-export const StyledCRUDProducts = styled.div`
-  .productContainer {
+export const StyledCRUDProductReviews = styled.div`
+  .categoryContainer {
     display: flex;
     flex-direction: column;
     width: ${formWidth * 2}vw;
     min-height: 30vh;
-    margin: 2rem auto;
-    margin-bottom: 0;
+    margin: 2rem auto 0 auto;
     border: 2px solid black;
     border-radius: 15px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     background-color: ${blanco};
+
     ul li {
       width: 100%;
       display: flex;
@@ -25,7 +25,6 @@ export const StyledCRUDProducts = styled.div`
       align-items: center;
       margin: 1rem 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-
       span,
       h5,
       div {
@@ -34,7 +33,13 @@ export const StyledCRUDProducts = styled.div`
         justify-content: center;
       }
     }
-    button,
+    .deleted {
+      margin-top: 3rem;
+      text-align: center;
+      h4 {
+        margin-bottom: 1rem;
+      }
+    }
     .addButton {
       margin: 1rem 0;
       padding: 0.5rem;
@@ -43,22 +48,12 @@ export const StyledCRUDProducts = styled.div`
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
       align-self: center;
     }
-    .deleted {
-      margin-top: 3rem;
-      text-align: center;
-      h4 {
-        margin-bottom: 1rem;
-      }
-    }
-    .fas, .far {
+    .fas {
       color: ${negro};
       margin-left: 1vw;
       &:hover {
         color: ${violeta};
       }
-    }
-    .swal2-html-container {
-      list-style-type: none;
     }
   }
   @media (max-width: 858px) {
