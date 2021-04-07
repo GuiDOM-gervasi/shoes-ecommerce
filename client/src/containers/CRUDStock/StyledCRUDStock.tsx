@@ -22,12 +22,22 @@ export const StyledCRUDStock = styled.div`
       margin: 1rem 0;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
+    :first-child  {
+        border: none;
+        margin-bottom: 0;
+      }
+
       span,
       h5,
       div {
         width: 20%;
         display: flex;
         justify-content: center;
+      }
+      
+      select {
+        width: 20%;
+        margin: 0.1rem 1rem;
       }
     }
     .fas {

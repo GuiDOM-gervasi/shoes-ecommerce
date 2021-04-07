@@ -54,7 +54,18 @@ export const DELETE_CATEGORY = gql`
     }
   }
 `;
-
+export const DELETE_REVIEW = gql`
+  mutation deleteReview($id: String!) {
+    deleteReview(id: $id)
+  }
+`;
+export const UNDELETE_REVIEW = gql`
+  mutation undeleteReview($id: String!) {
+    undeleteReview(id: $id) {
+      id
+    }
+  }
+`;
 export const UNDELETE_PRODUCT = gql`
   mutation undeleteProduct($id: String!) {
     undeleteProduct(id: $id) {

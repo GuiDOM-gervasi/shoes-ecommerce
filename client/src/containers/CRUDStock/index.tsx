@@ -10,6 +10,12 @@ import { EDIT_STOCK } from "../../graphql/mutations";
 
 export default function CRUDStock() {
   const history = useHistory();
+  const [filters, setFilters] = React.useState({
+    name: '',
+    size: '',
+    color: ''
+  })
+
   const { data, loading, error: stockError } = useQuery(GET_ALL_STOCK);
   const [editStock] = useMutation(EDIT_STOCK, {
     refetchQueries: [{ query: GET_ALL_STOCK }],
@@ -81,59 +87,129 @@ export default function CRUDStock() {
     // history.push(`/admin/editStock/${productId}/${modelId}`);
   };
 
+  function uniq(info) {
+    var seenName = {};
+    var seenColor = {};
+    var seenSize = {};
+    let names = info.map(function(item) {
+        if (seenName.hasOwnProperty(item.product?.name) ){
+          return null 
+        }else{
+          seenName[item.product?.name] = true;
+          return item.product?.name
+        }
+    });
+    let colors = info.map(function(item) {
+      if (seenColor.hasOwnProperty(item.model.color) ){
+        return null 
+      }else{
+        seenColor[item.model.color] = true;
+        return item.model.color
+      }
+    })
+    let sizes = info.map(function(item) {
+      if (seenSize.hasOwnProperty(item.model.size) ){
+        return null 
+      }else{
+        seenSize[item.model.size] = true;
+        return item.model.size
+      }
+    })
+
+    return {names, colors, sizes}
+  }
+  
+  let {names, colors, sizes} = uniq(data.allStock);
+  names = names.filter(e => !!e)
+  colors = colors.filter(e => !!e)
+  sizes = sizes.filter(e => !!e)
+
+
   return (
     <StyledCRUDStock>
-      <div className="stockContainer">
+      <div className="stockContainer crud_container">
         <ul>
           <li className="titles">
             <h5>ID</h5>
-            <h5>Nombre</h5>
+            <h5>Name</h5>
             <h5>Color</h5>
-            <h5>Talle</h5>
+            <h5>Size</h5>
             <h5>Stock</h5>
             <div></div>
           </li>
-          {data.allStock?.map((item: StockAttributes) => (
-            <li key={item.id}>
-              <span className="itemId">
-                <p className="itemId">ID</p>
-                {item.id}{" "}
-              </span>
-              <span className="itemName">
-                <p className="itemName">Nombre</p>
-                {item.product?.name}{" "}
-              </span>
-              <span className="itemColor">
-                <p className="itemColor">Color</p>
-                {item.model.color}{" "}
-              </span>
-              <span className="itemSize">
-                <p className="itemSize">Talle</p>
-                {item.model.size}{" "}
-              </span>
-              <span className="itemStock">
-                <p className="itemStock">Stock</p>
-                {item.stock}{" "}
-              </span>
-
-              <div className="buttons">
-                <button
-                  type="submit"
-                  onClick={() =>
-                    handleEdit(
-                      item.product.id,
-                      item.model.id,
-                      item.product.name,
-                      item.model.size,
-                      item.model.color
-                    )
-                  }
-                >
-                  Modificar stock
-                </button>
-              </div>
-            </li>
-          ))}
+          <li>
+            <h5> - </h5>
+            <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            setFilters({...filters, name: ev.target.value})
+          }>
+              <option value=''>All</option>
+              { names.map(item =>
+                <option>{item}</option>)}
+            </select>
+            <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            setFilters({...filters, color: ev.target.value})
+            }>
+              <option value=''>All</option>
+              { colors.map(item =>
+                <option>{item}</option>)}
+            </select>
+            <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            setFilters({...filters, size: ev.target.value})
+            }>
+              <option value=''>All</option>
+              { sizes.map(item =>
+                <option>{item}</option>)}
+            </select>
+            <h5> -  </h5>
+            <div></div>
+          </li>
+          {data.allStock?.map((item: StockAttributes) => {
+            if((item.product?.name === filters.name || filters.name.length < 1)
+              && (item.model.size === filters.size || filters.size.length < 1)
+              && (item.model.color === filters.color || filters.color.length < 1)
+              ){
+              return (<li key={item.id}>
+                <span className="itemId">
+                  <p className="itemId">ID</p>
+                  {item.id}{" "}
+                </span>
+                <span className="itemName">
+                  <p className="itemName">Nombre</p>
+                  {item.product?.name}{" "}
+                </span>
+                <span className="itemColor">
+                  <p className="itemColor">Color</p>
+                  {item.model.color}{" "}
+                </span>
+                <span className="itemSize">
+                  <p className="itemSize">Talle</p>
+                  {item.model.size}{" "}
+                </span>
+                <span className="itemStock">
+                  <p className="itemStock">Stock</p>
+                  {item.stock}{" "}
+                </span>
+                <div className="buttons">
+                  <button
+                    type="submit"
+                    onClick={() =>
+                      handleEdit(
+                        item.product.id,
+                        item.model.id,
+                        item.product.name,
+                        item.model.size,
+                        item.model.color
+                      )
+                    }
+                  >
+                    Modificar stock
+                  </button>
+                </div>
+              </li>)}
+              else{
+                <></>
+              }
+          })}
         </ul>
       </div>
       <div className="footerFake"></div>

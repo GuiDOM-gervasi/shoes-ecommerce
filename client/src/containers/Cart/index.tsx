@@ -66,26 +66,27 @@ const Cart = () => {
   };
 
   const handleQuantity = (e, cartProductItem) => {
-    if(e.target.value){
-    if (userId !== "0") {
-      if (cartProductItem.id) {
-        cartProductItem = cartProductItem.id;
+    if (e.target.value) {
+      if (userId !== "0") {
+        if (cartProductItem.id) {
+          cartProductItem = cartProductItem.id;
+        }
+        controlQuantity({
+          variables: {
+            id: cartProductItem,
+            quantity: parseInt(e.target.value),
+          },
+        });
+      } else {
+        let recuperarCartLocal = JSON.parse(localStorage.getItem("cart"));
+        let items = recuperarCartLocal.items.find(
+          (item) => item.id === cartProductItem.id
+        );
+        items.quantity = parseInt(e.target.value);
+        localStorage.setItem("cart", JSON.stringify(recuperarCartLocal));
+        setCartLocalState(recuperarCartLocal);
       }
-      controlQuantity({
-        variables: {
-          id: cartProductItem,
-          quantity: parseInt(e.target.value),
-        },
-      });
-    } else {
-      let recuperarCartLocal = JSON.parse(localStorage.getItem("cart"));
-      let items = recuperarCartLocal.items.find(
-        (item) => item.id === cartProductItem.id
-      );
-      items.quantity = parseInt(e.target.value);
-      localStorage.setItem("cart", JSON.stringify(recuperarCartLocal));
-      setCartLocalState(recuperarCartLocal);
-    }}
+    }
   };
 
   const handleClick = (e, cartProductItem) => {
@@ -137,44 +138,60 @@ const Cart = () => {
   return (
     <StyledCart className="fondoDegradado">
       <div className="cartContainer">
-        {userId !== "0"
-          ? sortedCartProductsArray?.map((cartProductItem) => {
+        <h2>Your Cart</h2>
+        <ul>
+          {userId !== "0"
+            ? sortedCartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.finalproducts.product;
               count +=
                 Math.round(product.price * (1 - product.discount)) *
                 cartProductItem.quantity;
               return (
-                <div className="cartItem">
-                <CartItem
-                  cartProductItem={cartProductItem}
-                  product={product}
-                  handleClick={handleClick}
-                  handleQuantity={handleQuantity}
-                  handleDelete={handleDelete}
-                />
-                </div>
+                <li>
+                  <CartItem
+                    cartProductItem={cartProductItem}
+                    product={product}
+                    handleClick={handleClick}
+                    handleQuantity={handleQuantity}
+                    handleDelete={handleDelete}
+                  />
+                </li>
               );
             })
-          : cartProductsArray?.map((cartProductItem) => {
+            : cartProductsArray?.map((cartProductItem) => {
               const product = cartProductItem.product;
               count += product.price * cartProductItem.quantity;
               return (
-                <CartItem
-                  cartProductItem={cartProductItem}
-                  product={product}
-                  handleClick={handleClick}
-                  handleQuantity={handleQuantity}
-                  handleDelete={handleDelete}
-                />
+                <li>
+                  <CartItem
+                    cartProductItem={cartProductItem}
+                    product={product}
+                    handleClick={handleClick}
+                    handleQuantity={handleQuantity}
+                    handleDelete={handleDelete}
+                  />
+                </li>
               );
             })}
+        </ul>
+          {
+            sortedCartProductsArray 
+            ?<footer>
+              <h5>Total: ${count}</h5>
+              <Link to={userId !== "0" ? "/checkout" : "/login"}>
+                <button className="boton">Buy</button>
+              </Link>
+          </footer>
+            :
+            <footer>
+              <Link to={'/'}>
+                <h5>seems there are nothing here yet...  </h5>
+                <h5>lets add someting  </h5>
+              </Link>
+            </footer>
+          }
       </div>
-      <footer>
-        <h5>Total: ${count}</h5>
-        <Link to={userId !== "0" ? "/checkout" : "/login"}>
-          <button className="boton">Buy</button>
-        </Link>
-      </footer>
+      <div className= 'footerFake'> </div> 
     </StyledCart>
   );
 };

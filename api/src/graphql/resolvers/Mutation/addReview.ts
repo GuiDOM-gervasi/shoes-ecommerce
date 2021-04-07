@@ -11,13 +11,14 @@ const addReview = async (parent:any, {productId, userId, title, score, descripti
     })
 
     if( check.length < 1){
-          return  await Review.create({
+      return await Review.create({
           productId,
           userId,
           title,
           score,
           description
       })
+
     }else{
       return {
         id: "0",

@@ -101,6 +101,19 @@ export const GET_DELETED_CATEGORIES = gql`
   }
 `;
 
+export const GET_DELETED_REVIEWS = gql`
+  query deletedReviews($productId: String!) {
+    deletedReviews(productId: $productId) {
+      id
+      title
+      score
+      description
+      productId
+      userId
+    }
+  }
+`;
+
 export const GET_BRANDS = gql`
   query Brands {
     brand {
@@ -334,7 +347,7 @@ export const GET_USER_DETAIL = gql`
 
 export const GET_HISTORY = gql`
   query OrderHistory($userId: String!) {
-    cart(userId: $userId, state: "finish") {
+    cart(userId: $userId, state: "finished") {
       cartproducts {
         id
         quantity
@@ -356,7 +369,7 @@ export const GET_HISTORY = gql`
 `;
 
 
-export const GET_OFFERTS = gql`
+export const GET_OFFERS = gql`
   query getOffers($active: Boolean!) {
     getOffers(active: $active) {
       id

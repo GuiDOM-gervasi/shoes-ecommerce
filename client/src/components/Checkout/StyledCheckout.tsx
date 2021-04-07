@@ -3,7 +3,7 @@ import { blanco, formWidth } from "../../containers/App/GlobalStyles";
 
 export const StyledCheckout = styled.div`
   .checkoutContainer {
-    width: ${formWidth}vw;
+    max-width: 35rem;
     min-height: 60vh;
     margin: 2rem auto 0 auto;
     padding: 1rem 0 1rem 0;
@@ -40,12 +40,18 @@ export const StyledCheckout = styled.div`
     .location {
       display: flex;
       flex-direction: column;
-      height: 20vh;
+      height: 30vh;
+      width: 30rem;
       justify-content: space-around;
       margin: 1.5rem;
       align-items: center;
+      h3{
+        margin: 1rem
+      }
       input {
         margin: 0.5rem 0 0.5rem 0;
+        width: 20rem;
+        font-size:1.1rem;
       }
       span {
         font-size: 0.5rem;
@@ -57,7 +63,8 @@ export const StyledCheckout = styled.div`
   }
   @media (max-width: 858px) {
     .checkoutContainer {
-      width: 90vw;
+      border: none;
+      border-radius: 0;
       .location {
         width: 90%;
         input {

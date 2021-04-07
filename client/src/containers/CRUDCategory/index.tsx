@@ -88,7 +88,7 @@ export default function CRUDCategory() {
           }
 
           Swal.fire({
-            icon:'success',
+            icon: "success",
             title: "Category " + result.value[0] + " added",
           });
         }
@@ -138,7 +138,7 @@ export default function CRUDCategory() {
           }
 
           Swal.fire({
-            icon:'success',
+            icon: "success",
             title: "Category modified",
           });
         }
@@ -152,53 +152,56 @@ export default function CRUDCategory() {
 
   return (
     <StyledCRUDCategory>
-      <div className="categoryContainer">
-      <button className="addButton" onClick={handleAdd}>
-        Add new Category
-      </button>
-      <ul>
-        <li className="titles">
-          <h5>ID</h5>
-          <h5>Category</h5>
-          <div></div>
-        </li>
-        {allCategory?.map((item: CategoryAttributes) => (
-          <li key={item.id}>
-            <span className="id"> {item.id} </span>
-            <span className="name"> {item.name} </span>
-            <div className="buttons">
-              <i onClick={() => handleEdit(item.id, item.name)} className="fas fa-edit" />
-              <i
-                onClick={() => handleDelete(item.id)}
-                className="fas fa-trash-alt"
-              />
-              {/* <button onClick={() => handleEdit(item.id)}> Edit </button> */}
-              {/* <button onClick={() => handleDelete(item.id)}> Delete </button> */}
-            </div>
+      <div className="categoryContainer crud_container">
+        <button className="addButton" onClick={handleAdd}>
+          Add new Category
+        </button>
+        <ul>
+          <li className="titles">
+            <h5>ID</h5>
+            <h5>Category</h5>
+            <div></div>
           </li>
-        ))}
-      </ul>
-      <div className="deleted">
-        <h4>Deleted categories</h4>
-        <ul className="deletedCategories">
-          {deletedCategories?.deletedCategories?.map(
-            (item: CategoryAttributes) => (
-              <li key={item.id}>
-                <span className="id">{item.id}</span>
-                <span className="name">{item.name}</span>
-                <span>
-                  <div className="buttons">
-                    <i
-                      onClick={() => handleRestore(item.id)}
-                      className="fas fa-trash-restore"
-                    />
-                  </div>
-                </span>
-              </li>
-            )
-          )}
+          {allCategory?.map((item: CategoryAttributes) => (
+            <li key={item.id}>
+              <span className="id"> {item.id} </span>
+              <span className="name"> {item.name} </span>
+              <div className="buttons">
+                <i
+                  onClick={() => handleEdit(item.id, item.name)}
+                  className="fas fa-edit"
+                />
+                <i
+                  onClick={() => handleDelete(item.id)}
+                  className="fas fa-trash-alt"
+                />
+                {/* <button onClick={() => handleEdit(item.id)}> Edit </button> */}
+                {/* <button onClick={() => handleDelete(item.id)}> Delete </button> */}
+              </div>
+            </li>
+          ))}
         </ul>
-      </div>
+        <div className="deleted">
+          <h4>Deleted categories</h4>
+          <ul className="deletedCategories">
+            {deletedCategories?.deletedCategories?.map(
+              (item: CategoryAttributes) => (
+                <li key={item.id}>
+                  <span className="id">{item.id}</span>
+                  <span className="name">{item.name}</span>
+                  <span>
+                    <div className="buttons">
+                      <i
+                        onClick={() => handleRestore(item.id)}
+                        className="fas fa-trash-restore"
+                      />
+                    </div>
+                  </span>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
       </div>
       <div className="footerFake"></div>
     </StyledCRUDCategory>
