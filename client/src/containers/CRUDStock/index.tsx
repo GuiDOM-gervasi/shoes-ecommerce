@@ -10,6 +10,12 @@ import { EDIT_STOCK } from "../../graphql/mutations";
 
 export default function CRUDStock() {
   const history = useHistory();
+  const [filters, setFilters] = React.useState({
+    name: '',
+    size: 0,
+    color: ''
+  })
+
   const { data, loading, error: stockError } = useQuery(GET_ALL_STOCK);
   const [editStock] = useMutation(EDIT_STOCK, {
     refetchQueries: [{ query: GET_ALL_STOCK }],
@@ -81,16 +87,73 @@ export default function CRUDStock() {
     // history.push(`/admin/editStock/${productId}/${modelId}`);
   };
 
+  function uniq(info) {
+    var seenName = {};
+    var seenColor = {};
+    var seenSize = {};
+    let names = info.map(function(item) {
+        if (seenName.hasOwnProperty(item.product?.name) ){
+          return null 
+        }else{
+          seenName[item.product?.name] = true;
+          return item.product?.name
+        }
+    });
+    let colors = info.map(function(item) {
+      if (seenColor.hasOwnProperty(item.model.color) ){
+        return null 
+      }else{
+        seenColor[item.model.color] = true;
+        return item.model.color
+      }
+    })
+    let sizes = info.map(function(item) {
+      if (seenSize.hasOwnProperty(item.model.size) ){
+        return null 
+      }else{
+        seenSize[item.model.size] = true;
+        return item.model.size
+      }
+    })
+
+    return {names, colors, sizes}
+  }
+  
+  let {names, colors, sizes} = uniq(data.allStock);
+  names = names.filter(e => !!e)
+  colors = colors.filter(e => !!e)
+  sizes = sizes.filter(e => !!e)
+
+
   return (
     <StyledCRUDStock>
       <div className="stockContainer">
         <ul>
           <li className="titles">
             <h5>ID</h5>
-            <h5>Nombre</h5>
+            <h5>Name</h5>
             <h5>Color</h5>
-            <h5>Talle</h5>
+            <h5>Size</h5>
             <h5>Stock</h5>
+            <div></div>
+          </li>
+          <li>
+            <h5> - </h5>
+            <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            setFilters({...filters, name: ev.target.value})
+          }>
+            { names.map(item =>
+              <option>{item}</option>)}
+            </select>
+            <select>
+            { colors.map(item =>
+              <option>{item}</option>)}
+            </select>
+            <select>
+            { sizes.map(item =>
+              <option>{item}</option>)}
+            </select>
+            <h5> -  </h5>
             <div></div>
           </li>
           {data.allStock?.map((item: StockAttributes) => (
