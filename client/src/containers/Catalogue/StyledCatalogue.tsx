@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { violeta } from "../App/GlobalStyles";
 
 export const StyledCatalogue = styled.div`
   
@@ -37,13 +36,7 @@ export const StyledCatalogue = styled.div`
       overflow:hidden;
     }
   }
-  .productData {
-    position: absolute;
-    bottom: 0;
-    width: 20rem;
-    background-color: ${violeta};
-    padding: 0.5vh 0 0.5vh 0;
-  }
+
 
   @media (max-width: 858px){
 

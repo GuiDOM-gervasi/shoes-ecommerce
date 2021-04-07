@@ -8,6 +8,7 @@ export const StyledSlider = styled.div`
   img {
         width: 100vw;
         height: 100%;
+        border-radius:0;
         object-position: 0 70%;
         object-fit: cover;
   }
