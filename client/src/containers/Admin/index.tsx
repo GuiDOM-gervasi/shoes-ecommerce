@@ -13,6 +13,20 @@ export default function Admin() {
           </div>
         </Link>
 
+        <Link to="/admin/stock"> 
+          <div>
+          <i className="fas fa-layer-group"></i>
+            Stock 
+          </div>
+        </Link>
+
+        <Link to="/admin/offerts"> 
+          <div>
+          <i className="fas fa-tags"></i>
+            Offers
+          </div>
+        </Link>
+
         <Link to="/admin/category"> 
           <div>
           <i className="fas fa-list"></i>
@@ -27,6 +41,12 @@ export default function Admin() {
           </div>
         </Link>
 
+        <Link to="/admin/statistics"> 
+          <div>
+          <i className="fas fa-chart-pie"></i>
+            Statistics
+          </div>
+        </Link>
 
         <Link to="/admin/users"> 
           <div>
@@ -36,21 +56,6 @@ export default function Admin() {
         
         </Link>
 
-
-        <Link to="/admin/stock"> 
-          <div>
-          <i className="fas fa-layer-group"></i>
-            Stock 
-          </div>
-        </Link>
-
-
-        <Link to="/admin/offerts"> 
-          <div>
-          <i className="fas fa-tags"></i>
-            Offers
-          </div>
-        </Link>
 
     </StyledAdmin>
   )
