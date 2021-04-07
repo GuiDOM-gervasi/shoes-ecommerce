@@ -46,7 +46,6 @@ export default function Catalogue() {
           filterOfferts={filterOfferts}
         />
       </div>
-
       <div className="productsUl">
         <ul>
           {loadedProducts.map((item, i) => {
