@@ -65,6 +65,9 @@ export const GlobalStyles = createGlobalStyle`
     ul{
         list-style-type:none;
     }
+    img{
+        border-radius:10px;
+    }
     .priceBefore{
         text-decoration:line-through;
         font-weight: 400;
