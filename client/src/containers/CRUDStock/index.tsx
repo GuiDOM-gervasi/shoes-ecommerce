@@ -8,6 +8,7 @@ import Loader from "../../components/Loader";
 import { GET_ALL_STOCK } from "../../graphql/queries";
 import { EDIT_STOCK } from "../../graphql/mutations";
 
+
 export default function CRUDStock() {
   const history = useHistory();
   const [filters, setFilters] = React.useState({
@@ -64,9 +65,6 @@ export default function CRUDStock() {
           } catch (e) {
             console.log(e);
           } finally {
-            // console.log(productId);
-            // console.log(modelId);
-            // console.log(modify);
           }
 
           Swal.fire({
@@ -83,11 +81,10 @@ export default function CRUDStock() {
           });
         }
       });
-
-    // history.push(`/admin/editStock/${productId}/${modelId}`);
   };
 
-  function uniq(info) {
+  function uniq(info: [StockAttributes]) {
+    console.log(`info`, info)
     var seenName = {};
     var seenColor = {};
     var seenSize = {};
@@ -120,9 +117,9 @@ export default function CRUDStock() {
   }
   
   let {names, colors, sizes} = uniq(data.allStock);
-  names = names.filter(e => !!e)
-  colors = colors.filter(e => !!e)
-  sizes = sizes.filter(e => !!e)
+  names = names.filter((e:String)=> !!e)
+  colors = colors.filter((e:String) => !!e)
+  sizes = sizes.filter((e:String) => !!e)
 
 
   return (
@@ -207,7 +204,7 @@ export default function CRUDStock() {
                 </div>
               </li>)}
               else{
-                <></>
+                return <></>
               }
           })}
         </ul>
