@@ -107,6 +107,7 @@ const typeDefs = gql`
     quantity: Int!
     price: Float!
     state: String!
+    updatedAt: Float
   }
   type Review {
     id: ID
@@ -133,6 +134,13 @@ const typeDefs = gql`
     discount: Float!
     duration: Float!
     active: Boolean
+  }
+
+  type orderQuantity{
+    reserved: String
+    paid: String
+    rejected: String
+    finished: String
   }
 
   type wishList {
@@ -249,6 +257,7 @@ const typeDefs = gql`
     image(productId: String!): [Image]!
     models: [Model!]!
 
+    orderQuantity( state: String ): orderQuantity!
     productDetail(id: String!): Product!
     productForCategory(name: String!): [Product!]!
     filteredProducts(categoryId: [String!]!, brandId: [String!]!): [Product!]!
