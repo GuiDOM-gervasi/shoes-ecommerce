@@ -25,11 +25,11 @@ export default function Offer() {
     console.error(errorMutationReview);
   }
 
-  const { data: catData, loading: catLoading, error: catError } = useQuery(
+  const { data: catData, loading: catLoading } = useQuery(
     GET_CATEGORIES,
     {}
   );
-  const { data: prodData, loading: prodLoading, error: prodError } = useQuery(
+  const { data: prodData, loading: prodLoading } = useQuery(
     GET_PRODUCTS,
     {}
   );
