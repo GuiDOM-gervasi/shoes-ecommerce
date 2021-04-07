@@ -121,7 +121,7 @@ export default function Offer() {
 
   return (
     <StyledOffer>
-      <div className="discountContainer">
+      <div className="discountContainer crud_container">
         <h2>Create New Discount</h2>
 
         <form

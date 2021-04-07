@@ -65,6 +65,9 @@ export const GlobalStyles = createGlobalStyle`
     ul{
         list-style-type:none;
     }
+    img{
+        border-radius:10px;
+    }
     .priceBefore{
         text-decoration:line-through;
         font-weight: 400;
@@ -130,4 +133,12 @@ export const GlobalStyles = createGlobalStyle`
         }
         }
     }
+
+  @media screen and (max-width:858px) {
+    .crud_container {
+      border-radius: 0 !important;
+      border: none !important;
+      width: 100vw !important;
+    }
+  }
 `;

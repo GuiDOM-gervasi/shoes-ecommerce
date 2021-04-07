@@ -3,10 +3,7 @@ import React from "react";
 import { StyledCRUDProductReviews } from "./StyledCRUDProductReviews";
 import { GET_DELETED_REVIEWS, GET_REVIEWS } from "../../graphql/queries";
 import { useHistory } from "react-router-dom";
-import {
-  UNDELETE_REVIEW,
-  DELETE_REVIEW,
-} from "../../graphql/mutations";
+import { UNDELETE_REVIEW, DELETE_REVIEW } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
 import Swal from "sweetalert2";
 
@@ -77,7 +74,7 @@ export default function CRUDCategory({ match }) {
   console.log(allReviews);
   return (
     <StyledCRUDProductReviews>
-      <div className="categoryContainer">
+      <div className="categoryContainer crud_container">
         <ul>
           <li className="titles">
             <h5>Review ID</h5>

@@ -58,7 +58,7 @@ export default function CRUDUsers() {
   };
 
   return (
-    <StyledCRUDUsers>
+    <StyledCRUDUsers className="crud_container">
       <ul className="activeUsers">
         <li className="titles">
           <h5>Username</h5>

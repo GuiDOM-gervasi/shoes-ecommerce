@@ -66,74 +66,86 @@ const OrderTable = () => {
     <StyledOrderTable>
       <div className="sectionBar">
         {states.map((state) =>
-          state === currentState ? <section className="currentState">{currentState}</section> : (
+          state === currentState ? (
+            <section className="currentState">{currentState}</section>
+          ) : (
             <section onClick={handleClick} id={state}>
               {state}
             </section>
           )
         )}
       </div>
-      <div className="orderContainer">
-
-<ul>
-  <li className="titles">
-    <span className="product"><h5>Product</h5> </span>
-    <span className="model"><h5>Model </h5></span>
-    <span className="quantity"><h5>Quantity </h5></span>
-    <span className="price"><h5>Price </h5></span>
-    <span className="state"><h5>Status</h5> </span>
-    <span className="username"><h5>Username</h5> </span>
-  </li>
-  {orders?.map((order) => (
-    <li>
-      <span
-        className="product"
-        onClick={() =>
-          history.push("/product/" + order.finalproducts.product.id)
-        }
-      >
-        <p className="product">Product</p>{" "}
-        {order.finalproducts?.product?.name}{" "}
-      </span>
-      <span className="model">
-        <p className="model">Model</p>{" "}
-        {order.finalproducts.model.size +
-          " - " +
-          order.finalproducts.model.color}{" "}
-      </span>
-      <span className="quantity">
-        <p className="quantity">Quantity</p>
-        {order.quantity}
-      </span>
-      <span className="price">
-        <p className="price">Price</p>
-        ${order.price}{" "}
-      </span>
-      <select
-        className="state"
-        value={order.state}
-        onChange={(e) => handleChange(e, order.id)}
-        disabled={
-          order.state === "finished" || order.state === "rejected"
-        }
-      >
-        {possibleStates.map((state, i) => (
-          <option value={state} id={i.toString()}>
-            {state}
-          </option>
-        ))}
-      </select>
-      <span className="username">
-        <p className="username">Username</p>
-        {order.cart.user.userName}{" "}
-      </span>
-    </li>
-  ))}
-</ul>
-</div>
-<div className="footerFake"></div>
-</StyledOrderTable>
-);
+      <div className="orderContainer crud_container">
+        <ul>
+          <li className="titles">
+            <span className="product">
+              <h5>Product</h5>{" "}
+            </span>
+            <span className="model">
+              <h5>Model </h5>
+            </span>
+            <span className="quantity">
+              <h5>Quantity </h5>
+            </span>
+            <span className="price">
+              <h5>Price </h5>
+            </span>
+            <span className="state">
+              <h5>Status</h5>{" "}
+            </span>
+            <span className="username">
+              <h5>Username</h5>{" "}
+            </span>
+          </li>
+          {orders?.map((order) => (
+            <li>
+              <span
+                className="product"
+                onClick={() =>
+                  history.push("/product/" + order.finalproducts.product.id)
+                }
+              >
+                <p className="product">Product</p>{" "}
+                {order.finalproducts?.product?.name}{" "}
+              </span>
+              <span className="model">
+                <p className="model">Model</p>{" "}
+                {order.finalproducts.model.size +
+                  " - " +
+                  order.finalproducts.model.color}{" "}
+              </span>
+              <span className="quantity">
+                <p className="quantity">Quantity</p>
+                {order.quantity}
+              </span>
+              <span className="price">
+                <p className="price">Price</p>${order.price}{" "}
+              </span>
+              <select
+                className="state"
+                value={order.state}
+                onChange={(e) => handleChange(e, order.id)}
+                disabled={
+                  order.state === "finished" || order.state === "rejected"
+                }
+              >
+                {possibleStates.map((state, i) => (
+                  <option value={state} id={i.toString()}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <span className="username">
+                <p className="username">Username</p>
+                {order.cart.user.userName}{" "}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="footerFake"></div>
+    </StyledOrderTable>
+  );
 };
 
 export default OrderTable;
