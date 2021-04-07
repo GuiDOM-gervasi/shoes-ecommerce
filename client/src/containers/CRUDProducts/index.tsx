@@ -279,6 +279,12 @@ export default function CRUDProducts() {
           Add new product
         </button>
         <ul className="activeProducts">
+        <li className="titles">
+          <h5>ID</h5>
+          <h5>Name</h5>
+          <h5>Price</h5>
+          <div></div>
+        </li>
           {allProducts?.map((item: ProductAttributes) => (
             <li key={item.id}>
               <span className="id"> {item.id} </span>

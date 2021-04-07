@@ -5,7 +5,9 @@ export const StyledWishListTable = styled.div`
 
   h2{
     text-align: center;
-    color:#594D9E;
+    color:${violeta};
+    margin: 0.5rem 2rem 2rem 2rem;
+    border-bottom: 2px solid ${violeta};
   }
 
   .productContainer{
@@ -15,7 +17,7 @@ export const StyledWishListTable = styled.div`
   min-height: 30vh;
   margin: 2rem auto;
   margin-bottom: 0;
-  border: 2px solid black;
+  border: 0.5rem, solid ${negro};
   border-radius: 15px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
   background-color: ${blanco};
@@ -69,11 +71,22 @@ export const StyledWishListTable = styled.div`
     color: ${negro}
   }
 
-  @media (max-width: 550px) {
+  @media (max-width: 750px) {
+    
+      border: 0;
+      border-radius: 0;
+      box-shadow: 0;
+
+      h2{
+        font-size: 2rem;
+        border: none;
+      }
+
     ul li {
       img{
         width: 8rem;
       }
     }
+
   }
 `;

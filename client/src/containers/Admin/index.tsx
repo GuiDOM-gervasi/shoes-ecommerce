@@ -45,10 +45,10 @@ export default function Admin() {
         </Link>
 
 
-        <Link to="/admin/offers"> 
+        <Link to="/admin/discounts"> 
           <div>
           <i className="fas fa-tags"></i>
-            Offers
+            Discounts
           </div>
         </Link>
 

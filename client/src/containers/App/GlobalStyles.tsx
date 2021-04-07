@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export var verdeMain = "#64DFDF";
 export var verdeDetalle = "#80FFDB";
 export var verdeDetalleTrans = "#80FFDB50";
-export var violeta = "#6930C3";
+export var violeta = "#7d56bd";
 export var violetaHover = "#6930C350";
 export var blanco = "#F0F0F0";
 export var negro = "#151515";
@@ -20,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
         transition: all 300ms ease;
+        
     }
     body{
         padding: 0 !important;
@@ -104,8 +105,8 @@ export const GlobalStyles = createGlobalStyle`
         background-color: ${verdeDetalleTrans};
     }
     .fondoDegradado{
-        /* background: linear-gradient(180deg, ${verdeDetalle} 0%, rgba(255, 255, 255, 0) 100%), ${violetaHover}; */
-        background: ${blanco}
+        background: linear-gradient(180deg, ${verdeDetalle} 0%, rgba(255, 255, 255, 0) 100%), ${violetaHover};
+        /* background: ${blanco} */
     }
 
     .sectionBar {

@@ -30,7 +30,8 @@ export default function OrderHistory() {
   const [createReview, { error: errorMutationReview }] = useMutation(
     ADD_REVIEW,
     {
-      refetchQueries: [{ query: GET_REVIEWS, variables: { prodId } }],
+      refetchQueries: [{ query: GET_REVIEWS, variables: {  productId: prodId } },
+        { query: GET_REVIEWS_FROM_USER, variables: {  userId  } }],
     }
   );
   const handleReview = (productId, userId) => {
@@ -94,7 +95,7 @@ export default function OrderHistory() {
               text: "Review added successfully.",
             });
           } catch (err) {
-            console.log(err);
+            console.error(err);
             return;
           }
         }
@@ -111,10 +112,12 @@ export default function OrderHistory() {
 
   return (
     <StyledOrderHistory>
+      
       <ul className="container">
+        <h2>Your purchases</h2>
         {!data.cart || !orders.length ? (
           <li className="noItems">
-            There's no items here, <Link to="/">click here to buy some!</Link>
+            There are no items here, <Link to="/">click here to buy some!</Link>
           </li>
         ) : (
           orders.map((order) => {
@@ -124,48 +127,50 @@ export default function OrderHistory() {
 
             return (
               <li key={order.id}>
-                <img
-                  src={product.muestraimg}
-                  alt={`photoDetail - ${product.name}`}
-                />
-                <h4>{product.name}</h4>
-                <p>
-                  <span>
-                    size: <strong>{" " + model.size}</strong>
-                  </span>
-                  <span>
-                    color: <strong>{" " + model.color}</strong>
-                  </span>
-                  <span>
-                    quantity: <strong>{" " + order.quantity}</strong>
-                  </span>
-                  <span>
-                    price: <strong>{" " + order.price}</strong>
-                  </span>
-                </p>
-                {userReviews.find(review => review === product.id) ? (
-                  <button
-                    id="reviewButton"
-                    className="boton"
-                    disabled
-                    onClick={() => handleReview(product.id, userId)}
-                  >
-                    Leave a review!
-                  </button>
-                ) : (
-                  <button
-                    id="reviewButton"
-                    className="boton"
-                    onClick={() => handleReview(product.id, userId)}
-                  >
-                    Leave a review!
-                  </button>
-                )}
+                <div className="itemImage" key={order.id}>
+                  <img
+                    src={product.muestraimg}
+                    alt={`photoDetail - ${product.name}`}
+                  />
+                </div>
+                <div className="itemData">
+                  <h4>{product.name}</h4>
+                  <p>
+                      size: <strong>{" " + model.size}</strong>
+                      <br />
+                      color: <strong>{" " + model.color}</strong>
+                      <br />
+                      quantity: <strong>{" " + order.quantity}</strong>
+                      <br />
+                      price: <strong>${" " + order.price}</strong>
+                  </p>
+                </div>
+                <div className="itemButtons">
+                  {userReviews.find(review => review === product.id) ? (
+                    <button
+                      id="reviewButton"
+                      className="boton"
+                      disabled
+                      onClick={() => handleReview(product.id, userId)}
+                    >
+                      Leave a review!
+                    </button>
+                  ) : (
+                    <button
+                      id="reviewButton"
+                      className="boton"
+                      onClick={() => handleReview(product.id, userId)}
+                    >
+                      Leave a review!
+                    </button>
+                  )}
+                </div>
               </li>
             );
           })
         )}
       </ul>
+      <div className="footerFake"></div>
     </StyledOrderHistory>
   );
 }

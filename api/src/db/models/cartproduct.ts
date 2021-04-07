@@ -59,7 +59,7 @@ export class CartProduct extends Model {
 
   @Column({
     allowNull: false,
-    type: DataType.ENUM("reserved", "payed", "finish", "rejected"),
+    type: DataType.ENUM("reserved", "paid", "finished", "rejected"),
   })
   state!: string;
 }

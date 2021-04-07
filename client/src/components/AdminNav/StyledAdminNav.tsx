@@ -24,6 +24,9 @@ width: 100vw;
   .navlink{
     margin-top: 6rem;
     color:${blanco};
+    i{
+      margin: 0 0.5rem;
+    }
   }
   .selected{
     border-bottom: solid ${verdeMain};
@@ -61,20 +64,18 @@ width: 100vw;
     }
 
 @media (max-width: 858px) {
-.adminNav{
-    display: none;
+.navlink *:not(:first-child){
+  display:none;
 }
-.adminNavMovile{
-    display: grid;
-    .selected{
-            border-bottom: none;
-            color: ${verdeDetalle};
-            font-size: 2em;
-        }
+ .adminNav .selected{
+    border-bottom: none;
+    i{
+    color: ${verdeDetalle};
+    }
+    font-size: 2em;
     }
 
 }
-
 
 `
 ;

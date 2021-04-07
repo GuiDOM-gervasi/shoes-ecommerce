@@ -69,7 +69,7 @@ function App() {
         component={isAdmin ? EditProduct : Login}
       />
       <Route
-        path="/admin/offers"
+        path="/admin/discounts"
         component={isAdmin ? Offer : Login}
       />
       <Route path="/cart" component={Cart} />
