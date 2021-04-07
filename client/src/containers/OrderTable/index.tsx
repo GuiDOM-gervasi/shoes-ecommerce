@@ -8,7 +8,6 @@ import Loader from "../../components/Loader";
 import Swal from "sweetalert2";
 
 const OrderTable = () => {
-  // reserved, payed, finish, rejected
   const { data, loading, error, refetch } = useQuery(GET_ORDERS, {
     variables: { orderId: "all", state: "reserved" },
   });
@@ -59,76 +58,81 @@ const OrderTable = () => {
 
   const orders = data.viewOrders;
 
-  let states = ["reserved", "payed", "finish", "rejected"];
+  let states = ["reserved", "paid", "finished", "rejected"];
   const currentIndex = states.findIndex((state) => state === currentState);
   let possibleStates = states.slice(currentIndex - states.length);
 
   return (
     <StyledOrderTable>
       <h3>{currentState}</h3>
-      <div className="sectionBar">
-        {states.map((state) =>
-          state === currentState ? null : (
-            <section onClick={handleClick} id={state}>
-              {state}
-            </section>
-          )
-        )}
-      </div>
-      
-      <ul>
-        <li className="titles">
-          <span className="product">Product </span>
-          <span className="model">Model </span>
-          <span className="quantity">Quantity </span>
-          <span className="price">Price </span>
-          <span className="state">Status </span>
-          <span className="username">Username </span>
-        </li>
-        {orders?.map((order) => (
-          <li>
-            <span
-              className="product"
-              onClick={() =>
-                history.push("/product/" + order.finalproducts.product.id)
-              }
-            >
-              <p className="product">Product</p>{" "}
-              {order.finalproducts.product.name}{" "}
-            </span>
-            <span className="model">
-              <p className="model">Model</p>{" "}
-              {order.finalproducts.model.size +
-                " - " +
-                order.finalproducts.model.color}{" "}
-            </span>
-            <span className="quantity">
-              <p className="quantity">Quantity</p>
-              {order.quantity}
-            </span>
-            <span className="price">
-              <p className="price">Price</p>
-              {order.price}{" "}
-            </span>
-            <select
-              className="state"
-              value={order.state}
-              onChange={(e) => handleChange(e, order.id)}
-              disabled={order.state === "finish" || order.state === "rejected"}
-            >
-              {possibleStates.map((state, i) => (
-                <option value={state} id={i.toString()}>
-                  {state}
-                </option>
-              ))}
-            </select>
-            <span className="username">
-              <p className="username">Username</p>
-              {order.cart.user.userName}{" "}
-            </span>
+        <div className="sectionBar">
+          {states.map((state) =>
+            state === currentState ? null : (
+              <section onClick={handleClick} id={state}>
+                {state}
+              </section>
+            )
+          )}
+        </div>
+      <div className="orderContainer">
+
+        <ul>
+          <li className="titles">
+            <span className="product"><h5>Product</h5> </span>
+            <span className="model"><h5>Model </h5></span>
+            <span className="quantity"><h5>Quantity </h5></span>
+            <span className="price"><h5>Price </h5></span>
+            <span className="state"><h5>Status</h5> </span>
+            <span className="username"><h5>Username</h5> </span>
           </li>
-        ))}
-      </ul>
+          {orders?.map((order) => (
+            <li>
+              <span
+                className="product"
+                onClick={() =>
+                  history.push("/product/" + order.finalproducts.product.id)
+                }
+              >
+                <p className="product">Product</p>{" "}
+                {order.finalproducts.product.name}{" "}
+              </span>
+              <span className="model">
+                <p className="model">Model</p>{" "}
+                {order.finalproducts.model.size +
+                  " - " +
+                  order.finalproducts.model.color}{" "}
+              </span>
+              <span className="quantity">
+                <p className="quantity">Quantity</p>
+                {order.quantity}
+              </span>
+              <span className="price">
+                <p className="price">Price</p>
+                {order.price}{" "}
+              </span>
+              <select
+                className="state"
+                value={order.state}
+                onChange={(e) => handleChange(e, order.id)}
+                disabled={
+                  order.state === "finished" || order.state === "rejected"
+                }
+              >
+                {possibleStates.map((state, i) => (
+                  <option value={state} id={i.toString()}>
+                    {state}
+                  </option>
+                ))}
+              </select>
+              <span className="username">
+                <p className="username">Username</p>
+                {order.cart.user.userName}{" "}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="footerFake"></div>
     </StyledOrderTable>
   );
 };

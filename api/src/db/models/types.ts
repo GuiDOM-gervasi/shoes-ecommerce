@@ -6,15 +6,15 @@ export interface UserAttributes {
   isAdmin: Boolean;
   email: string;
   password: string;
-  country?: string; 
+  country?: string;
   city?: string;
   street?: string;
   addressnumber?: string;
   postcode?: string;
   nlsuscribe: Boolean;
-	isGmail:Boolean;
+  isGmail: Boolean;
   count: number;
-		ReviewId?: [string];
+  ReviewId?: [string];
 }
 
 export interface ProductAttributes {
@@ -27,7 +27,10 @@ export interface ProductAttributes {
   brandId: string;
   CategoriesId: [string];
   ModelsId: [string];
-		ReviewId?: [string];
+  ReviewId?: [string];
+  detalleimg1: string;
+  detalleimg2: string;
+  detalleimg3: string;
 }
 
 export interface CategoryAttributes {
@@ -79,11 +82,11 @@ export interface UpdateUserAttributes {
   input: string;
 }
 
-export interface ReviewAttributes{
-		id?: string;
-		productId:string;
-		userId:string;
-		score: number;
-		title:string;
-		description:string;
+export interface ReviewAttributes {
+  id?: string;
+  productId: string;
+  userId: string;
+  score: number;
+  title: string;
+  description: string;
 }

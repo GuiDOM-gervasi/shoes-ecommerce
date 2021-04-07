@@ -9,10 +9,10 @@ import {
 import { fotosZapa } from "../ProductDetail/mockup";
 import { StyledEditProduct } from "./StyledEditProduct";
 import Loader from "../Loader";
+import Swal from "sweetalert2";
 
 export default function EditProduct({ match }) {
   const productId = match.params.productId;
-  const [modify, setModify] = useState("");
 
   const { loading, error, data: mainProduct } = useQuery(GET_PRODUCT_DETAIL, {
     variables: {
@@ -64,34 +64,64 @@ export default function EditProduct({ match }) {
   } = fotosZapa;
 
   const handleClick = async (e) => {
-    const modal: any = document.querySelector(".modal");
-    modal.style.display = "flex";
     let modifyProp = e.target.id.split("_")[1];
     if (modifyProp === "size" || modifyProp === "color") modifyProp = "models";
-    setModify(modifyProp);
-  };
+    let inputType = "text";
+    if (
+      modifyProp === "models" ||
+      modifyProp === "categories" ||
+      modifyProp === "brand"
+    )
+      inputType = "select";
+    let selectOptions = {};
+    if (inputType === "select") {
+      switch (modifyProp) {
+        case "models":
+          mainProduct.productDetail.models.forEach(
+            (model) =>
+              (selectOptions[model.id] = model.size + " - " + model.color)
+          );
+          break;
 
-  const handleKeyDown = async (e: any) => {
-    if (e.key === "Escape") {
-      const modal: any = document.querySelector(".modal");
-      modal.style.display = "none";
+        case "categories":
+          dataCategories.categories.forEach(
+            (category) => (selectOptions[category.id] = category.name)
+          );
+          break;
+
+        case "brand":
+          dataBrands.brand.forEach((b) => (selectOptions[b.id] = b.name));
+          break;
+      }
     }
-
-    if (e.key === "Enter") {
-      console.log("modify", modify, e.target.value)
-      await editProduct({
-        variables: {
-          id: productId,
-          atr: modify,
-          input: e.target.value,
-        },
-      });
-      const modal: any = document.querySelector(".modal");
-      modal.style.display = "none";
-    }
+    Swal.fire({
+      title: `New ${modifyProp}`,
+      input: inputType === "select" ? "select" : "text",
+      inputOptions: inputType === "select" ? selectOptions : null,
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Modify",
+      showLoaderOnConfirm: true,
+      preConfirm: async (value) => {
+        try {
+          await editProduct({
+            variables: {
+              id: productId,
+              atr: modifyProp,
+              input: value,
+            },
+          });
+          return;
+        } catch (e) {
+          console.log(e);
+        }
+      },
+    }).then((name) => {
+      if (!name) throw null;
+    });
   };
-
-  document.body.onkeydown = handleKeyDown;
 
   function filterModels(value) {
     sizes = models.filter((prop) => prop.color === value);
@@ -116,30 +146,6 @@ export default function EditProduct({ match }) {
   return (
     <StyledEditProduct>
       <div className="container">
-        <div className="modal">
-          <button
-            className="close"
-            onClick={() => handleKeyDown({ key: "Escape" })}
-          >
-            x
-          </button>
-          <h2 className="headingModal">{"New " + modify}</h2>
-          {modify === "brand" ? (
-            <select multiple>
-              {dataBrands.brand.map((brand) => (
-                <option value={brand.id}>{brand.name}</option>
-              ))}
-            </select>
-          ) : modify === "categories" ? (
-            <select multiple>
-              {dataCategories.categories.map((category) => (
-                <option value={category.id}>{category.name}</option>
-              ))}
-            </select>
-          ) : (
-            <input type="text" name="inputModal" onKeyDown={handleKeyDown} />
-          )}
-        </div>
         <div className="fondoVioleta"></div>
         <div className="imagenes">
           <div className="img1">
@@ -235,7 +241,7 @@ export default function EditProduct({ match }) {
               <h4>List Price:</h4>
             )}
             {!!discount && discount > 0 ? (
-              <h2 className="price">${Math.floor(price * (1 - discount))}</h2>
+              <h2 className="price">${Math.round(price * (1 - discount))}</h2>
             ) : (
               <div style={{ display: "flex" }}>
                 <h2 className="price">${price}</h2>

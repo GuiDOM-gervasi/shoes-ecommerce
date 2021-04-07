@@ -21,6 +21,7 @@ import CRUDUsers from "../CRUDUsers";
 import Success from "../../components/Success";
 import Cancel from "../../components/Cancel";
 import CRUDStock from "../CRUDStock";
+import CRUDProductReviews from "../CRUDProductReviews";
 import PasswordReset from "../../components/PasswordReset";
 import NewPassword from "../../components/NewPassword";
 import Profile from "../../containers/Profile";
@@ -68,7 +69,11 @@ function App() {
         component={isAdmin ? EditProduct : Login}
       />
       <Route
-        path="/admin/offerts"
+        path="/admin/productReviews/:productId"
+        component={isAdmin ? CRUDProductReviews : Login}
+      />
+      <Route
+        path="/admin/discounts"
         component={isAdmin ? Offert : Login}
       />
       <Route path="/cart" component={Cart} />

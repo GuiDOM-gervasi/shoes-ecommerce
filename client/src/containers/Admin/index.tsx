@@ -20,10 +20,10 @@ export default function Admin() {
           </div>
         </Link>
 
-        <Link to="/admin/offerts"> 
+        <Link to="/admin/discounts"> 
           <div>
           <i className="fas fa-tags"></i>
-            Offers
+            Discounts
           </div>
         </Link>
 
@@ -55,7 +55,6 @@ export default function Admin() {
           </div>
         
         </Link>
-
 
     </StyledAdmin>
   )

@@ -362,12 +362,12 @@ export default function ProductDetail({ match }: any) {
               <h4>List Price:</h4>
             )}
             {!!discount && discount > 0 ? (
-              <h2 className="price">${Math.floor(price * (1 - discount))}</h2>
+              <h2 className="price">${Math.round(price * (1 - discount))}</h2>
             ) : (
               <h2 className="price">${price}</h2>
             )}
             {!!discount && discount > 0 ? (
-              <h3 className="sale"> {discount * 100}% OFF!!!</h3>
+              <h3 className="sale"> {Math.round(discount * 100)}% OFF!!!</h3>
             ) : (
               <></>
             )}

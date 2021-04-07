@@ -122,9 +122,9 @@ export default function Checkout() {
           {cartProductsArray.map((i: any) => {
             i.finalproducts.product.discount
               ? (count +=
+                Math.round((1- i.finalproducts.product.discount)*
                   i.finalproducts.product.price *
-                  i.finalproducts.product.discount *
-                  i.quantity)
+                  i.quantity))
               : (count += i.finalproducts.product.price * i.quantity);
             return (
               <li key={i.finalproducts.id}>
@@ -141,9 +141,9 @@ export default function Checkout() {
                 <span className="price">
                   $
                   {i.finalproducts.product.discount
-                    ? i.finalproducts.product.discount *
+                    ? Math.round((1- i.finalproducts.product.discount) *
                       i.finalproducts.product.price *
-                      i.quantity
+                      i.quantity)
                     : i.finalproducts.product.price * i.quantity}
                 </span>
               </li>
@@ -159,7 +159,7 @@ export default function Checkout() {
           </li>
         </ul>
         <form className="location" onSubmit={handleSubmit}>
-          <label>Dirección de envio</label>
+          <label><h3>Delivery address</h3></label>
           <input
             type="text"
             name="country"
@@ -184,14 +184,14 @@ export default function Checkout() {
           <input
             type="number"
             name="addressnumber"
-            placeholder="Addressnumber"
+            placeholder="Address number"
             onChange={handleChange}
           />
           <span className="span_addressnumber"></span>
 
           <input
             className="boton"
-            type="text"
+            type="submit"
             value="Comprar"
             disabled={
               !form.country ||

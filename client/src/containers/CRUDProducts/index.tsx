@@ -103,7 +103,8 @@ export default function CRUDProducts() {
     Swal.mixin({
       confirmButtonText: "Next &rarr;",
       showCancelButton: true,
-      progressSteps: ["1", "2", "3", "4", "5", "6"],
+      width:"36rem",
+      progressSteps: ["1", "2", "3", "4", "5", "6", "7"],
     })
       .queue([
         {
@@ -179,6 +180,43 @@ export default function CRUDProducts() {
             return checked;
           },
         },
+        {
+          title: "Upload image",
+          html: `<div style="display:grid; grid-template-columns:1fr; grid-template-rows:auto;justify-items:center; justify-content: space-around;">
+          <input type="file" accept="image/*" id="imageCloud" aria-label='Upload your profile picture' multiple>
+          </div>`,
+          preConfirm: async () => {
+            let imagesInCloud = [];
+            const image: any = document.querySelector("#imageCloud");
+            
+            async function uploadFile(file) {
+              const fd = new FormData();
+              fd.append("upload_preset", "kvo7ryen");
+              fd.append("tags", "browser_upload");
+              fd.append("file", file);
+
+              const url = `https://api.cloudinary.com/v1_1/ecommerceft09/upload`;
+              await fetch(url, {
+                method: "POST",
+                body: fd,
+              }).then((response) => response.json())
+                .then((result) => {
+                  imagesInCloud.push(result.secure_url)
+                  return 
+                })
+                .catch((error) => {
+                  console.error("Error:", error);
+                });
+            }
+
+            if (image) {
+              for (let i = 0; i < image.files.length; i++) {
+                await uploadFile(image.files[i]);
+              }
+            }
+            return imagesInCloud;
+          },
+        },
       ])
       .then(async (result: any) => {
         if (result.value) {
@@ -191,6 +229,10 @@ export default function CRUDProducts() {
                 brandId: result.value[3],
                 CategoriesId: result.value[4],
                 ModelsId: result.value[5],
+                muestraimg: result.value[6][0],
+                detalleimg1: result.value[6][1],
+                detalleimg2: result.value[6][2],
+                detalleimg3: result.value[6][3],
               },
             }).then((res) => {
               const productId = res.data.createProduct.id;
@@ -225,6 +267,9 @@ export default function CRUDProducts() {
   const handleRestore = (id) => {
     undeleteProduct({ variables: { id } });
   };
+  const handleReviews = (id) => {
+    history.push(`/admin/productReviews/${id}`);
+  };
 
   const handleEdit = (id) => {
     history.push(`/admin/editProduct/${id}`);
@@ -237,6 +282,12 @@ export default function CRUDProducts() {
           Add new product
         </button>
         <ul className="activeProducts">
+        <li className="titles">
+          <h5>ID</h5>
+          <h5>Name</h5>
+          <h5>Price</h5>
+          <div></div>
+        </li>
           {allProducts?.map((item: ProductAttributes) => (
             <li key={item.id}>
               <span className="id"> {item.id} </span>
@@ -244,6 +295,10 @@ export default function CRUDProducts() {
               <span className="price"> $ {item.price} </span>
 
               <div className="buttons">
+                <i
+                  onClick={() => handleReviews(item.id)}
+                  className="far fa-star"
+                />
                 <i
                   onClick={() => handleEdit(item.id)}
                   className="fas fa-edit"

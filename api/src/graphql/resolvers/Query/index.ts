@@ -5,6 +5,7 @@ export { default as categories } from "./categories";
 export { default as deleted } from "./deletedProducts";
 export { default as deletedUsers } from "./deletedUsers";
 export { default as deletedCategories } from "./deletedCategories";
+export { default as deletedReviews } from "./deletedReviews";
 
 export { default as stockProduct } from "./stockProduct";
 export { default as allModelsProduct } from "./allModelsProduct";
