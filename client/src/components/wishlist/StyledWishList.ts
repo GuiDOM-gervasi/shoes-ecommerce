@@ -65,7 +65,6 @@ export const StyledWishListTable = styled.div`
       color: ${negro};
     }
   }
-
   @media (max-width: 750px) {
     border: 0;
     border-radius: 0;
