@@ -8,22 +8,19 @@ export default function Slider() {
 
   return (
     <StyledSlider>
-      <Carousel>
+      <Carousel showThumbs={false} autoPlay={true} infiniteLoop={true} interval={5000}>
         <div>
-          <img src="https://user-images.githubusercontent.com/74660801/113930470-9d7c1780-97f1-11eb-9bbd-6abdfd0f1a3a.jpg" />
+          <img src="https://user-images.githubusercontent.com/74660801/113933544-02853c80-97f5-11eb-95f1-c8d2f7895e34.jpg" />
+        </div>
+        <div>
+          <img src="https://user-images.githubusercontent.com/74660801/113934044-93f4ae80-97f5-11eb-9769-eb7987e1aa0c.jpg" />
+        </div>
+        <div>
+          <img src="https://user-images.githubusercontent.com/74660801/113934025-8f2ffa80-97f5-11eb-9e5a-d9bf3c39b9ea.jpg" />
         </div>
 
-        <div>
-          <img src="https://user-images.githubusercontent.com/74660801/113929022-d4e9c480-97ef-11eb-87ce-1f58278d01c7.jpg" />
-        </div>
-        <div>
-          <img src="https://user-images.githubusercontent.com/74660801/113929950-f39c8b00-97f0-11eb-9ede-19e0efc28018.jpg" />
-        </div>
       </Carousel>
-      {/* <img
-        src="https://images.unsplash.com/photo-1520256862855-398228c41684?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw"
-        alt="slider"
-      /> */}
+
     </StyledSlider>
   );
 }
