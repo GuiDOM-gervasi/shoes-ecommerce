@@ -42,9 +42,9 @@ export const StyledStatistics = styled.div`
   @media (max-width: 858px){
     .crud_container{
       flex-direction: column !important;
-      .donutContainer, .barContainer{
+      /* .donutContainer, .barContainer{
         width: 100vw;
-      }
+      } */
     }
   }
 
