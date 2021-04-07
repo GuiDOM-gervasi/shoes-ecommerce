@@ -15,6 +15,8 @@ import resolvers from '#root/graphql/resolvers';
 import typeDefs from '#root/graphql/typeDefs';
 import accessEnv from '#root/helpers/accessEnv';
 
+import sendOffersNotification from '#root/helpers/sendOffersNotification'
+
 const bodyParser = require('body-parser');
 const apiKey = accessEnv("STRIPE_KEY");
 const client = accessEnv("CLIENT_ADDRESS")
@@ -44,8 +46,6 @@ const startServer = async () => {
   app.use(cookieParser());
   
   app.get('/status', async (req, res) => {
-    let cart = await getCartForPayment(7);
-    console.log(`cart`, cart)
     res.json({status:'ok'})
   })
   
