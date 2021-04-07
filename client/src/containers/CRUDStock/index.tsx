@@ -83,7 +83,7 @@ export default function CRUDStock() {
 
   return (
     <StyledCRUDStock>
-      <div className="stockContainer">
+      <div className="stockContainer crud_container">
         <ul>
           <li className="titles">
             <h5>ID</h5>

@@ -133,4 +133,12 @@ export const GlobalStyles = createGlobalStyle`
         }
         }
     }
+
+  @media screen and (max-width:858px) {
+    .crud_container {
+      border-radius: 0 !important;
+      border: none !important;
+      width: 100vw !important;
+    }
+  }
 `;
