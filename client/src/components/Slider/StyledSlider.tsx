@@ -1,16 +1,14 @@
 import styled from "styled-components";
 
 export const StyledSlider = styled.div`
-  height: 50vh;
+  height: 70vh;
   width: 100%;
   overflow: hidden;
 
-  /* .div {
-    width: 10vw;
-    height: 100%;
-    object-position: 0 70%;
-    object-fit: cover;
-  } */
+  .image {
+    height: 71vh;
+  }
   @media (max-width: 858px) {
+    height: 30vh;
   }
 `;
