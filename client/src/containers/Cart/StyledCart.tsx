@@ -2,11 +2,12 @@ import styled from "styled-components";
 import { blanco, negro, violeta } from "../../containers/App/GlobalStyles";
 
 export const StyledCart = styled.div`
+    min-height: 78vh;
   .cartContainer {
     display: flex;
     flex-direction: column;
     max-width: 45rem;
-    min-height: 10rem;
+    min-height: 30vh;
     margin: 2rem auto;
     border: 0.5rem, solid ${negro};
     border-radius: 1rem;
