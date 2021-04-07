@@ -14,6 +14,7 @@ import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
 import OrderTable from "../OrderTable";
+import Statistics from "../../components/statistics";
 import Checkout from "../../components/Checkout";
 // import Loader from "../../components/Loader";
 import CRUDUsers from "../CRUDUsers";
@@ -83,6 +84,11 @@ function App() {
         exact
         path="/admin/orders"
         component={isAdmin ? OrderTable : Login}
+      />
+      <Route
+        exact
+        path="/admin/statistics"
+        component={isAdmin ? Statistics : Login}
       />
       <Route
         exact path="/wishlist"

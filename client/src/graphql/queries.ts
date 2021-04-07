@@ -314,6 +314,7 @@ export const GET_ORDERS = gql`
       quantity
       price
       state
+      updatedAt
       finalproducts {
         model {
           size
@@ -395,6 +396,16 @@ query wishList($userId:String!){
         name
       }
     }  
+  }
+}`
+
+export const GET_ORDERS_QUANTITY = gql`
+query orderQuantity($state:String!){
+  orderQuantity(state: $state){
+    reserved
+    rejected
+    paid
+    finished
   }
 }
 `

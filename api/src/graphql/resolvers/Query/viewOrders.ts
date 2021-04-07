@@ -11,7 +11,7 @@ import User from "#root/db/models/users";
 const ordersResolver = async (parent, { orderId, state = 'reserved' }) => {
     
     if (orderId === 'all'){
-        return await CartProduct.findAll({
+        const allOrders: any = await CartProduct.findAll({
             where: {
                 state
             },
@@ -31,6 +31,7 @@ const ordersResolver = async (parent, { orderId, state = 'reserved' }) => {
                 }
             ], 
         })
+        return allOrders
     }else{
         return await CartProduct.findAll({
             where:{
