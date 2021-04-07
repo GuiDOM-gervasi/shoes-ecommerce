@@ -6,6 +6,7 @@ import {
   GET_FILTERED_PRODUCTS,
   GET_BRANDS
 } from "../../graphql/queries";
+import Loader from "../Loader";
 
 // typescript interface
 interface filterAtribute {
@@ -59,7 +60,7 @@ export default function Filter({ setLoadedProduct, setFilterOfferts, filterOffer
   };
 
   if (catLoading || brandsLoading ) {
-    return <div>Loading ...</div>;
+    return <Loader />;
   }
   if (catError || brandsError ) {
     return <div>Something go wrong loading the filter bar</div>;
