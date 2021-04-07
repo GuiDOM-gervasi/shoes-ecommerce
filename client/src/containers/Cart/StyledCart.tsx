@@ -35,7 +35,6 @@ export const StyledCart = styled.div`
   }
   footer {
     display: flex;
-    /* position: fixed; */
     bottom: 0;
     width: 100%;
     flex-direction: column;
