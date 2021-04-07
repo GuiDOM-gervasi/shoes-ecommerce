@@ -101,6 +101,19 @@ export const GET_DELETED_CATEGORIES = gql`
   }
 `;
 
+export const GET_DELETED_REVIEWS = gql`
+  query deletedReviews($productId: String!) {
+    deletedReviews(productId: $productId) {
+      id
+      title
+      score
+      description
+      productId
+      userId
+    }
+  }
+`;
+
 export const GET_BRANDS = gql`
   query Brands {
     brand {
