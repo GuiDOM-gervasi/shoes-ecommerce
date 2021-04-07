@@ -12,7 +12,7 @@ export default function CRUDStock() {
   const history = useHistory();
   const [filters, setFilters] = React.useState({
     name: '',
-    size: 0,
+    size: '',
     color: ''
   })
 
@@ -142,61 +142,74 @@ export default function CRUDStock() {
             <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
             setFilters({...filters, name: ev.target.value})
           }>
-            { names.map(item =>
-              <option>{item}</option>)}
+              <option value=''>All</option>
+              { names.map(item =>
+                <option>{item}</option>)}
             </select>
-            <select>
-            { colors.map(item =>
-              <option>{item}</option>)}
+            <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            setFilters({...filters, color: ev.target.value})
+            }>
+              <option value=''>All</option>
+              { colors.map(item =>
+                <option>{item}</option>)}
             </select>
-            <select>
-            { sizes.map(item =>
-              <option>{item}</option>)}
+            <select onChange={(ev: React.ChangeEvent<HTMLSelectElement>): void =>
+            setFilters({...filters, size: ev.target.value})
+            }>
+              <option value=''>All</option>
+              { sizes.map(item =>
+                <option>{item}</option>)}
             </select>
             <h5> -  </h5>
             <div></div>
           </li>
-          {data.allStock?.map((item: StockAttributes) => (
-            <li key={item.id}>
-              <span className="itemId">
-                <p className="itemId">ID</p>
-                {item.id}{" "}
-              </span>
-              <span className="itemName">
-                <p className="itemName">Nombre</p>
-                {item.product?.name}{" "}
-              </span>
-              <span className="itemColor">
-                <p className="itemColor">Color</p>
-                {item.model.color}{" "}
-              </span>
-              <span className="itemSize">
-                <p className="itemSize">Talle</p>
-                {item.model.size}{" "}
-              </span>
-              <span className="itemStock">
-                <p className="itemStock">Stock</p>
-                {item.stock}{" "}
-              </span>
-
-              <div className="buttons">
-                <button
-                  type="submit"
-                  onClick={() =>
-                    handleEdit(
-                      item.product.id,
-                      item.model.id,
-                      item.product.name,
-                      item.model.size,
-                      item.model.color
-                    )
-                  }
-                >
-                  Modificar stock
-                </button>
-              </div>
-            </li>
-          ))}
+          {data.allStock?.map((item: StockAttributes) => {
+            if((item.product?.name === filters.name || filters.name.length < 1)
+              && (item.model.size === filters.size || filters.size.length < 1)
+              && (item.model.color === filters.color || filters.color.length < 1)
+              ){
+              return (<li key={item.id}>
+                <span className="itemId">
+                  <p className="itemId">ID</p>
+                  {item.id}{" "}
+                </span>
+                <span className="itemName">
+                  <p className="itemName">Nombre</p>
+                  {item.product?.name}{" "}
+                </span>
+                <span className="itemColor">
+                  <p className="itemColor">Color</p>
+                  {item.model.color}{" "}
+                </span>
+                <span className="itemSize">
+                  <p className="itemSize">Talle</p>
+                  {item.model.size}{" "}
+                </span>
+                <span className="itemStock">
+                  <p className="itemStock">Stock</p>
+                  {item.stock}{" "}
+                </span>
+                <div className="buttons">
+                  <button
+                    type="submit"
+                    onClick={() =>
+                      handleEdit(
+                        item.product.id,
+                        item.model.id,
+                        item.product.name,
+                        item.model.size,
+                        item.model.color
+                      )
+                    }
+                  >
+                    Modificar stock
+                  </button>
+                </div>
+              </li>)}
+              else{
+                <></>
+              }
+          })}
         </ul>
       </div>
       <div className="footerFake"></div>
