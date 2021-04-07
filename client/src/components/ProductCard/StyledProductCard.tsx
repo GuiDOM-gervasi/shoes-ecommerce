@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { blanco, violeta } from "../../containers/App/GlobalStyles";
 
 export const StyledProductCard = styled.div`
+  border-radius: 10px;
+  overflow:hidden;
 
   a {
     text-decoration: none;
