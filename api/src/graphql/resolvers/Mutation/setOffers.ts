@@ -53,8 +53,6 @@ const setOffers = async ( parent:any, args: any )  => {
     console.log(`offert`, offert.id)
 
     let restore = setTimeout( defineOffert, duration, 0, productsToUpdate, offert.id);  // DO NOT USE AWAIT HERE!
-    // console.log(`prod`, prod)
-    // console.log(`update`, update)
 
     sendOffersNotification()
     return "todo Ok"
@@ -77,7 +75,6 @@ async function defineOffert(discount: number, productsToUpdate: string[], offert
       );
     console.log(`offert #${offertId} has finished`)
   }
-
 
   return update
 }

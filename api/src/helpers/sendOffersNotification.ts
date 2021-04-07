@@ -4,11 +4,8 @@ import User from "#root/db/models/users";
 const sendOffersNotification = async () => {
 
   const users = await User.findAll();
-  // console.log(`users`, users)
   
   users.forEach(user => {
-
-    // console.log(`user.firstName`, user.firstName)
 
     if(user.nlsuscribe){
       let email = user.email;
@@ -36,7 +33,6 @@ const sendOffersNotification = async () => {
       </body>
       </html>
       `
-    
       emailService(email, subject, textToSend)
     }
 
