@@ -7,6 +7,7 @@ const allStock = async (parent, args, context, info) => {
   const productsStock = await FinalProduct.findAll(
       {
             include: [Product as any, Models as any],
+            order:[['id', 'ASC']]
         });
         
   return productsStock;

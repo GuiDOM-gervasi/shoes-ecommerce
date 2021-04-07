@@ -26,7 +26,7 @@ export default function Checkout() {
     },
   });
 
-  const [updateAddress, { error: errorUpdate }] = useMutation(UPDATE_ADDRESS);
+  const [updateAddress] = useMutation(UPDATE_ADDRESS);
   const [form, setForm] = useState<form>({
     country: "",
     city: "",

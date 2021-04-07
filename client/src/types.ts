@@ -25,8 +25,8 @@ export interface CartAttributes {
 
 export interface ProductAttributes {
   id: string;
-  name: String;
-  description: String;
+  name: string;
+  description: string;
   price: number;
   brandId: String;
   CategoriesId: String[];

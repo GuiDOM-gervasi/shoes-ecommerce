@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blanco, formWidth } from "../../containers/App/GlobalStyles";
+import { blanco } from "../../containers/App/GlobalStyles";
 
 export const StyledCheckout = styled.div`
   .checkoutContainer {
