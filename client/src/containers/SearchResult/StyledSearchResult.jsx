@@ -27,12 +27,5 @@ export const StyledSearchResult = styled.div`
     object-fit: cover;
     transition: all 500ms ease;
   }
-  .productData{
-    position: absolute;
-    bottom:0;
-    width:${productWidth}vw;
-    background-color:${violeta};
-    padding:0.5vh 0 0.5vh 0;
-  }
 
 `;

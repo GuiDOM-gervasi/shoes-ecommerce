@@ -103,7 +103,7 @@ export default function CRUDProducts() {
     Swal.mixin({
       confirmButtonText: "Next &rarr;",
       showCancelButton: true,
-      width:"36rem",
+      width: "36rem",
       progressSteps: ["1", "2", "3", "4", "5", "6", "7"],
     })
       .queue([
@@ -188,7 +188,7 @@ export default function CRUDProducts() {
           preConfirm: async () => {
             let imagesInCloud = [];
             const image: any = document.querySelector("#imageCloud");
-            
+
             async function uploadFile(file) {
               const fd = new FormData();
               fd.append("upload_preset", "kvo7ryen");
@@ -199,10 +199,11 @@ export default function CRUDProducts() {
               await fetch(url, {
                 method: "POST",
                 body: fd,
-              }).then((response) => response.json())
+              })
+                .then((response) => response.json())
                 .then((result) => {
-                  imagesInCloud.push(result.secure_url)
-                  return 
+                  imagesInCloud.push(result.secure_url);
+                  return;
                 })
                 .catch((error) => {
                   console.error("Error:", error);
@@ -277,17 +278,17 @@ export default function CRUDProducts() {
 
   return (
     <StyledCRUDProducts>
-      <div className="productContainer">
+      <div className="productContainer crud_container">
         <button className="addButton" onClick={handleAddProduct}>
           Add new product
         </button>
         <ul className="activeProducts">
-        <li className="titles">
-          <h5>ID</h5>
-          <h5>Name</h5>
-          <h5>Price</h5>
-          <div></div>
-        </li>
+          <li className="titles">
+            <h5>ID</h5>
+            <h5>Name</h5>
+            <h5>Price</h5>
+            <div></div>
+          </li>
           {allProducts?.map((item: ProductAttributes) => (
             <li key={item.id}>
               <span className="id"> {item.id} </span>
