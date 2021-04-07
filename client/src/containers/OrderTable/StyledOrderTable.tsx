@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { blanco, formWidth, violeta } from "../App/GlobalStyles";
+import { blanco, formWidth, verdeDetalle} from "../App/GlobalStyles";
 
 export const StyledOrderTable = styled.div`
-  h3 {
-    text-align: center;
-    text-transform: capitalize;
-    padding: 1rem;
-    color: ${blanco};
-    background-color: ${violeta};
-  }
+
+    .sectionBar section {
+      text-transform: capitalize;
+    }
+    .sectionBar .currentState{
+        background-color: ${verdeDetalle};
+      }
   .orderContainer {
     display: flex;
     flex-direction: column;
@@ -21,9 +21,6 @@ export const StyledOrderTable = styled.div`
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     background-color: ${blanco};
 
-    .sectionBar section {
-      text-transform: capitalize;
-    }
     ul li {
       width: 100%;
       display: flex;
