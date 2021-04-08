@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { StyledReviews } from "./StyledReviews";
 import { useQuery } from "@apollo/client";
@@ -15,7 +16,7 @@ interface ReviewsAttributes {
 }
 export default function Reviews({ className, allReviews }: ReviewsAttributes) {
   useEffect(() => {
-    var stars = Math.round(allReviews.average);
+    var stars = Math.floor(allReviews.average);
     var emptyStars = 5 - allReviews.average;
     for (let i = 0; i < stars; i++) {
       var div = document.createElement("div");
