@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { StyledProductDetail } from "./StyledProductDetail";
 import { useQuery, useLazyQuery, useMutation } from "@apollo/client";
@@ -247,7 +248,7 @@ export default function ProductDetail({ match }: any) {
       (current) =>
         current.size === sizeSelect.value && current.color === colorSelect.value
     );
-    const finalproductId = finalproducts({
+    finalproducts({
       variables: {
         productId: id,
         modelId: model.id,
