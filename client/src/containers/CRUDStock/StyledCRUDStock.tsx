@@ -68,6 +68,13 @@ export const StyledCRUDStock = styled.div`
         grid-gap: 5vw;
         grid-template-rows: auto;
         padding: 5vw;
+        select{
+          width:80%;
+          justify-self:center;
+        }
+        h5{
+          display:none;
+        }
         span,
         div {
           width: 100%;
