@@ -14,7 +14,7 @@ import Admin from "../Admin";
 import { useAuth } from "../../hooks/AuthProvider";
 import Cart from "../Cart";
 import OrderTable from "../OrderTable";
-import Statistics from "../../components/statistics";
+import Statistics from "../../components/Statistics";
 import Checkout from "../../components/Checkout";
 // import Loader from "../../components/Loader";
 import CRUDUsers from "../CRUDUsers";
@@ -57,7 +57,7 @@ function App() {
       <Route exact path="/success" component={Success} />
       <Route exact path="/cancel" component={Cancel} />
       <Route exact path="/admin" component={isAdmin ? Admin : Login} />
-      <Route path="/admin/:navs" component={AdminNav}/>
+      <Route path="/admin/:navs" component={AdminNav} />
       <Route
         path="/admin/products"
         component={isAdmin ? CRUDProducts : Login}
@@ -74,10 +74,7 @@ function App() {
         path="/admin/productReviews/:productId"
         component={isAdmin ? CRUDProductReviews : Login}
       />
-      <Route
-        path="/admin/discounts"
-        component={isAdmin ? Offer : Login}
-      />
+      <Route path="/admin/discounts" component={isAdmin ? Offer : Login} />
       <Route path="/cart" component={Cart} />
       <Route path="/admin/stock" component={CRUDStock} />
       <Route
@@ -90,10 +87,7 @@ function App() {
         path="/admin/statistics"
         component={isAdmin ? Statistics : Login}
       />
-      <Route
-        exact path="/wishlist"
-        component={wishListTable}
-      />
+      <Route exact path="/wishlist" component={wishListTable} />
       <Route path="/admin/users" component={isAdmin ? CRUDUsers : Login} />
       <Route path="/forgotpassword" component={PasswordReset} />
       <Route path="/resetpassword/:token" component={NewPassword} />
