@@ -4,6 +4,7 @@ import { Doughnut, Bar } from "react-chartjs-2";
 import { useQuery } from "@apollo/client";
 import { GET_ORDERS_QUANTITY, GET_ORDERS } from "../../graphql/queries";
 import Loader from "../Loader";
+import {dateFilter} from '../../helpers/dateFilter';
 
 const Statistics = () => {
 	const {
@@ -18,7 +19,7 @@ const Statistics = () => {
 
 	const { data: dataOrders, loading, error } = useQuery(GET_ORDERS, {
 		variables: {
-			state: "paid",
+			state: "finished",
 			orderId: "all",
 		},
 	});
@@ -28,17 +29,19 @@ const Statistics = () => {
 		return <span>ERROR: {errorQuantity.message}</span>;
 
 	const { reserved, rejected, paid, finished } = dataQuantity.orderQuantity;
-	const { viewOrders } = dataOrders;
+  const { viewOrders } = dataOrders;
+
+  const {mon,tue,wed,thu,fri,sat,sun} = dateFilter(viewOrders)
 
 	return (
 		<StyledStatistics>
       <div className='crud_container'>
 			<div className="barContainer" >
-				<h3>Sales of the Week</h3>
+				<h3>Average sales per day</h3>
 				<Bar
 					data={{
 						labels: [
-							"Lunes",
+              "Lunes",
 							"Martes",
 							"Miércoles",
 							"Jueves",
@@ -48,9 +51,9 @@ const Statistics = () => {
 						],
 						datasets: [
 							{
-                label: "Sales of the week",
+                label: "Weekdays",
                 fontSize: 250,
-								data: [paid],
+								data: [mon,tue,wed,thu,fri,sat,sun],
 								backgroundColor: [
 									"rgba(255, 206, 86, 0.75)",
 									"rgba(255, 99, 132, 0.75)",
