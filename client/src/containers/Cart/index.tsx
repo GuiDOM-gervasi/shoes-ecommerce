@@ -185,8 +185,8 @@ const Cart = () => {
             :
             <footer>
               <Link to={'/'}>
-                <h5>seems there are nothing here yet...  </h5>
-                <h5>lets add someting  </h5>
+                <h5>Seems there is nothing here yet...  </h5>
+                <h5>Let's add something</h5>
               </Link>
             </footer>
           }

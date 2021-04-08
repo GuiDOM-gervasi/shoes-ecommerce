@@ -7,7 +7,6 @@ export const StyledCart = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 45rem;
-    min-height: 25vh;
     margin: 2rem auto;
     border: 0.5rem, solid ${negro};
     border-radius: 1rem;

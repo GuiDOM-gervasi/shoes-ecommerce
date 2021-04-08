@@ -35,18 +35,18 @@ const Statistics = () => {
   return (
     <StyledStatistics>
       <div className="crud_container">
-        <div className="barContainer">
+        <div className="containerStatistics">
           <h3>Average sales per day</h3>
           <Bar
             data={{
               labels: [
-                "Lunes",
-                "Martes",
-                "Miércoles",
-                "Jueves",
-                "Viernes",
-                "Sábado",
-                "Domingo",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday",
               ],
               datasets: [
                 {
@@ -94,7 +94,7 @@ const Statistics = () => {
             // height                                                                                                                                                  ={{ maintainAspectRatio: false }}
           />
         </div>
-        <div className="donutContainer">
+        <div className="containerStatistics doughnutStats">
           <h3>Orders status</h3>
           <Doughnut
             data={{
