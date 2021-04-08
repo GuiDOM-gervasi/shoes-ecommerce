@@ -59,6 +59,9 @@ export const StyledAboutUs = styled.div`
 				align-items: center;
 				justify-content: space-evenly;
                 margin-top:0.2rem;
+				a:first-child{
+					margin-right:1vw;
+				}
 				i {
 					text-decoration: none;
 					font-size: 2em;

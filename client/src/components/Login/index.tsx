@@ -57,6 +57,7 @@ export default function Login() {
       <NavLink to="/forgotpassword">Forgot your password?</NavLink>
       </form>
 			<GoogleLogin clientId="884127490955-bdfbijmkt1eu684ggiosat775ktug3qn.apps.googleusercontent.com" onSuccess={responseGoogle} onFailure={responseGoogle} buttonText="Login with Gmail"/>
+      <NavLink to="/register">No account? Sign up</NavLink>
     </StyledLogin>
   );
 }

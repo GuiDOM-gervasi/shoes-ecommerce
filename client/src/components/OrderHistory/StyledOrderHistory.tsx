@@ -33,7 +33,7 @@ export const StyledOrderHistory = styled.div`
   }
 
   .itemImage{
-
+    
     width: 10rem;
     text-align: center;
 

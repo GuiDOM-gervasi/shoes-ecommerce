@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledSearchBar = styled.div`
+width: 100;
+  max-width: 50vw;
   .searchinput {
     width: 50vw;
     height: 43px;
@@ -14,19 +16,22 @@ export const StyledSearchBar = styled.div`
     color: #f2f2f2;
   }
   .contentResult {
-    margin: 1.4rem 0 0 0;
+    width: 100%;
+    margin: 1.3rem 0 0 0;
     position: absolute;
     display: flex;
     flex-direction: column;
     height: min-content;
     top: 2.5rem;
-    width: 50vw;
+    width: 100%;
+    max-width: 50vw;
   }
   .contentResult-inactive {
     display: none;
   }
   .contentResultItem {
     position: relative;
+    background-color: #f2f2f2;
     border: 1px solid #c4c4c4;
     z-index: 99;
     top: 100%;
@@ -39,7 +44,7 @@ export const StyledSearchBar = styled.div`
       margin: auto;
     }
     div {
-      padding: 0.3rem 0.5rem;
+      padding: 0.05rem 0.5rem;
       cursor: pointer;
       background-color: #f0f0f0;
       display: flex;

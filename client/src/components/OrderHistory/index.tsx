@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { StyledOrderHistory } from "./StyledOrderHistory";
 import {
@@ -131,10 +131,12 @@ export default function OrderHistory() {
             return (
               <li key={order.id}>
                 <div className="itemImage" key={order.id}>
+                <NavLink to={"/product/" + product.id}>
                   <img
                     src={product.muestraimg}
                     alt={`photoDetail - ${product.name}`}
                   />
+                  </NavLink>
                 </div>
                 <div className="itemData">
                   <h4>{product.name}</h4>
