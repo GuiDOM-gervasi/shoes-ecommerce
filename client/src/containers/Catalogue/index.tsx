@@ -61,6 +61,7 @@ export default function Catalogue() {
           })}
         </ul>
       </div>
+      <div className= 'footerFake'> </div> 
     </StyledCatalogue>
   );
 }

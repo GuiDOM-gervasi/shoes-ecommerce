@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { StyledWishListTable } from "./StyledWishList";
 import { GET_WISHLIST } from "../../graphql/queries";
-import { DELETE_FROM_WISHLIST, UPDATE_STATE } from "../../graphql/mutations";
+import { DELETE_FROM_WISHLIST } from "../../graphql/mutations";
 import Loader from "../Loader";
 import Swal from "sweetalert2";
 import { useAuth } from "../../hooks/AuthProvider";
@@ -11,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const WishListTable = () => {
   const {userId} = useAuth()
-  const { data, loading, error, refetch } = useQuery(GET_WISHLIST, {
+  const { data, loading, error } = useQuery(GET_WISHLIST, {
     variables: { 
       userId:  userId && userId
     }
@@ -42,7 +41,6 @@ const handleDelete = (productId) => {
       },
     });
 }
-  const orders = data.viewOrders;
 
   return (
     <StyledWishListTable>

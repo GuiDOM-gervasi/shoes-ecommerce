@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { useQuery, useMutation } from "@apollo/client";
 import { StyledOrderTable } from "./StyledOrderTable";
@@ -98,7 +98,7 @@ const OrderTable = () => {
             </span>
           </li>
           {orders?.map((order) => (
-            <li>
+            <li  key={order.id}>
               <span
                 className="product"
                 onClick={() =>

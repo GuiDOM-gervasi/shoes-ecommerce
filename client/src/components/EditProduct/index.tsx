@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_PRODUCT } from "../../graphql/mutations";
@@ -41,7 +42,7 @@ export default function EditProduct({ match }) {
   useEffect(() => {
     if (mainProduct) {
       const {
-        productDetail: { models, categories },
+        productDetail: { models },
       } = mainProduct;
       colors = models.map((model) => model.color);
       colors = Array.from(new Set(colors));
@@ -60,7 +61,6 @@ export default function EditProduct({ match }) {
     photoDetail1,
     photoDetail2,
     photoDetail3,
-    priceBefore,
   } = fotosZapa;
 
   const handleClick = async (e) => {

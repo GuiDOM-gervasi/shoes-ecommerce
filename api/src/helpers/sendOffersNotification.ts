@@ -10,7 +10,7 @@ const sendOffersNotification = async () => {
     if(user.nlsuscribe){
       let email = user.email;
       let name = user.firstName;
-      let subject = `New oferts are wating for you ${name}!!!`;
+      let subject = `New discount are wating for you ${name}!!!`;
       let textToSend = `<!DOCTYPE html>
       <html lang="en">
       <head>

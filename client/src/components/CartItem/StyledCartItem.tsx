@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { blanco, negro, violeta } from "../../containers/App/GlobalStyles";
+import { negro, violeta } from "../../containers/App/GlobalStyles";
 
 export const StyledCartItem = styled.div`
   .itemContainer {

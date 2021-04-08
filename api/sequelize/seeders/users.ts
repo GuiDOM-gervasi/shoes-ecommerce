@@ -60,10 +60,10 @@ module.exports = {
       },
       {
         firstName: "Matias",
-        lastName: "Stefanutti",
-        userName: "mstefa",
+        lastName: "Stefanuti",
+        userName: "matute",
         isAdmin: true,
-        email: "matiastefanutti@gmail.com",
+        email: "mstefanutti@gmail.com",
         password:
           "$2a$05$bL1E5YTZ7xZbKdczSCIA5ejlNm1NJnSrSPF77vvr18PBGHl.cQ1p6",
         country: "Argentina",

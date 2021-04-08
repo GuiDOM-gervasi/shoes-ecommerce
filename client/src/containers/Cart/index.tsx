@@ -129,8 +129,7 @@ const Cart = () => {
     sortedCartProductsArray = cartArray.sort((a, b) => {
       if (a.finalproducts.id > b.finalproducts.id) {
         return 1;
-      }
-      if (a.finalproducts.id <= b.finalproducts.id) {
+      }else{
         return -1;
       }
     });
@@ -147,7 +146,7 @@ const Cart = () => {
                 Math.round(product.price * (1 - product.discount)) *
                 cartProductItem.quantity;
               return (
-                <li>
+                <li key={cartProductItem.finalproducts?.id}>
                   <CartItem
                     cartProductItem={cartProductItem}
                     product={product}
@@ -159,10 +158,11 @@ const Cart = () => {
               );
             })
             : cartProductsArray?.map((cartProductItem) => {
+              let i;
               const product = cartProductItem.product;
               count += product.price * cartProductItem.quantity;
               return (
-                <li>
+                <li key={i++}>
                   <CartItem
                     cartProductItem={cartProductItem}
                     product={product}

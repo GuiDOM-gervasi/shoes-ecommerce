@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const StyledSlider = styled.div`
   width: 100%;
   overflow: hidden;
+  .carousel-status{
+    display: none;
+  }
 
   div img {
     border-radius: 0;

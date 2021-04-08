@@ -5,11 +5,9 @@ import { GET_DELETED_REVIEWS, GET_REVIEWS } from "../../graphql/queries";
 import { useHistory } from "react-router-dom";
 import { UNDELETE_REVIEW, DELETE_REVIEW } from "../../graphql/mutations";
 import Loader from "../../components/Loader";
-import Swal from "sweetalert2";
 
 export default function CRUDCategory({ match }) {
   const productId = match.params.productId;
-  const history = useHistory();
   const { data, loading, error } = useQuery(GET_REVIEWS, {
     variables: {
       productId,
@@ -17,8 +15,6 @@ export default function CRUDCategory({ match }) {
   });
   const {
     data: deletedReviews,
-    loading: loadingDeleted,
-    error: errorDeleted,
   } = useQuery(GET_DELETED_REVIEWS, {
     variables: {
       productId,
@@ -41,7 +37,7 @@ export default function CRUDCategory({ match }) {
       },
     ],
   });
-  const [restoreReview, { loading: loadingRestore }] = useMutation(
+  const [restoreReview] = useMutation(
     UNDELETE_REVIEW,
     {
       refetchQueries: [
