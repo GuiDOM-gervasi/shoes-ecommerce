@@ -19,7 +19,7 @@ const Statistics = () => {
 
 	const { data: dataOrders, loading, error } = useQuery(GET_ORDERS, {
 		variables: {
-			state: "finished",
+			state: "paid",
 			orderId: "all",
 		},
 	});
@@ -30,7 +30,6 @@ const Statistics = () => {
 
 	const { reserved, rejected, paid, finished } = dataQuantity.orderQuantity;
   const { viewOrders } = dataOrders;
-
   const {mon,tue,wed,thu,fri,sat,sun} = dateFilter(viewOrders)
 
 	return (
@@ -58,13 +57,19 @@ const Statistics = () => {
 									"rgba(255, 206, 86, 0.75)",
 									"rgba(255, 99, 132, 0.75)",
 									"rgba(75, 192, 192, 0.75)",
-									"rgba(54, 162, 235, 0.75)",
+                  "rgba(54, 162, 235, 0.75)",
+                  "rgba(214, 54, 235, 0.75)",
+                  "rgba(235, 54, 54, 0.75)",
+                  "rgba(235, 54, 211, 0.75)",
 								],
 								hoverBackgroundColor: [
 									"rgba(255, 206, 86, 1)",
 									"rgba(255, 99, 132, 1)",
 									"rgba(75, 192, 192, 1)",
-									"rgba(54, 162, 235, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(214, 54, 235, 1)",
+                  "rgba(235, 54, 54, 1)",
+                  "rgba(235, 54, 211, 1)",
 								],
 							},
 						],
@@ -76,7 +81,11 @@ const Statistics = () => {
           }}
 					options={{
 						maintainAspectRatio: false,
-						responsive: true,
+            responsive: true,
+            tooltips: {
+              titleFontSize: 20,
+              bodyFontSize: 20
+            },
 						scales: {
 							yAxes: [{ ticks: { fontSize: 20 } }],
 							xAxes: [{ ticks: { fontSize: 20 } }],
